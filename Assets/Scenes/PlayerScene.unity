@@ -135,51 +135,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1932583634}
     - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
-      propertyPath: invSlots
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: selectedBorder
+      value: 
+      objectReference: {fileID: 1267808679}
     - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
       propertyPath: invGridLayoutGroup
       value: 
       objectReference: {fileID: 2092041319}
-    - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
-      propertyPath: invGridElementPrefab
-      value: 
-      objectReference: {fileID: 4360489607200718510, guid: 3d8250cccf9cf724fb01098bd565a9df,
-        type: 3}
-    - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
-      propertyPath: targetableLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
-      propertyPath: weaponIcons.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
-      propertyPath: weaponIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: ddc97d27d3c2f434ebe96c2c3cf73846,
-        type: 3}
-    - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
-      propertyPath: weaponIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5b5d24b2aaddc824a95e7f6e6c7e9339,
-        type: 3}
     - target: {fileID: 3432608838026907472, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 888998480}
-    - target: {fileID: 3432608838026907472, guid: ed5dc1bd0e8791a4b8228583125542f5,
-        type: 3}
-      propertyPath: dropUpwardForce
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3432608838026907472, guid: ed5dc1bd0e8791a4b8228583125542f5,
-        type: 3}
-      propertyPath: dropForwardForce
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6063671662139761664, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
       propertyPath: cam
@@ -250,21 +217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6063671662139761669, guid: ed5dc1bd0e8791a4b8228583125542f5,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 6063671662139761670, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
       propertyPath: healthText
       value: 
       objectReference: {fileID: 645044951}
-    - target: {fileID: 6063671662455724949, guid: ed5dc1bd0e8791a4b8228583125542f5,
-        type: 3}
-      propertyPath: m_TagString
-      value: PlayerCollider
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!4 &25086531 stripped
@@ -1362,7 +1319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1267808680
 RectTransform:
   m_ObjectHideFlags: 0
