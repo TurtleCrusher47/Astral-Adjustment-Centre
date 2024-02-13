@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
 	[Header("References")]
-	[SerializeField] WallRun wallRun;
+	// [SerializeField] WallRun wallRun;
 
 	[SerializeField] private Transform cam;
 	[SerializeField] private Transform orientation;
@@ -27,7 +27,7 @@ public class CameraControl : MonoBehaviour
 	{
 		HandleCameraRotation();
 
-		cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, wallRun.tilt);
+		cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, transform.rotation.z);
 		orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
 
 		// if (trauma > 0.0f)
