@@ -15,7 +15,6 @@ public abstract class RangedWeapon : Weapon
 
     protected override void Init()
     {
-        type = Type.RANGED;
     }
 
     public abstract void Update();

@@ -9,6 +9,7 @@ public class RangedWeaponData : ScriptableObject
     public string weaponName;
 
     [Header("Reloading")]
+    public bool infiniteAmmo;
     public int currentAmmo;
     public int magazineSize;
     [Tooltip("The higher this is, the faster it can fire")]

@@ -35,6 +35,8 @@ public class PlayerWeaponDrop : MonoBehaviour
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         StartCoroutine(AllowPickUp(weapon));
+
+        weapon.layer = LayerMask.NameToLayer("DroppedWeapons");
     }
 
     private IEnumerator AllowPickUp(GameObject weapon)

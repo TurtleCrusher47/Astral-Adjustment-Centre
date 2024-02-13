@@ -6,7 +6,7 @@ public class RaycastRangedWeapon : RangedWeapon
 {
     [SerializeField] private RaycastProjectileData raycastProjectileData;
 
-    public override void OnShot()
+    public override void Update()
     {
         timeSinceLastShot += Time.deltaTime;
 
@@ -14,7 +14,7 @@ public class RaycastRangedWeapon : RangedWeapon
         {
             Shoot();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !rangedWeaponData.infiniteAmmo)
         {
             StartReload();
         }
@@ -22,10 +22,11 @@ public class RaycastRangedWeapon : RangedWeapon
 
     public override void Shoot()
     {
-        if (rangedWeaponData.currentAmmo > 0)
+        if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
             if (CanShoot())
             {
+                Debug.Log("Shoot");
                 if (Physics.Raycast(cam.position, transform.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance))
                 {
                     Debug.Log(hitInfo.transform.name);
@@ -36,7 +37,9 @@ public class RaycastRangedWeapon : RangedWeapon
                     // Destroy(effect, 0.5f);
                 }
 
+                if (!rangedWeaponData.infiniteAmmo)
                 rangedWeaponData.currentAmmo--;
+
                 timeSinceLastShot = 0;
                 OnShot();
                 // recoil.GunRecoil(gunData.recoil);
@@ -46,7 +49,7 @@ public class RaycastRangedWeapon : RangedWeapon
         }
     }
 
-    public override void Update()
+    public override void OnShot()
     {
     }
 }

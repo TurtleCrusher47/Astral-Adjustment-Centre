@@ -6,6 +6,5 @@ public abstract class MeleeWeapon : Weapon
 {
     protected override void Init()
     {
-        type = Type.MELEE;
     }
 }
