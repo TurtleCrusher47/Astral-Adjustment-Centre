@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b059f90377ffb6b4a953b47ad8755c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPosition: {fileID: 6063671663168222223}
+  cameraPosition: {fileID: 560739170}
 --- !u!4 &1564407557
 Transform:
   m_ObjectHideFlags: 0
