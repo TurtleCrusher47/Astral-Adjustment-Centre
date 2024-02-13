@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public enum Type
+    {
+        MELEE,
+        RANGE
+    }
+
     //[SerializeField] public ScriptableWeapon weaponStats;
     public bool inInventory;
+    public Type type;
+    public int invPos;
 
     void Awake()
     {

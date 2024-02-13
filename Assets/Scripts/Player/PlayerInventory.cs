@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] private GameObject weaponContainer;
+    [SerializeField] private GridLayoutGroup invGridLayoutGroup;
+    [SerializeField] private GameObject invGridElementPrefab;
     [SerializeField] private int invSlots;
     [SerializeField] private LayerMask targetableLayer;
 
+    [SerializeField] private List<Sprite> weaponIcons = new List<Sprite>();
+    public static List<Sprite> invWeaponIcons = new List<Sprite>();
     public static List<GameObject> invWeapons = new List<GameObject>();
+    public static List<GameObject> invUISlots = new List<GameObject>();
 
-    public static int maxInvSlots = 1;
+    public static int maxInvSlots;
+    public static int selectedWeaponIndex = 0;
     public static int currWeaponIndex = 0;
     public static int prevWeaponIndex = 0;
 
@@ -21,6 +29,22 @@ public class PlayerInventory : MonoBehaviour
         {
             maxInvSlots = invSlots;
         }
+
+        RectTransform invGridLayoutGroupTransform = invGridLayoutGroup.gameObject.GetComponent<RectTransform>();
+        int newWidth = 150 * maxInvSlots;
+
+        invGridLayoutGroupTransform.sizeDelta = new Vector2(newWidth, 150);
+
+        for (int i = 0; i < maxInvSlots; i++)
+        {
+            GameObject newSlot = Instantiate(invGridElementPrefab);
+            newSlot.transform.parent = invGridLayoutGroup.transform;
+            newSlot.transform.localScale = new Vector3(1, 1, 1);
+
+            invUISlots.Add(newSlot);
+        }
+
+        invWeaponIcons = weaponIcons;
     }
 
     void Update()
@@ -79,34 +103,18 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            /*isReloading = false;
-            CancelInvoke("ReloadFinished");
-
-            if (isADSing)
-            {
-                isADSing = false;
-                NotifyADSObservers(gunModels[currWeaponIndex], false);
-            }
-            
-            NotifyUpdateWeaponObservers(false, false);
-
-            IADSObserver currADS = gunModels[currWeaponIndex].GetComponent<IADSObserver>();
-            UnsubscribeADS(currADS);
-
-            IShootObserver currShoot = gunModels[currWeaponIndex].GetComponent<IShootObserver>();
-            UnsubscribeShoot(currShoot);*/
-
+            selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().invPos;
             GameObject.FindWithTag("Player").GetComponent<PlayerWeaponDrop>().DropWeapon(invWeapons[currWeaponIndex]);
-            
+            invUISlots[selectedWeaponIndex].GetComponent<Image>().sprite = null;
+
             if (currWeaponIndex != 0)
             {
                 currWeaponIndex--;
             }
-
+            
             if (invWeapons.Count > 0)
             {
                 invWeapons[currWeaponIndex].SetActive(true);
-                //GetcurrWeaponIndexStats();
             }
         }
     }
@@ -156,12 +164,16 @@ public class PlayerInventory : MonoBehaviour
             if (swapWeapon)
             {
                 invWeapons.Insert(currWeaponIndex, weapon);
+                invUISlots[currWeaponIndex].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
+                weapon.GetComponent<Weapon>().invPos = currWeaponIndex;
                 Debug.Log("Swap Weapon : " + weapon.name);
                 swapWeapon = false;
             }
             else
             {
                 invWeapons.Add(weapon);
+                invUISlots[invWeapons.Count - 1].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
+                weapon.GetComponent<Weapon>().invPos = invWeapons.Count - 1;
                 Debug.Log("Added Weapon : " + weapon.name);
             }
 
