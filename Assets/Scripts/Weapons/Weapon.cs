@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     public enum Type
     {
         MELEE,
-        RANGE
+        RANGED
     }
-
-    //[SerializeField] public ScriptableWeapon weaponStats;
-    public bool inInventory;
     public Type type;
-    public int invPos;
 
-    void Awake()
-    {
-        // For gun can initialise ammo etc or something
-    }
+    public bool inInventory;
+    public int inventoryPosition;
 
+    // To init the weapon type
+    protected abstract void Init();
+
+    // For weapon pickup
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerCollider") && !inInventory)
