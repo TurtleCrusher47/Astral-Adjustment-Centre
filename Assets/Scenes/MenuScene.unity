@@ -575,6 +575,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1464299809}
   - component: {fileID: 1464299810}
+  - component: {fileID: 1464299813}
+  - component: {fileID: 1464299812}
+  - component: {fileID: 1464299811}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -617,6 +620,57 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1464299811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464299808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa4a73bb82c8a0498ea83bf93fd0e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!114 &1464299812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464299808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ab3d13685bf354398e9d1c713b9847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallRun: {fileID: 0}
+  cam: {fileID: 0}
+  orientation: {fileID: 0}
+  mouseSensitivity: 100
+  playerBody: {fileID: 0}
+  xRotation: 0
+  yRotation: 0
+--- !u!114 &1464299813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464299808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36723b05cef76a459c6546dc26ab871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
+  orientation: {fileID: 684860668}
+  cam: {fileID: 330585545}
+  capsule: {fileID: 1148227248}
+  capsuleCollider: {fileID: 1148227250}
+  groundCheck: {fileID: 0}
 --- !u!1 &1626558420
 GameObject:
   m_ObjectHideFlags: 0
