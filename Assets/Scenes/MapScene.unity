@@ -292,7 +292,13 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: 71673d9873285904ab00282788add27f, type: 2}
   blueMaterial: {fileID: 2100000, guid: bd79999920190574a94044b2acad7316, type: 2}
   greenMaterial: {fileID: 2100000, guid: 13cd47135277903479d4b55421faa42e, type: 2}
-  brickPrefab: {fileID: 8714290784293134360, guid: b8a5ae909574673498e3b1237625bb82,
+  floorPrefab: {fileID: 5481238698225377882, guid: 159707ad8af90534f8ac70c60b798814,
+    type: 3}
+  wallPrefab: {fileID: 7957831090434690199, guid: a14fe99a9e5ae0c4c87116f1dec760c0,
+    type: 3}
+  cornerPrefab: {fileID: 7371786038021223979, guid: 6952457c256bc624ba7a49ecf3da5e14,
+    type: 3}
+  stairPrefab: {fileID: 4175498258089693725, guid: 45579cec63adbc8468e46c67bcdf038b,
     type: 3}
 --- !u!1 &2017080174
 GameObject:

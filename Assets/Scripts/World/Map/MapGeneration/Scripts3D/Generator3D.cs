@@ -8,6 +8,7 @@ using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 using System;
 using static UnityEditor.FilePathAttribute;
+using System.Drawing;
 
 public class Generator3D : MonoBehaviour {
     enum CellType {
@@ -50,7 +51,13 @@ public class Generator3D : MonoBehaviour {
     [SerializeField]
     Material greenMaterial;
     [SerializeField]
-    GameObject brickPrefab;
+    GameObject floorPrefab;
+    [SerializeField]
+    GameObject wallPrefab;
+    [SerializeField]
+    GameObject cornerPrefab;
+    [SerializeField]
+    GameObject stairPrefab;
 
     Random random;
     Grid3D<CellType> grid;
@@ -265,11 +272,52 @@ public class Generator3D : MonoBehaviour {
                             PlaceStairs(prev + horizontalOffset * 2);
                             PlaceStairs(prev + verticalOffset + horizontalOffset);
                             PlaceStairs(prev + verticalOffset + horizontalOffset * 2);
-                            Instantiate(brickPrefab, prev + horizontalOffset + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
-                            Instantiate(brickPrefab, prev + verticalOffset + horizontalOffset * 2 + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+
+                            // spawn stairs
+                            Instantiate(floorPrefab, prev + horizontalOffset + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+                            if (delta.y > 0)
+                            {
+                                GameObject obj = Instantiate(stairPrefab, prev + horizontalOffset * 2 + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+                                if (delta.x > 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, -90, 0);
+                                }
+                                else if (delta.x < 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, 90, 0);
+                                }
+                                else if (delta.z > 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, 180, 0);
+                                }
+                                else if (delta.z < 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, 0, 0);
+                                }
+                            }
+                            else if (delta.y < 0)
+                            {
+                                GameObject obj = Instantiate(stairPrefab, prev + verticalOffset + horizontalOffset * 2 + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+                                if (delta.x > 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, 90, 0);
+                                }
+                                else if (delta.x < 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, -90, 0);
+                                }
+                                else if (delta.z > 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, 0, 0);
+                                }
+                                else if (delta.z < 0)
+                                {
+                                    obj.transform.eulerAngles = new Vector3(0, 180, 0);
+                                }
+                            }
                         }
 
-                        Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), Color.blue, 100, false);
+                        Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), UnityEngine.Color.blue, 100, false);
                     }
                 }
 
@@ -297,7 +345,24 @@ public class Generator3D : MonoBehaviour {
             {
                 for (int l = 0; l < size.z; l++)
                 {
-                    Instantiate(brickPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
+                    // spawn floor
+                    Instantiate(floorPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
+
+                    // spawn walls
+                    if (k == 1) // 1 level above floor
+                    {
+                        if (j == 0 || j == size.x - 1 || l == 0 || l == size.z - 1)
+                        {
+                            if (j == 0 && l == 0 || j == 0 && l == size.z - 1 || j == size.x - 1 && l == 0 || j == size.x - 1 && l == size.z - 1) // corners of room
+                            {
+                                Instantiate(cornerPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
+                            }
+                            else // sides of room
+                            {
+                                Instantiate(wallPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -306,7 +371,8 @@ public class Generator3D : MonoBehaviour {
     void PlaceHallway(Vector3Int location) {
         //PlaceCube(location, new Vector3Int(1, 1, 1), blueMaterial);
 
-        Instantiate(brickPrefab, location + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+        // spawn floor
+        Instantiate(floorPrefab, location + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
     }
 
     void PlaceStairs(Vector3Int location) {
