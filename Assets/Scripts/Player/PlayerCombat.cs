@@ -22,4 +22,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         
         healthText.text = playerData.currentHealth.ToString() + " HP";
     }
+
+    public void Despawn()
+    {
+        throw new System.NotImplementedException();
+    }
 }

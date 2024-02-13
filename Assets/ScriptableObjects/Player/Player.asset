@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a89363a4c26de94db93a7541fca0ee1, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  moveSpeed: 25
+  airMultiplier: 0.5
+  walkSpeed: 35
+  sprintSpeed: 55
+  acceleration: 15
+  jumpForce: 6
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
+  proneKey: 99
+  crouchScale: 0.5
+  crouchSpeed: 25
+  proneScale: 0.2
+  proneSpeed: 15
+  standScale: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  groundDistance: 0.1
+  groundDrag: 6
+  airDrag: 2
+  currentHealth: 100
+  maxHealth: 100

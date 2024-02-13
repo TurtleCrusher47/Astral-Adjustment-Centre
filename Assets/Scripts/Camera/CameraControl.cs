@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour
 
 	[SerializeField] private Transform cam;
 	[SerializeField] private Transform orientation;
-	[SerializeField] private Recoil recoil;
+	// [SerializeField] private Recoil recoil;
 
 	public float mouseSensitivity = 100.0f;
 
