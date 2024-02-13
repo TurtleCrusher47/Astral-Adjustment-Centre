@@ -222,6 +222,11 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 645044951}
+    - target: {fileID: 6063671662455724949, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!4 &25086531 stripped
@@ -355,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209260261}
   - component: {fileID: 209260262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +446,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 631
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -602,7 +607,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8f983b60692de384a9920b26d4c4e6ae,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f983b60692de384a9920b26d4c4e6ae, type: 3}
@@ -1265,7 +1270,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8f983b60692de384a9920b26d4c4e6ae,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f983b60692de384a9920b26d4c4e6ae, type: 3}
@@ -1408,7 +1413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1294666088}
   - component: {fileID: 1294666089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,7 +1505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1733479726}
   - component: {fileID: 1733479727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1815,7 +1820,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8f983b60692de384a9920b26d4c4e6ae,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f983b60692de384a9920b26d4c4e6ae, type: 3}
