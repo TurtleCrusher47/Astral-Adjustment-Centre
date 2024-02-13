@@ -9,6 +9,7 @@ public class CameraControl : MonoBehaviour
 
 	[SerializeField] private Transform cam;
 	[SerializeField] private Transform orientation;
+	[SerializeField] GameObject playerModel;
 	// [SerializeField] private Recoil recoil;
 
 	public float mouseSensitivity = 100.0f;
@@ -29,6 +30,7 @@ public class CameraControl : MonoBehaviour
 
 		cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, transform.rotation.z);
 		orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+		playerModel.transform.rotation = Quaternion.Euler(0, yRotation, 0);
 
 		// if (trauma > 0.0f)
 		// CameraShake();
