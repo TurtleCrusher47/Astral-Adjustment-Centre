@@ -29,7 +29,7 @@ public class LoadingScene : MonoBehaviour
         while (!asyncOperation.isDone)
         {
             //Output the current progress
-            float progress = Mathf.Clamp(asyncOperation.progress / 0.9f);
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
 
             loadingBar.value = progress;
 
