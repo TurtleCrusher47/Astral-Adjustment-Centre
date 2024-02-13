@@ -1356,6 +1356,9 @@ GameObject:
   - component: {fileID: 6063671662139761664}
   - component: {fileID: 6063671662139761665}
   - component: {fileID: 6063671662139761670}
+  - component: {fileID: 8406932}
+  - component: {fileID: 8406931}
+  - component: {fileID: 3432608838026907472}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1450,6 +1453,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   healthText: {fileID: 0}
+--- !u!114 &8406932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063671662139761669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035011467e0a9654590e3382941c5a4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invSlots: 2
+--- !u!114 &8406931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063671662139761669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfcedb0b2f4dc64d894e6e786fc747a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponContainer: {fileID: 0}
+--- !u!114 &3432608838026907472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063671662139761669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68006a37c4806f42b2ba94c087a1509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  cam: {fileID: 0}
+  dropForwardForce: 0
+  dropUpwardForce: 0
 --- !u!1 &6063671662455724949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,7 +1507,7 @@ GameObject:
   - component: {fileID: 6063671662455724951}
   m_Layer: 0
   m_Name: Capsule Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
