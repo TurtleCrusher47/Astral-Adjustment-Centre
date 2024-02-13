@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraControl : MonoBehaviour
+{
+	[Header("References")]
+	[SerializeField] WallRun wallRun;
+
+	[SerializeField] private Transform cam;
+	[SerializeField] private Transform orientation;
+	[SerializeField] private Recoil recoil;
+
+	public float mouseSensitivity = 100.0f;
+
+	public Transform playerBody;
+	public float xRotation = 0f;
+	public float yRotation = 0f;
+
+	private void Start()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	private void Update()
+	{
+		HandleCameraRotation();
+
+		cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, wallRun.tilt);
+		orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+
+		// if (trauma > 0.0f)
+		// CameraShake();
+		// Debug.Log(transform.localRotation.y * Mathf.Rad2Deg);
+		// Debug.Log(xRotation + ", " + yRotation);
+	}
+
+	private void HandleCameraRotation()
+	{
+		float mouseX = Input.GetAxis("Mouse X");
+		float mouseY = Input.GetAxis("Mouse Y");
+
+		yRotation += mouseX * mouseSensitivity;
+		xRotation -= mouseY * mouseSensitivity;
+
+		xRotation = Mathf.Clamp(xRotation, -90, 90);
+	}
+}
