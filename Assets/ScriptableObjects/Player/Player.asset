@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89363a4c26de94db93a7541fca0ee1, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  moveSpeed: 25
+  moveSpeed: 35
   airMultiplier: 0.5
   walkSpeed: 35
   sprintSpeed: 55
@@ -29,7 +29,7 @@ MonoBehaviour:
   standScale: 1
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   groundDistance: 0.1
   groundDrag: 6
   airDrag: 2
