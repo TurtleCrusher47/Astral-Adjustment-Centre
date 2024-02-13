@@ -29,7 +29,6 @@ public class PlayerWeaponDrop : MonoBehaviour
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
 
         rb.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
-        rb.AddForce(cam.transform.up * dropUpwardForce, ForceMode.Impulse);
 
         float random = Random.Range(-1, 1);
 
