@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private GameObject weaponContainer;
+    [SerializeField] private GameObject selectedBorder;
     [SerializeField] private GridLayoutGroup invGridLayoutGroup;
     [SerializeField] private GameObject invGridElementPrefab;
-    [SerializeField] private int invSlots;
     [SerializeField] private LayerMask targetableLayer;
+    [SerializeField] private int invSlots;
 
     [SerializeField] private List<Sprite> weaponIcons = new List<Sprite>();
     public static List<Sprite> invWeaponIcons = new List<Sprite>();
@@ -38,13 +38,18 @@ public class PlayerInventory : MonoBehaviour
         for (int i = 0; i < maxInvSlots; i++)
         {
             GameObject newSlot = Instantiate(invGridElementPrefab);
-            newSlot.transform.parent = invGridLayoutGroup.transform;
+            newSlot.transform.SetParent(invGridLayoutGroup.transform);
             newSlot.transform.localScale = new Vector3(1, 1, 1);
 
             invUISlots.Add(newSlot);
         }
 
         invWeaponIcons = weaponIcons;
+    }
+    
+    void Start()
+    {
+        selectedBorder.transform.localPosition = invUISlots[0].transform.localPosition;
     }
 
     void Update()
@@ -75,6 +80,9 @@ public class PlayerInventory : MonoBehaviour
                 invWeapons[prevWeaponIndex].SetActive(false);
                 invWeapons[currWeaponIndex].SetActive(true);
 
+                selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().invPos;
+                selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
+
                 // Set can attack here
             }
             else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
@@ -92,6 +100,9 @@ public class PlayerInventory : MonoBehaviour
                 
                 invWeapons[prevWeaponIndex].SetActive(false);
                 invWeapons[currWeaponIndex].SetActive(true);
+
+                selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().invPos;
+                selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
 
                 // Set can attack here
                 // Can set get weapon stats here too if need be
@@ -115,6 +126,9 @@ public class PlayerInventory : MonoBehaviour
             if (invWeapons.Count > 0)
             {
                 invWeapons[currWeaponIndex].SetActive(true);
+
+                selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().invPos;
+                selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
             }
         }
     }
@@ -130,9 +144,14 @@ public class PlayerInventory : MonoBehaviour
             if (hitObj != null && !swapWeapon)
             {
                 swapWeapon = true;
+
                 GameObject.FindWithTag("Player").GetComponent<PlayerWeaponDrop>().DropWeapon(invWeapons[currWeaponIndex]);
                 GetComponent<PlayerWeaponPickup>().PickUpWeapon(hitObj);
+                
                 invWeapons[currWeaponIndex].SetActive(true);
+
+                selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().invPos;
+                selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
             }
         }
     }
@@ -166,6 +185,7 @@ public class PlayerInventory : MonoBehaviour
                 invWeapons.Insert(currWeaponIndex, weapon);
                 invUISlots[currWeaponIndex].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
                 weapon.GetComponent<Weapon>().invPos = currWeaponIndex;
+
                 Debug.Log("Swap Weapon : " + weapon.name);
                 swapWeapon = false;
             }
@@ -174,6 +194,7 @@ public class PlayerInventory : MonoBehaviour
                 invWeapons.Add(weapon);
                 invUISlots[invWeapons.Count - 1].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
                 weapon.GetComponent<Weapon>().invPos = invWeapons.Count - 1;
+
                 Debug.Log("Added Weapon : " + weapon.name);
             }
 
