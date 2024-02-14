@@ -6,13 +6,10 @@ TagManager:
   tags:
   - CameraHolder
   - CameraRotation
-<<<<<<< HEAD
   - PlayerCollider
   - RayGun
   - BaseSword
-=======
   - MapWallTile
->>>>>>> map
   layers:
   - Default
   - TransparentFX
