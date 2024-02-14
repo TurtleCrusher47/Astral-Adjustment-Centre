@@ -204,6 +204,8 @@ public class PlayerInventory : MonoBehaviour
                         weapon.GetComponent<Weapon>().inventoryPosition = i;
 
                         invUISlots[i].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
+
+                        break;
                     }
                 }
 
