@@ -194,8 +194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 0.00016117, y: -0.00024891}
+  m_SizeDelta: {x: 50.856, y: 48.122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &50908328
 MonoBehaviour:
@@ -1194,8 +1194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 11.5, y: -11.29}
-  m_SizeDelta: {x: 23, y: 22.581}
+  m_AnchoredPosition: {x: 18, y: -11.79}
+  m_SizeDelta: {x: 52.2759, y: 49.9176}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &252072545
 CanvasRenderer:
@@ -1883,6 +1883,7 @@ MonoBehaviour:
     vertical: 720
   - horizontal: 854
     vertical: 480
+  resolutionLabel: {fileID: 1999554427}
 --- !u!4 &585101681
 Transform:
   m_ObjectHideFlags: 0
@@ -1981,7 +1982,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 715591630}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 585101680}
+        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
+        m_MethodName: ApplySettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &715591630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2441,8 +2454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: -0.000030518, y: 0.000030041}
+  m_SizeDelta: {x: 52.276, y: 49.918}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &836154912
 GameObject:
@@ -2830,8 +2843,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 11.5, y: -11.29}
-  m_SizeDelta: {x: 23, y: 22.581}
+  m_AnchoredPosition: {x: 16.4897, y: -24.0612}
+  m_SizeDelta: {x: 50.8568, y: 48.123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &899512439
 MonoBehaviour:
@@ -3391,7 +3404,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1197359016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 585101680}
+        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
+        m_MethodName: ResRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1197359016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3851,7 +3876,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409399049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 585101680}
+        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
+        m_MethodName: ResLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1409399049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4271,8 +4308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -59, y: -230}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -62.448, y: -230}
+  m_SizeDelta: {x: 221.1038, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999554427
 MonoBehaviour:
@@ -4294,7 +4331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1920 / 1080
+  m_text: 1920 X 1080
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

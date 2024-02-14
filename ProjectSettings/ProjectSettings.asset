@@ -15,7 +15,7 @@ PlayerSettings:
   companyName: DefaultCompany
   productName: Astral_Adjustment_Centre
   defaultCursor: {fileID: 2800000, guid: 97aed15550bd59444a1ee2b640189640, type: 3}
-  cursorHotspot: {x: 0, y: 0}
+  cursorHotspot: {x: 1, y: 1}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1

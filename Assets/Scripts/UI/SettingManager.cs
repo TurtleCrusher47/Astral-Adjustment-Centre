@@ -10,6 +10,8 @@ public class SettingManager : MonoBehaviour
     public List<ResItem> resolutions = new List<ResItem>();
     private int selectedResolution;
 
+    public TMP_Text resolutionLabel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,8 @@ public class SettingManager : MonoBehaviour
         {
             selectedResolution = 0;
         }
+
+        UpdateResLabel();
     }
 
     public void ResRight()
@@ -48,6 +52,12 @@ public class SettingManager : MonoBehaviour
         {
             selectedResolution = resolutions.Count - 1; 
         }
+        UpdateResLabel();
+    }
+
+    public void UpdateResLabel()
+    {
+        resolutionLabel.text = resolutions[selectedResolution].horizontal.ToString() + " X " + resolutions[selectedResolution].vertical.ToString();
     }
 
     public void ApplySettings()
@@ -62,6 +72,8 @@ public class SettingManager : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
+
+        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
     }
 }
 
