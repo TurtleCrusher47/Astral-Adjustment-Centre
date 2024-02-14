@@ -59,6 +59,12 @@ public class Generator3D : MonoBehaviour {
     GameObject hallwayPrefab;
     [SerializeField]
     GameObject stairPrefab;
+    [SerializeField]
+    GameObject playerObj;
+    [SerializeField]
+    GameObject camObj;
+    [SerializeField]
+    GameObject endObj;
 
     Random random;
     Grid3D<CellType> grid;
@@ -110,6 +116,7 @@ public class Generator3D : MonoBehaviour {
         Triangulate();
         CreateHallways();
         PathfindHallways();
+        SpawnPlayer();
         DeleteWalls();
     }
 
@@ -154,6 +161,13 @@ public class Generator3D : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void SpawnPlayer()
+    {
+        playerObj.transform.position = pathList[0][0];
+        camObj.transform.position = pathList[0][0];
+        endObj.transform.position = pathList[pathList.Count - 1][pathList[pathList.Count - 1].Count - 1];
     }
 
     void Triangulate() {
