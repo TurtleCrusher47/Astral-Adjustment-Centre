@@ -13,6 +13,7 @@ public class LoadingScene : MonoBehaviour
 
     public void LoadSceneButton()
     {
+        // Made a Temp Button to test it, can change to automatically switch scene
         StartCoroutine(LoadScene());
     }
 
@@ -24,21 +25,25 @@ public class LoadingScene : MonoBehaviour
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("MenuScene");
         //Don't let the Scene activate until you allow it to
         asyncOperation.allowSceneActivation = false;
-        Debug.Log("Pro :" + asyncOperation.progress);
+
+        Debug.Log("Progress : " + asyncOperation.progress);
+
         //When the load is still in progress, output the Text and progress bar
         while (!asyncOperation.isDone)
         {
             //Output the current progress
             float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
 
-            loadingBar.value = progress;
-
             loadingBarText.text = Mathf.Round(progress * 100) + "%";
+
+            loadingBar.value = progress * 100;
+
+            //Debug.Log(progress * 100 + "%");
 
             loadingText.text = "Loading ";
 
-            int dotsCount = Mathf.FloorToInt(Time.time % 4);
-            for(int i = 0; i < dotsCount; i++)
+            int numDots =(int)(Time.time % 3) + 1;
+            for(int i = 0; i < numDots; i++)
             {
                 loadingText.text += ".";
             }
@@ -47,7 +52,7 @@ public class LoadingScene : MonoBehaviour
             if (asyncOperation.progress >= 0.9f)
             {
                 //Change the Text to show the Scene is ready
-                //loadingText.text = "Press the space bar to continue";
+                loadingText.text = "Continue";
                 //Wait to you press the space key to activate the Scene
                 if (Input.GetKeyDown(KeyCode.Space))
                     //Activate the Scene
