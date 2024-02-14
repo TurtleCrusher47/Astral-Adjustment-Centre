@@ -36,6 +36,8 @@ public class Generator3D : MonoBehaviour {
     }
 
     [SerializeField]
+    MapPrefabManager mPrefabManager;
+    [SerializeField]
     int seed;
     [SerializeField]
     Vector3Int size;
@@ -386,7 +388,26 @@ public class Generator3D : MonoBehaviour {
     }
 
     void PlaceRoom(Vector3Int location, Vector3Int size) {
-        //PlaceCube(location, size, redMaterial);
+        // place misc items
+        // loops all items
+        for (int i = 0; i < mPrefabManager.maxMinChanceList.Count; i++)
+        {
+            // check if item is spawned
+            if (RandomR.Range(1, 100) < mPrefabManager.maxMinChanceList[i].z)
+            {
+                // check the number of times that item spawns
+                int amount = RandomR.Range((int)mPrefabManager.maxMinChanceList[i].x, (int)mPrefabManager.maxMinChanceList[i].x);
+                for (int j = 0; j < amount; j++)
+                {
+                    Vector3 randPos = location + new Vector3(
+                        RandomR.Range((float)(1), (size.x - 1)),
+                        -0.35f,
+                        RandomR.Range((float)(1), (float)(size.z - 1))
+                        );
+                    Instantiate(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                }
+            }
+        }
 
         for (int j = 0; j < size.x; j++)
         {
