@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8117124819462022139}
   - component: {fileID: 6287347570643212081}
   m_Layer: 0
-  m_Name: WallWithDoor
+  m_Name: WallWithDoor_MapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

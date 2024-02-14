@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 8935869309301989740}
   - component: {fileID: 3299497968736528412}
   m_Layer: 0
-  m_Name: Hallway
+  m_Name: Hallway_MapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

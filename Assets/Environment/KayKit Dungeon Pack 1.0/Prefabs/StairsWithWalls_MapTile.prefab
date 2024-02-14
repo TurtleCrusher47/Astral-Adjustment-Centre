@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 7455119506069009859}
   - component: {fileID: 2243711671217023045}
   m_Layer: 0
-  m_Name: StairsWithWalls
+  m_Name: StairsWithWalls_MapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -79,7 +79,7 @@ public class Generator3D : MonoBehaviour {
             UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
             foreach(GameObject go in s.GetRootGameObjects())
             {
-                if (go.name.Contains("cube") || go.name.Contains("Brick"))
+                if (go.name.Contains("MapTile"))
                 {
                     Destroy(go);
                 }
