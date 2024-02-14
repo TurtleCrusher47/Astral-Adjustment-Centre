@@ -15,23 +15,18 @@ public class PlayerWeaponPickup : MonoBehaviour
         {
             weapon.transform.SetParent(weaponContainer.transform);
 
-            if (weapon.CompareTag("BaseSword"))
-            {
-                weapon.transform.localPosition = new Vector3(0, 0, 0);
-                weapon.transform.localRotation = Quaternion.Euler(0, -90, 0);
-
-            }
-            else if (weapon.CompareTag("RayGun"))
-            {
-                weapon.transform.localPosition = new Vector3(0, 0, 0);
-                weapon.transform.localRotation = Quaternion.Euler(-90, 0, -90);
-            }
+            weapon.transform.localPosition = new Vector3(0, 0, 0);
+            weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             weapon.GetComponent<Weapon>().inInventory = true;
             weapon.GetComponent<Rigidbody>().isKinematic = true;
 
             canPickUp = false;
-            weapon.layer = LayerMask.NameToLayer("Weapons");
+
+            foreach (Transform child in weapon.transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Weapons");
+            }
         }
     }
 }
