@@ -9,6 +9,7 @@ TagManager:
   - PlayerCollider
   - BaseSword
   - MapWallTile
+  - FirePoint
   layers:
   - Default
   - TransparentFX

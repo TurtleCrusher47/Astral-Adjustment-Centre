@@ -15,7 +15,7 @@ public class GameObjectRangedWeapon : RangedWeapon
 
     public override void Shoot()
     {
-        if (rangedWeaponData.currentAmmo > 0)
+        if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
             if (CanShoot())
             {
