@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 using System;
 using static UnityEditor.FilePathAttribute;
 using System.Drawing;
+using Unity.VisualScripting;
+using System.IO;
+using static UnityEngine.GraphicsBuffer;
 
 public class Generator3D : MonoBehaviour {
     enum CellType {
@@ -43,19 +46,11 @@ public class Generator3D : MonoBehaviour {
     [SerializeField]
     Vector3Int roomMinSize;
     [SerializeField]
-    GameObject cubePrefab;
-    [SerializeField]
-    Material redMaterial;
-    [SerializeField]
-    Material blueMaterial;
-    [SerializeField]
-    Material greenMaterial;
-    [SerializeField]
     GameObject floorPrefab;
     [SerializeField]
     GameObject wallPrefab;
     [SerializeField]
-    GameObject cornerPrefab;
+    GameObject hallwayPrefab;
     [SerializeField]
     GameObject stairPrefab;
 
@@ -176,7 +171,7 @@ public class Generator3D : MonoBehaviour {
         remainingEdges.ExceptWith(selectedEdges);
 
         foreach (var edge in remainingEdges) {
-            if (random.NextDouble() < 0.225) {
+            if (random.NextDouble() < 0.5) {
                 selectedEdges.Add(edge);
             }
         }
@@ -268,72 +263,78 @@ public class Generator3D : MonoBehaviour {
                             grid[prev + verticalOffset + horizontalOffset] = CellType.Stairs;
                             grid[prev + verticalOffset + horizontalOffset * 2] = CellType.Stairs;
 
-                            PlaceStairs(prev + horizontalOffset);
-                            PlaceStairs(prev + horizontalOffset * 2);
-                            PlaceStairs(prev + verticalOffset + horizontalOffset);
-                            PlaceStairs(prev + verticalOffset + horizontalOffset * 2);
-
                             // spawn stairs
-                            Instantiate(floorPrefab, prev + horizontalOffset + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+                            // stair landing
+                            // stair
+                            Vector3 tilePos1 = prev + (Vector3)horizontalOffset * 1.5f + new Vector3(0.5f, -1.5f, 0.5f);
+                            Vector3 tilePos2 = prev + verticalOffset + (Vector3)horizontalOffset * 1.5f + new Vector3(0.5f, -1.5f, 0.5f);
+                            // going up
                             if (delta.y > 0)
                             {
-                                GameObject obj = Instantiate(stairPrefab, prev + horizontalOffset * 2 + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
                                 if (delta.x > 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, -90, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos1, -90);
                                 }
                                 else if (delta.x < 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, 90, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos1, 90);
                                 }
                                 else if (delta.z > 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, 180, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos1, 180);
                                 }
                                 else if (delta.z < 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, 0, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos1, 0);
                                 }
                             }
+                            // goind down
                             else if (delta.y < 0)
                             {
-                                GameObject obj = Instantiate(stairPrefab, prev + verticalOffset + horizontalOffset * 2 + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
                                 if (delta.x > 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, 90, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos2, 90);
                                 }
                                 else if (delta.x < 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, -90, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos2, -90);
                                 }
                                 else if (delta.z > 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, 0, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos2, 0);
                                 }
                                 else if (delta.z < 0)
                                 {
-                                    obj.transform.eulerAngles = new Vector3(0, 180, 0);
+                                    SpawnTileWithRotation(stairPrefab, tilePos2, 180);
                                 }
                             }
                         }
 
-                        Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), UnityEngine.Color.blue, 100, false);
+                        Debug.DrawLine(prev + new Vector3(0.5f, -1.0f, 0.5f), current + new Vector3(0.5f, -1.0f, 0.5f), UnityEngine.Color.blue, 100, false);
                     }
                 }
 
-                foreach (var pos in path) {
-                    if (grid[pos] == CellType.Hallway) {
+                foreach (var pos in path) 
+                {
+                    if (grid[pos] == CellType.Hallway) 
+                    {
                         PlaceHallway(pos);
+                    }
+                }
+
+                for (int i = 0; i < path.Count - 1; i++)
+                {
+                    RaycastHit hit;
+                    if (Physics.Raycast(path[i] + new Vector3(0.5f, -1.0f, 0.5f), path[i + 1] - path[i], out hit))
+                    {
+                        if (hit.transform.CompareTag("MapWallTile"))
+                        {
+                            Destroy(hit.transform.gameObject);
+                        }
                     }
                 }
             }
         }
-    }
-
-    void PlaceCube(Vector3Int location, Vector3Int size, Material material) {
-        GameObject go = Instantiate(cubePrefab, location, Quaternion.identity);
-        go.GetComponent<Transform>().localScale = size;
-        go.GetComponent<MeshRenderer>().material = material;
     }
 
     void PlaceRoom(Vector3Int location, Vector3Int size) {
@@ -345,22 +346,30 @@ public class Generator3D : MonoBehaviour {
             {
                 for (int l = 0; l < size.z; l++)
                 {
+                    Vector3 tileOffset = new Vector3(j + 0.5f, k - 0.5f, l + 0.5f);
                     // spawn floor
-                    Instantiate(floorPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
-
-                    // spawn walls
-                    if (k == 1) // 1 level above floor
+                    if (k == 0 || k == size.y - 1)
                     {
-                        if (j == 0 || j == size.x - 1 || l == 0 || l == size.z - 1)
+                        Instantiate(floorPrefab, location + tileOffset, Quaternion.identity);
+                    }
+                    // spawn walls
+                    if (k < size.y - 1)
+                    {
+                        if (j == 0)
                         {
-                            if (j == 0 && l == 0 || j == 0 && l == size.z - 1 || j == size.x - 1 && l == 0 || j == size.x - 1 && l == size.z - 1) // corners of room
-                            {
-                                Instantiate(cornerPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
-                            }
-                            else // sides of room
-                            {
-                                Instantiate(wallPrefab, location + new Vector3(j + 0.5f, 0.5f, l + 0.5f), Quaternion.identity);
-                            }
+                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(-0.5f, 0, 0), 90);
+                        }
+                        else if (j == size.x - 1)
+                        {
+                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(0.5f, 0, 0), -90);
+                        }
+                        if (l == 0)
+                        {
+                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(0, 0, -0.5f), 0);
+                        }
+                        else if (l == size.z - 1)
+                        {
+                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(0, 0, 0.5f), 180);
                         }
                     }
                 }
@@ -368,14 +377,15 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void PlaceHallway(Vector3Int location) {
-        //PlaceCube(location, new Vector3Int(1, 1, 1), blueMaterial);
-
+    void PlaceHallway(Vector3Int curr) {
+        Vector3 tileOffset = new Vector3(0.5f, -1.5f, 0.5f);
         // spawn floor
-        Instantiate(floorPrefab, location + new Vector3(0.5f, -0.5f, 0.5f), Quaternion.identity);
+        Instantiate(hallwayPrefab, curr + tileOffset, Quaternion.identity);
     }
 
-    void PlaceStairs(Vector3Int location) {
-        //PlaceCube(location, new Vector3Int(1, 1, 1), greenMaterial);
+    void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
+    {
+        GameObject obj = Instantiate(go, location, Quaternion.identity);
+        obj.transform.eulerAngles = new Vector3(0, angle, 0);
     }
 }

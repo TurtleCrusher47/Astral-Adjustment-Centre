@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5066775973524403994}
   - component: {fileID: 9030223104147407418}
   - component: {fileID: 3345406492285124291}
+  - component: {fileID: -3502235422578460925}
   m_Layer: 0
   m_Name: arch_labyrinth_floorEdge_1line_2vert_varC
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2856145581387262934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-3502235422578460925
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856145581387262934}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7698815803000367413, guid: 2622cda86b02f734180bd20efa58f421, type: 3}

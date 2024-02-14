@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 1865677416}
   - component: {fileID: 1865677417}
   m_Layer: 0
-  m_Name: MapGenrator
+  m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +265,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -283,22 +283,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 0
-  size: {x: 50, y: 8, z: 50}
-  roomCount: 250
-  roomMaxSize: {x: 9, y: 3, z: 9}
-  roomMinSize: {x: 5, y: 3, z: 5}
-  cubePrefab: {fileID: 7415050535990569633, guid: 3fb4ddafbd160274ba8f07a1cf8cd5ee,
+  size: {x: 40, y: 6, z: 40}
+  roomCount: 300
+  roomMaxSize: {x: 8, y: 2, z: 8}
+  roomMinSize: {x: 5, y: 2, z: 5}
+  floorPrefab: {fileID: 5314266566890921846, guid: b4ffc6135504d1d4089e0fdde3a7a5e2,
     type: 3}
-  redMaterial: {fileID: 2100000, guid: 71673d9873285904ab00282788add27f, type: 2}
-  blueMaterial: {fileID: 2100000, guid: bd79999920190574a94044b2acad7316, type: 2}
-  greenMaterial: {fileID: 2100000, guid: 13cd47135277903479d4b55421faa42e, type: 2}
-  floorPrefab: {fileID: 5481238698225377882, guid: 159707ad8af90534f8ac70c60b798814,
+  wallPrefab: {fileID: 7718480786274019014, guid: 3ad7ae4773b8ae949b0b8a66d3052463,
     type: 3}
-  wallPrefab: {fileID: 7957831090434690199, guid: a14fe99a9e5ae0c4c87116f1dec760c0,
+  hallwayPrefab: {fileID: 6185756753956964034, guid: c72472c289358f240b512113beaa2dc0,
     type: 3}
-  cornerPrefab: {fileID: 7371786038021223979, guid: 6952457c256bc624ba7a49ecf3da5e14,
-    type: 3}
-  stairPrefab: {fileID: 4175498258089693725, guid: 45579cec63adbc8468e46c67bcdf038b,
+  stairPrefab: {fileID: 8968104749458756630, guid: 0895b371a292fd3429a194bdf3f1b7d1,
     type: 3}
 --- !u!1 &2017080174
 GameObject:
@@ -378,7 +373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017080174}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 25, y: 25, z: -10}
+  m_LocalPosition: {x: 15, y: 25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
