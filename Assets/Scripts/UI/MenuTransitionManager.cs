@@ -6,27 +6,61 @@ using UnityEngine;
 
 public class MenuTransitionManager : MonoBehaviour
 {
-    public CinemachineVirtualCamera currCamera;
+    [SerializeField] private List<GameObject> virtualCameras;
+    [SerializeField] private CinemachineVirtualCamera currCamera;
+    [SerializeField] private CinemachineBrain mainCamBrain;
     [SerializeField] private CinemachineVirtualCamera menuCamera;
+    [SerializeField] private GameObject settingsPanel;
 
     void Awake()
     {
+        for (int i = 0; i < virtualCameras.Count; i++)
+        {
+            virtualCameras[i].SetActive(true);
+        }
+
+        settingsPanel.SetActive(false);
+
         currCamera.Priority++;
 
-        StartCoroutine(TransitionToMenu());
-    }
-
-    private IEnumerator TransitionToMenu()
-    {
-        yield return new WaitForSeconds(1);
-
-        UpdateCamera(menuCamera);
+        StartCoroutine(DelayedTransition(menuCamera, 1));
     }
 
     public void UpdateCamera(CinemachineVirtualCamera target)
     {
+        StopAllCoroutines();
+
+        if (currCamera.name == "SettingsCamera")
+        {
+            StartCoroutine(DelayedSettingsPanel(false));
+        }
+
         currCamera.Priority--;
         currCamera = target;
         currCamera.Priority++;
+
+        if (target.name == "SettingsCamera")
+        {
+            StartCoroutine(DelayedSettingsPanel(true));
+        }
+    }
+
+    private IEnumerator DelayedTransition(CinemachineVirtualCamera target, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        UpdateCamera(target);
+    }
+
+    private IEnumerator DelayedSettingsPanel(bool show)
+    {
+        if (show)
+        {
+            yield return new WaitUntil(() => mainCamBrain.IsBlending);
+
+            yield return new WaitUntil(() => !mainCamBrain.IsBlending);
+        }
+
+        settingsPanel.SetActive(show);
     }
 }
