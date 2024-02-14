@@ -12,6 +12,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private int invSlots;
 
     [SerializeField] private List<Sprite> weaponIcons = new List<Sprite>();
+    public static GameObject selectBorder;
     public static List<Sprite> invWeaponIcons = new List<Sprite>();
     public static List<GameObject> invWeapons = new List<GameObject>();
     public static List<GameObject> invUISlots = new List<GameObject>();
@@ -45,6 +46,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         invWeaponIcons = weaponIcons;
+        selectBorder = selectedBorder;
     }
     
     void Start()
@@ -183,8 +185,10 @@ public class PlayerInventory : MonoBehaviour
             if (swapWeapon)
             {
                 invWeapons.Insert(currWeaponIndex, weapon);
-                invUISlots[currWeaponIndex].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
                 weapon.GetComponent<Weapon>().inventoryPosition = currWeaponIndex;
+
+                invUISlots[currWeaponIndex].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
+                selectBorder.transform.localPosition = invUISlots[currWeaponIndex].transform.localPosition;
 
                 Debug.Log("Swap Weapon : " + weapon.name);
                 swapWeapon = false;
@@ -192,8 +196,16 @@ public class PlayerInventory : MonoBehaviour
             else
             {
                 invWeapons.Add(weapon);
-                invUISlots[invWeapons.Count - 1].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
-                weapon.GetComponent<Weapon>().inventoryPosition = invWeapons.Count - 1;
+                
+                for (int i = 0; i < invWeapons.Count; i++)
+                {
+                    if (invUISlots[i].GetComponent<Image>().sprite == null)
+                    {
+                        weapon.GetComponent<Weapon>().inventoryPosition = i;
+
+                        invUISlots[i].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
+                    }
+                }
 
                 Debug.Log("Added Weapon : " + weapon.name);
             }
@@ -202,6 +214,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 currWeaponIndex = 0;
                 weapon.SetActive(true);
+                selectBorder.transform.localPosition = invUISlots[currWeaponIndex].transform.localPosition;
             }
             else
             {
