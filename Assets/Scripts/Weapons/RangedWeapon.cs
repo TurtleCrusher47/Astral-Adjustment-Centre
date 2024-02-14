@@ -7,6 +7,7 @@ public abstract class RangedWeapon : Weapon
 {
     [SerializeField] protected RangedWeaponData rangedWeaponData;
     [SerializeField] protected Transform cam;
+    [SerializeField] protected Transform firePoint;
     // [SerializeField] protected Recoil recoil;
 
     // [SerializeField] protected UpdateAmmoText updateAmmoText;
@@ -17,7 +18,19 @@ public abstract class RangedWeapon : Weapon
     {
     }
 
-    public abstract void Update();
+    public void Update()
+    {
+        timeSinceLastShot += Time.deltaTime;
+
+        if (Input.GetMouseButton(0))
+        {
+            Shoot();
+        }
+        if (Input.GetKeyDown(KeyCode.R) && !rangedWeaponData.infiniteAmmo)
+        {
+            StartReload();
+        }
+    }
     
 
     protected bool CanShoot()

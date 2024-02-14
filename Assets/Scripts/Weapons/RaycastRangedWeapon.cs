@@ -5,20 +5,7 @@ using UnityEngine;
 public class RaycastRangedWeapon : RangedWeapon
 {
     [SerializeField] private RaycastProjectileData raycastProjectileData;
-
-    public override void Update()
-    {
-        timeSinceLastShot += Time.deltaTime;
-
-        if (Input.GetMouseButton(0))
-        {
-            Shoot();
-        }
-        if (Input.GetKeyDown(KeyCode.R) && !rangedWeaponData.infiniteAmmo)
-        {
-            StartReload();
-        }
-    }
+    [SerializeField] private LineRenderer lineRenderer;
 
     public override void Shoot()
     {
@@ -29,12 +16,17 @@ public class RaycastRangedWeapon : RangedWeapon
                 // Debug.Log("Shoot");
                 if (Physics.Raycast(cam.position, transform.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance))
                 {
+                    StartCoroutine(RenderTraceLine(hitInfo.point));
                     Debug.Log(hitInfo.transform.name);
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
                     damageable?.Damage(raycastProjectileData.damage);
                     
                     // GameObject effect = ObjectPoolManager.SpawnObject(hitEffect, hitInfo.point, hitInfo.transform.rotation);
                     // Destroy(effect, 0.5f);
+                }
+                else
+                {
+                    StartCoroutine(RenderTraceLine(cam.transform.forward * raycastProjectileData.maxDistance));
                 }
 
                 if (!rangedWeaponData.infiniteAmmo)
@@ -51,5 +43,18 @@ public class RaycastRangedWeapon : RangedWeapon
 
     public override void OnShot()
     {
+    }
+
+    private IEnumerator RenderTraceLine(Vector3 hitPosition)
+    {
+        // audController.PlayAudio("shoot");
+        
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, hitPosition);
+
+        yield return new WaitForSeconds(0.1f);
+
+        lineRenderer.positionCount = 0;
     }
 }
