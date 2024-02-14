@@ -248,6 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865677416}
   - component: {fileID: 1865677417}
+  - component: {fileID: 1865677418}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -282,19 +283,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2adc24e688e8841887873ee6b3e08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mPrefabManager: {fileID: 1865677418}
   seed: 0
-  size: {x: 40, y: 6, z: 40}
-  roomCount: 300
-  roomMaxSize: {x: 8, y: 2, z: 8}
-  roomMinSize: {x: 5, y: 2, z: 5}
+  size: {x: 40, y: 7, z: 40}
+  roomCount: 30
+  roomMaxSize: {x: 5, y: 2, z: 5}
+  roomMinSize: {x: 2, y: 2, z: 2}
   floorPrefab: {fileID: 5314266566890921846, guid: b4ffc6135504d1d4089e0fdde3a7a5e2,
     type: 3}
-  wallPrefab: {fileID: 7718480786274019014, guid: 3ad7ae4773b8ae949b0b8a66d3052463,
+  ceilingPrefab: {fileID: 3812864620290879476, guid: 08f947dcbad96c54790a49b7efc436cd,
     type: 3}
-  hallwayPrefab: {fileID: 6185756753956964034, guid: c72472c289358f240b512113beaa2dc0,
+  wallPrefab: {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463,
+    type: 3}
+  wallDoorPrefab: {fileID: 5494911878686914276, guid: 610a17a9a4666d645b92b171fbf3abbb,
+    type: 3}
+  hallwayPrefab: {fileID: 7422611386983579833, guid: c72472c289358f240b512113beaa2dc0,
     type: 3}
   stairPrefab: {fileID: 8968104749458756630, guid: 0895b371a292fd3429a194bdf3f1b7d1,
     type: 3}
+--- !u!114 &1865677418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865677415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095e30edf3aea064482b9724f78e4d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectsList:
+  - {fileID: 1165792392210164609, guid: 86927605401ce0d4797db526abf3832c, type: 3}
+  - {fileID: 2866348493960091575, guid: 1d5a70baca7f0934eb013000a00753bf, type: 3}
+  maxMinChanceList:
+  - {x: 7, y: 4, z: 100}
+  - {x: 3, y: 2, z: 50}
 --- !u!1 &2017080174
 GameObject:
   m_ObjectHideFlags: 0

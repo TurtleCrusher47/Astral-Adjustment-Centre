@@ -7,7 +7,6 @@ TagManager:
   - CameraHolder
   - CameraRotation
   - PlayerCollider
-  - RayGun
   - BaseSword
   - MapWallTile
   layers:
