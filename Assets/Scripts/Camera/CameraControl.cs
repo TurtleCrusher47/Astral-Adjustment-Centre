@@ -28,6 +28,8 @@ public class CameraControl : MonoBehaviour
 	{
 		HandleCameraRotation();
 
+		// yRotation = Mathf.Clamp(yRotation, )	
+
 		cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, transform.rotation.z);
 		orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
 		playerModel.transform.rotation = Quaternion.Euler(0, yRotation, 0);
