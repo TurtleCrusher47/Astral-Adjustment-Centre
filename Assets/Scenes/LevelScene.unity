@@ -364,6 +364,12 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &471361266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1681676031481293, guid: ed5dc1bd0e8791a4b8228583125542f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174318288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &535182513
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,11 +858,36 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 200180308}
+    - target: {fileID: 5712472407430565007, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029409768925095403, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059889624154805749, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6063671662139761664, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 535182517}
+    - target: {fileID: 6063671662139761664, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: stepRayLower
+      value: 
+      objectReference: {fileID: 1998722005}
+    - target: {fileID: 6063671662139761664, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: stepRayUpper
+      value: 
+      objectReference: {fileID: 471361266}
     - target: {fileID: 6063671662139761665, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
       propertyPath: cam
@@ -927,6 +958,11 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1525211068}
+    - target: {fileID: 6063671663935837587, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!1 &1270919068
@@ -1484,6 +1520,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1998722005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 697089824008479216, guid: ed5dc1bd0e8791a4b8228583125542f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174318288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2138456471
 GameObject:
   m_ObjectHideFlags: 0
