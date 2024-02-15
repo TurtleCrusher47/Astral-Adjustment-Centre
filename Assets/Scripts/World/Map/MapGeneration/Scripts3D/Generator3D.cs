@@ -84,16 +84,15 @@ public class Generator3D : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            ChangeSeed();
+            //ChangeSeed();
             UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
-            foreach(GameObject go in s.GetRootGameObjects())
+            for (int i = 0; i < MapContentGrp.transform.childCount; i++)
             {
-                if (go.name.Contains("MapTile"))
+                if (MapContentGrp.transform.GetChild(i).name.Contains("MapTile"))
                 {
-                    Destroy(go);
+                    Destroy(MapContentGrp.transform.GetChild(i).gameObject);
                 }
             }
-
             InitializeMap();
         }
     }
@@ -108,6 +107,7 @@ public class Generator3D : MonoBehaviour {
         random = new Random(seed);
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
+        pathList = new List<List<Vector3Int>>();
 
         PlaceRooms();
         Triangulate();
@@ -192,7 +192,7 @@ public class Generator3D : MonoBehaviour {
         remainingEdges.ExceptWith(selectedEdges);
 
         foreach (var edge in remainingEdges) {
-            if (random.NextDouble() < 0.5) {
+            if (random.NextDouble() < 0.65) {
                 selectedEdges.Add(edge);
             }
         }
@@ -428,7 +428,8 @@ public class Generator3D : MonoBehaviour {
                         -0.35f,
                         RandomR.Range((float)(1), (float)(size.z - 1))
                         );
-                    Instantiate(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                    GameObject obj = Instantiate(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                    obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                 }
             }
         }
@@ -448,7 +449,7 @@ public class Generator3D : MonoBehaviour {
                     // spawn ceiling
                     else if (k == size.y - 1)
                     {
-                        Instantiate(ceilingPrefab, location + tileOffset, Quaternion.identity);
+                        Instantiate(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity);
                     }
                     // spawn walls
                     if (k < size.y - 1)
