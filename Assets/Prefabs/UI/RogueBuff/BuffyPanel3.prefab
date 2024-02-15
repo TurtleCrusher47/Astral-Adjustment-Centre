@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1851527452478051700}
   - component: {fileID: 2577248211072040976}
   m_Layer: 5
-  m_Name: BuffyPanel (2)
+  m_Name: BuffyPanel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4019270769681266111}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.008278665, z: 0, w: -0.9999657}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
@@ -172,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 388, y: 126}
+  m_AnchoredPosition: {x: -344.25, y: 0}
   m_SizeDelta: {x: 450.58765, y: 587.8871}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7849453007435731011

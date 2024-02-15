@@ -5,13 +5,15 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject phonePanel, optionPanel;
+    public GameObject phonePanel, optionPanel, roguePanel;
 
     [Header("GameObjects")]
     public GameObject optionButton, exitButton;
 
     [Header("Buff Panels")]
     public List<GameObject> buffPanels = new List<GameObject>();
+
+    private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
 
     private void Start()
     {
@@ -23,35 +25,17 @@ public class UIManager : MonoBehaviour
         optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
         optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
 
-        StartBuff();
-
         ShuffleBuffPanel();
+        InstantiateBuffPanels();
+        ShowRandomBuffPanels(2);
 
-        Debug.Log("GameObjects in List: " + buffPanels.Count);
+        //Debug.Log("GameObjects in List: " + buffPanels.Count);
 
+        /*
         foreach( GameObject buffPanel in buffPanels)
         {
             Debug.Log("GameObject Name: " + buffPanel.name);
-        }
-    }
-
-    private void StartBuff()
-    {
-        // Reset Buff Panel
-        //buffPanels.transform.localPosition = new Vector3(-344.25f, 61f, 0f);
-        //buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
-        // buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-
-        //buffPanel2.transform.localPosition = new Vector3(388f, 126f, 0f);
-        //buffPanel2.transform.localScale = new Vector3(1f, 1f, 0f);
-        //buffPanel2.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-
-        // Test Buff 
-        //LeanTween.moveLocal(buffPanel, new Vector3(-344.25f, 0f, 0f), .6f).setDelay(0.3f).setEase(LeanTweenType.easeInOutQuart);
-        // LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1.2f).setEase(LeanTweenType.easeInOutExpo);
-
-        //LeanTween.moveLocal(buffPanel2, new Vector3(384f, 0f, 0f), .6f).setDelay(0.5f).setEase(LeanTweenType.easeInOutQuart);
-        //LeanTween.rotate(buffPanel2, new Vector3(0f, 0f, 0f), .9f).setDelay(1.4f).setEase(LeanTweenType.easeInOutExpo);
+        }*/
     }
 
     private void ShuffleBuffPanel()
@@ -67,25 +51,74 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void InstantiateBuffPanels()
+    {
+        // Destroy the previous buff panels
+        DestroyOldPanels();
+
+        // Instantiate buff panels from the list
+        for (int i = 0; i < 2 && i < buffPanels.Count; i++)
+        {
+            GameObject buffPanel = Instantiate(buffPanels[i], roguePanel.transform);
+            instantiatedPanels.Add(buffPanel); // Keep track of instantiated panel
+        }
+    }
+
+    private void DestroyOldPanels()
+    {
+        // Destroy the previous instantiated panels
+        foreach (GameObject panel in instantiatedPanels)
+        {
+            Destroy(panel);
+        }
+        instantiatedPanels.Clear(); // Clear the list of instantiated panels
+    }
+
+    private void ShowRandomBuffPanels(int numberOfPanelsToShow)
+    {
+        // Ensure there are enough buff panels in the list
+        if (numberOfPanelsToShow > buffPanels.Count)
+        {
+            Debug.LogWarning("Not enough buff panels in the list.");
+            return;
+        }
+
+        // Show the specified number of random buff panels
+        for (int i = 0; i < numberOfPanelsToShow; i++)
+        {
+            GameObject buffPanel = instantiatedPanels[i]; // Use the instantiated panels
+            // Add your logic here for showing the panels
+            if(i == 0)
+            {
+                // Reset Buff Panel
+                buffPanel.transform.localPosition = new Vector3(-344.25f, 61f, 0f);
+                buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
+                buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+                // Buff Animation
+                LeanTween.moveLocal(buffPanel, new Vector3(-344.25f, 0f, 0f), .6f).setDelay(0.1f).setEase(LeanTweenType.easeInOutQuart);
+                LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1f).setEase(LeanTweenType.easeInOutExpo);
+            }
+            else if (i == 1)
+            {
+                buffPanel.transform.localPosition = new Vector3(388f, 126f, 0f);
+                buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
+                buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+                // Buff Animation
+                LeanTween.moveLocal(buffPanel, new Vector3(384f, 0f, 0f), .6f).setDelay(0.3f).setEase(LeanTweenType.easeInOutQuart);
+                LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1.2f).setEase(LeanTweenType.easeInOutExpo);
+            }
+        }
+    }
+
     public void RerollButton()
     {
+        // Destroy the previous buff panels before rerolling
+        DestroyOldPanels();
+
+        // Reroll logic
         ShuffleBuffPanel();
-
-        // Reset Buff Panel
-        //buffPanel.transform.localPosition = new Vector3(-344.25f, 61f, 0f);
-        //buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
-        //buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-
-        //buffPanel2.transform.localPosition = new Vector3(388f, 126f, 0f);
-        //buffPanel2.transform.localScale = new Vector3(1f, 1f, 0f);
-        //buffPanel2.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-
-        // Test Buff Animations 
-        //LeanTween.moveLocal(buffPanel, new Vector3(-344.25f, 0f, 0f), .6f).setDelay(0.3f).setEase(LeanTweenType.easeInOutQuart);
-        //LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1.2f).setEase(LeanTweenType.easeInOutExpo);
-
-        //LeanTween.moveLocal(buffPanel2, new Vector3(384f, 0f, 0f), .6f).setDelay(0.5f).setEase(LeanTweenType.easeInOutQuart);
-        //LeanTween.rotate(buffPanel2, new Vector3(0f, 0f, 0f), .9f).setDelay(1.4f).setEase(LeanTweenType.easeInOutExpo);
+        InstantiateBuffPanels();
+        ShowRandomBuffPanels(2);
     }
 
     private void Update()
