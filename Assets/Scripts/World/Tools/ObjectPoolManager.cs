@@ -14,6 +14,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     public enum PoolType
     {
         Ammo,
+        Map,    
         None
     }
 
@@ -28,7 +29,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         objectPoolEmptyHolder = new GameObject("Pooled Objects");
 
-        gameObjectsEmpty = new GameObject("Bullets");
+        gameObjectsEmpty = new GameObject("Map");
         gameObjectsEmpty.transform.SetParent(objectPoolEmptyHolder.transform);
     }
 

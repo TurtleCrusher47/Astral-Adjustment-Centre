@@ -428,7 +428,7 @@ public class Generator3D : MonoBehaviour {
                         -0.35f,
                         RandomR.Range((float)(1), (float)(size.z - 1))
                         );
-                    GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                    GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                     mapContent.Add(obj);
                     obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                 }
@@ -445,13 +445,13 @@ public class Generator3D : MonoBehaviour {
                     // spawn floor
                     if (k == 0)
                     {
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                     }
                     // spawn ceiling
                     else if (k == size.y - 1)
                     {
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                     }
                     // spawn walls
@@ -482,13 +482,13 @@ public class Generator3D : MonoBehaviour {
     void PlaceHallway(Vector3Int curr) {
         Vector3 tileOffset = new Vector3(0.5f, -1.5f, 0.5f);
         // spawn floor
-        GameObject obj = ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity);
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
     }
 
     void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
     {
-        GameObject obj = ObjectPoolManager.Instance.SpawnObject(go, location, Quaternion.identity);
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(go, location, Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
         obj.transform.eulerAngles = new Vector3(0, angle, 0);
     }
