@@ -1516,8 +1516,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   capsule: {fileID: 6063671662455724949}
   capsuleCollider: {fileID: 6063671662455724951}
-  stepRayUpper: {fileID: 0}
-  stepRayLower: {fileID: 0}
+  stepRayUpper: {fileID: 1681676031481293}
+  stepRayLower: {fileID: 697089824008479216}
   stepHeight: 0.3
   stepSmooth: 2
   groundCheck: {fileID: 6063671663935837587}
@@ -2490,7 +2490,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8894067595518307545}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 3
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
