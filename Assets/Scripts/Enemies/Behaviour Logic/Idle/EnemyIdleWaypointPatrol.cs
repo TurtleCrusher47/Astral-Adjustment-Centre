@@ -11,11 +11,11 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
      [SerializeField]
     private List<GameObject> waypoints = new List<GameObject>();
 
-    [SerializeField] public float randomMovementSpeed = 1f;
+    [SerializeField] public float movementSpeed = 1f;
     private int _targetIndex = 0;
     private Vector3 _targetPos;
     private Vector3 _direction;
-    private float _pauseTimer = 3f;
+    private float _pauseTimer = 2f;
     private float _timer = 0f;
      public override void DoEnterLogic()
     {
@@ -23,6 +23,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
+        enemy.gameObject.transform.LookAt(_targetPos);
     }
 
     public override void DoExitLogic()
@@ -34,7 +35,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
     {
         base.DoFrameUpdateLogic();
 
-        enemy.MoveEnemy(_direction * randomMovementSpeed);
+        enemy.MoveEnemy(_direction * movementSpeed);
 
         if (Vector3.Distance(transform.position, _targetPos) <= 0.01f)
         {
@@ -43,7 +44,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
             if (_timer <= _pauseTimer)
             {
-                enemy.MoveEnemy(Vector2.zero);
+                enemy.MoveEnemy(Vector3.zero);
             }
 
             else
@@ -59,6 +60,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
                 _targetPos = waypoints[_targetIndex].transform.position;
                 _direction = ( _targetPos - transform.position).normalized;
+                enemy.gameObject.transform.LookAt(_targetPos);
                 _timer = 0f;
             }
         }
