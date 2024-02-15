@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 {
-    public Rigidbody2D BulletPrefab;
+    public Rigidbody BulletPrefab;
     private float _timer;
     private float _shotCooldown = 3f;
 
@@ -29,7 +29,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        enemy.MoveEnemy(Vector2.zero);
+        enemy.MoveEnemy(Vector3.zero);
 
         _timer += Time.deltaTime;
 
@@ -37,15 +37,15 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         {
             _timer = 0f;
 
-            Vector2 dir = (playerTransform.position - enemy.transform.position).normalized;
+            Vector3 dir = (playerTransform.position - enemy.transform.position).normalized;
 
-            Rigidbody2D bullet = GameObject.Instantiate(BulletPrefab, enemy.transform.position, Quaternion.identity);
+            Rigidbody bullet = GameObject.Instantiate(BulletPrefab, enemy.transform.position, Quaternion.identity);
 
             bullet.velocity = dir * _bulletSpeed;
 
         }
 
-        if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
+        if (Vector3.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
         {
             _exitTimer += Time.deltaTime;
 
