@@ -172,7 +172,7 @@ public class Generator3D : MonoBehaviour {
         endObj.transform.position = pathList[pathList.Count - 1][0];
 
         // Temp
-        ObjectPoolManager.Instance.SpawnObject(weaponToSpawn, pathList[0][0], Quaternion.identity);
+        ObjectPoolManager.Instance.SpawnObject(weaponToSpawn, playerObj.transform.position, Quaternion.identity);
     }
 
     void Triangulate() {

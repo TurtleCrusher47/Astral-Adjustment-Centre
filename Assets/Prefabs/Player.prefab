@@ -1618,6 +1618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a3ecbbb98affe409f702b66c839c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetableLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &6063671662455724949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6063671662455724948}
   - component: {fileID: 6063671662455724951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule Collider
   m_TagString: PlayerCollider
   m_Icon: {fileID: 0}
@@ -2502,7 +2505,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8894067595518307545}
   m_Enabled: 1
-  m_CastShadows: 3
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
