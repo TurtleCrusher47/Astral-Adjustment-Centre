@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 1
+  nextSceneName: 
 --- !u!4 &121125314
 Transform:
   m_ObjectHideFlags: 0
@@ -1820,7 +1821,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642716405}
-  m_LocalRotation: {x: -0.002208719, y: 0.9840847, z: -0.012261829, w: -0.17726286}
+  m_LocalRotation: {x: -0.0022087144, y: 0.9840847, z: -0.012261803, w: -0.17726283}
   m_LocalPosition: {x: -3.25, y: 4, z: -2.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3352,7 +3353,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281163915}
-  m_LocalRotation: {x: -0.002208719, y: 0.9840847, z: -0.012261829, w: -0.17726286}
+  m_LocalRotation: {x: -0.0022087144, y: 0.9840847, z: -0.012261803, w: -0.17726283}
   m_LocalPosition: {x: -3.25, y: 4, z: -2.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

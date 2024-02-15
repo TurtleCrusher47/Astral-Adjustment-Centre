@@ -22,7 +22,7 @@ public class LoadingScene : MonoBehaviour
         yield return null;
 
         //Begin to load the Scene you specify
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(PlayFabManager.nextSceneName);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(GameManager.Instance.nextSceneName);
         //Don't let the Scene activate until you allow it to
         asyncOperation.allowSceneActivation = false;
 

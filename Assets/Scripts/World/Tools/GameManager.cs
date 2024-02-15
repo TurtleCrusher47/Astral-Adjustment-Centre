@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    public string nextSceneName;
+
     public void ChangeScene(string sceneName)
     {
-        // SceneManager.LoadScene("LoadingScene");
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("LoadingScene");
+        // SceneManager.LoadScene(sceneName);
 
-        // nextSceneName = sceneName;
+        nextSceneName = sceneName;
     }
 }

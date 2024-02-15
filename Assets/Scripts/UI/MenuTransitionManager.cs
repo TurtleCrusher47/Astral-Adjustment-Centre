@@ -48,7 +48,7 @@ public class MenuTransitionManager : MonoBehaviour
             StartCoroutine(DelayedSettingsPanel(true));
         }
 
-        else if (target.name == "StartCamera")
+        else if (target.name == "PlayCamera")
         {
             StartCoroutine(DelayedLoadScene());
         }
