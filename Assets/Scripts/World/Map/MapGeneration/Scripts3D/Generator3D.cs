@@ -50,7 +50,7 @@ public class Generator3D : MonoBehaviour {
     [SerializeField]
     GameObject ceilingPrefab;
     [SerializeField]
-    GameObject wallPrefab;
+    List<GameObject> wallPrefab;
     [SerializeField]
     GameObject wallDoorPrefab;
     [SerializeField]
@@ -456,19 +456,19 @@ public class Generator3D : MonoBehaviour {
                     {
                         if (j == 0)
                         {
-                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(-0.5f, 0, 0), 90);
+                            SpawnTileWithRotation(wallPrefab[RandomR.Range(0, wallPrefab.Count)], location + tileOffset + new Vector3(-0.5f, 0, 0), 90);
                         }
                         else if (j == size.x - 1)
                         {
-                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(0.5f, 0, 0), -90);
+                            SpawnTileWithRotation(wallPrefab[RandomR.Range(0, wallPrefab.Count)], location + tileOffset + new Vector3(0.5f, 0, 0), -90);
                         }
                         if (l == 0)
                         {
-                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(0, 0, -0.5f), 0);
+                            SpawnTileWithRotation(wallPrefab[RandomR.Range(0, wallPrefab.Count)], location + tileOffset + new Vector3(0, 0, -0.5f), 0);
                         }
                         else if (l == size.z - 1)
                         {
-                            SpawnTileWithRotation(wallPrefab, location + tileOffset + new Vector3(0, 0, 0.5f), 180);
+                            SpawnTileWithRotation(wallPrefab[RandomR.Range(0, wallPrefab.Count)], location + tileOffset + new Vector3(0, 0, 0.5f), 180);
                         }
                     }
                 }
