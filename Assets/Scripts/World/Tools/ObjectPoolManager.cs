@@ -7,8 +7,9 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     public List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
 
-    private GameObject objectPoolEmptyHolder;
+    private GameObject objectPoolHolder;
 
+    private GameObject gameObjectsMap;
     private GameObject gameObjectsEmpty;
 
     public enum PoolType
@@ -27,10 +28,13 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     private void SetUpEmpties()
     {
-        objectPoolEmptyHolder = new GameObject("Pooled Objects");
+        objectPoolHolder = new GameObject("Pooled Objects");
 
-        gameObjectsEmpty = new GameObject("Map");
-        gameObjectsEmpty.transform.SetParent(objectPoolEmptyHolder.transform);
+        gameObjectsEmpty = new GameObject("Empty");
+        gameObjectsEmpty.transform.SetParent(objectPoolHolder.transform);
+
+        gameObjectsMap = new GameObject("Map");
+        gameObjectsMap.transform.SetParent(objectPoolHolder.transform);
     }
 
     public GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
@@ -104,8 +108,10 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         switch (poolType)
         {
-            case PoolType.Ammo:
+            case PoolType.None:
                 return gameObjectsEmpty;
+            case PoolType.Map:
+                return gameObjectsMap;
             default:
                 return null;
         }
