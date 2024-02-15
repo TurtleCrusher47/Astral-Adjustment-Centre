@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
     public Rigidbody rb { get; set; }
+    public Animator animator;
 
     //public bool isFacingRight { get; set; } = false;
 
@@ -57,6 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         CurrentHealth = MaxHealth;
 
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
         enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
@@ -69,12 +71,27 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     private void Update()
     {
         stateMachine.currEnemyState.FrameUpdate();
+        UpdateAnimator();
 
     }
 
     private void FixedUpdate()
     {
         stateMachine.currEnemyState.PhysicsUpdate();
+    }
+
+    private void UpdateAnimator()
+    {
+        if (Mathf.Abs(rb.velocity.x) > 0.01f || Mathf.Abs(rb.velocity.z) > 0.01f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+
+        else
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", false);
+        }
     }
 
 
