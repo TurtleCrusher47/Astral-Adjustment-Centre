@@ -8,9 +8,12 @@ using PlayFab.ClientModels;
 using PlayFab.GroupsModels;
 using PlayFab.MultiplayerModels;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class LoginPanelManager : MonoBehaviour
 {
+    [SerializeField] private MenuTransitionManager menuTransitionManager;
+    [SerializeField] private CinemachineVirtualCamera menuCamera;
     [SerializeField] private MainSceneManager mainSceneManager;
     [SerializeField] TMP_InputField if_userid, if_password;
     [SerializeField] GameObject menuPage;
@@ -232,8 +235,8 @@ public class LoginPanelManager : MonoBehaviour
             }
         }, OnError);
 
-        PlayFabManager.ChangeScene("MenuScene");
         StopAllCoroutines();
+        menuTransitionManager.UpdateCamera(menuCamera);
     }
 
     public static string SafeSubstring(string input, int startIndex, int length)

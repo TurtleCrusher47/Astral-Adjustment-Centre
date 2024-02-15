@@ -11,7 +11,7 @@ public class MenuTransitionManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera currCamera;
     [SerializeField] private CinemachineBrain mainCamBrain;
     [SerializeField] private CinemachineVirtualCamera menuCamera;
-    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject loginPanel, settingsPanel;
 
     void Awake()
     {
@@ -20,17 +20,20 @@ public class MenuTransitionManager : MonoBehaviour
             virtualCameras[i].SetActive(true);
         }
 
+        loginPanel.SetActive(true);
         settingsPanel.SetActive(false);
 
         currCamera.Priority++;
-
-        StartCoroutine(DelayedTransition(menuCamera, 1));
     }
 
     public void UpdateCamera(CinemachineVirtualCamera target)
     {
         StopAllCoroutines();
 
+        if (currCamera.name == "StartCamera")
+        {
+            loginPanel.SetActive(false);
+        }
         if (currCamera.name == "SettingsCamera")
         {
             StartCoroutine(DelayedSettingsPanel(false));
@@ -78,6 +81,6 @@ public class MenuTransitionManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        PlayFabManager.ChangeScene("MapScene");
+        PlayFabManager.ChangeScene("LevelScene");
     }
 }
