@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 1485344234}
   - component: {fileID: 1485344233}
   m_Layer: 0
-  m_Name: Dummy (Clone)
+  m_Name: Dummy(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
