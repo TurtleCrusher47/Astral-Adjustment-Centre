@@ -49,10 +49,10 @@ public class LoadingScene : MonoBehaviour
             }
 
             // Check if the load has finished
-            if (asyncOperation.progress >= 0.9f)
+            if (asyncOperation.progress >= 0.99f)
             {
                 //Change the Text to show the Scene is ready
-                loadingText.text = "Continue";
+                //loadingText.text = "Continue";
                 //Wait to you press the space key to activate the Scene
                 asyncOperation.allowSceneActivation = true;
             }
