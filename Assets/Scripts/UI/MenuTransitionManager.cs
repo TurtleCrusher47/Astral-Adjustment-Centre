@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class MenuTransitionManager : MonoBehaviour
@@ -11,7 +12,10 @@ public class MenuTransitionManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera currCamera;
     [SerializeField] private CinemachineBrain mainCamBrain;
     [SerializeField] private CinemachineVirtualCamera menuCamera;
+    [SerializeField] private CinemachineVirtualCamera loadSceneCamera;
     [SerializeField] private GameObject loginPanel, settingsPanel;
+
+    [SerializeField] private Volume volume;
 
     void Awake()
     {
@@ -47,7 +51,6 @@ public class MenuTransitionManager : MonoBehaviour
         {
             StartCoroutine(DelayedSettingsPanel(true));
         }
-
         else if (target.name == "PlayCamera")
         {
             StartCoroutine(DelayedLoadScene());
@@ -79,7 +82,13 @@ public class MenuTransitionManager : MonoBehaviour
 
         yield return new WaitUntil(() => !mainCamBrain.IsBlending);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.15f);
+
+        currCamera.Priority--;
+        currCamera = loadSceneCamera;
+        currCamera.Priority++;
+
+        yield return new WaitForSeconds(0.75f);
 
         GameManager.Instance.ChangeScene("LevelScene");
     }
