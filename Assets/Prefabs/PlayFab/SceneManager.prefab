@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3934542635301780005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3934542635301780004}
+  - component: {fileID: 3934542635301780007}
+  - component: {fileID: 3934542635301780001}
+  - component: {fileID: 3934542635301780006}
+  - component: {fileID: 3934542635301780000}
+  - component: {fileID: 3934542635301780003}
+  - component: {fileID: 3934542635301780002}
+  - component: {fileID: 3934542635301780013}
+  - component: {fileID: 3934542635301780012}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3934542635301780004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3934542635301780007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a33c55aff972a143bc0073c6a1be67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuPage: {fileID: 0}
+  loginPage: {fileID: 0}
+  regPage: {fileID: 0}
+  forgetpassPage: {fileID: 0}
+  creditPanel: {fileID: 0}
+  menuPanel: {fileID: 0}
+  leaderboardPanel: {fileID: 0}
+  storePanel: {fileID: 0}
+  userPanel: {fileID: 0}
+  socialPanel: {fileID: 0}
+  guildPanel: {fileID: 0}
+  addFriendPanel: {fileID: 0}
+  tradePanel: {fileID: 0}
+  incomingTradePanel: {fileID: 0}
+  createGuildPanel: {fileID: 0}
+  myGuildPanel: {fileID: 0}
+  invitePlayerPanel: {fileID: 0}
+  menuNameText: {fileID: 0}
+  statusText: {fileID: 0}
+--- !u!114 &3934542635301780001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f740425efadc441a7a559b983055ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3934542635301780006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b53d2077c001f043b5074187e33a5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opManager: {fileID: 3934542635301780001}
+  rowPrefab: {fileID: 6200564809918243054, guid: 4b40b3d248c358541b2fdebe3d7db641, type: 3}
+  lbGroup: {fileID: 0}
+  titleText: {fileID: 0}
+  statTypeButton: {fileID: 0}
+  lbTypeButton: {fileID: 0}
+--- !u!114 &3934542635301780000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded3267dc8b2cf94189e730acce73852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opManager: {fileID: 3934542635301780001}
+  CurrencyCode: GC
+  storeItemPrefab: {fileID: 7769228047856315126, guid: 3d3b846c7746f90499d9acab07f82201, type: 3}
+  storeGroup: {fileID: 0}
+  creditText: {fileID: 0}
+  catItems: []
+  storeItems: []
+  invItems: []
+--- !u!114 &3934542635301780003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d794fd0aa6ae449a1583520d7e5258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opManager: {fileID: 3934542635301780001}
+  CurrencyCode: GC
+  invItemPrefab: {fileID: 634560208554796131, guid: 6d1959013ad5bee4c9253ec49f7722c7, type: 3}
+  invGroup: {fileID: 0}
+  highscoreText: {fileID: 0}
+  nameText: {fileID: 0}
+  creditText: {fileID: 0}
+  catItems: []
+  invItems: []
+--- !u!114 &3934542635301780002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089f6f6675cc65344b357bfe5b0895ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opManager: {fileID: 3934542635301780001}
+  friendRowPrefab: {fileID: 4839543273566889319, guid: 8a353bd34c660c14eb192e5a7146ced7, type: 3}
+  requestRowPrefab: {fileID: 9144032814278937216, guid: 0f16d9a758ac04a44b7bd1c559710bd7, type: 3}
+  pendingRowPrefab: {fileID: 3018878249953080295, guid: 66ec4cbe7ed035d4094cbf75d58c046c, type: 3}
+  tradeRowPrefab: {fileID: 1466377091460694945, guid: 6e3fa6374f23ddc4cb5156980baa8016, type: 3}
+  socialScrollRect: {fileID: 0}
+  friendListGroup: {fileID: 0}
+  requestAndPendingListGroup: {fileID: 0}
+  tradeListGroup: {fileID: 0}
+  listTypeButton: {fileID: 0}
+  invItems: []
+  leftItem1: {fileID: 0}
+  leftItem2: {fileID: 0}
+  rightItem1: {fileID: 0}
+  rightItem2: {fileID: 0}
+  tradePanel: {fileID: 0}
+  tradeTitleText: {fileID: 0}
+  tradeeDN: {fileID: 0}
+  tradeeID: 
+  tradeInfos: []
+  tradeIDs: []
+  traderIDs: []
+  traderDNs: []
+  offerInvItemInstance1:
+    Annotation: 
+    BundleContents: []
+    BundleParent: 
+    CatalogVersion: 
+    DisplayName: 
+    ItemClass: 
+    ItemId: 
+    ItemInstanceId: 
+    UnitCurrency: 
+    UnitPrice: 0
+  offerInvItemInstance2:
+    Annotation: 
+    BundleContents: []
+    BundleParent: 
+    CatalogVersion: 
+    DisplayName: 
+    ItemClass: 
+    ItemId: 
+    ItemInstanceId: 
+    UnitCurrency: 
+    UnitPrice: 0
+  requestCatalogItem1:
+    Bundle:
+      BundledItems: []
+      BundledResultTables: []
+    CanBecomeCharacter: 0
+    CatalogVersion: 
+    Consumable:
+      UsagePeriodGroup: 
+    Container:
+      ItemContents: []
+      KeyItemId: 
+      ResultTableContents: []
+    CustomData: 
+    Description: 
+    DisplayName: 
+    InitialLimitedEditionCount: 0
+    IsLimitedEdition: 0
+    IsStackable: 0
+    IsTradable: 0
+    ItemClass: 
+    ItemId: 
+    ItemImageUrl: 
+    Tags: []
+  requestCatalogItem2:
+    Bundle:
+      BundledItems: []
+      BundledResultTables: []
+    CanBecomeCharacter: 0
+    CatalogVersion: 
+    Consumable:
+      UsagePeriodGroup: 
+    Container:
+      ItemContents: []
+      KeyItemId: 
+      ResultTableContents: []
+    CustomData: 
+    Description: 
+    DisplayName: 
+    InitialLimitedEditionCount: 0
+    IsLimitedEdition: 0
+    IsStackable: 0
+    IsTradable: 0
+    ItemClass: 
+    ItemId: 
+    ItemImageUrl: 
+    Tags: []
+  titleText: {fileID: 0}
+  addFriendText: {fileID: 0}
+  if_recipient: {fileID: 0}
+--- !u!114 &3934542635301780013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873ce635f916cd340b99537adcb26cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opManager: {fileID: 3934542635301780001}
+  guildsRowPrefab: {fileID: 4204754260227077034, guid: 5866c0c02705c1f4a814dff5ac15f27a, type: 3}
+  requestRowPrefab: {fileID: 7026414267671903469, guid: 888c8447927ccad4ab12bddd3d947ee3, type: 3}
+  guildsListGroup: {fileID: 0}
+  requestsListGroup: {fileID: 0}
+  titleText: {fileID: 0}
+  detail2Text: {fileID: 0}
+  myGuildButton: {fileID: 0}
+  listTypeButton: {fileID: 0}
+  createGuildButton: {fileID: 0}
+  createGuildText: {fileID: 0}
+  if_guildName: {fileID: 0}
+  if_searchByGuildName: {fileID: 0}
+  if_searchByLeaderName: {fileID: 0}
+  guildIDs: []
+  guildDatas: []
+  guildNames: []
+  guildLeaderIDs: []
+  guildLeaderDNs: []
+  currListType: 0
+--- !u!114 &3934542635301780012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934542635301780005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b847394e9fc60d94d9f7bee1206cf7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opManager: {fileID: 3934542635301780001}
+  playFabGuild: {fileID: 3934542635301780013}
+  membersRowPrefab: {fileID: 9154135019730549496, guid: 378c77686023b664eaeedd457c52aa2f, type: 3}
+  requestRowPrefab: {fileID: 3726614375997175113, guid: b99e44b142ce2c44eb324b0fae37041b, type: 3}
+  pendingRowPrefab: {fileID: 0}
+  membersListGroup: {fileID: 0}
+  requestAndPendingListGroup: {fileID: 0}
+  titleText: {fileID: 0}
+  detail2Text: {fileID: 0}
+  inviteButton: {fileID: 0}
+  listTypeButton: {fileID: 0}
+  leaveButton: {fileID: 0}
+  invitePlayerText: {fileID: 0}
+  if_displayName: {fileID: 0}
+  memberEntityIDs: []
+  memberIDs: []
+  memberDNs: []
+  memberRoles: []
+  memberAppExpiry: []

@@ -10,6 +10,8 @@ TagManager:
   - BaseSword
   - MapWallTile
   - Waypoint
+  - FirePoint
+  - PlayFabManager
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Weapons
   - Player
   - DroppedWeapons
-  - 
+  - Door
   - 
   - 
   - 

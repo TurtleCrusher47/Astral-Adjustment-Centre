@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ObjectPoolManager : MonoBehaviour
+public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
-    public static List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
+    public List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
 
-    private GameObject objectPoolEmptyHolder;
+    private GameObject objectPoolHolder;
 
-    private static GameObject gameObjectsEmpty;
+    private GameObject gameObjectsMap;
+    private GameObject gameObjectsEmpty;
 
     public enum PoolType
     {
         Ammo,
+        Map,    
         None
     }
 
-    public static PoolType PoolingType;
+    public PoolType PoolingType;
 
     private void Awake()
     {
@@ -26,13 +28,16 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void SetUpEmpties()
     {
-        objectPoolEmptyHolder = new GameObject("Pooled Objects");
+        objectPoolHolder = this.gameObject;
 
-        gameObjectsEmpty = new GameObject("Bullets");
-        gameObjectsEmpty.transform.SetParent(objectPoolEmptyHolder.transform);
+        gameObjectsEmpty = new GameObject("Empty");
+        gameObjectsEmpty.transform.SetParent(objectPoolHolder.transform);
+
+        gameObjectsMap = new GameObject("Map");
+        gameObjectsMap.transform.SetParent(objectPoolHolder.transform);
     }
 
-    public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
+    public GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
     {
         // If it is the same name, assign pool to it
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == objectToSpawn.name);
@@ -71,17 +76,24 @@ public class ObjectPoolManager : MonoBehaviour
         return spawnableObject;
     }
 
-    public static IEnumerator ReturnObjectToPool(GameObject obj, float timeBeforeReturn = 0.0f)
+    public IEnumerator ReturnObjectToPool(GameObject obj, float timeBeforeReturn = 0.0f)
     {
         yield return new WaitForSeconds(timeBeforeReturn);
 
         // By taking off 7 letters of the string, we are removing (Clone) from the name of the passed inobj
+        Debug.Log(obj.name);
         string goName = obj.name.Substring(0, obj.name.Length - 7); 
 
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
 
+        // Remove this later most likely, only for testing
         if (pool == null)
         {
+            // pool = new PooledObjectInfo() { LookupString = goName};
+            // ObjectPools.Add(pool);
+
+            // obj.SetActive(false);
+            // pool.InactiveObjects.Add(obj);
             Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
         }
         else
@@ -91,12 +103,15 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    private static GameObject SetParentObject(PoolType poolType)
+
+    private GameObject SetParentObject(PoolType poolType)
     {
         switch (poolType)
         {
-            case PoolType.Ammo:
+            case PoolType.None:
                 return gameObjectsEmpty;
+            case PoolType.Map:
+                return gameObjectsMap;
             default:
                 return null;
         }

@@ -8,13 +8,17 @@ public class CharacterMovement : MonoBehaviour
 	[SerializeField] PlayerData playerData;
 	[SerializeField] Transform orientation;
 	[SerializeField] Animator animator;
-
 		
 	[Header("Crouch and Prone")]
 	[SerializeField] Camera cam;
 	[SerializeField] GameObject capsule;
 	[SerializeField] CapsuleCollider capsuleCollider;
 	private float playerHeight;
+
+	[Header("Stair movement")]
+	[SerializeField] GameObject stepRayUpper;
+    [SerializeField] GameObject stepRayLower;
+    [SerializeField] float stepSmooth = 3;
 
 	private bool isCrouching;
 	private bool isProning;
@@ -45,6 +49,7 @@ public class CharacterMovement : MonoBehaviour
 		ControlDrag();
 		ControlSpeed();
 		SetAnimator();
+		ClimbStep();
 
 		// Get the perpendicular angle of the plane
 		slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -220,4 +225,40 @@ public class CharacterMovement : MonoBehaviour
 		}
 		return false;
 	}
+
+	private void ClimbStep()
+    {
+		RaycastHit hitLower;
+        if (Physics.Raycast(stepRayLower.transform.position, orientation.transform.forward, out hitLower, 0.1f))
+        {
+            RaycastHit hitUpper;
+            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.transform.forward, out hitUpper, 0.1f))
+            {
+				Debug.Log("Stairs");
+                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+		RaycastHit hitLower45;
+    if (Physics.Raycast(stepRayLower.transform.position, orientation.transform.forward + orientation.transform.right, out hitLower45, 0.1f))
+        {
+            RaycastHit hitUpper45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.forward + orientation.transform.right, out hitUpper45, 0.2f))
+            {
+				Debug.Log("Stairs");
+                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+        RaycastHit hitLowerMinus45;
+        if (Physics.Raycast(stepRayLower.transform.position, orientation.transform.forward - orientation.transform.right, out hitLowerMinus45, 0.1f))
+        {
+
+            RaycastHit hitUpperMinus45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.forward - orientation.transform.right, out hitUpperMinus45, 0.2f))
+            {
+                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+    }
 }
