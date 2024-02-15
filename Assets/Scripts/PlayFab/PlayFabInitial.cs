@@ -12,10 +12,10 @@ public class PlayFabInitial : MonoBehaviour
             PlayFabSettings.staticSettings.TitleId = "DCAAB";
         }
 
-        if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.DeveloperSecretKey))
+        //if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.DeveloperSecretKey))
         {
             // Developer Secret
-            PlayFabSettings.staticSettings.DeveloperSecretKey = "I4XWH5YBNZHIFMBJ1MCRS3Y8X81IOMZXOYF8TONNMBTOYKBB1B";
+            //PlayFabSettings.staticSettings.DeveloperSecretKey = "I4XWH5YBNZHIFMBJ1MCRS3Y8X81IOMZXOYF8TONNMBTOYKBB1B";
         }
     }
 }
