@@ -11,6 +11,7 @@ TagManager:
   - MapWallTile
   - FirePoint
   - PlayFabManager
+  - HandlePoint
   layers:
   - Default
   - TransparentFX
