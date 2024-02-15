@@ -63,8 +63,6 @@ public class Generator3D : MonoBehaviour {
     GameObject camObj;
     [SerializeField]
     GameObject endObj;
-    // [SerializeField]
-    // GameObject MapContentGrp;
 
     Random random;
     Grid3D<CellType> grid;
@@ -113,7 +111,6 @@ public class Generator3D : MonoBehaviour {
         PathfindHallways();
         SpawnPlayer();
         DeleteWalls();
-        // StoreGO();
     }
 
     void PlaceRooms() {
@@ -369,6 +366,7 @@ public class Generator3D : MonoBehaviour {
 
     void DeleteWalls()
     {
+        List<Vector3> doorList = new List<Vector3>();
         foreach (var path in pathList)
         {
             if (path != null)
@@ -385,7 +383,20 @@ public class Generator3D : MonoBehaviour {
                         {
                             if (hit.transform.gameObject.name != "Wall")
                             {
-                                SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
+                                bool placeDoor = true;
+                                foreach (Vector3 doorPos in doorList)
+                                {
+                                    if (hit.transform.position == doorPos)
+                                    {
+                                        placeDoor = false;
+                                        break;
+                                    }
+                                }
+                                if (placeDoor)
+                                {
+                                    doorList.Add(hit.transform.position);
+                                    SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
+                                }
                             }
                             // Destroy because it is unable to be pooled as it is part of a prefab
                             // (To create path through rooms)
@@ -399,20 +410,17 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    // void StoreGO()
-    // {
-    //     UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
-    //     foreach (GameObject go in s.GetRootGameObjects())
-    //     {
-    //         if (go.name.Contains("MapTile"))
-    //         {
-    //             go.transform.SetParent(MapContentGrp.transform);
-    //         }
-    //     }
-    // }
-
     void PlaceRoom(Vector3Int location, Vector3Int size) {
         // place misc items
+        // create list of available spaces
+        List<Vector3> vacantSpaces = new List<Vector3>();
+        for (float x = 1; x < size.x - 1; x += 0.5f)
+        {
+            for (float z = 1; z < size.z - 1; z += 0.5f)
+            {
+                vacantSpaces.Add(location + new Vector3(x, -0.35f, z));
+            }
+        }
         // loops all items
         for (int i = 0; i < mPrefabManager.maxMinChanceList.Count; i++)
         {
@@ -423,14 +431,17 @@ public class Generator3D : MonoBehaviour {
                 int amount = RandomR.Range((int)mPrefabManager.maxMinChanceList[i].x, (int)mPrefabManager.maxMinChanceList[i].x);
                 for (int j = 0; j < amount; j++)
                 {
-                    Vector3 randPos = location + new Vector3(
-                        RandomR.Range((float)(1), (size.x - 1)),
-                        -0.35f,
-                        RandomR.Range((float)(1), (float)(size.z - 1))
-                        );
-                    GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
-                    mapContent.Add(obj);
-                    obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
+                    // find random space and places object
+                    // removes that space from list of vacant spaces
+                    if (vacantSpaces.Count > 0)
+                    {
+                        int randIndex = RandomR.Range(0, vacantSpaces.Count);
+                        Vector3 randPos = vacantSpaces[randIndex];
+                        vacantSpaces.RemoveAt(randIndex);
+                        GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        mapContent.Add(obj);
+                        obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
+                    }
                 }
             }
         }

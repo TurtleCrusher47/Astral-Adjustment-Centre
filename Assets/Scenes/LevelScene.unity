@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016554378, g: 0.017811595, b: 0.023785997, a: 1}
+  m_IndirectSpecularColor: {r: 0.041671604, g: 0.042723782, b: 0.056730397, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -187,7 +187,7 @@ MonoBehaviour:
   - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
   - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
   - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
-  wallDoorPrefab: {fileID: 5494911878686914276, guid: 610a17a9a4666d645b92b171fbf3abbb,
+  wallDoorPrefab: {fileID: 4710844307718804079, guid: 77d7de5cf3899bb4490e4bde22027ddd,
     type: 3}
   hallwayPrefab: {fileID: 7422611386983579833, guid: c72472c289358f240b512113beaa2dc0,
     type: 3}
@@ -196,7 +196,6 @@ MonoBehaviour:
   playerObj: {fileID: 1043347683}
   camObj: {fileID: 135899573}
   endObj: {fileID: 1009041329}
-  MapContentGrp: {fileID: 1707451083}
 --- !u!4 &108134768
 Transform:
   m_ObjectHideFlags: 0
@@ -477,7 +476,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 887
+    m_Bits: 1911
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -936,6 +935,11 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1525211068}
+    - target: {fileID: 7794122106875085168, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: targetableLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!1 &1270919068
