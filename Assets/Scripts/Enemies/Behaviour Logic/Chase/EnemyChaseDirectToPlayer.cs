@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase- Direct Chase", menuName = "Enemy Logic/Chase State/Direct Chase")]
 public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 {
-    [SerializeField] private float _movementSpeed = 1.75f;
+    [SerializeField] private float _movementSpeed = 4.0f;
    
    public override void DoEnterLogic()
     {

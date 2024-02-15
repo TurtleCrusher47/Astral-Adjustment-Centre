@@ -7,11 +7,11 @@ using UnityEngine;
 public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 {
 
-    //change this to take in existing game objects? not sure if that is possible from so tho 
-     [SerializeField]
+    
+    [SerializeField]
     private List<GameObject> waypoints = new List<GameObject>();
 
-    [SerializeField] public float movementSpeed = 1f;
+    [SerializeField] public float movementSpeed = 2.0f;
     private int _targetIndex = 0;
     private Vector3 _targetPos;
     private Vector3 _direction;

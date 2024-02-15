@@ -82,6 +82,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     private void UpdateAnimator()
     {
+
+
         if (Mathf.Abs(rb.velocity.x) > 0.01f || Mathf.Abs(rb.velocity.z) > 0.01f)
         {
             animator.SetBool("isWalking", true);
@@ -90,7 +92,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         else
         {
             animator.SetBool("isWalking", false);
-            animator.SetBool("isRunning", false);
         }
     }
 

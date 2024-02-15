@@ -12,9 +12,11 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
     private float _exitTimer;
     private float _timeTillExit = 2f;
-    private float _distanceToCountExit = 3.2f;
+    private float _distanceToCountExit = 4.5f;
 
     private float _bulletSpeed = 5f;
+
+    private float _movementSpeed = 2.0f;
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
@@ -29,7 +31,12 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        enemy.MoveEnemy(Vector3.zero);
+        //enemy.MoveEnemy(Vector3.zero);
+
+        Vector3 moveDirection = (playerTransform.position - enemy.transform.position).normalized;
+        moveDirection.y = 0;
+
+        enemy.MoveEnemy(moveDirection * _movementSpeed);
 
         Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
         lookPos.y = 0;
