@@ -12,7 +12,8 @@ TagManager:
   - Waypoint
   - FirePoint
   - PlayFabManager
-  - HandlePoint
+  - RayGunHandle
+  - RayGunHint
   layers:
   - Default
   - TransparentFX
