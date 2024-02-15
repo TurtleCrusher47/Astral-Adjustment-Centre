@@ -20,7 +20,7 @@ public class GameObjectRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 // Debug.Log("Shot GameObject");
-                currentProjectile = ObjectPoolManager.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
+                currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
 
                 rangedWeaponData.currentAmmo--;
                 timeSinceLastShot = 0;

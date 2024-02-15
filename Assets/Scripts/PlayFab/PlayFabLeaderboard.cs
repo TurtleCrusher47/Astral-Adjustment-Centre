@@ -133,7 +133,7 @@ public class PlayFabLeaderboard : MonoBehaviour
 
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(lbItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
         }
 
         ResetAllRows();
@@ -166,7 +166,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(lbItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
         }
 
         ResetAllRows();
@@ -209,7 +209,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(lbItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
         }
 
         ResetAllRows();
@@ -257,7 +257,7 @@ public class PlayFabLeaderboard : MonoBehaviour
     {
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(lbItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
         }
 
         ResetAllRows();

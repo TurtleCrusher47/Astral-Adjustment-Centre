@@ -14,6 +14,6 @@ public class ShurikenProjectile : GameObjectProjectile
         damageable?.Damage(gameObjectProjectileData.damage);
 
         // Return back to object pool
-        ObjectPoolManager.ReturnObjectToPool(this.gameObject);
+        ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject);
     }
 }

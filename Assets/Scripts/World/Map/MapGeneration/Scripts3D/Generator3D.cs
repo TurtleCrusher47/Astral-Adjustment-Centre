@@ -63,8 +63,8 @@ public class Generator3D : MonoBehaviour {
     GameObject camObj;
     [SerializeField]
     GameObject endObj;
-    [SerializeField]
-    GameObject MapContentGrp;
+    // [SerializeField]
+    // GameObject MapContentGrp;
 
     Random random;
     Grid3D<CellType> grid;
@@ -72,6 +72,7 @@ public class Generator3D : MonoBehaviour {
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
     List<List<Vector3Int>> pathList;
+    List<GameObject> mapContent;
 
     void Start()
     {
@@ -84,14 +85,10 @@ public class Generator3D : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            //ChangeSeed();
-            UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
-            for (int i = 0; i < MapContentGrp.transform.childCount; i++)
+            ChangeSeed();
+            for (int i = 0; i < mapContent.Count; i++)
             {
-                if (MapContentGrp.transform.GetChild(i).name.Contains("MapTile"))
-                {
-                    Destroy(MapContentGrp.transform.GetChild(i).gameObject);
-                }
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(mapContent[i]));
             }
             InitializeMap();
         }
@@ -108,6 +105,7 @@ public class Generator3D : MonoBehaviour {
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
         pathList = new List<List<Vector3Int>>();
+        mapContent = new();
 
         PlaceRooms();
         Triangulate();
@@ -115,7 +113,7 @@ public class Generator3D : MonoBehaviour {
         PathfindHallways();
         SpawnPlayer();
         DeleteWalls();
-        StoreGO();
+        // StoreGO();
     }
 
     void PlaceRooms() {
@@ -385,10 +383,12 @@ public class Generator3D : MonoBehaviour {
                     {
                         if (hit.transform.CompareTag("MapWallTile"))
                         {
-                            if (hit.transform.parent == null)
+                            if (hit.transform.gameObject.name != "Wall")
                             {
                                 SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
                             }
+                            // Destroy because it is unable to be pooled as it is part of a prefab
+                            // (To create path through rooms)
                             Destroy(hit.transform.gameObject);
                         }
                     }
@@ -399,17 +399,17 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void StoreGO()
-    {
-        UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
-        foreach (GameObject go in s.GetRootGameObjects())
-        {
-            if (go.name.Contains("MapTile"))
-            {
-                go.transform.SetParent(MapContentGrp.transform);
-            }
-        }
-    }
+    // void StoreGO()
+    // {
+    //     UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
+    //     foreach (GameObject go in s.GetRootGameObjects())
+    //     {
+    //         if (go.name.Contains("MapTile"))
+    //         {
+    //             go.transform.SetParent(MapContentGrp.transform);
+    //         }
+    //     }
+    // }
 
     void PlaceRoom(Vector3Int location, Vector3Int size) {
         // place misc items
@@ -428,7 +428,8 @@ public class Generator3D : MonoBehaviour {
                         -0.35f,
                         RandomR.Range((float)(1), (float)(size.z - 1))
                         );
-                    GameObject obj = Instantiate(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                    GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                    mapContent.Add(obj);
                     obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                 }
             }
@@ -444,12 +445,14 @@ public class Generator3D : MonoBehaviour {
                     // spawn floor
                     if (k == 0)
                     {
-                        Instantiate(floorPrefab, location + tileOffset, Quaternion.identity);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        mapContent.Add(obj);
                     }
                     // spawn ceiling
                     else if (k == size.y - 1)
                     {
-                        Instantiate(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        mapContent.Add(obj);
                     }
                     // spawn walls
                     if (k < size.y - 1)
@@ -479,12 +482,14 @@ public class Generator3D : MonoBehaviour {
     void PlaceHallway(Vector3Int curr) {
         Vector3 tileOffset = new Vector3(0.5f, -1.5f, 0.5f);
         // spawn floor
-        Instantiate(hallwayPrefab, curr + tileOffset, Quaternion.identity);
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+        mapContent.Add(obj);
     }
 
     void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
     {
-        GameObject obj = Instantiate(go, location, Quaternion.identity);
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(go, location, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+        mapContent.Add(obj);
         obj.transform.eulerAngles = new Vector3(0, angle, 0);
     }
 }

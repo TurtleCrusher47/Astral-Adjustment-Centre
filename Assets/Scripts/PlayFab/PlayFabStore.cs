@@ -159,7 +159,7 @@ public class PlayFabStore : MonoBehaviour
 
         for (int i = 0; i < itemsInStore.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(itemsInStore[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(itemsInStore[i]);
         }
 
         ResetAllItemCards();
@@ -183,7 +183,7 @@ public class PlayFabStore : MonoBehaviour
     {
         for (int i = 0; i < itemsInStore.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(itemsInStore[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(itemsInStore[i]);
         }
 
         ResetAllItemCards();

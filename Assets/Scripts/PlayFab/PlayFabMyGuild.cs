@@ -435,7 +435,7 @@ public class PlayFabMyGuild : MonoBehaviour
 
         for (int i = 0; i < memberItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(memberItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(memberItems[i]);
         }
 
         ResetAllRows(membersListGroup, memberItems, 0);
@@ -454,7 +454,7 @@ public class PlayFabMyGuild : MonoBehaviour
 
         for (int i = 0; i < requestItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(requestItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(requestItems[i]);
         }
 
         ResetAllRows(requestAndPendingListGroup, requestItems, 1);
