@@ -9,6 +9,7 @@ TagManager:
   - PlayerCollider
   - BaseSword
   - MapWallTile
+  - Waypoint
   - FirePoint
   - PlayFabManager
   - HandlePoint

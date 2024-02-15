@@ -7,20 +7,21 @@ using UnityEngine;
 public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 {
 
-    //change this to take in existing game objects? not sure if that is possible from so tho 
-     [SerializeField]
+    
+    [SerializeField]
     private List<GameObject> waypoints = new List<GameObject>();
 
-    [SerializeField] public float randomMovementSpeed = 1f;
+    [SerializeField] public float movementSpeed = 2.0f;
     private int _targetIndex = 0;
     private Vector3 _targetPos;
     private Vector3 _direction;
-    private float _pauseTimer = 3f;
+    private float _pauseTimer = 2f;
     private float _timer = 0f;
      public override void DoEnterLogic()
     {
         base.DoEnterLogic();
 
+        waypoints = enemy.FindChildObjectsWithTag(enemy.gameObject.transform.parent.gameObject, "Waypoint");
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
     }
@@ -34,21 +35,43 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
     {
         base.DoFrameUpdateLogic();
 
-        enemy.MoveEnemy(_direction * randomMovementSpeed);
+        enemy.MoveEnemy(_direction * movementSpeed);
 
-        if (Vector3.Distance(transform.position, _targetPos) <= 0.01f)
+        Vector3 lookPos = (waypoints[_targetIndex].transform.position - transform.position).normalized;
+        lookPos.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+        if (transform.rotation != lookRotation)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+        }
+
+        if (Vector3.Distance(transform.position, _targetPos) <= 0.1f)
         {
             //add timer to pause at waypoint
             _timer += Time.deltaTime;
 
             if (_timer <= _pauseTimer)
             {
-                enemy.MoveEnemy(Vector2.zero);
+                enemy.MoveEnemy(Vector3.zero);
+
+                int targetIndex = _targetIndex + 1;
+
+                if (targetIndex >= waypoints.Count)
+                {
+                    targetIndex = 0;
+                }
+                
+                // Vector3 lookPos = (waypoints[targetIndex].transform.position - transform.position).normalized;
+                // lookPos.y = 0;
+
+                // Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+                // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
             }
 
             else
             {
-                if (_targetIndex >= waypoints.Count)
+                if (_targetIndex == waypoints.Count - 1)
                 {
                     _targetIndex = 0;
                 }
@@ -59,6 +82,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
                 _targetPos = waypoints[_targetIndex].transform.position;
                 _direction = ( _targetPos - transform.position).normalized;
+
                 _timer = 0f;
             }
         }

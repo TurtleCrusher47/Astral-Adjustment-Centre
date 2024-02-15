@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase- Direct Chase", menuName = "Enemy Logic/Chase State/Direct Chase")]
 public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 {
-    [SerializeField] private float _movementSpeed = 1.75f;
+    [SerializeField] private float _movementSpeed = 4.0f;
    
    public override void DoEnterLogic()
     {
@@ -21,9 +21,16 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
     {
         base.DoFrameUpdateLogic();
 
-        Vector2 moveDirection = (playerTransform.position - enemy.transform.position).normalized;
+        Vector3 moveDirection = (playerTransform.position - enemy.transform.position).normalized;
+        moveDirection.y = 0;
 
         enemy.MoveEnemy(moveDirection * _movementSpeed);
+
+        Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
+        lookPos.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
     }
 
     public override void DoPhysicsLogic()
