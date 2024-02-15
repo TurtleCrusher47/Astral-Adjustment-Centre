@@ -467,8 +467,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mPrefabManager: {fileID: 1865677418}
   seed: 0
-  size: {x: 40, y: 7, z: 40}
-  roomCount: 30
+  size: {x: 35, y: 6, z: 35}
+  roomCount: 25
   roomMaxSize: {x: 5, y: 2, z: 5}
   roomMinSize: {x: 2, y: 2, z: 2}
   floorPrefab: {fileID: 5314266566890921846, guid: b4ffc6135504d1d4089e0fdde3a7a5e2,
@@ -481,7 +481,7 @@ MonoBehaviour:
     type: 3}
   hallwayPrefab: {fileID: 7422611386983579833, guid: c72472c289358f240b512113beaa2dc0,
     type: 3}
-  stairPrefab: {fileID: 8968104749458756630, guid: 0895b371a292fd3429a194bdf3f1b7d1,
+  stairPrefab: {fileID: 6151637669906187874, guid: 4402bf049220e3e4aa58bedab76071b3,
     type: 3}
   playerObj: {fileID: 6063671662531838989}
   camObj: {fileID: 307754731066148141}
@@ -595,7 +595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869705116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.133, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -800,7 +800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307754731066148141}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.133, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2532,7 +2532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6063671662531838989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.133, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
