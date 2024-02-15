@@ -255,7 +255,7 @@ public class CharacterMovement : MonoBehaviour
         {
 
             RaycastHit hitUpperMinus45;
-            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.forward - orientation.transform.right), out hitUpperMinus45, 0.2f))
+            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.forward - orientation.transform.right, out hitUpperMinus45, 0.2f))
             {
                 rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
             }
