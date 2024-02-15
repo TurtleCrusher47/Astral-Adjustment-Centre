@@ -11,8 +11,8 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     private float _shotCooldown = 3f;
 
     private float _exitTimer;
-    private float _timeTillExit = 3f;
-    private float _distanceToCountExit = 0.25f;
+    private float _timeTillExit = 2f;
+    private float _distanceToCountExit = 3.2f;
 
     private float _bulletSpeed = 5f;
     public override void DoEnterLogic()
@@ -55,15 +55,15 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         {
             _exitTimer += Time.deltaTime;
 
-            if (_exitTimer > _timeTillExit)
+            if (_exitTimer >= _timeTillExit)
             {
                 enemy.stateMachine.ChangeState(enemy.chaseState);
             }
+        }
 
-            else
-            {
-                _exitTimer = 0f;
-            }
+        else
+        {
+            _exitTimer = 0;
         }
 
     }
