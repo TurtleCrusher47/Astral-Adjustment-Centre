@@ -80,9 +80,15 @@ public class ObjectPoolManager : MonoBehaviour
 
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
 
+        // Remove this later most likely, only for testing
         if (pool == null)
         {
-            Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
+            pool = new PooledObjectInfo() { LookupString = goName};
+            ObjectPools.Add(pool);
+
+            obj.SetActive(false);
+            pool.InactiveObjects.Add(obj);
+            // Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
         }
         else
         {
@@ -90,6 +96,7 @@ public class ObjectPoolManager : MonoBehaviour
             pool.InactiveObjects.Add(obj);
         }
     }
+
 
     private static GameObject SetParentObject(PoolType poolType)
     {
