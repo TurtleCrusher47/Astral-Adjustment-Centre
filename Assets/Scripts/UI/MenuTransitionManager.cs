@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuTransitionManager : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class MenuTransitionManager : MonoBehaviour
         {
             StartCoroutine(DelayedSettingsPanel(true));
         }
+
+        else if (target.name == "StartCamera")
+        {
+            StartCoroutine(DelayedLoadScene());
+        }
     }
 
     private IEnumerator DelayedTransition(CinemachineVirtualCamera target, float delay)
@@ -62,5 +68,16 @@ public class MenuTransitionManager : MonoBehaviour
         }
 
         settingsPanel.SetActive(show);
+    }
+
+    private IEnumerator DelayedLoadScene()
+    {
+        yield return new WaitUntil(() => mainCamBrain.IsBlending);
+
+        yield return new WaitUntil(() => !mainCamBrain.IsBlending);
+
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene("MapScene");
     }
 }
