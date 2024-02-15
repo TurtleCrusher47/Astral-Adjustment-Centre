@@ -14,5 +14,7 @@ public class GameManager : Singleton<GameManager>
         // SceneManager.LoadScene(sceneName);
 
         nextSceneName = sceneName;
+
+        Debug.Log("Next Scene : " + nextSceneName);
     }
 }
