@@ -19,8 +19,10 @@ public class MenuTransitionManager : MonoBehaviour
     {
         for (int i = 0; i < virtualCameras.Count; i++)
         {
-            virtualCameras[i].SetActive(true);
+            virtualCameras[i].SetActive(false);
         }
+
+        virtualCameras[0].SetActive(true);
 
         loginPanel.SetActive(true);
         settingsPanel.SetActive(false);
@@ -47,7 +49,9 @@ public class MenuTransitionManager : MonoBehaviour
         }
 
         currCamera.Priority--;
+        currCamera.gameObject.SetActive(false);
         currCamera = target;
+        currCamera.gameObject.SetActive(true);
         currCamera.Priority++;
 
         switch (target.name)
