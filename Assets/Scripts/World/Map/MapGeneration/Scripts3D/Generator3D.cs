@@ -65,6 +65,8 @@ public class Generator3D : MonoBehaviour {
     GameObject camObj;
     [SerializeField]
     GameObject endObj;
+    [SerializeField]
+    GameObject MapContentGrp;
 
     Random random;
     Grid3D<CellType> grid;
@@ -82,8 +84,9 @@ public class Generator3D : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
+            ChangeSeed();
             UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
             foreach(GameObject go in s.GetRootGameObjects())
             {
@@ -94,10 +97,6 @@ public class Generator3D : MonoBehaviour {
             }
 
             InitializeMap();
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeSeed();
         }
     }
 
@@ -118,6 +117,7 @@ public class Generator3D : MonoBehaviour {
         PathfindHallways();
         SpawnPlayer();
         DeleteWalls();
+        StoreGO();
     }
 
     void PlaceRooms() {
@@ -167,7 +167,7 @@ public class Generator3D : MonoBehaviour {
     {
         playerObj.transform.position = pathList[0][0];
         camObj.transform.position = pathList[0][0];
-        endObj.transform.position = pathList[pathList.Count - 1][pathList[pathList.Count - 1].Count - 1];
+        endObj.transform.position = pathList[pathList.Count - 1][0];
     }
 
     void Triangulate() {
@@ -377,7 +377,7 @@ public class Generator3D : MonoBehaviour {
         {
             if (path != null)
             {
-                Vector3 offset = new Vector3(0.25f, -1.0f, 0.5f);
+                Vector3 offset = new Vector3(0.55f, -1.0f, 0.5f);
 
                 for (int i = 0; i < path.Count - 1; i++)
                 {
@@ -397,6 +397,18 @@ public class Generator3D : MonoBehaviour {
                 }
                 Debug.DrawLine(path[0] + offset, path[1] + offset, UnityEngine.Color.green, 1000, false);
                 Debug.DrawLine(path[path.Count - 2] + offset, path[path.Count - 1] + offset, UnityEngine.Color.red, 1000, false);
+            }
+        }
+    }
+
+    void StoreGO()
+    {
+        UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
+        foreach (GameObject go in s.GetRootGameObjects())
+        {
+            if (go.name.Contains("MapTile"))
+            {
+                go.transform.SetParent(MapContentGrp.transform);
             }
         }
     }

@@ -159,6 +159,37 @@ MonoBehaviour:
   weaponIcons:
   - {fileID: 21300000, guid: ddc97d27d3c2f434ebe96c2c3cf73846, type: 3}
   - {fileID: 21300000, guid: 5b5d24b2aaddc824a95e7f6e6c7e9339, type: 3}
+--- !u!1 &509538232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 509538233}
+  m_Layer: 0
+  m_Name: MapContentGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &509538233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509538232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.3077018, y: 2.0480232, z: 14.492486}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1014846123
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +371,7 @@ MonoBehaviour:
   playerObj: {fileID: 6063671662531838989}
   camObj: {fileID: 307754731066148141}
   endObj: {fileID: 1869705116}
+  MapContentGrp: {fileID: 509538232}
 --- !u!114 &1865677418
 MonoBehaviour:
   m_ObjectHideFlags: 0
