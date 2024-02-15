@@ -7,6 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
 	[SerializeField] PlayerData playerData;
 	[SerializeField] Transform orientation;
+	[SerializeField] Animator animator;
+
 		
 	[Header("Crouch and Prone")]
 	[SerializeField] Camera cam;
@@ -17,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
 	private bool isCrouching;
 	private bool isProning;
 	private bool isGrounded;
+	private bool isMoving;
 	private	Vector3 moveDirection;
 
 	[SerializeField] private Transform groundCheck;
@@ -41,6 +44,7 @@ public class CharacterMovement : MonoBehaviour
 		PlayerInput();
 		ControlDrag();
 		ControlSpeed();
+		SetAnimator();
 
 		// Get the perpendicular angle of the plane
 		slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -77,6 +81,9 @@ public class CharacterMovement : MonoBehaviour
 		}
 
 		moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+		isMoving = (horizontalInput != 0 || verticalInput != 0) && isGrounded;
+		
 	}
 
 	private void Jump()
@@ -165,6 +172,35 @@ public class CharacterMovement : MonoBehaviour
 		{
 			rb.AddForce(moveDirection.normalized * playerData.moveSpeed * playerData.airMultiplier, ForceMode.Acceleration);
 		}
+	}
+
+	void SetAnimator()
+	{
+
+		if (isMoving)
+		{
+			if(playerData.moveSpeed > playerData.walkSpeed + 0.3)
+			{
+				animator.SetBool("isRunning", true);
+				animator.SetBool("isWalking", false);
+			}
+
+			else
+			{
+				animator.SetBool("isWalking", true);
+				animator.SetBool("isRunning", false);
+			}
+		}
+		
+		else
+		{
+			animator.SetBool("isWalking", false);
+			animator.SetBool("isRunning", false);
+
+		}
+
+		animator.SetBool("isCrouching", isCrouching);
+
 	}
 
 	private bool OnSlope()
