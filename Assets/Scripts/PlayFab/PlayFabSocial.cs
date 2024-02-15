@@ -606,7 +606,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < friendItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(friendItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(friendItems[i]);
         }
 
         ResetAllRows(friendListGroup, friendItems, 0);
@@ -629,12 +629,12 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < requestItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(requestItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(requestItems[i]);
         }
 
         for (int i = 0; i < pendingItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(pendingItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(pendingItems[i]);
         }
 
         ResetAllRows(requestAndPendingListGroup, requestItems, 1);
@@ -663,7 +663,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < tradeItems.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(tradeItems[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(tradeItems[i]);
         }
 
         ResetAllRows(tradeListGroup, tradeItems, 3);

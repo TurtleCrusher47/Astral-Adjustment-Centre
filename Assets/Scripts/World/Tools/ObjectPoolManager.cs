@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ObjectPoolManager : MonoBehaviour
+public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
-    public static List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
+    public List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
 
     private GameObject objectPoolEmptyHolder;
 
-    private static GameObject gameObjectsEmpty;
+    private GameObject gameObjectsEmpty;
 
     public enum PoolType
     {
@@ -17,7 +17,7 @@ public class ObjectPoolManager : MonoBehaviour
         None
     }
 
-    public static PoolType PoolingType;
+    public PoolType PoolingType;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class ObjectPoolManager : MonoBehaviour
         gameObjectsEmpty.transform.SetParent(objectPoolEmptyHolder.transform);
     }
 
-    public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
+    public GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
     {
         // If it is the same name, assign pool to it
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == objectToSpawn.name);
@@ -71,7 +71,7 @@ public class ObjectPoolManager : MonoBehaviour
         return spawnableObject;
     }
 
-    public static IEnumerator ReturnObjectToPool(GameObject obj, float timeBeforeReturn = 0.0f)
+    public IEnumerator ReturnObjectToPool(GameObject obj, float timeBeforeReturn = 0.0f)
     {
         yield return new WaitForSeconds(timeBeforeReturn);
 
@@ -98,7 +98,7 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
 
-    private static GameObject SetParentObject(PoolType poolType)
+    private GameObject SetParentObject(PoolType poolType)
     {
         switch (poolType)
         {

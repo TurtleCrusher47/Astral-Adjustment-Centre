@@ -141,7 +141,7 @@ public class MainSceneManager : MonoBehaviour
         ClearMembersListItems();
         ClearMemberRequestsListItems();
         
-        ObjectPoolManager.ObjectPools.Clear();
+        ObjectPoolManager.Instance.ObjectPools.Clear();
 
         StopAllCoroutines();
 

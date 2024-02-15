@@ -41,6 +41,6 @@ public class Dummy : MonoBehaviour, IDamageable
     public void Despawn()
     {
         // Return to pool
-        StartCoroutine(ObjectPoolManager.ReturnObjectToPool(this.gameObject));
+        StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
     }
 }

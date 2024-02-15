@@ -90,7 +90,7 @@ public class Generator3D : MonoBehaviour {
             {
                 if (MapContentGrp.transform.GetChild(i).name.Contains("MapTile"))
                 {
-                    Destroy(MapContentGrp.transform.GetChild(i).gameObject);
+                    ObjectPoolManager.Instance.ReturnObjectToPool(MapContentGrp.transform.GetChild(i).gameObject);
                 }
             }
             InitializeMap();
@@ -389,7 +389,7 @@ public class Generator3D : MonoBehaviour {
                             {
                                 SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
                             }
-                            Destroy(hit.transform.gameObject);
+                            ObjectPoolManager.Instance.ReturnObjectToPool(hit.transform.gameObject);
                         }
                     }
                 }
@@ -428,7 +428,7 @@ public class Generator3D : MonoBehaviour {
                         -0.35f,
                         RandomR.Range((float)(1), (float)(size.z - 1))
                         );
-                    GameObject obj = Instantiate(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                    GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
                     obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                 }
             }
@@ -444,12 +444,12 @@ public class Generator3D : MonoBehaviour {
                     // spawn floor
                     if (k == 0)
                     {
-                        Instantiate(floorPrefab, location + tileOffset, Quaternion.identity);
+                        ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity);
                     }
                     // spawn ceiling
                     else if (k == size.y - 1)
                     {
-                        Instantiate(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity);
+                        ObjectPoolManager.Instance.SpawnObject(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity);
                     }
                     // spawn walls
                     if (k < size.y - 1)
@@ -479,12 +479,12 @@ public class Generator3D : MonoBehaviour {
     void PlaceHallway(Vector3Int curr) {
         Vector3 tileOffset = new Vector3(0.5f, -1.5f, 0.5f);
         // spawn floor
-        Instantiate(hallwayPrefab, curr + tileOffset, Quaternion.identity);
+        ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity);
     }
 
     void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
     {
-        GameObject obj = Instantiate(go, location, Quaternion.identity);
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(go, location, Quaternion.identity);
         obj.transform.eulerAngles = new Vector3(0, angle, 0);
     }
 }

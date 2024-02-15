@@ -100,7 +100,7 @@ public class PlayFabUser : MonoBehaviour
 
         for (int i = 0; i < itemsInInv.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(itemsInInv[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(itemsInInv[i]);
         }
 
         ResetAllItemCards();
@@ -123,7 +123,7 @@ public class PlayFabUser : MonoBehaviour
     {
         for (int i = 0; i < itemsInInv.Count; i++)
         {
-            ObjectPoolManager.ReturnObjectToPool(itemsInInv[i]);
+            ObjectPoolManager.Instance.ReturnObjectToPool(itemsInInv[i]);
         }
 
         ResetAllItemCards();
