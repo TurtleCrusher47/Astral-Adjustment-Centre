@@ -4,10 +4,8 @@ using UnityEngine;
 using Random = System.Random;
 using RandomR = UnityEngine.Random;
 using Graphs;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 using System;
-using static UnityEditor.FilePathAttribute;
 using System.Drawing;
 using Unity.VisualScripting;
 using System.IO;
@@ -36,6 +34,8 @@ public class Generator3D : MonoBehaviour {
     }
 
     [SerializeField]
+    MapPrefabManager mPrefabManager;
+    [SerializeField]
     int seed;
     [SerializeField]
     Vector3Int size;
@@ -57,6 +57,14 @@ public class Generator3D : MonoBehaviour {
     GameObject hallwayPrefab;
     [SerializeField]
     GameObject stairPrefab;
+    [SerializeField]
+    GameObject playerObj;
+    [SerializeField]
+    GameObject camObj;
+    [SerializeField]
+    GameObject endObj;
+    [SerializeField]
+    GameObject MapContentGrp;
 
     Random random;
     Grid3D<CellType> grid;
@@ -74,8 +82,9 @@ public class Generator3D : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
+            ChangeSeed();
             UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
             foreach(GameObject go in s.GetRootGameObjects())
             {
@@ -86,10 +95,6 @@ public class Generator3D : MonoBehaviour {
             }
 
             InitializeMap();
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeSeed();
         }
     }
 
@@ -108,7 +113,9 @@ public class Generator3D : MonoBehaviour {
         Triangulate();
         CreateHallways();
         PathfindHallways();
+        SpawnPlayer();
         DeleteWalls();
+        StoreGO();
     }
 
     void PlaceRooms() {
@@ -152,6 +159,13 @@ public class Generator3D : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void SpawnPlayer()
+    {
+        playerObj.transform.position = pathList[0][0];
+        camObj.transform.position = pathList[0][0];
+        endObj.transform.position = pathList[pathList.Count - 1][0];
     }
 
     void Triangulate() {
@@ -361,7 +375,7 @@ public class Generator3D : MonoBehaviour {
         {
             if (path != null)
             {
-                Vector3 offset = new Vector3(0.25f, -1.0f, 0.5f);
+                Vector3 offset = new Vector3(0.55f, -1.0f, 0.5f);
 
                 for (int i = 0; i < path.Count - 1; i++)
                 {
@@ -385,8 +399,39 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
+    void StoreGO()
+    {
+        UnityEngine.SceneManagement.Scene s = SceneManager.GetActiveScene();
+        foreach (GameObject go in s.GetRootGameObjects())
+        {
+            if (go.name.Contains("MapTile"))
+            {
+                go.transform.SetParent(MapContentGrp.transform);
+            }
+        }
+    }
+
     void PlaceRoom(Vector3Int location, Vector3Int size) {
-        //PlaceCube(location, size, redMaterial);
+        // place misc items
+        // loops all items
+        for (int i = 0; i < mPrefabManager.maxMinChanceList.Count; i++)
+        {
+            // check if item is spawned
+            if (RandomR.Range(1, 100) < mPrefabManager.maxMinChanceList[i].z)
+            {
+                // check the number of times that item spawns
+                int amount = RandomR.Range((int)mPrefabManager.maxMinChanceList[i].x, (int)mPrefabManager.maxMinChanceList[i].x);
+                for (int j = 0; j < amount; j++)
+                {
+                    Vector3 randPos = location + new Vector3(
+                        RandomR.Range((float)(1), (size.x - 1)),
+                        -0.35f,
+                        RandomR.Range((float)(1), (float)(size.z - 1))
+                        );
+                    Instantiate(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity);
+                }
+            }
+        }
 
         for (int j = 0; j < size.x; j++)
         {
