@@ -14,7 +14,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     private float _timeTillExit = 3f;
     private float _distanceToCountExit = 0.25f;
 
-   private float _bulletSpeed = 5f;
+    private float _bulletSpeed = 5f;
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
@@ -30,6 +30,12 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         base.DoFrameUpdateLogic();
 
         enemy.MoveEnemy(Vector3.zero);
+
+        Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
+        lookPos.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
 
         _timer += Time.deltaTime;
 
