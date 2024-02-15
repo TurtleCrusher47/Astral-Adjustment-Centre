@@ -11,7 +11,7 @@ public class LoadingScene : MonoBehaviour
     public TMP_Text loadingText;
     public Slider loadingBar;
 
-    public void LoadSceneButton()
+    public void Awake()
     {
         // Made a Temp Button to test it, can change to automatically switch scene
         StartCoroutine(LoadScene());
@@ -22,7 +22,7 @@ public class LoadingScene : MonoBehaviour
         yield return null;
 
         //Begin to load the Scene you specify
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("MenuScene");
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(GameManager.Instance.nextSceneName);
         //Don't let the Scene activate until you allow it to
         asyncOperation.allowSceneActivation = false;
 
@@ -54,9 +54,7 @@ public class LoadingScene : MonoBehaviour
                 //Change the Text to show the Scene is ready
                 loadingText.text = "Continue";
                 //Wait to you press the space key to activate the Scene
-                if (Input.GetKeyDown(KeyCode.Space))
-                    //Activate the Scene
-                    asyncOperation.allowSceneActivation = true;
+                asyncOperation.allowSceneActivation = true;
             }
 
             yield return null;

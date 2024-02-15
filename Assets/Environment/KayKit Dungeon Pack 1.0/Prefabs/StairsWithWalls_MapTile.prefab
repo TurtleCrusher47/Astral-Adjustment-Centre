@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5064493525130296404}
   - component: {fileID: 6602963851119908658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5414215963809407445}
   - component: {fileID: 1823921836129470737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4738605555225265632}
   - component: {fileID: 1338793873625186670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5539884188312427898}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 6.75, z: 0}
+  m_LocalPosition: {x: -0, y: 6.59, z: 0}
   m_LocalScale: {x: 2.25, y: 0.25, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -242,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8058503819593399957}
   - component: {fileID: 5825370744749414670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3601087524845459659}
   - component: {fileID: 1774678992981534111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7964899724928588191}
   - component: {fileID: 7954730434652104165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7269940558760254631}
   - component: {fileID: 3069279657169694111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1313,7 +1313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8286991986945304428}
   - component: {fileID: 1536720360915697647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: collider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

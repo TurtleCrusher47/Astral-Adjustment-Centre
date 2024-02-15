@@ -8,6 +8,7 @@ public class MenuButtonClick : MonoBehaviour
 {
     public UnityEvent unityEvent = new UnityEvent();
     public GameObject button;
+    public Color32 baseColor;
     private Ray ray;
     private RaycastHit hit;
     private bool _onButton = false;
@@ -21,7 +22,7 @@ public class MenuButtonClick : MonoBehaviour
                 // On Button
                 try
                 {
-                    button.GetComponentInChildren<TMP_Text>().color = new Color32(0, 0, 0, 255);
+                    button.GetComponentInChildren<TMP_Text>().color = new Color32(128, 128, 128, 255);
                 }
                 catch {}
             }
@@ -30,13 +31,18 @@ public class MenuButtonClick : MonoBehaviour
                 // Not On Button
                 try
                 {
-                    button.GetComponentInChildren<TMP_Text>().color = new Color32(255, 255, 255, 255);
+                    button.GetComponentInChildren<TMP_Text>().color = baseColor;
                 }
                 catch {}
             }
 
             _onButton = value;
         }
+    }
+
+    void Awake()
+    {
+        baseColor = gameObject.GetComponentInChildren<TMP_Text>().color;
     }
 
     void Start()

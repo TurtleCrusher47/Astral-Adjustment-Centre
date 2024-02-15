@@ -7,6 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
 	[SerializeField] PlayerData playerData;
 	[SerializeField] Transform orientation;
+	[SerializeField] Animator animator;
+
 		
 	[Header("Crouch and Prone")]
 	[SerializeField] Camera cam;
@@ -14,9 +16,15 @@ public class CharacterMovement : MonoBehaviour
 	[SerializeField] CapsuleCollider capsuleCollider;
 	private float playerHeight;
 
+	[Header("Stair movement")]
+	[SerializeField] GameObject stepRayUpper;
+    [SerializeField] GameObject stepRayLower;
+    [SerializeField] float stepSmooth = 2.5f;
+
 	private bool isCrouching;
 	private bool isProning;
 	private bool isGrounded;
+	private bool isMoving;
 	private	Vector3 moveDirection;
 
 	[SerializeField] private Transform groundCheck;
@@ -41,6 +49,7 @@ public class CharacterMovement : MonoBehaviour
 		PlayerInput();
 		ControlDrag();
 		ControlSpeed();
+		SetAnimator();
 
 		// Get the perpendicular angle of the plane
 		slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -49,6 +58,7 @@ public class CharacterMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		MovePlayer();
+		ClimbStep();
 	}
 
 	public void PlayerInput()
@@ -77,6 +87,9 @@ public class CharacterMovement : MonoBehaviour
 		}
 
 		moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+		isMoving = (horizontalInput != 0 || verticalInput != 0) && isGrounded;
+		
 	}
 
 	private void Jump()
@@ -167,6 +180,35 @@ public class CharacterMovement : MonoBehaviour
 		}
 	}
 
+	void SetAnimator()
+	{
+
+		// if (isMoving)
+		// {
+		// 	if(playerData.moveSpeed > playerData.walkSpeed + 0.3)
+		// 	{
+		// 		animator.SetBool("isRunning", true);
+		// 		animator.SetBool("isWalking", false);
+		// 	}
+
+		// 	else
+		// 	{
+		// 		animator.SetBool("isWalking", true);
+		// 		animator.SetBool("isRunning", false);
+		// 	}
+		// }
+		
+		// else
+		// {
+		// 	animator.SetBool("isWalking", false);
+		// 	animator.SetBool("isRunning", false);
+
+		// }
+
+		// animator.SetBool("isCrouching", isCrouching);
+
+	}
+
 	private bool OnSlope()
 	{
 		// If there is something under the player
@@ -184,4 +226,40 @@ public class CharacterMovement : MonoBehaviour
 		}
 		return false;
 	}
+
+	private void ClimbStep()
+    {
+		RaycastHit hitLower;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
+        {
+            RaycastHit hitUpper;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.1f))
+            {
+				Debug.Log("Stairs");
+                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+		RaycastHit hitLower45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0 ,1), out hitLower45, 0.1f))
+        {
+            RaycastHit hitUpper45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.2f))
+            {
+				Debug.Log("Stairs");
+                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+        RaycastHit hitLowerMinus45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinus45, 0.1f))
+        {
+
+            RaycastHit hitUpperMinus45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.2f))
+            {
+                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+    }
 }
