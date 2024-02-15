@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class EnemyAggroCheck : MonoBehaviour
 {
-    private GameObject PlayerTarget { get; set; }
     private Enemy _enemy;
 
     private void Awake()
     {
-        PlayerTarget = GameObject.FindGameObjectWithTag("Player");
-        _enemy = GetComponentInParent<Enemy>();
+        _enemy = transform.parent.gameObject.GetComponentInParent<Enemy>();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject == PlayerTarget)
+        if (collision.CompareTag("PlayerCollider"))
         {
             _enemy.SetAggroStatus(true);
         }
@@ -23,7 +21,7 @@ public class EnemyAggroCheck : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-         if (collision.gameObject == PlayerTarget)
+         if (collision.CompareTag("PlayerCollider"))
         {
             _enemy.SetAggroStatus(false);
         }

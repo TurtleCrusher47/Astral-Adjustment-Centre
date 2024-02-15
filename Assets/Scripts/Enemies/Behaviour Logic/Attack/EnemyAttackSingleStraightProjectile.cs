@@ -39,7 +39,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
             Vector3 dir = (playerTransform.position - enemy.transform.position).normalized;
 
-            Rigidbody bullet = GameObject.Instantiate(BulletPrefab, enemy.transform.position, Quaternion.identity);
+            Rigidbody bullet = GameObject.Instantiate(BulletPrefab, enemy.transform.position, enemy.transform.localRotation);
 
             bullet.velocity = dir * _bulletSpeed;
 

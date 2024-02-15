@@ -15,7 +15,7 @@ public class EnemyIdleSOBase : ScriptableObject
         transform = gameObject.transform;
         this.enemy = enemy;
 
-        //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         Debug.Log("Init run");
     }

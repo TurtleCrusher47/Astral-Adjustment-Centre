@@ -24,8 +24,6 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
         waypoints = enemy.FindChildObjectsWithTag(enemy.gameObject.transform.parent.gameObject, "Waypoint");
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
-        enemy.gameObject.transform.LookAt(_targetPos);
-
     }
 
     public override void DoExitLogic()
@@ -38,6 +36,15 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
         base.DoFrameUpdateLogic();
 
         enemy.MoveEnemy(_direction * movementSpeed);
+
+        Vector3 lookPos = (waypoints[_targetIndex].transform.position - transform.position).normalized;
+        lookPos.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+        if (transform.rotation != lookRotation)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+        }
 
         if (Vector3.Distance(transform.position, _targetPos) <= 0.1f)
         {
@@ -55,11 +62,11 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
                     targetIndex = 0;
                 }
                 
-                Vector3 lookPos = (waypoints[targetIndex].transform.position - transform.position).normalized;
-                lookPos.y = 0;
+                // Vector3 lookPos = (waypoints[targetIndex].transform.position - transform.position).normalized;
+                // lookPos.y = 0;
 
-                Quaternion lookRotation = Quaternion.LookRotation(lookPos);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+                // Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+                // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
             }
 
             else
