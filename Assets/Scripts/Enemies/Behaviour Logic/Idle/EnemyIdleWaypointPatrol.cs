@@ -21,7 +21,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
     {
         base.DoEnterLogic();
 
-        waypoints = new List<GameObject>(GameObject.FindGameObjectsWithTag("Waypoint"));
+        waypoints = enemy.FindChildObjectsWithTag(enemy.gameObject.transform.parent.gameObject, "Waypoint");
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
         enemy.gameObject.transform.LookAt(_targetPos);
@@ -53,7 +53,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
             else
             {
-                if (_targetIndex >= waypoints.Count)
+                if (_targetIndex == waypoints.Count - 1)
                 {
                     _targetIndex = 0;
                 }

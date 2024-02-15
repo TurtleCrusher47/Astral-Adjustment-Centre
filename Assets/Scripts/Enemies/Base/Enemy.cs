@@ -132,4 +132,19 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     }
 
 #endregion
+
+    public List<GameObject> FindChildObjectsWithTag(GameObject parent, string tag)
+    {
+        List<GameObject> children = new();
+ 
+        foreach(Transform transform in parent.transform) 
+        {
+            if(transform.CompareTag(tag)) 
+            {
+                children.Add(transform.gameObject);
+            }
+        }
+        
+        return children;
+    }
 }
