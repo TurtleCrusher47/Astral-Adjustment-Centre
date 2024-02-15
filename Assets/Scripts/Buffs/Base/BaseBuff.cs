@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseBuff : MonoBehaviour
 {
-
+    //
     // Buff Tiers
     public enum buffTiers
     {
