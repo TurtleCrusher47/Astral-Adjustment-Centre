@@ -6,15 +6,24 @@ using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
 {
-    public Toggle fullscreenToggle, vsyncToggle;
+    public Toggle fullscreenToggle, vsyncToggle, fpsToggle;
     public List<ResItem> resolutions = new List<ResItem>();
     private int selectedResolution;
 
-    public TMP_Text resolutionLabel;
+    public TMP_Text resolutionLabel, fpsText;
+
+    // FPS Variables
+    private float pollingTime = 1f;
+    private float time;
+    private int frameCount;
+    private int frameIndex;
+    private float[] frameDeltaTimeArray;
 
     // Start is called before the first frame update
     void Start()
     {
+        frameDeltaTimeArray = new float[50];
+
         fullscreenToggle.isOn = Screen.fullScreen;
 
         if(QualitySettings.vSyncCount == 0)
@@ -31,7 +40,7 @@ public class SettingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        DisplayFPS();
     }
 
     public void ResLeft()
@@ -74,6 +83,25 @@ public class SettingManager : MonoBehaviour
         }
 
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
+    }
+
+    private void DisplayFPS()
+    {
+        frameDeltaTimeArray[frameIndex] = Time.deltaTime;
+        frameIndex = (frameIndex + 1) % frameDeltaTimeArray.Length;
+
+        fpsText.text = Mathf.RoundToInt(CalculateFPS()).ToString();
+    }
+
+    private float CalculateFPS()
+    {
+        float total = 0f;
+        foreach (float deltaTime in frameDeltaTimeArray)
+        {
+            total += deltaTime;
+        }
+
+        return frameDeltaTimeArray.Length / total;
     }
 }
 

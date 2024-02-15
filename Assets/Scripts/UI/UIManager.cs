@@ -25,9 +25,9 @@ public class UIManager : MonoBehaviour
         optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
         optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
 
-        ShuffleBuffPanel();
-        InstantiateBuffPanels();
-        ShowRandomBuffPanels(2);
+        //ShuffleBuffPanel();
+        //InstantiateBuffPanels();
+        //ShowRandomBuffPanels(2);
 
         //Debug.Log("GameObjects in List: " + buffPanels.Count);
 
