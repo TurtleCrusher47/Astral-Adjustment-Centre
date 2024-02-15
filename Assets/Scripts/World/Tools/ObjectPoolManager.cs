@@ -76,6 +76,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         yield return new WaitForSeconds(timeBeforeReturn);
 
         // By taking off 7 letters of the string, we are removing (Clone) from the name of the passed inobj
+        Debug.Log(obj.name);
         string goName = obj.name.Substring(0, obj.name.Length - 7); 
 
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
@@ -83,12 +84,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         // Remove this later most likely, only for testing
         if (pool == null)
         {
-            pool = new PooledObjectInfo() { LookupString = goName};
-            ObjectPools.Add(pool);
+            // pool = new PooledObjectInfo() { LookupString = goName};
+            // ObjectPools.Add(pool);
 
-            obj.SetActive(false);
-            pool.InactiveObjects.Add(obj);
-            // Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
+            // obj.SetActive(false);
+            // pool.InactiveObjects.Add(obj);
+            Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
         }
         else
         {
