@@ -6,7 +6,6 @@ using PlayFab.ClientModels;
 using EntityKey = PlayFab.GroupsModels.EntityKey;
 using UnityEngine;
 using PlayFab.GroupsModels;
-using UnityEngine.SceneManagement;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -31,12 +30,5 @@ public class PlayFabManager : MonoBehaviour
         {
             Destroy(base.gameObject);
         }
-    }
-    
-    public static void ChangeScene(string sceneName)
-    {
-        SceneManager.LoadScene("LoadingScene");
-
-        nextSceneName = sceneName;
     }
 }

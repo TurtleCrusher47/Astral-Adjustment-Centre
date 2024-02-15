@@ -81,6 +81,6 @@ public class MenuTransitionManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        PlayFabManager.ChangeScene("LevelScene");
+        GameManager.Instance.ChangeScene("LevelScene");
     }
 }
