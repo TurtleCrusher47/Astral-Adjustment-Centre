@@ -19,7 +19,7 @@ public class CharacterMovement : MonoBehaviour
 	[Header("Stair movement")]
 	[SerializeField] GameObject stepRayUpper;
     [SerializeField] GameObject stepRayLower;
-    [SerializeField] float stepSmooth = 2.5f;
+    [SerializeField] float stepSmooth = 3;
 
 	private bool isCrouching;
 	private bool isProning;
@@ -50,6 +50,7 @@ public class CharacterMovement : MonoBehaviour
 		ControlDrag();
 		ControlSpeed();
 		SetAnimator();
+		ClimbStep();
 
 		// Get the perpendicular angle of the plane
 		slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -58,7 +59,6 @@ public class CharacterMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		MovePlayer();
-		ClimbStep();
 	}
 
 	public void PlayerInput()
