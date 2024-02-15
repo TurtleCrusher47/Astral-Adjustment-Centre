@@ -10,6 +10,7 @@ using System.Drawing;
 using Unity.VisualScripting;
 using System.IO;
 using static UnityEngine.GraphicsBuffer;
+using Unity.Mathematics;
 
 public class Generator3D : MonoBehaviour {
     enum CellType {
@@ -57,6 +58,8 @@ public class Generator3D : MonoBehaviour {
     GameObject hallwayPrefab;
     [SerializeField]
     GameObject stairPrefab;
+    [SerializeField]
+    GameObject lightPrefab;
     [SerializeField]
     GameObject playerObj;
     [SerializeField]
@@ -413,10 +416,11 @@ public class Generator3D : MonoBehaviour {
     void PlaceRoom(Vector3Int location, Vector3Int size) {
         // place misc items
         // create list of available spaces
+        GameObject obj;
         List<Vector3> vacantSpaces = new List<Vector3>();
-        for (float x = 1; x < size.x - 1; x += 0.5f)
+        for (float x = 0.5f; x < size.x - 0.5f; x += 0.5f)
         {
-            for (float z = 1; z < size.z - 1; z += 0.5f)
+            for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
             {
                 vacantSpaces.Add(location + new Vector3(x, -0.35f, z));
             }
@@ -438,13 +442,16 @@ public class Generator3D : MonoBehaviour {
                         int randIndex = RandomR.Range(0, vacantSpaces.Count);
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
-                        GameObject obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        obj =  ObjectPoolManager.Instance.SpawnObject(mPrefabManager.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                         obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                     }
                 }
             }
         }
+        // place light in the middle of the room
+        obj = ObjectPoolManager.Instance.SpawnObject(lightPrefab, location + new Vector3(size.x / 2, size.y - 1.65f, size.z / 2), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+        mapContent.Add(obj);
 
         for (int j = 0; j < size.x; j++)
         {
@@ -456,13 +463,13 @@ public class Generator3D : MonoBehaviour {
                     // spawn floor
                     if (k == 0)
                     {
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                     }
                     // spawn ceiling
                     else if (k == size.y - 1)
                     {
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        obj = ObjectPoolManager.Instance.SpawnObject(ceilingPrefab, location + tileOffset + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                     }
                     // spawn walls
