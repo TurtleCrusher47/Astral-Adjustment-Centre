@@ -13,9 +13,7 @@ public class MenuTransitionManager : MonoBehaviour
     [SerializeField] private CinemachineBrain mainCamBrain;
     [SerializeField] private CinemachineVirtualCamera menuCamera;
     [SerializeField] private CinemachineVirtualCamera loadSceneCamera;
-    [SerializeField] private GameObject loginPanel, settingsPanel;
-
-    [SerializeField] private Volume volume;
+    [SerializeField] private GameObject loginPanel, settingsPanel, creditsPanel;
 
     void Awake()
     {
@@ -26,6 +24,7 @@ public class MenuTransitionManager : MonoBehaviour
 
         loginPanel.SetActive(true);
         settingsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
 
         currCamera.Priority++;
     }
@@ -34,37 +33,38 @@ public class MenuTransitionManager : MonoBehaviour
     {
         StopAllCoroutines();
 
-        if (currCamera.name == "StartCamera")
+        switch (currCamera.name)
         {
-            loginPanel.SetActive(false);
-        }
-        if (currCamera.name == "SettingsCamera")
-        {
-            StartCoroutine(DelayedSettingsPanel(false));
+            case "StartCamera":
+                StartCoroutine(DelayedShowPanel(loginPanel, false));
+                break;
+            case "SettingsCamera":
+                StartCoroutine(DelayedShowPanel(settingsPanel, false));
+                break;
+            case "CreditsCamera":
+                StartCoroutine(DelayedShowPanel(creditsPanel, false));
+                break;
         }
 
         currCamera.Priority--;
         currCamera = target;
         currCamera.Priority++;
 
-        if (target.name == "SettingsCamera")
+        switch (target.name)
         {
-            StartCoroutine(DelayedSettingsPanel(true));
-        }
-        else if (target.name == "PlayCamera")
-        {
-            StartCoroutine(DelayedLoadScene());
+            case "SettingsCamera":
+                StartCoroutine(DelayedShowPanel(settingsPanel, true));
+                break;
+            case "CreditsCamera":
+                StartCoroutine(DelayedShowPanel(creditsPanel, true));
+                break;
+            case "PlayCamera":
+                StartCoroutine(DelayedLoadScene());
+                break;
         }
     }
 
-    private IEnumerator DelayedTransition(CinemachineVirtualCamera target, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        UpdateCamera(target);
-    }
-
-    private IEnumerator DelayedSettingsPanel(bool show)
+    private IEnumerator DelayedShowPanel(GameObject panel, bool show)
     {
         if (show)
         {
@@ -73,7 +73,7 @@ public class MenuTransitionManager : MonoBehaviour
             yield return new WaitUntil(() => !mainCamBrain.IsBlending);
         }
 
-        settingsPanel.SetActive(show);
+        panel.SetActive(show);
     }
 
     private IEnumerator DelayedLoadScene()
