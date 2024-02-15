@@ -28,7 +28,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     private void SetUpEmpties()
     {
-        objectPoolHolder = new GameObject("Pooled Objects");
+        objectPoolHolder = this.gameObject;
 
         gameObjectsEmpty = new GameObject("Empty");
         gameObjectsEmpty.transform.SetParent(objectPoolHolder.transform);
