@@ -847,10 +847,20 @@ PrefabInstance:
       propertyPath: invGridLayoutGroup
       value: 
       objectReference: {fileID: 1270919070}
+    - target: {fileID: 1340748603843631959, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655351385711893705, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2655351385711893705, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3432608838026907472, guid: ed5dc1bd0e8791a4b8228583125542f5,
         type: 3}
