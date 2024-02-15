@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 157606215951488799}
   - component: {fileID: 6904914553098172067}
   m_Layer: 0
-  m_Name: Wall (1)
+  m_Name: Wall
   m_TagString: MapWallTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 2707973945624196538}
   - component: {fileID: 8676297672787268614}
   m_Layer: 0
-  m_Name: Wall (3)
+  m_Name: Wall
   m_TagString: MapWallTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 7783682156388390647}
   - component: {fileID: 3601173917146445643}
   m_Layer: 0
-  m_Name: Wall (2)
+  m_Name: Wall
   m_TagString: MapWallTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

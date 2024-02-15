@@ -383,7 +383,7 @@ public class Generator3D : MonoBehaviour {
                     {
                         if (hit.transform.CompareTag("MapWallTile"))
                         {
-                            if (hit.transform.parent == null)
+                            if (hit.transform.gameObject.name != "Wall")
                             {
                                 SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
                             }
