@@ -233,7 +233,7 @@ public class CharacterMovement : MonoBehaviour
         if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(transform.forward), out hitLower, 0.1f))
         {
             RaycastHit hitUpper;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.1f))
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(transform.forward), out hitUpper, 0.1f))
             {
 				Debug.Log("Stairs");
                 rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
