@@ -6,6 +6,7 @@ using PlayFab.ClientModels;
 using EntityKey = PlayFab.GroupsModels.EntityKey;
 using UnityEngine;
 using PlayFab.GroupsModels;
+using UnityEngine.SceneManagement;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayFabManager : MonoBehaviour
     public static EntityKey currGuildID;
     public static string currGuildName;
     public static string currGuildRole;
+
+    public static string nextSceneName;
 
     private void Awake()
     {
@@ -30,5 +33,10 @@ public class PlayFabManager : MonoBehaviour
         }
     }
     
-    
+    public static void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene("LoadingScene");
+
+        nextSceneName = sceneName;
+    }
 }

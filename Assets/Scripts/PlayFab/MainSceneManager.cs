@@ -10,8 +10,6 @@ public class MainSceneManager : MonoBehaviour
 {
     [SerializeField] private GameObject loginPage, regPage, forgetpassPage;
 
-    [SerializeField] private TMP_Text menuNameText;
-
     public TMP_Text statusText;
 
     void Awake()
@@ -28,7 +26,7 @@ public class MainSceneManager : MonoBehaviour
         }
 
         statusText.text = "";
-        SetDisplayName(PlayFabManager.currPlayFabDN);
+        // SetDisplayName(PlayFabManager.currPlayFabDN);
     }
 
     public void ShowLoginPage()
@@ -42,7 +40,7 @@ public class MainSceneManager : MonoBehaviour
     {
         statusText.text = text;
 
-        StartCoroutine(ResetStatusText());
+        //StartCoroutine(ResetStatusText());
     }
 
     private IEnumerator ResetStatusText()
@@ -152,8 +150,8 @@ public class MainSceneManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    public void SetDisplayName(string name)
-    {
-        menuNameText.text = name;
-    }
+    // public void SetDisplayName(string name)
+    // {
+    //     menuNameText.text = name;
+    // }
 }

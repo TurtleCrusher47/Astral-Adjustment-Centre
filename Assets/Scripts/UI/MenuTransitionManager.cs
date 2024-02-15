@@ -78,6 +78,6 @@ public class MenuTransitionManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        SceneManager.LoadScene("MapScene");
+        PlayFabManager.ChangeScene("MapScene");
     }
 }

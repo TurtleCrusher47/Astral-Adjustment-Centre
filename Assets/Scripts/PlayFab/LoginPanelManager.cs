@@ -176,7 +176,7 @@ public class LoginPanelManager : MonoBehaviour
             PlayFabManager.currTitleID = r.InfoResultPayload.AccountInfo.TitleInfo.TitlePlayerAccount.Id;
             PlayFabManager.currPlayFabDN = r.InfoResultPayload.PlayerProfile.DisplayName;
 
-            mainSceneManager.SetDisplayName(PlayFabManager.currPlayFabDN);
+            //mainSceneManager.SetDisplayName(PlayFabManager.currPlayFabDN);
         }
         else
         {
@@ -197,7 +197,7 @@ public class LoginPanelManager : MonoBehaviour
                 PlayFabManager.currPlayFabID = customGUID;
                 PlayFabManager.currPlayFabDN = result.DisplayName;
 
-                mainSceneManager.SetDisplayName(PlayFabManager.currPlayFabDN);
+                //mainSceneManager.SetDisplayName(PlayFabManager.currPlayFabDN);
             }, OnError);
         }
 
@@ -232,7 +232,8 @@ public class LoginPanelManager : MonoBehaviour
             }
         }, OnError);
 
-        //SceneManager.LoadScene();
+        PlayFabManager.ChangeScene("MenuScene");
+        StopAllCoroutines();
     }
 
     public static string SafeSubstring(string input, int startIndex, int length)
