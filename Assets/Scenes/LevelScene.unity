@@ -181,8 +181,9 @@ MonoBehaviour:
     type: 3}
   ceilingPrefab: {fileID: 3812864620290879476, guid: 08f947dcbad96c54790a49b7efc436cd,
     type: 3}
-  wallPrefab: {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463,
-    type: 3}
+  wallPrefab:
+  - {fileID: 5772583972939754072, guid: 175b6e8d6fed7b145baf4b14ff8ae4ac, type: 3}
+  - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
   wallDoorPrefab: {fileID: 5494911878686914276, guid: 610a17a9a4666d645b92b171fbf3abbb,
     type: 3}
   hallwayPrefab: {fileID: 7422611386983579833, guid: c72472c289358f240b512113beaa2dc0,
@@ -201,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108134765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.286, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -246,7 +247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135899573}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.286, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -815,7 +816,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009041329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.286, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
