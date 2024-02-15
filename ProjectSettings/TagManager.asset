@@ -10,6 +10,7 @@ TagManager:
   - RayGun
   - BaseSword
   - MapWallTile
+  - Waypoint
   layers:
   - Default
   - TransparentFX

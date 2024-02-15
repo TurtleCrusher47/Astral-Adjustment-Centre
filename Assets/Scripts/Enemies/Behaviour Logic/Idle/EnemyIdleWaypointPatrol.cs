@@ -21,9 +21,11 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
     {
         base.DoEnterLogic();
 
+        waypoints = new List<GameObject>(GameObject.FindGameObjectsWithTag("Waypoint"));
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
         enemy.gameObject.transform.LookAt(_targetPos);
+
     }
 
     public override void DoExitLogic()
@@ -37,7 +39,9 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
         enemy.MoveEnemy(_direction * movementSpeed);
 
-        if (Vector3.Distance(transform.position, _targetPos) <= 0.01f)
+        Debug.Log(Vector3.Distance(transform.position, _targetPos));
+
+        if (Vector3.Distance(transform.position, _targetPos) <= 0.1f)
         {
             //add timer to pause at waypoint
             _timer += Time.deltaTime;
