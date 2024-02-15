@@ -42,7 +42,11 @@ public class MenuButtonClick : MonoBehaviour
 
     void Awake()
     {
-        baseColor = gameObject.GetComponentInChildren<TMP_Text>().color;
+        try
+        {
+            baseColor = gameObject.GetComponentInChildren<TMP_Text>().color;
+        }
+        catch {}
     }
 
     void Start()
@@ -68,7 +72,6 @@ public class MenuButtonClick : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && onButton)
         {
-            Debug.Log(hit.transform.name);
             unityEvent.Invoke();
         }
     }
