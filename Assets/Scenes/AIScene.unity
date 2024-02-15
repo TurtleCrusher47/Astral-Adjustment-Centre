@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &170861385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1949679902077625556, guid: 75eed5cce29cb4b47864397ac428a453,
+    type: 3}
+  m_PrefabInstance: {fileID: 1949679903694583960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &683425569
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,9 +524,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3444514332548000584}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 1.1808501, z: -3.0695162}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2579301963728207559}
   m_RootOrder: 0
@@ -1119,9 +1125,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6671888801013864764}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 1.8472385, z: 0.13611293}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0, y: 0.056, z: 0.2685}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2579301963728207559}
   m_RootOrder: 1
@@ -1133,15 +1139,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2918426931832349821}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.072, z: 0.196}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1709718498273502626}
   - {fileID: 2083687425306624129}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 170861385}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2918426931832349821
 GameObject:
