@@ -6,11 +6,8 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 [Serializable]
-[VolumeComponentMenuForRenderPipeline(
-    "Custom/Fog Post-Processing",
-    typeof(UniversalRenderPipeline))]
-public class FogPostProcess : VolumeComponent,
-    IPostProcessComponent
+[VolumeComponentMenuForRenderPipeline("Custom/Fog Post-Processing", typeof(UniversalRenderPipeline))]
+public class FogPostProcess : VolumeComponent, IPostProcessComponent
 {
     public ColorParameter fogColor = new(Color.white); 
     public ClampedFloatParameter fogDensity = new(0.5f, 0.0f, 1.0f);

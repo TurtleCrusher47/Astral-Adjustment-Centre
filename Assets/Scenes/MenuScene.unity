@@ -2515,7 +2515,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642716405}
-  m_LocalRotation: {x: -0.0022087132, y: 0.9840847, z: -0.012261796, w: -0.17726286}
+  m_LocalRotation: {x: -0.0022087148, y: 0.9840847, z: -0.012261811, w: -0.1772628}
   m_LocalPosition: {x: -3.25, y: 4, z: -2.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3335,7 +3335,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 69978ae463b4d824d814782331a1a9fd, type: 2}
 --- !u!4 &832575519
 Transform:
   m_ObjectHideFlags: 0
@@ -4764,7 +4764,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281163915}
-  m_LocalRotation: {x: -0.0022087132, y: 0.9840847, z: -0.012261796, w: -0.17726286}
+  m_LocalRotation: {x: -0.0022087148, y: 0.9840847, z: -0.012261811, w: -0.1772628}
   m_LocalPosition: {x: -3.25, y: 4, z: -2.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5813,6 +5813,7 @@ MonoBehaviour:
   loadSceneCamera: {fileID: 603554599}
   loginPanel: {fileID: 496852478}
   settingsPanel: {fileID: 670931453}
+  volume: {fileID: 0}
 --- !u!225 &1592541939
 CanvasGroup:
   m_ObjectHideFlags: 0
