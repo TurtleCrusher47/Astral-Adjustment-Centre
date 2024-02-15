@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681676031481293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.225, y: -0.65, z: 0}
+  m_LocalPosition: {x: 0.225, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -217,7 +217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697089824008479216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.225, y: -0.915, z: 0}
+  m_LocalPosition: {x: 0.225, y: -0.945, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1518,7 +1518,6 @@ MonoBehaviour:
   capsuleCollider: {fileID: 6063671662455724951}
   stepRayUpper: {fileID: 1681676031481293}
   stepRayLower: {fileID: 697089824008479216}
-  stepHeight: 0.3
   stepSmooth: 2
   groundCheck: {fileID: 6063671663935837587}
 --- !u!114 &6063671662139761665
@@ -2490,7 +2489,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8894067595518307545}
   m_Enabled: 1
-  m_CastShadows: 3
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
