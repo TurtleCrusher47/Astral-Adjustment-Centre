@@ -7,5 +7,6 @@ public class RangedEnemy : Enemy
     void Start()
     {
         MaxHealth = 50;
+        CurrentHealth = MaxHealth;
     }
 }

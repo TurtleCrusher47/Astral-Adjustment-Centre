@@ -39,8 +39,6 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
         enemy.MoveEnemy(_direction * movementSpeed);
 
-        Debug.Log(Vector3.Distance(transform.position, _targetPos));
-
         if (Vector3.Distance(transform.position, _targetPos) <= 0.1f)
         {
             //add timer to pause at waypoint
@@ -49,6 +47,19 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
             if (_timer <= _pauseTimer)
             {
                 enemy.MoveEnemy(Vector3.zero);
+
+                int targetIndex = _targetIndex + 1;
+
+                if (targetIndex >= waypoints.Count)
+                {
+                    targetIndex = 0;
+                }
+                
+                Vector3 lookPos = (waypoints[targetIndex].transform.position - transform.position).normalized;
+                lookPos.y = 0;
+
+                Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
             }
 
             else
@@ -64,7 +75,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
 
                 _targetPos = waypoints[_targetIndex].transform.position;
                 _direction = ( _targetPos - transform.position).normalized;
-                enemy.gameObject.transform.LookAt(_targetPos);
+
                 _timer = 0f;
             }
         }
