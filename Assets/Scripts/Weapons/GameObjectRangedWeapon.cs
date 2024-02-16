@@ -16,7 +16,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 Debug.Log("Shot GameObject");
-                currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
+                currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Projectile);
                 currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.transform.forward;
                 currentProjectile.GetComponent<ShurikenProjectile>().MoveProjectile();
 
