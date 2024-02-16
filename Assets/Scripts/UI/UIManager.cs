@@ -25,10 +25,6 @@ public class UIManager : MonoBehaviour
         optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
         optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
 
-        //ShuffleBuffPanel();
-        //InstantiateBuffPanels();
-        //ShowRandomBuffPanels(2);
-
         //Debug.Log("GameObjects in List: " + buffPanels.Count);
 
         /*
@@ -36,89 +32,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("GameObject Name: " + buffPanel.name);
         }*/
-    }
-
-    private void ShuffleBuffPanel()
-    {
-        int n = buffPanels.Count;
-        while ( n > 1)
-        {
-            n--;
-            int k  = Random.Range(0, n + 1);
-            GameObject temp = buffPanels[k];
-            buffPanels[k] = buffPanels[n];
-            buffPanels[n] = temp;
-        }
-    }
-
-    private void InstantiateBuffPanels()
-    {
-        // Destroy the previous buff panels
-        DestroyOldPanels();
-
-        // Instantiate buff panels from the list
-        for (int i = 0; i < 2 && i < buffPanels.Count; i++)
-        {
-            GameObject buffPanel = Instantiate(buffPanels[i], roguePanel.transform);
-            instantiatedPanels.Add(buffPanel); // Keep track of instantiated panel
-        }
-    }
-
-    private void DestroyOldPanels()
-    {
-        // Destroy the previous instantiated panels
-        foreach (GameObject panel in instantiatedPanels)
-        {
-            Destroy(panel);
-        }
-        instantiatedPanels.Clear(); // Clear the list of instantiated panels
-    }
-
-    private void ShowRandomBuffPanels(int numberOfPanelsToShow)
-    {
-        // Ensure there are enough buff panels in the list
-        if (numberOfPanelsToShow > buffPanels.Count)
-        {
-            Debug.LogWarning("Not enough buff panels in the list.");
-            return;
-        }
-
-        // Show the specified number of random buff panels
-        for (int i = 0; i < numberOfPanelsToShow; i++)
-        {
-            GameObject buffPanel = instantiatedPanels[i]; // Use the instantiated panels
-            // Add your logic here for showing the panels
-            if(i == 0)
-            {
-                // Reset Buff Panel
-                buffPanel.transform.localPosition = new Vector3(-344.25f, 61f, 0f);
-                buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
-                buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-                // Buff Animation
-                LeanTween.moveLocal(buffPanel, new Vector3(-344.25f, 0f, 0f), .6f).setDelay(0.1f).setEase(LeanTweenType.easeInOutQuart);
-                LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1f).setEase(LeanTweenType.easeInOutExpo);
-            }
-            else if (i == 1)
-            {
-                buffPanel.transform.localPosition = new Vector3(388f, 126f, 0f);
-                buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
-                buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-                // Buff Animation
-                LeanTween.moveLocal(buffPanel, new Vector3(384f, 0f, 0f), .6f).setDelay(0.3f).setEase(LeanTweenType.easeInOutQuart);
-                LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1.2f).setEase(LeanTweenType.easeInOutExpo);
-            }
-        }
-    }
-
-    public void RerollButton()
-    {
-        // Destroy the previous buff panels before rerolling
-        DestroyOldPanels();
-
-        // Reroll logic
-        ShuffleBuffPanel();
-        InstantiateBuffPanels();
-        ShowRandomBuffPanels(2);
     }
 
     private void Update()

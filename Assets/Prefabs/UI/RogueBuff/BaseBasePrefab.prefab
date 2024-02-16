@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5907959068145341086}
   - component: {fileID: 5907959068145341087}
   m_Layer: 5
-  m_Name: Title FireRate
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire Rate IV
+  m_text: Base ?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e95f2bfbea6d884458b64b9eae553992, type: 2}
   m_sharedMaterial: {fileID: -6396573718608157244, guid: e95f2bfbea6d884458b64b9eae553992,
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5907959068461915948}
   - component: {fileID: 5883092555706986799}
   m_Layer: 5
-  m_Name: FireRateBuff
+  m_Name: BaseBasePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 3775018016568941637}
   - component: {fileID: 8224751988017169932}
   m_Layer: 5
-  m_Name: FireRate Description
+  m_Name: DescText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Increases Range Fire Rate by *%
+  m_text: Increases Base by *%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e95f2bfbea6d884458b64b9eae553992, type: 2}
   m_sharedMaterial: {fileID: -6396573718608157244, guid: e95f2bfbea6d884458b64b9eae553992,
