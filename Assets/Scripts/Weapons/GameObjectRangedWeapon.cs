@@ -7,7 +7,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
     [SerializeField] protected GameObjectProjectileData gameObjectProjectileData;
     [SerializeField] protected GameObject projectile;
 
-    protected GameObject currentProjectile;
+    private GameObject currentProjectile;
 
     protected override void UsePrimary()
     {
@@ -15,7 +15,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
         {
             if (CanShoot())
             {
-                // Debug.Log("Shot GameObject");
+                Debug.Log("Shot GameObject");
                 currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
                 currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = transform.forward;
 
