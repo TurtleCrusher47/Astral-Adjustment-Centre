@@ -10,10 +10,11 @@ public abstract class Weapon : MonoBehaviour
         MELEE,
         RANGED
     }
-    public Type type;
 
-    public bool inInventory;
-    public int inventoryPosition;
+    [HideInInspector] public Type type;
+
+    [HideInInspector] public bool inInventory;
+    [HideInInspector] public int inventoryPosition;
 
     protected float secondaryCooldownTimer;
     protected float abilityCooldownTimer;

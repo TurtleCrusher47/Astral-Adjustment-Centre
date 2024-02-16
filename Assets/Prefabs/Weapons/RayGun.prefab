@@ -356,6 +356,7 @@ MonoBehaviour:
   type: 1
   inInventory: 0
   inventoryPosition: 0
-  rangedWeaponData: {fileID: 0}
-  raycastProjectileData: {fileID: 0}
-  lineRenderer: {fileID: 0}
+  rangedWeaponData: {fileID: 11400000, guid: acaff1312e52d194682ad96595a8d0ca, type: 2}
+  raycastProjectileData: {fileID: 11400000, guid: 61f907ae0af511a43a1a116ce7c93889,
+    type: 2}
+  lineRenderer: {fileID: 2253815619458178107}
