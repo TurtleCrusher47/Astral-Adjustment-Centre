@@ -47,19 +47,19 @@ public class MenuTransitionManager : MonoBehaviour
         {
             case "StartCamera":
                 StartCoroutine(DelayedShowPanel(loginPanel, null, false));
-                StartCoroutine(HologramDissolve(loginMat, false));
+                StartCoroutine(HologramDissolve(loginMat, loginTarget, false));
                 break;
             case "MenuCamera":
                 StartCoroutine(DelayedShowPanel(menuPanel, null, false));
-                StartCoroutine(HologramDissolve(menuMat, false));
+                StartCoroutine(HologramDissolve(menuMat, menuTarget, false));
                 break;
             case "SettingsCamera":
                 StartCoroutine(DelayedShowPanel(settingsPanel, null, false));
-                StartCoroutine(HologramDissolve(settingsMat, false));
+                StartCoroutine(HologramDissolve(settingsMat, settingsTarget, false));
                 break;
             case "CreditsCamera":
                 StartCoroutine(DelayedShowPanel(creditsPanel, null, false));
-                StartCoroutine(HologramDissolve(creditsMat, false));
+                StartCoroutine(HologramDissolve(creditsMat, creditsTarget, false));
                 break;
         }
 
@@ -72,12 +72,15 @@ public class MenuTransitionManager : MonoBehaviour
         switch (target.name)
         {
             case "MenuCamera":
+                menuTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(menuPanel, menuMat, true));
                 break;
             case "SettingsCamera":
+                settingsTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(settingsPanel, settingsMat, true));
                 break;
             case "CreditsCamera":
+                creditsTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(creditsPanel, creditsMat, true));
                 break;
             case "PlayCamera":
@@ -90,7 +93,8 @@ public class MenuTransitionManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        StartCoroutine(HologramDissolve(loginMat, true));
+        loginTarget.SetActive(true);
+        StartCoroutine(HologramDissolve(loginMat, loginTarget, true));
 
         yield return new WaitForSeconds(0.75f);
 
@@ -105,7 +109,7 @@ public class MenuTransitionManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
 
-            StartCoroutine(HologramDissolve(mat, show));
+            StartCoroutine(HologramDissolve(mat, null, show));
 
             yield return new WaitUntil(() => !mainCamBrain.IsBlending);
         }
@@ -113,7 +117,7 @@ public class MenuTransitionManager : MonoBehaviour
         panel.SetActive(show);
     }
 
-    private IEnumerator HologramDissolve(Material mat, bool show)
+    private IEnumerator HologramDissolve(Material mat, GameObject target, bool show)
     {
         float dissolveValue = mat.GetFloat("_DissolveValue");
 
@@ -135,6 +139,11 @@ public class MenuTransitionManager : MonoBehaviour
                 mat.SetFloat("_DissolveValue", dissolveValue);
 
                 yield return null;
+            }
+
+            if (target != null)
+            {
+                target.SetActive(false);
             }
         }
     }

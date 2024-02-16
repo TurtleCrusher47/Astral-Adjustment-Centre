@@ -70,17 +70,17 @@ public class MenuSocialsManager : MonoBehaviour
         {
             case "FriendsCamera":
                 StartCoroutine(DelayedShowPanel(friendsPanel, null, false, defaultDelay));
-                StartCoroutine(HologramDissolve(friendsMat, false));
+                StartCoroutine(HologramDissolve(friendsMat, friendsTarget, false));
                 SetAllButtonClick(true);
                 break;
             case "LeaderboardCamera":
                 StartCoroutine(DelayedShowPanel(leaderboardPanel, null, false, defaultDelay));
-                StartCoroutine(HologramDissolve(leaderboardMat, false));
+                StartCoroutine(HologramDissolve(leaderboardMat, leaderboardTarget, false));
                 SetAllButtonClick(true);
                 break;
             case "GuildsCamera":
                 StartCoroutine(DelayedShowPanel(guildsPanel, null, false, defaultDelay));
-                StartCoroutine(HologramDissolve(guildsMat, false));
+                StartCoroutine(HologramDissolve(guildsMat, guildsTarget, false));
                 if (target.name != "MyGuildCamera")
                 {
                     SetAllButtonClick(true);
@@ -88,7 +88,7 @@ public class MenuSocialsManager : MonoBehaviour
                 break;
             case "MyGuildCamera":
                 StartCoroutine(DelayedShowPanel(myGuildPanel, null, false, defaultDelay));
-                StartCoroutine(HologramDissolve(myGuildMat, false));
+                StartCoroutine(HologramDissolve(myGuildMat, myGuildTarget, false));
                 delay = true;
                 break;
         }
@@ -102,14 +102,17 @@ public class MenuSocialsManager : MonoBehaviour
         switch (target.name)
         {
             case "FriendsCamera":
+                friendsTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(friendsPanel, friendsMat, true, defaultDelay));
                 SetAllButtonClick(false);
                 break;
             case "LeaderboardCamera":
+                leaderboardTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(leaderboardPanel, leaderboardMat, true, defaultDelay));
                 SetAllButtonClick(false);
                 break;
             case "GuildsCamera":
+                guildsTarget.SetActive(true);
                 if (delay)
                 {
                     StartCoroutine(DelayedShowPanel(guildsPanel, guildsMat, true, 0.75f));
@@ -121,6 +124,7 @@ public class MenuSocialsManager : MonoBehaviour
                 SetAllButtonClick(false);
                 break;
             case "MyGuildCamera":
+                myGuildTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(myGuildPanel, myGuildMat, true, defaultDelay));
                 break;
         }
@@ -134,7 +138,7 @@ public class MenuSocialsManager : MonoBehaviour
 
         StartCoroutine(ChangeCameraPriority(creditsCamera, null, false));
         StartCoroutine(DelayedShowPanel(menuPanel, null, false, defaultDelay));
-        StartCoroutine(HologramDissolve(menuMat, false));
+        StartCoroutine(HologramDissolve(menuMat, menuTarget, false));
 
         yield return new WaitUntil(() => mainCamBrain.IsBlending);
         yield return new WaitForSeconds(1.25f);
@@ -158,11 +162,12 @@ public class MenuSocialsManager : MonoBehaviour
         yield return new WaitUntil(() => mainCamBrain.IsBlending);
         yield return new WaitForSeconds(1.25f);
 
+        menuTarget.SetActive(true);
         StartCoroutine(ChangeCameraPriority(menuCamera, null, false));
         StartCoroutine(DelayedShowPanel(menuPanel, menuMat, true, defaultDelay));
     }
 
-    private IEnumerator HologramDissolve(Material mat, bool show)
+    private IEnumerator HologramDissolve(Material mat, GameObject target, bool show)
     {
         float dissolveValue = mat.GetFloat("_DissolveValue");
 
@@ -185,6 +190,11 @@ public class MenuSocialsManager : MonoBehaviour
 
                 yield return null;
             }
+
+            if (target != null)
+            {
+                target.SetActive(false);
+            }
         }
     }
 
@@ -196,7 +206,7 @@ public class MenuSocialsManager : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
 
-            StartCoroutine(HologramDissolve(mat, show));
+            StartCoroutine(HologramDissolve(mat, null, show));
 
             yield return new WaitUntil(() => !mainCamBrain.IsBlending);
         }
