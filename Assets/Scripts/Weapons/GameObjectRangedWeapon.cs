@@ -14,7 +14,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 // Debug.Log("Shot GameObject");
-                GameObject currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Projectile);
+                GameObject currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
                 currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
 
                 RaycastHit hit;
@@ -26,8 +26,10 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
 
                 currentProjectile.GetComponent<ShurikenProjectile>().MoveProjectile();
 
-
+                // Only deduct ammo if the ammo is not infinite
+                if (!rangedWeaponData.infiniteAmmo)
                 rangedWeaponData.currentAmmo--;
+
                 timeSinceLastShot = 0;
                 // recoil.GunRecoil(gunData.recoil);
 
