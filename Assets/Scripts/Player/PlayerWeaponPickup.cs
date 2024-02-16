@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerWeaponPickup : MonoBehaviour
@@ -19,6 +20,7 @@ public class PlayerWeaponPickup : MonoBehaviour
             weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             weapon.GetComponent<Weapon>().inInventory = true;
+            weapon.GetComponent<Weapon>().enabled = true;
             weapon.GetComponent<Rigidbody>().isKinematic = true;
 
             canPickUp = false;

@@ -13,6 +13,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     private GameObject gameObjectsMap;
     private GameObject gameObjectsEmpty;
 
+    [HideInInspector]
     public enum PoolType
     {
         Projectile,

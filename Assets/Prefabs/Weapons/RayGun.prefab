@@ -185,7 +185,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2253815619291179920}
-  - component: {fileID: 2253815619291179921}
   - component: {fileID: 169605034}
   - component: {fileID: 169605035}
   - component: {fileID: 2253815619458178107}
@@ -213,27 +212,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2253815619291179921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253815619291179934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6a31912f1a23b45aef3b1f5c329030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  inInventory: 0
-  inventoryPosition: 0
-  rangedWeaponData: {fileID: 11400000, guid: acaff1312e52d194682ad96595a8d0ca, type: 2}
-  cam: {fileID: 0}
-  firePoint: {fileID: 2052419769}
-  raycastProjectileData: {fileID: 11400000, guid: 61f907ae0af511a43a1a116ce7c93889,
-    type: 2}
-  lineRenderer: {fileID: 2253815619458178107}
 --- !u!65 &169605034
 BoxCollider:
   m_ObjectHideFlags: 0
