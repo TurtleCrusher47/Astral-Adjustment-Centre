@@ -43,6 +43,10 @@ public class BaseBuff : MonoBehaviour
     public void UpdateBuffMultiplier()
     {
         damageMultiplier = GetMultiplierForTier(damageBuff);
+        healthMultiplier = GetMultiplierForTier(healthBuff);
+        movementMultiplier = GetMultiplierForTier(movementBuff);
+        atkSpdMultiplier = GetMultiplierForTier(atkSpdBuff);
+        firerateMultiplier = GetMultiplierForTier(firerateBuff);
     }
 
     // Function to get the string representation of a buff tier

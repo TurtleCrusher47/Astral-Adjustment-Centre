@@ -19,6 +19,7 @@ public class BuffManager : BaseBuff
     // Start is called before the first frame update
     void Start()
     {
+        // Move this to Awake Function or Call them. When player interacts with Chest/Wateve idk
         //ShuffleBuffPanel();
         //InstantiateBuffPanels();
         //ShowRandomBuffPanels(2);
@@ -102,5 +103,10 @@ public class BuffManager : BaseBuff
         //ShuffleBuffPanel();
         InstantiateBuffPanels();
         //ShowRandomBuffPanels(2);
+    }
+
+    public void ClearButton()
+    {
+        DestroyOldPanels();
     }
 }
