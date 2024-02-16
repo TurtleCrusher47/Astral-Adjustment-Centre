@@ -30,9 +30,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         objectPoolHolder = this.gameObject;
 
-        gameObjectsEmpty = new GameObject("Empty");
-        gameObjectsEmpty.transform.SetParent(objectPoolHolder.transform);
-
         gameObjectsMap = new GameObject("Map");
         gameObjectsMap.transform.SetParent(objectPoolHolder.transform);
     }
@@ -108,8 +105,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         switch (poolType)
         {
-            case PoolType.None:
-                return gameObjectsEmpty;
             case PoolType.Map:
                 return gameObjectsMap;
             default:
