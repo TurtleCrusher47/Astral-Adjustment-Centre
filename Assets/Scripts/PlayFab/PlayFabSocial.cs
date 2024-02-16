@@ -606,7 +606,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < friendItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(friendItems[i]);
+            PlayFabObjectPoolManager.ReturnObjectToPool(friendItems[i]);
         }
 
         ResetAllRows(friendListGroup, friendItems, 0);
@@ -629,12 +629,12 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < requestItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(requestItems[i]);
+            PlayFabObjectPoolManager.ReturnObjectToPool(requestItems[i]);
         }
 
         for (int i = 0; i < pendingItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(pendingItems[i]);
+            PlayFabObjectPoolManager.ReturnObjectToPool(pendingItems[i]);
         }
 
         ResetAllRows(requestAndPendingListGroup, requestItems, 1);
@@ -663,7 +663,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < tradeItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(tradeItems[i]);
+            PlayFabObjectPoolManager.ReturnObjectToPool(tradeItems[i]);
         }
 
         ResetAllRows(tradeListGroup, tradeItems, 3);
@@ -680,6 +680,8 @@ public class PlayFabSocial : MonoBehaviour
         friendItems.Add(newRow);
 
         newRow.transform.SetParent(friendListGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
 
         ResetListRow(newRow, 0);
@@ -706,6 +708,8 @@ public class PlayFabSocial : MonoBehaviour
         requestItems.Add(newRow);
 
         newRow.transform.SetParent(requestAndPendingListGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
 
         ResetListRow(newRow, 1);
@@ -732,6 +736,8 @@ public class PlayFabSocial : MonoBehaviour
         pendingItems.Add(newRow);
 
         newRow.transform.SetParent(requestAndPendingListGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
 
         ResetListRow(newRow, 2);
@@ -757,6 +763,8 @@ public class PlayFabSocial : MonoBehaviour
         Debug.Log(newRow.gameObject.name);
 
         newRow.transform.SetParent(tradeListGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
 
         ResetListRow(newRow, 3);
@@ -810,7 +818,7 @@ public class PlayFabSocial : MonoBehaviour
             ResetListRow(item, type);
         }
 
-        group.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1500, 0);
+        group.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1200, 0);
 
         list.Clear();
     }

@@ -41,6 +41,7 @@ public class PlayFabLeaderboard : MonoBehaviour
     void Awake()
     {
         currStatType = StatisticType.OVERALL;
+        currLBType = LeaderboardType.GLOBAL;
     }
 
     public void OnButtonSwitchType()
@@ -133,14 +134,17 @@ public class PlayFabLeaderboard : MonoBehaviour
 
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
+            PlayFabObjectPoolManager.ReturnObjectToPool(lbItems[i]);
         }
 
         ResetAllRows();
 
-        for (int i = 0; i < r.Leaderboard.Count; i++)
+        List<PlayerLeaderboardEntry> entries = r.Leaderboard;
+        entries.Reverse();
+
+        for (int i = 0; i < entries.Count; i++)
         {
-            UpdateRow(r.Leaderboard[i], r.Leaderboard[i].Position + 1);
+            UpdateRow(entries[i], i + 1);
         }
     }
 
@@ -257,7 +261,7 @@ public class PlayFabLeaderboard : MonoBehaviour
     {
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
+            PlayFabObjectPoolManager.ReturnObjectToPool(lbItems[i]);
         }
 
         ResetAllRows();
@@ -267,10 +271,12 @@ public class PlayFabLeaderboard : MonoBehaviour
 
     private void UpdateRow(PlayerLeaderboardEntry item, int rank)
     {
-        GameObject newRow = opManager.SpawnObject(rowPrefab);
+        GameObject newRow = opManager.SpawnObject(rowPrefab); //, new Vector3(0, 0, 0), Quaternion.identity, ObjectPoolManager.PoolType.None
         lbItems.Add(newRow);
 
         newRow.transform.SetParent(lbGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
 
         ResetRow(newRow);
@@ -280,10 +286,10 @@ public class PlayFabLeaderboard : MonoBehaviour
         TMP_Text nameText = FindChildWithTag(newRow, "DisplayNameText").GetComponent<TMP_Text>();
         TMP_Text scoreText = FindChildWithTag(newRow, "ScoreText").GetComponent<TMP_Text>();
 
-        newRow.transform.SetSiblingIndex(item.Position);
+        newRow.transform.SetSiblingIndex(rank);
         rankText.text = AddOrdinal(rank);
         nameText.text = item.DisplayName;
-        scoreText.text = item.StatValue.ToString();
+        scoreText.text = ConvertSecondsToHHMMSS(item.StatValue);
 
         delay += 0.25f;
         StartCoroutine(FadeInRow(background, rankText, nameText, scoreText, delay));
@@ -298,7 +304,7 @@ public class PlayFabLeaderboard : MonoBehaviour
             ResetRow(item);
         }
 
-        lbGroup.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1500, 0);
+        lbGroup.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1200, 0);
 
         lbItems.Clear();
     }
@@ -421,6 +427,15 @@ public class PlayFabLeaderboard : MonoBehaviour
             default:
                 return num + "th";
         }
+    }
+
+    private string ConvertSecondsToHHMMSS(int totalSeconds)
+    {
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int seconds = totalSeconds % 60;
+
+        return string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
 
     void OnLeaderboardError(PlayFabError e)
