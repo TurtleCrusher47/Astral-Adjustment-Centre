@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MapPrefabManager : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> ObjectsList = new List<GameObject>();
-    [SerializeField] public List<Vector3> maxMinChanceList = new List<Vector3>();
+    [SerializeField] public RoomData startRoomData;
+    [SerializeField] public RoomData endRoomData;
+    [SerializeField] public RoomData enemyRoomData;
+    [SerializeField] public RoomData lootRoomData;
 }
