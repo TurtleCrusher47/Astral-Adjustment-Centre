@@ -17,6 +17,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
             {
                 // Debug.Log("Shot GameObject");
                 currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
+                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = transform.forward;
 
                 rangedWeaponData.currentAmmo--;
                 timeSinceLastShot = 0;

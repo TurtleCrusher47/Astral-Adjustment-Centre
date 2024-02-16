@@ -16,6 +16,7 @@ public class Shuriken : GameObjectRangedWeapon
     {
         if (CanUseSecondary())
         {
+            // currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
 
         }
     }
