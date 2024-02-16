@@ -9,21 +9,20 @@ public class EnemyStrikingDistanceCheck : MonoBehaviour
 
     private void Awake()
     {
-        PlayerTarget = GameObject.FindGameObjectWithTag("Player");
         _enemy = GetComponentInParent<Enemy>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject == PlayerTarget)
+        if (collision.CompareTag("PlayerCollider"))
         {
             _enemy.SetStrikingDistanceBool(true);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
-         if (collision.gameObject == PlayerTarget)
+         if (collision.CompareTag("PlayerCollider"))
         {
             _enemy.SetStrikingDistanceBool(false);
         }

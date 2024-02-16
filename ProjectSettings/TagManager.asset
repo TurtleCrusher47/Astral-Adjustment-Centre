@@ -9,8 +9,11 @@ TagManager:
   - PlayerCollider
   - BaseSword
   - MapWallTile
+  - Waypoint
   - FirePoint
   - PlayFabManager
+  - RayGunHandle
+  - RayGunHint
   layers:
   - Default
   - TransparentFX

@@ -20,4 +20,8 @@ public class RangedWeaponData : ScriptableObject
 
     [Header("Recoil")]
     public Vector3 recoil;
+
+    [Header("Skills")]
+    public float secondarycooldown;
+    public float abilitycooldown;
 }

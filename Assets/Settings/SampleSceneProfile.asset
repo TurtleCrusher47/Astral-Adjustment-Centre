@@ -120,10 +120,10 @@ MonoBehaviour:
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   fogDensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0
   fogOffset:
     m_OverrideState: 1
     m_Value: 0
   farFogFactor:
     m_OverrideState: 1
-    m_Value: 0.975
+    m_Value: 1

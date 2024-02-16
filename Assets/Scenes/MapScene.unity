@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 81f714daf7144784b8a2f42f1cd30927, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.035325035, g: 0.036674775, b: 0.04870545, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -232,6 +232,52 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &73930764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73930766}
+  - component: {fileID: 73930765}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &73930765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73930764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56bfe7cb5cf9c143a9647aa1ffc92dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  nextSceneName: 
+--- !u!4 &73930766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73930764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6125729, y: 2.4739666, z: -2.4112785}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &141721729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1239,11 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1954932798}
+    - target: {fileID: 7794122106875085168, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: targetableLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!4 &1743961497 stripped
@@ -1313,12 +1364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095e30edf3aea064482b9724f78e4d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectsList:
-  - {fileID: 1165792392210164609, guid: 86927605401ce0d4797db526abf3832c, type: 3}
-  - {fileID: 2866348493960091575, guid: 1d5a70baca7f0934eb013000a00753bf, type: 3}
-  maxMinChanceList:
-  - {x: 7, y: 4, z: 100}
-  - {x: 3, y: 2, z: 50}
+  startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
+  endRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
+  enemyRoomData: {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  lootRoomData: {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
 --- !u!114 &1783158046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,11 +1396,15 @@ MonoBehaviour:
   - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
   - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
   - {fileID: 556279365411589038, guid: 3ad7ae4773b8ae949b0b8a66d3052463, type: 3}
-  wallDoorPrefab: {fileID: 5494911878686914276, guid: 610a17a9a4666d645b92b171fbf3abbb,
+  wallDoorPrefab: {fileID: 4710844307718804079, guid: 77d7de5cf3899bb4490e4bde22027ddd,
     type: 3}
   hallwayPrefab: {fileID: 7422611386983579833, guid: c72472c289358f240b512113beaa2dc0,
     type: 3}
   stairPrefab: {fileID: 6151637669906187874, guid: 4402bf049220e3e4aa58bedab76071b3,
+    type: 3}
+  roomLightPrefab: {fileID: 3835785972192684306, guid: 0653fdbb6c4020e4098942b3bef062da,
+    type: 3}
+  hallwayLightPrefab: {fileID: 4587904980839318902, guid: 0861ca3d33089e144a30fe77feaf1923,
     type: 3}
   playerObj: {fileID: 1743961498}
   camObj: {fileID: 678228025}
@@ -1370,6 +1423,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1944919666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1944919668}
+  - component: {fileID: 1944919667}
+  m_Layer: 0
+  m_Name: ObjectPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1944919667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944919666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590d1c8f25562be449cee0e7349bd55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  PoolingType: 0
+--- !u!4 &1944919668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944919666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6125729, y: 2.4739666, z: -2.4112785}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954932797
 GameObject:
@@ -1556,7 +1655,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 887
+    m_Bits: 1911
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
