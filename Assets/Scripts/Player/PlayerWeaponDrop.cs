@@ -23,6 +23,7 @@ public class PlayerWeaponDrop : MonoBehaviour
 
         weapon.transform.parent = null;
 
+        weapon.GetComponent<Weapon>().enabled = false;
         weapon.GetComponent<Rigidbody>().isKinematic = false;
         rb = weapon.GetComponent<Rigidbody>();
 

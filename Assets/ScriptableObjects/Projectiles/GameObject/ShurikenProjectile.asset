@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShurikenProjectile
   m_EditorClassIdentifier: 
   damage: 60
-  force: 5
+  force: 10
   range: 60
   timeBeforeDestroy: 10
   angularVelocity: {x: 0, y: 20, z: 0}
