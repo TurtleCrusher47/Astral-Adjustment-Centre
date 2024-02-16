@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.03584802, g: 0.03714832, b: 0.049333327, a: 1}
+  m_IndirectSpecularColor: {r: 0.038728133, g: 0.03976906, b: 0.052786022, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,18 +176,18 @@ MonoBehaviour:
   roomMaxSize: {x: 5, y: 2, z: 5}
   roomMinSize: {x: 2, y: 2, z: 2}
   floorPrefab:
-  - {fileID: 1586600439431609782, guid: 9118c44e9124c40428c4df98aaebce13, type: 3}
-  - {fileID: 5489047998985582871, guid: 10d7c36d998cce04b88452488f8d3e9a, type: 3}
-  - {fileID: 7726211792529837520, guid: 02656df551c6ab04d95d13383382c854, type: 3}
+  - {fileID: 7859670942643163479, guid: 9118c44e9124c40428c4df98aaebce13, type: 3}
+  - {fileID: 5031631298267123669, guid: 10d7c36d998cce04b88452488f8d3e9a, type: 3}
+  - {fileID: 51653658490302604, guid: 02656df551c6ab04d95d13383382c854, type: 3}
   ceilingPrefab: {fileID: 3812864620290879476, guid: 08f947dcbad96c54790a49b7efc436cd,
     type: 3}
   wallPrefab:
-  - {fileID: 9033676713577318732, guid: a4449c0df2a626645acbf4a97f49a75a, type: 3}
-  wallDoorPrefab: {fileID: 7379897431947797271, guid: 01ed61d282109af46a2c3662c7d24bc3,
+  - {fileID: 8464572342554772565, guid: a4449c0df2a626645acbf4a97f49a75a, type: 3}
+  wallDoorPrefab: {fileID: 7147627235797150405, guid: 01ed61d282109af46a2c3662c7d24bc3,
     type: 3}
-  hallwayPrefab: {fileID: 5462274585083097965, guid: fa795e7010aa0dc42aa4451c815e0fa4,
+  hallwayPrefab: {fileID: 3001381509379049670, guid: fa795e7010aa0dc42aa4451c815e0fa4,
     type: 3}
-  stairPrefab: {fileID: 165118853627404837, guid: 7b1f54199ea64b94e9f04d5cd606b390,
+  stairPrefab: {fileID: 8287564808869449885, guid: 7b1f54199ea64b94e9f04d5cd606b390,
     type: 3}
   roomLightPrefab: {fileID: 3835785972192684306, guid: 0653fdbb6c4020e4098942b3bef062da,
     type: 3}
@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108134765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.286, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -450,7 +450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009041329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.286, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
