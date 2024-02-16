@@ -22,6 +22,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
         base.DoEnterLogic();
 
         waypoints = enemy.FindChildObjectsWithTag(enemy.gameObject.transform.parent.gameObject, "Waypoint");
+        Debug.Log(enemy.gameObject.transform.parent.gameObject.name);
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
     }

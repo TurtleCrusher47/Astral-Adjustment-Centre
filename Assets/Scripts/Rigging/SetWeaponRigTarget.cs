@@ -21,7 +21,7 @@ public class SetWeaponRigTarget : MonoBehaviour
     [SerializeField] private Transform leftElbowTarget;
 
 
-    public void UpdateTransform()
+    void Update()
     {
         rightHandTransform.position = rightHandTarget.position;
         leftHandTransform.position = leftHandTarget.position;
