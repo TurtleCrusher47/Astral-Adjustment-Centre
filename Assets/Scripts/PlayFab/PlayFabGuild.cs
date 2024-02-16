@@ -29,8 +29,6 @@ public class PlayFabGuild : MonoBehaviour
         REQUESTSLIST
     }
 
-    public PlayFabObjectPoolManager opManager;
-
     public static List<GameObject> guildItems = new List<GameObject>();
     public static List<GameObject> requestItems = new List<GameObject>();
 
@@ -515,7 +513,7 @@ public class PlayFabGuild : MonoBehaviour
 
         for (int i = 0; i < guildItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(guildItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(guildItems[i]));
         }
 
         ResetAllRows(guildsListGroup, guildItems, 0);
@@ -528,10 +526,12 @@ public class PlayFabGuild : MonoBehaviour
 
     private void UpdateGuildsListRow(int i)
     {
-        GameObject newRow = opManager.SpawnObject(guildsRowPrefab);
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(guildsRowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         guildItems.Add(newRow);
 
         newRow.transform.SetParent(guildsListGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
         newRow.transform.SetSiblingIndex(i);
 
@@ -559,7 +559,7 @@ public class PlayFabGuild : MonoBehaviour
 
         for (int i = 0; i < requestItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(requestItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(requestItems[i]));
         }
 
         ResetAllRows(requestsListGroup, requestItems, 1);
@@ -572,10 +572,12 @@ public class PlayFabGuild : MonoBehaviour
 
     private void UpdateRequestListRow(int i)
     {
-        GameObject newRow = opManager.SpawnObject(requestRowPrefab);
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(requestRowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         requestItems.Add(newRow);
 
         newRow.transform.SetParent(requestsListGroup.transform);
+        newRow.transform.localPosition = new Vector3(0, 0, 0);
+        newRow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         newRow.transform.localScale = new Vector3(1, 1, 1);
         newRow.transform.SetSiblingIndex(i);
 
@@ -606,7 +608,7 @@ public class PlayFabGuild : MonoBehaviour
             ResetListRow(item, type);
         }
 
-        group.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1500, 0);
+        group.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1200, 0);
 
         list.Clear();
     }
