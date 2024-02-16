@@ -48,14 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b62b4b0acd9d5042ad51838f5a7ec72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   inInventory: 0
   inventoryPosition: 0
   rangedWeaponData: {fileID: 11400000, guid: 8f53ca047d14931478533f68d6f5c0c3, type: 2}
   cam: {fileID: 0}
   firePoint: {fileID: 0}
   gameObjectProjectileData: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
+    type: 3}
 --- !u!54 &2234285575767978175
 Rigidbody:
   m_ObjectHideFlags: 0
