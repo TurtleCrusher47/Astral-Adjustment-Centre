@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using System.IO;
 using static UnityEngine.GraphicsBuffer;
 using Unity.Mathematics;
+using UnityEditor.Experimental.GraphView;
 
 public class Generator3D : MonoBehaviour {
     enum CellType {
@@ -36,38 +37,22 @@ public class Generator3D : MonoBehaviour {
 
     [SerializeField]
     MapPrefabManager mPrefabManager;
-    [SerializeField]
-    int seed;
-    [SerializeField]
-    Vector3Int size;
-    [SerializeField]
-    int roomCount;
-    [SerializeField]
-    Vector3Int roomMaxSize;
-    [SerializeField]
-    Vector3Int roomMinSize;
-    [SerializeField]
-    GameObject floorPrefab;
-    [SerializeField]
-    GameObject ceilingPrefab;
-    [SerializeField]
-    List<GameObject> wallPrefab;
-    [SerializeField]
-    GameObject wallDoorPrefab;
-    [SerializeField]
-    GameObject hallwayPrefab;
-    [SerializeField]
-    GameObject stairPrefab;
-    [SerializeField]
-    GameObject roomLightPrefab;
-    [SerializeField]
-    GameObject hallwayLightPrefab;
-    [SerializeField]
-    GameObject playerObj;
-    [SerializeField]
-    GameObject camObj;
-    [SerializeField]
-    GameObject endObj;
+    [SerializeField] int seed;
+    [SerializeField] Vector3Int size;
+    [SerializeField] int roomCount;
+    [SerializeField] Vector3Int roomMaxSize;
+    [SerializeField] Vector3Int roomMinSize;
+    [SerializeField] List<GameObject> floorPrefab;
+    [SerializeField] GameObject ceilingPrefab;
+    [SerializeField] List<GameObject> wallPrefab;
+    [SerializeField] GameObject wallDoorPrefab;
+    [SerializeField] GameObject hallwayPrefab;
+    [SerializeField] GameObject stairPrefab;
+    [SerializeField] GameObject roomLightPrefab;
+    [SerializeField] GameObject hallwayLightPrefab;
+    [SerializeField] GameObject playerObj;
+    [SerializeField] GameObject camObj;
+    [SerializeField] GameObject endObj;
 
     Random random;
     Grid3D<CellType> grid;
@@ -410,8 +395,8 @@ public class Generator3D : MonoBehaviour {
                                 }
                                 if (placeDoor)
                                 {
-                                    doorList.Add(hit.transform.position);
                                     SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
+                                    doorList.Add(hit.transform.position);
                                 }
                             }
                             // Destroy because it is unable to be pooled as it is part of a prefab
@@ -478,8 +463,43 @@ public class Generator3D : MonoBehaviour {
                     // spawn floor
                     if (k == 0)
                     {
-                        obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab, location + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
-                        mapContent.Add(obj);
+                        if (j == 0 && l == 0)
+                        {
+                            SpawnTileWithRotation(floorPrefab[1], location + tileOffset, 0);
+                        }
+                        else if (j == 0 && l == size.z - 1)
+                        {
+                            SpawnTileWithRotation(floorPrefab[1], location + tileOffset, 90);
+                        }
+                        else if (j == size.x - 1 && l == 0)
+                        {
+                            SpawnTileWithRotation(floorPrefab[1], location + tileOffset, -90);
+                        }
+                        else if (j == size.x - 1 && l == size.z - 1)
+                        {
+                            SpawnTileWithRotation(floorPrefab[1], location + tileOffset, 180);
+                        }
+                        else if (j == 0)
+                        {
+                            SpawnTileWithRotation(floorPrefab[2], location + tileOffset, 90);
+                        }
+                        else if (j == size.x - 1)
+                        {
+                            SpawnTileWithRotation(floorPrefab[2], location + tileOffset, -90);
+                        }
+                        else if (l == 0)
+                        {
+                            SpawnTileWithRotation(floorPrefab[2], location + tileOffset, 0);
+                        }
+                        else if (l == size.z - 1)
+                        {
+                            SpawnTileWithRotation(floorPrefab[2], location + tileOffset, 180);
+                        }
+                        else
+                        {
+                            obj = ObjectPoolManager.Instance.SpawnObject(floorPrefab[0], location + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                            mapContent.Add(obj);
+                        }
                     }
                     // spawn ceiling
                     else if (k == size.y - 1)
