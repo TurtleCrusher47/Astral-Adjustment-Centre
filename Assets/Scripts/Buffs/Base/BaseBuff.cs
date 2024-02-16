@@ -80,7 +80,6 @@ public class BaseBuff : MonoBehaviour
                 return 1.4f;
             case BuffTiers.TierIII:
                 return 1.6f;
-            // Add cases for other tiers as needed
             case BuffTiers.TierIV:
                 return 1.8f;
             case BuffTiers.TierV:

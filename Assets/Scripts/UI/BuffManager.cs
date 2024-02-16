@@ -56,9 +56,13 @@ public class BuffManager : BaseBuff
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
             // Set the text dynamically
-            titleText.text = buffTitle[i] + " " + GetBuffTierstring(damageBuff);
-            UpdateBuffMultiplier(); // Update the buff multiplier based on tier
-            string buffDescription = $"Increases {buffTitle[i]} by {GetMultiplierForTier(damageBuff)}%";
+            titleText.text = buffTitle[i];
+
+            // Update the buff multiplier based on tier for the specific buff type
+            UpdateBuffMultiplierForType(buffTitle[i]);
+
+            // Construct the description text based on the buff type
+            string buffDescription = GetBuffDescription(buffTitle[i]);
             descText.text = buffDescription;
 
             // Add your logic here for showing the panels
@@ -108,5 +112,38 @@ public class BuffManager : BaseBuff
     public void ClearButton()
     {
         DestroyOldPanels();
+    }
+
+    private void UpdateBuffMultiplierForType(string buffType)
+    {
+        switch (buffType)
+        {
+            case "Attack":
+                UpdateBuffMultiplier();
+                break;
+            case "Health":
+                UpdateBuffMultiplier();
+                break;
+                // Add cases for other buff types (movement, atkSpd, firerate) as needed
+        }
+    }
+
+    private string GetBuffDescription(string buffType)
+    {
+        switch (buffType)
+        {
+            case "Attack":
+                return $"Increases {buffType} by {GetMultiplierForTier(damageBuff)}%";
+            case "Health":
+                return $"Increases {buffType} by {GetMultiplierForTier(healthBuff)}%";
+            case "Movement":
+                return $"Increases {buffType} by {GetMultiplierForTier(movementBuff)}%";
+            case "AtkSpeed":
+                return $"Increases {buffType} by {GetMultiplierForTier(atkSpdBuff)}%";
+            case "FireRate":
+                return $"Increases {buffType} by {GetMultiplierForTier(firerateBuff)}%";
+            default:
+                return "";
+        }
     }
 }
