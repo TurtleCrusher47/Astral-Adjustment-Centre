@@ -14,11 +14,6 @@ public class Raygun : RaycastRangedWeapon
         throw new System.NotImplementedException();
     }
 
-    protected override void OnPrimary()
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override void OnSecondary()
     {
         throw new System.NotImplementedException();
