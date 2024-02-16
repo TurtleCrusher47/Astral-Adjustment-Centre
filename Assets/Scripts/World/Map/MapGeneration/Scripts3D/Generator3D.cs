@@ -12,6 +12,7 @@ using System.IO;
 using static UnityEngine.GraphicsBuffer;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
+using static UnityEditor.FilePathAttribute;
 
 public class Generator3D : MonoBehaviour {
     enum CellType {
@@ -98,8 +99,8 @@ public class Generator3D : MonoBehaviour {
         Triangulate();
         CreateHallways();
         PathfindHallways();
-        SpawnPlayer();
         DeleteWalls();
+        InitRoomObjects();
     }
 
     void PlaceRooms() {
@@ -145,25 +146,8 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void SpawnPlayer()
+    private void Triangulate() 
     {
-        Vector3 playerStartPos = pathList[0][0];
-        Vector3 playerEndPos = pathList[0][pathList[0].Count - 1];
-
-        for (int i = 0; i < pathList.Count; i++)
-        {
-            playerEndPos = pathList[i][0];
-            if (Vector3.Distance(playerStartPos, playerEndPos) > size.x / 2)
-            {
-                break;
-            }
-        }
-        playerObj.transform.position = playerStartPos;
-        camObj.transform.position = playerStartPos;
-        endObj.transform.position = playerEndPos;
-    }
-
-    void Triangulate() {
         List<Vertex> vertices = new List<Vertex>();
 
         foreach (var room in rooms) {
@@ -173,7 +157,8 @@ public class Generator3D : MonoBehaviour {
         delaunay = Delaunay3D.Triangulate(vertices);
     }
 
-    void CreateHallways() {
+    private void CreateHallways() 
+    {
         List<Prim.Edge> edges = new List<Prim.Edge>();
 
         foreach (var edge in delaunay.Edges) {
@@ -193,7 +178,8 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void PathfindHallways() {
+    private void PathfindHallways() 
+    {
         DungeonPathfinder3D aStar = new DungeonPathfinder3D(size);
 
         foreach (var edge in selectedEdges) {
@@ -364,7 +350,7 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void DeleteWalls()
+    private void DeleteWalls()
     {
         List<Vector3> doorList = new List<Vector3>();
         foreach (var path in pathList)
@@ -410,12 +396,50 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void PlaceRoom(Vector3Int location, Vector3Int size) {
-        // place misc items
+    void InitRoomObjects()
+    {
+        PlaceRoomObjects(rooms[0].bounds.position, rooms[0].bounds.size, mPrefabManager.startRoomData);
+        Vector3 playerStartPos = rooms[0].bounds.center + Vector3.down;
+        playerObj.transform.position = playerStartPos;
+        camObj.transform.position = playerStartPos;
+
+        bool isEndPlaced = false;
+        for (int i = 1; i < rooms.Count; i++)
+        {
+            if (!isEndPlaced)
+            {
+                // try place end
+                Vector3 playerEndPos = rooms[i].bounds.center;
+                // if end is far enough away from start or if it's the last room
+                if (Vector3.Distance(playerStartPos, playerEndPos) > size.x / 2 || 1 == roomCount - 1)
+                {
+                    isEndPlaced = true;
+                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.endRoomData);
+                    endObj.transform.position = playerEndPos + new Vector3(0, -1.8f, 0);
+                }
+                // randomise other tyes of rooms
+                else
+                {
+                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.lootRoomData);
+                }
+            }
+            // randomise other tyes of rooms
+            else
+            {
+                PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.lootRoomData);
+            }
+        }
+    }
+
+    private void PlaceRoomObjects(Vector3Int location, Vector3Int size, RoomData data)
+    {
+        // place light in the middle of the room
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, location + new Vector3(size.x / 2, size.y - 1.65f, size.z / 2), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+        mapContent.Add(obj);
+
         // set room type
-        RoomData roomData = mPrefabManager.lootRoomData;
+        RoomData roomData = data;
         // create list of available spaces
-        GameObject obj;
         List<Vector3> vacantSpaces = new List<Vector3>();
         for (float x = 0.5f; x < size.x - 0.5f; x += 0.5f)
         {
@@ -441,17 +465,18 @@ public class Generator3D : MonoBehaviour {
                         int randIndex = RandomR.Range(0, vacantSpaces.Count);
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
-                        obj =  ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                         obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                     }
                 }
             }
         }
-        // place light in the middle of the room
-        obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, location + new Vector3(size.x / 2, size.y - 1.65f, size.z / 2), Quaternion.identity, ObjectPoolManager.PoolType.Map);
-        mapContent.Add(obj);
+    }
 
+    private void PlaceRoom(Vector3Int location, Vector3Int size) 
+    {
+        GameObject obj;
         for (int j = 0; j < size.x; j++)
         {
             for (int k = 0; k < size.y; k++)
@@ -531,7 +556,7 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void PlaceHallway(Vector3Int curr, int pathIndex) {
+    private void PlaceHallway(Vector3Int curr, int pathIndex) {
         Vector3 tileOffset = new Vector3(0.5f, -1.5f, 0.5f);
         // spawn floor
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
@@ -544,7 +569,7 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
+    private void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
     {
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(go, location, Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
