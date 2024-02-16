@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hologram
+  m_Name: HologramPanel
   m_Shader: {fileID: -6465566751694194690, guid: 229282899e77c7547b4fa851d8a59e0b,
     type: 3}
   m_ValidKeywords: []
@@ -92,11 +92,16 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DissolveNoise: 25
+    - _DissolveOutlineScale: 0.025
+    - _DissolveValue: 1
+    - _DissolveWidth: 0.01
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HologramDissolve: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -114,6 +119,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.42138356, g: 0.89469475, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 2, g: 0.6875171, b: 0, a: 1}
     - _EmissionColor: {r: 23.968628, g: 6.901961, b: 0, a: 1}
     - _HologramTextureTiling: {r: 1, g: 3, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
