@@ -36,7 +36,7 @@ public class LoadingScene : MonoBehaviour
             yield return new WaitForSeconds(0.01f); // Adjust the time as needed
 
             // Continue incrementing fake progress even after Unity's progress reaches 0.9
-            fakeProgress = Mathf.Clamp01(fakeProgress + 0.0015f); // Adjust the increment as needed
+            fakeProgress = Mathf.Clamp01(fakeProgress + 0.0030f); // Adjust the increment as needed
 
             // Output the current progress
             float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
