@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cfd2420566ac444aa035e613651005, type: 3}
   m_Name: EndRoomData
   m_EditorClassIdentifier: 
-  ObjectsList:
-  - {fileID: 1165792392210164609, guid: 86927605401ce0d4797db526abf3832c, type: 3}
-  - {fileID: 2866348493960091575, guid: 1d5a70baca7f0934eb013000a00753bf, type: 3}
-  maxMinChanceList:
-  - {x: 8, y: 4, z: 75}
-  - {x: 4, y: 2, z: 50}
+  ObjectsList: []
+  maxMinChanceList: []
