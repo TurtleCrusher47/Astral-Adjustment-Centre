@@ -148,8 +148,12 @@ public class MenuTransitionManager : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
 
         currCamera.Priority--;
+        currCamera.gameObject.SetActive(false);
         currCamera = loadSceneCamera;
+        currCamera.gameObject.SetActive(true);
         currCamera.Priority++;
+
+        yield return new WaitUntil(() => mainCamBrain.IsBlending);
 
         yield return new WaitForSeconds(0.75f);
 
