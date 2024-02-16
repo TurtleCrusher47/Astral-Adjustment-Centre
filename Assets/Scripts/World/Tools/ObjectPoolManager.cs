@@ -9,12 +9,13 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     private GameObject objectPoolHolder;
 
+    private GameObject gameObjectsProjectile;
     private GameObject gameObjectsMap;
     private GameObject gameObjectsEmpty;
 
     public enum PoolType
     {
-        Ammo,
+        Projectile,
         Map,    
         None
     }
@@ -29,6 +30,9 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     private void SetUpEmpties()
     {
         objectPoolHolder = this.gameObject;
+        
+        gameObjectsProjectile = new GameObject("Projectile");
+        gameObjectsProjectile.transform.SetParent(objectPoolHolder.transform);
 
         gameObjectsMap = new GameObject("Map");
         gameObjectsMap.transform.SetParent(objectPoolHolder.transform);
@@ -105,6 +109,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         switch (poolType)
         {
+            case PoolType.Projectile:
+                return gameObjectsProjectile;
             case PoolType.Map:
                 return gameObjectsMap;
             default:
