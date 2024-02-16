@@ -52,7 +52,8 @@ MonoBehaviour:
   inInventory: 0
   inventoryPosition: 0
   rangedWeaponData: {fileID: 11400000, guid: 8f53ca047d14931478533f68d6f5c0c3, type: 2}
-  gameObjectProjectileData: {fileID: 0}
+  gameObjectProjectileData: {fileID: 11400000, guid: c67cb6062c630dc4fa17e9bcc62d06c3,
+    type: 2}
   projectile: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
     type: 3}
 --- !u!54 &2234285575767978175
@@ -108,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2234285575901989135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 1.78}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
