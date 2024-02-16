@@ -694,6 +694,8 @@ public class PlayFabSocial : MonoBehaviour
         detail1Text.text = item.TitleDisplayName;
         detail2Text.text = item.Profile.LastLogin.ToString();
 
+        tradeBtn.enabled = false;
+
         tradeBtn.onClick.AddListener( delegate { OnButtonTradeRequest(tradeBtn.gameObject); });
         removeBtn.onClick.AddListener( delegate { OnButtonDenyFriendRequest(removeBtn.gameObject); });
 
