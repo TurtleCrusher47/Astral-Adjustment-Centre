@@ -9,10 +9,6 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
 
     protected GameObject currentProjectile;
 
-    public override void OnShot()
-    {
-    }
-
     protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
@@ -27,8 +23,12 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
                 // recoil.GunRecoil(gunData.recoil);
 
                 // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
-                OnShot();
+                OnPrimary();
             }
         }
+    }
+
+    protected override void OnPrimary()
+    {
     }
 }

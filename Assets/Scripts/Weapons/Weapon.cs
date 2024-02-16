@@ -14,6 +14,9 @@ public abstract class Weapon : MonoBehaviour
     public bool inInventory;
     public int inventoryPosition;
 
+    protected float secondaryCooldownTimer;
+    protected float abilityCooldownTimer;
+
     // To init the weapon type
     protected abstract void Init();
 
@@ -34,4 +37,11 @@ public abstract class Weapon : MonoBehaviour
 
     // E
     protected abstract void UseAbility();
+
+    // Effects
+    protected abstract void OnPrimary();
+
+    protected abstract void OnSecondary();
+
+    protected abstract void OnSkill();
 }

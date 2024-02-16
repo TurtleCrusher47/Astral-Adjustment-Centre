@@ -75,9 +75,6 @@ public abstract class RangedWeapon : Weapon
         // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
     }
 
-    // Effects
-    public abstract void OnShot();
-
     public int GetAmmo()
     {
         return rangedWeaponData.currentAmmo;
