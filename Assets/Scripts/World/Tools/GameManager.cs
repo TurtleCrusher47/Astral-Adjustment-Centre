@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Next Scene : " + nextSceneName);
     }
 
-    public  GameObject FindChildWithTag(GameObject parent, string tag)
+    public GameObject FindChildWithTag(GameObject parent, string tag)
     {
         GameObject child = null;
         

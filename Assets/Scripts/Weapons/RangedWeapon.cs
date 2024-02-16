@@ -17,7 +17,7 @@ public abstract class RangedWeapon : Weapon
     protected override void Start()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
-        // firePoint = GameObject.
+        firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
     }
 
     public void Update()

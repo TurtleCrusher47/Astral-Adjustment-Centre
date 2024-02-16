@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class MeleeWeapon : Weapon
 {
-    protected override void Init()
-    {
-    }
+    // protected override void Start()
+    // {
+    // }
 
     // protected override void UsePrimary()
     // {
