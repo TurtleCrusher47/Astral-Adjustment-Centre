@@ -4252,7 +4252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -922.5, y: 502.15}
+  m_AnchoredPosition: {x: -914, y: 502.15}
   m_SizeDelta: {x: 175.2849, y: 75.7027}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1228206962
@@ -5157,12 +5157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12de38354a4ad247bf927b31ca80073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffId: 0
   roguePanel: {fileID: 847264408}
   basePanel: {fileID: 5907959068461915938, guid: 1686b6c7468a7e94baa94a8c85ed4f47,
     type: 3}
   buffTitle:
-  - Attack I
-  - Health I
+  - Attack
+  - Health
   buffDesc:
   - 
   - 

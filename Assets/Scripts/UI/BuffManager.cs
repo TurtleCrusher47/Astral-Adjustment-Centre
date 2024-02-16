@@ -55,8 +55,9 @@ public class BuffManager : BaseBuff
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
             // Set the text dynamically
-            titleText.text = buffTitle[i];
-            string buffDescription = $"Increases {buffTitle[i]} by {damageMultiplier}%";
+            titleText.text = buffTitle[i] + " " + GetBuffTierstring(damageBuff);
+            UpdateBuffMultiplier(); // Update the buff multiplier based on tier
+            string buffDescription = $"Increases {buffTitle[i]} by {GetMultiplierForTier(damageBuff)}%";
             descText.text = buffDescription;
 
             // Add your logic here for showing the panels
