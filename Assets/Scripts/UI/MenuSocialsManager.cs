@@ -34,6 +34,10 @@ public class MenuSocialsManager : MonoBehaviour
         friendsButton.enabled = active;
         leaderboardButton.enabled = active;
         guildsButton.enabled = active;
+
+        friendsButton.GetComponent<Collider>().enabled = active;
+        leaderboardButton.GetComponent<Collider>().enabled = active;
+        guildsButton.GetComponent<Collider>().enabled = active;
     }
 
     private void SetAllPanels(bool active)
@@ -61,14 +65,20 @@ public class MenuSocialsManager : MonoBehaviour
             case "FriendsCamera":
                 StartCoroutine(DelayedShowPanel(friendsPanel, null, false, defaultDelay));
                 StartCoroutine(HologramDissolve(friendsMat, false));
+                SetAllButtonClick(true);
                 break;
             case "LeaderboardCamera":
                 StartCoroutine(DelayedShowPanel(leaderboardPanel, null, false, defaultDelay));
                 StartCoroutine(HologramDissolve(leaderboardMat, false));
+                SetAllButtonClick(true);
                 break;
             case "GuildsCamera":
                 StartCoroutine(DelayedShowPanel(guildsPanel, null, false, defaultDelay));
                 StartCoroutine(HologramDissolve(guildsMat, false));
+                if (target.name != "MyGuildCamera")
+                {
+                    SetAllButtonClick(true);
+                }
                 break;
             case "MyGuildCamera":
                 StartCoroutine(DelayedShowPanel(myGuildPanel, null, false, defaultDelay));
@@ -87,9 +97,11 @@ public class MenuSocialsManager : MonoBehaviour
         {
             case "FriendsCamera":
                 StartCoroutine(DelayedShowPanel(friendsPanel, friendsMat, true, defaultDelay));
+                SetAllButtonClick(false);
                 break;
             case "LeaderboardCamera":
                 StartCoroutine(DelayedShowPanel(leaderboardPanel, leaderboardMat, true, defaultDelay));
+                SetAllButtonClick(false);
                 break;
             case "GuildsCamera":
                 if (delay)
@@ -100,6 +112,7 @@ public class MenuSocialsManager : MonoBehaviour
                 {
                     StartCoroutine(DelayedShowPanel(guildsPanel, guildsMat, true, defaultDelay));
                 }
+                SetAllButtonClick(false);
                 break;
             case "MyGuildCamera":
                 StartCoroutine(DelayedShowPanel(myGuildPanel, myGuildMat, true, defaultDelay));
