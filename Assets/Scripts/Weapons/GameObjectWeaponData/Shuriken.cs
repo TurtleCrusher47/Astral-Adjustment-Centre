@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Shuriken : GameObjectRangedWeapon
 {
+    [SerializeField] GameObject abilityProjectile;
+
     protected override void UseAbility()
     {
         if (CanUseAbility())
         {
+            GameObject kunai = ObjectPoolManager.Instance.SpawnObject(abilityProjectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
+            kunai.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward;
+            kunai.GetComponent<ShurikenProjectile>().MoveProjectile();   
 
+            abilityCooldownTimer = rangedWeaponData.abilitycooldown;
         }
     }
 
@@ -27,6 +33,8 @@ public class Shuriken : GameObjectRangedWeapon
             GameObject rightShuriken = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
             rightShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward + cam.right;
             rightShuriken.GetComponent<ShurikenProjectile>().MoveProjectile();
+
+            secondaryCooldownTimer = rangedWeaponData.secondarycooldown;
         }
     }
 

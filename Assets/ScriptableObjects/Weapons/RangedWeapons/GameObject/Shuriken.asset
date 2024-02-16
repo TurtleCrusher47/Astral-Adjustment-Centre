@@ -20,5 +20,5 @@ MonoBehaviour:
   reloadTime: 0
   reloading: 0
   recoil: {x: 0, y: 0, z: 0}
-  secondarycooldown: 0
+  secondarycooldown: 5
   abilitycooldown: 0
