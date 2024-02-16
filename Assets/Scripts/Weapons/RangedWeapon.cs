@@ -14,8 +14,10 @@ public abstract class RangedWeapon : Weapon
 
     protected float timeSinceLastShot;
 
-    protected override void Init()
+    protected override void Start()
     {
+        cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
+        // firePoint = GameObject.
     }
 
     public void Update()

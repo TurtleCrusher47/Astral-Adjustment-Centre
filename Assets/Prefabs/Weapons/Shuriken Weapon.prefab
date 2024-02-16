@@ -51,7 +51,7 @@ MonoBehaviour:
   type: 0
   inInventory: 0
   inventoryPosition: 0
-  rangedWeaponData: {fileID: 0}
+  rangedWeaponData: {fileID: 11400000, guid: 8f53ca047d14931478533f68d6f5c0c3, type: 2}
   cam: {fileID: 0}
   firePoint: {fileID: 0}
   gameObjectProjectileData: {fileID: 0}

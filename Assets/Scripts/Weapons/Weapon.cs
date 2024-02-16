@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour
     protected float abilityCooldownTimer;
 
     // To init the weapon type
-    protected abstract void Init();
+    protected abstract void Start();
 
     // For weapon pickup
     private void OnTriggerEnter(Collider other)
