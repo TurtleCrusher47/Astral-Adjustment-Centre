@@ -14,6 +14,19 @@ TagManager:
   - PlayFabManager
   - RayGunHandle
   - RayGunHint
+  - CancelRequest
+  - SocialDetail2Text
+  - RowBG
+  - SocialDetail1Text
+  - Kick
+  - TradeButton
+  - RemoveFriend
+  - RankText
+  - ScoreText
+  - DisplayNameText
+  - AcceptRequest
+  - DenyRequest
+  - Orientation
   layers:
   - Default
   - TransparentFX

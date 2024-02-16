@@ -9,7 +9,7 @@ public class ShurikenProjectile : GameObjectProjectile
         if (collider.tag == "Player")
         return;
 
-        Debug.Log(collider.transform.name);
+        // Debug.Log(collider.transform.name);
         IDamageable damageable = collider.transform.GetComponent<IDamageable>();
         damageable?.Damage(gameObjectProjectileData.damage);
 

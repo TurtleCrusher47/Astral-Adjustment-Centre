@@ -17,7 +17,8 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
             {
                 Debug.Log("Shot GameObject");
                 currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
-                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = transform.forward;
+                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.transform.forward;
+                currentProjectile.GetComponent<ShurikenProjectile>().MoveProjectile();
 
                 rangedWeaponData.currentAmmo--;
                 timeSinceLastShot = 0;
