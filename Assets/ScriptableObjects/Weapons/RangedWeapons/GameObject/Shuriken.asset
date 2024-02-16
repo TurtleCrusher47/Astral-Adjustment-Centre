@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shuriken
   infiniteAmmo: 1
-  currentAmmo: 0
+  currentAmmo: -78
   magazineSize: 0
-  fireRate: 150
+  fireRate: 10
   reloadTime: 0
   reloading: 0
   recoil: {x: 0, y: 0, z: 0}
+  secondarycooldown: 0
+  abilitycooldown: 0
