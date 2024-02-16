@@ -24,11 +24,19 @@ public abstract class RangedWeapon : Weapon
 
         if (Input.GetMouseButton(0))
         {
-            Shoot();
+            UsePrimary();
         }
         if (Input.GetKeyDown(KeyCode.R) && !rangedWeaponData.infiniteAmmo)
         {
             StartReload();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            UseSecondary();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UseAbility();
         }
     }
     
@@ -37,9 +45,6 @@ public abstract class RangedWeapon : Weapon
     {
         return !rangedWeaponData.reloading && timeSinceLastShot > 1f / (rangedWeaponData.fireRate / 60f);
     }
-
-    // Dependent on gun as Raycast Guns have the same shoot code but GameObject guns do not
-    public abstract void Shoot();
 
     // Probably change later as we will not do disabling
     private void OnDisable()

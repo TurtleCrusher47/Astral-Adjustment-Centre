@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectRangedWeapon : RangedWeapon
+public abstract class GameObjectRangedWeapon : RangedWeapon
 {
     [SerializeField] protected GameObjectProjectileData gameObjectProjectileData;
     [SerializeField] protected GameObject projectile;
@@ -13,7 +13,7 @@ public class GameObjectRangedWeapon : RangedWeapon
     {
     }
 
-    public override void Shoot()
+    protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {

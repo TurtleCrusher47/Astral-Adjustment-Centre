@@ -25,4 +25,13 @@ public abstract class Weapon : MonoBehaviour
             other.transform.parent.GetComponent<PlayerWeaponPickup>().PickUpWeapon(gameObject);
         }
     }
+
+    // Left Click
+    protected abstract void UsePrimary();
+
+    // Right Click
+    protected abstract void UseSecondary();
+
+    // E
+    protected abstract void UseAbility();
 }

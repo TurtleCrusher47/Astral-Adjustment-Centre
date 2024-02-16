@@ -7,7 +7,7 @@ public class RaycastRangedWeapon : RangedWeapon
     [SerializeField] private RaycastProjectileData raycastProjectileData;
     [SerializeField] private LineRenderer lineRenderer;
 
-    public override void Shoot()
+    protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
@@ -39,6 +39,16 @@ public class RaycastRangedWeapon : RangedWeapon
                 // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
             }
         }
+    }
+
+    protected override void UseSecondary()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void UseAbility()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void OnShot()
