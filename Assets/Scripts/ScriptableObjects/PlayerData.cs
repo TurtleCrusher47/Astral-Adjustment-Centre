@@ -42,8 +42,14 @@ public class PlayerData : ScriptableObject
     public int currentHealth = 100;
     public int maxHealth = 100;
 
+	[Header("Player Settings")]
+	public float mainVolume;
+	public float sfxVolume;
+
+
     public void ResetValues()
     {
         currentHealth = maxHealth;
     }
+
 }
