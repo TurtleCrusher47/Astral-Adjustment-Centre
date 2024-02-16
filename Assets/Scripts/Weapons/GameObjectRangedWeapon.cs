@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectRangedWeapon : RangedWeapon
+public abstract class GameObjectRangedWeapon : RangedWeapon
 {
     [SerializeField] protected GameObjectProjectileData gameObjectProjectileData;
     [SerializeField] protected GameObject projectile;
 
     protected GameObject currentProjectile;
 
-    public override void OnShot()
-    {
-    }
-
-    public override void Shoot()
+    protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
@@ -21,14 +17,19 @@ public class GameObjectRangedWeapon : RangedWeapon
             {
                 // Debug.Log("Shot GameObject");
                 currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Ammo);
+                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = transform.forward;
 
                 rangedWeaponData.currentAmmo--;
                 timeSinceLastShot = 0;
                 // recoil.GunRecoil(gunData.recoil);
 
                 // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
-                OnShot();
+                OnPrimary();
             }
         }
+    }
+
+    protected override void OnPrimary()
+    {
     }
 }

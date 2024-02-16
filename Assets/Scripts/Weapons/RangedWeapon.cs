@@ -14,13 +14,10 @@ public abstract class RangedWeapon : Weapon
 
     protected float timeSinceLastShot;
 
-    private void Start()
+    protected override void Start()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
-    }
-
-    protected override void Init()
-    {
+        firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
     }
 
     public void Update()
@@ -29,11 +26,30 @@ public abstract class RangedWeapon : Weapon
 
         if (Input.GetMouseButton(0))
         {
-            Shoot();
+            UsePrimary();
         }
         if (Input.GetKeyDown(KeyCode.R) && !rangedWeaponData.infiniteAmmo)
         {
             StartReload();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            UseSecondary();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UseAbility();
+        }
+
+        // Cooldowns
+        if (secondaryCooldownTimer > 0)
+        {
+            secondaryCooldownTimer -= Time.deltaTime;
+        }
+
+        if (abilityCooldownTimer > 0)
+        {
+            abilityCooldownTimer -= Time.deltaTime;
         }
     }
     
@@ -42,9 +58,6 @@ public abstract class RangedWeapon : Weapon
     {
         return !rangedWeaponData.reloading && timeSinceLastShot > 1f / (rangedWeaponData.fireRate / 60f);
     }
-
-    // Dependent on gun as Raycast Guns have the same shoot code but GameObject guns do not
-    public abstract void Shoot();
 
     // Probably change later as we will not do disabling
     private void OnDisable()
@@ -74,9 +87,6 @@ public abstract class RangedWeapon : Weapon
 
         // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
     }
-
-    // Effects
-    public abstract void OnShot();
 
     public int GetAmmo()
     {

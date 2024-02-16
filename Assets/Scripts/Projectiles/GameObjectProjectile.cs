@@ -9,6 +9,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
     protected Rigidbody rb;
     private Transform cam;
     private Transform firePoint;
+    public Vector3 projectileDirection;
 
     void Awake()
     {
@@ -23,7 +24,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
         rb.angularVelocity = gameObjectProjectileData.angularVelocity;
 
         // Call a coroutine to return bullet to pool after a set amount of time
-        Vector3 shootDirection = cam.forward;
+        Vector3 shootDirection = projectileDirection;
 
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range))

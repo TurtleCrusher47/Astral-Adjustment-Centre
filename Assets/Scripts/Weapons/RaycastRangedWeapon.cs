@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastRangedWeapon : RangedWeapon
+public abstract class RaycastRangedWeapon : RangedWeapon
 {
     [SerializeField] private RaycastProjectileData raycastProjectileData;
     [SerializeField] private LineRenderer lineRenderer;
 
-    public override void Shoot()
+    protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
@@ -33,16 +33,12 @@ public class RaycastRangedWeapon : RangedWeapon
                 rangedWeaponData.currentAmmo--;
 
                 timeSinceLastShot = 0;
-                OnShot();
+                OnPrimary();
                 // recoil.GunRecoil(gunData.recoil);
 
                 // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
             }
         }
-    }
-
-    public override void OnShot()
-    {
     }
 
     private IEnumerator RenderTraceLine(Vector3 hitPosition)
