@@ -9,14 +9,13 @@ public class MenuSocialsManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera currCamera;
     [SerializeField] private CinemachineVirtualCamera creditsCamera, secondFloorEntranceCamera;
     [SerializeField ] private CinemachineVirtualCamera socialsCamera;
-    [SerializeField] private CinemachineVirtualCamera friendsCamera;
-    [SerializeField] private CinemachineVirtualCamera leaderboardCamera;
-    [SerializeField] private CinemachineVirtualCamera guildsCamera;
 
     [SerializeField] private MenuButtonClick friendsButton, leaderboardButton, guildsButton;
-    [SerializeField] private GameObject menuTarget, friendsTarget, leaderboardTarget, guildsTarget, nextTarget;
-    [SerializeField] private GameObject menuPanel, friendsPanel, leaderboardPanel, guildsPanel, nextPanel;
-    [SerializeField] private Material menuMat, friendsMat, leaderboardMat, guildsMat;
+    [SerializeField] private GameObject menuTarget, friendsTarget, leaderboardTarget, guildsTarget, myGuildTarget, nextTarget;
+    [SerializeField] private GameObject menuPanel, friendsPanel, leaderboardPanel, guildsPanel, myGuildPanel, nextPanel;
+    [SerializeField] private Material menuMat, friendsMat, leaderboardMat, guildsMat, myGuildMat;
+
+    [SerializeField] private float defaultDelay = 0.25f;
 
     void Awake()
     {
@@ -27,6 +26,7 @@ public class MenuSocialsManager : MonoBehaviour
         friendsMat = friendsTarget.GetComponent<Renderer>().material;
         leaderboardMat = leaderboardTarget.GetComponent<Renderer>().material;
         guildsMat = guildsTarget.GetComponent<Renderer>().material;
+        myGuildMat = myGuildTarget.GetComponent<Renderer>().material;
     }
 
     private void SetAllButtonClick(bool active)
@@ -41,6 +41,7 @@ public class MenuSocialsManager : MonoBehaviour
         friendsPanel.SetActive(active);
         leaderboardPanel.SetActive(active);
         guildsPanel.SetActive(active);
+        myGuildPanel.SetActive(active);
     }
 
     public void GoToSocials()
@@ -53,19 +54,26 @@ public class MenuSocialsManager : MonoBehaviour
 
     public void UpdateCamera(CinemachineVirtualCamera target)
     {
+        bool delay = false;
+
         switch (currCamera.name)
         {
             case "FriendsCamera":
-                StartCoroutine(DelayedShowPanel(friendsPanel, null, false));
+                StartCoroutine(DelayedShowPanel(friendsPanel, null, false, defaultDelay));
                 StartCoroutine(HologramDissolve(friendsMat, false));
                 break;
             case "LeaderboardCamera":
-                StartCoroutine(DelayedShowPanel(leaderboardPanel, null, false));
+                StartCoroutine(DelayedShowPanel(leaderboardPanel, null, false, defaultDelay));
                 StartCoroutine(HologramDissolve(leaderboardMat, false));
                 break;
             case "GuildsCamera":
-                StartCoroutine(DelayedShowPanel(guildsPanel, null, false));
+                StartCoroutine(DelayedShowPanel(guildsPanel, null, false, defaultDelay));
                 StartCoroutine(HologramDissolve(guildsMat, false));
+                break;
+            case "MyGuildCamera":
+                StartCoroutine(DelayedShowPanel(myGuildPanel, null, false, defaultDelay));
+                StartCoroutine(HologramDissolve(myGuildMat, false));
+                delay = true;
                 break;
         }
 
@@ -78,13 +86,23 @@ public class MenuSocialsManager : MonoBehaviour
         switch (target.name)
         {
             case "FriendsCamera":
-                StartCoroutine(DelayedShowPanel(friendsPanel, friendsMat, true));
+                StartCoroutine(DelayedShowPanel(friendsPanel, friendsMat, true, defaultDelay));
                 break;
             case "LeaderboardCamera":
-                StartCoroutine(DelayedShowPanel(leaderboardPanel, leaderboardMat, true));
+                StartCoroutine(DelayedShowPanel(leaderboardPanel, leaderboardMat, true, defaultDelay));
                 break;
             case "GuildsCamera":
-                StartCoroutine(DelayedShowPanel(guildsPanel, guildsMat, true));
+                if (delay)
+                {
+                    StartCoroutine(DelayedShowPanel(guildsPanel, guildsMat, true, 0.75f));
+                }
+                else
+                {
+                    StartCoroutine(DelayedShowPanel(guildsPanel, guildsMat, true, defaultDelay));
+                }
+                break;
+            case "MyGuildCamera":
+                StartCoroutine(DelayedShowPanel(myGuildPanel, myGuildMat, true, defaultDelay));
                 break;
         }
     }
@@ -96,7 +114,7 @@ public class MenuSocialsManager : MonoBehaviour
         yield return new WaitUntil(() => currCamera != null);
 
         StartCoroutine(ChangeCameraPriority(creditsCamera, null, false));
-        StartCoroutine(DelayedShowPanel(menuPanel, null, false));
+        StartCoroutine(DelayedShowPanel(menuPanel, null, false, defaultDelay));
         StartCoroutine(HologramDissolve(menuMat, false));
 
         yield return new WaitUntil(() => mainCamBrain.IsBlending);
@@ -136,13 +154,13 @@ public class MenuSocialsManager : MonoBehaviour
         }
     }
 
-    private IEnumerator DelayedShowPanel(GameObject panel, Material mat, bool show)
+    private IEnumerator DelayedShowPanel(GameObject panel, Material mat, bool show, float delay)
     {
         if (show)
         {
             yield return new WaitUntil(() => mainCamBrain.IsBlending);
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(delay);
 
             StartCoroutine(HologramDissolve(mat, show));
 
@@ -167,7 +185,7 @@ public class MenuSocialsManager : MonoBehaviour
 
         if (inSocials)
         {
-            StartCoroutine(DelayedShowPanel(nextPanel, mat, true));
+            StartCoroutine(DelayedShowPanel(nextPanel, mat, true, defaultDelay));
         }
 
         yield return null;

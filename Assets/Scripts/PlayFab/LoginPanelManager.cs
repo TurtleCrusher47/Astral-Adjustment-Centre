@@ -231,12 +231,17 @@ public class LoginPanelManager : MonoBehaviour
                             }
                         }
                     }
+
+                    StopAllCoroutines();
+                    menuTransitionManager.UpdateCamera(menuCamera);
                 }, OnError);
             }
+            else
+            {
+                StopAllCoroutines();
+                menuTransitionManager.UpdateCamera(menuCamera);
+            }
         }, OnError);
-
-        StopAllCoroutines();
-        menuTransitionManager.UpdateCamera(menuCamera);
     }
 
     public static string SafeSubstring(string input, int startIndex, int length)
