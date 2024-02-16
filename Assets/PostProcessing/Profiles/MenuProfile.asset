@@ -59,13 +59,13 @@ MonoBehaviour:
     m_Value: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   fogDensity:
     m_OverrideState: 1
-    m_Value: 0.025
+    m_Value: 0.03
   fogOffset:
     m_OverrideState: 1
     m_Value: 0
   farFogFactor:
     m_OverrideState: 1
-    m_Value: 0.85
+    m_Value: 0.75
 --- !u!114 &-5604119305519933318
 MonoBehaviour:
   m_ObjectHideFlags: 3
