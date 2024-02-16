@@ -7,8 +7,8 @@ public class SetRayGunRigTarget : MonoBehaviour
     [SerializeField] Transform ArmTarget;
     [SerializeField] Transform ArmHint;
 
-    private Transform GunHandlePos;
-    private Transform GunHintPos;
+    [SerializeField] private Transform GunHandlePos;
+    [SerializeField] private Transform GunHintPos;
     
     void Update()
     {
@@ -22,8 +22,12 @@ public class SetRayGunRigTarget : MonoBehaviour
             GunHintPos = GameObject.FindGameObjectWithTag("RayGunHint").transform;
         }
         
-        ArmTarget.position = Vector3.Lerp(ArmTarget.position, GunHandlePos.position, Time.deltaTime * 15);
-        ArmHint.position = Vector3.Lerp(ArmHint.position, GunHintPos.position, Time.deltaTime * 15);
+        // ArmTarget.position = Vector3.Lerp(ArmTarget.position, GunHandlePos.position, Time.deltaTime * 50);
+        // ArmHint.position = Vector3.Lerp(ArmHint.position, GunHintPos.position, Time.deltaTime * 50);
+
+        ArmTarget.position = GunHandlePos.position;
+        ArmHint.position = GunHintPos.position;
+
 
     }
 
