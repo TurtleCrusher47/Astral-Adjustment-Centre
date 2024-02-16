@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    [HideInInspector]
     public enum Type
     {
         MELEE,
