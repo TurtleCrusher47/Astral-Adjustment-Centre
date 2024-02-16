@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BuffManager : MonoBehaviour
+public class BuffManager : BaseBuff
 {
     public GameObject roguePanel;
 
@@ -13,7 +13,8 @@ public class BuffManager : MonoBehaviour
     public List<string> buffTitle = new List<string>();
     public List<string> buffDesc = new List<string>();
 
-    private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
+    // Just to see if its instantiating
+    public List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
 
     // Start is called before the first frame update
     void Start()
@@ -26,14 +27,14 @@ public class BuffManager : MonoBehaviour
     /*
     private void ShuffleBuffPanel()
     {
-        int n = buffPanels.Count;
+        int n = instantiatedPanels.Count;
         while (n > 1)
         {
             n--;
             int k = Random.Range(0, n + 1);
-            GameObject temp = buffPanels[k];
-            buffPanels[k] = buffPanels[n];
-            buffPanels[n] = temp;
+            GameObject temp = instantiatedPanels[k];
+            instantiatedPanels[k] = instantiatedPanels[n];
+            instantiatedPanels[n] = temp;
         }
     }*/
 
@@ -55,10 +56,8 @@ public class BuffManager : MonoBehaviour
 
             // Set the text dynamically
             titleText.text = buffTitle[i];
-
-            // Replace the placeholder in the description with the actual buff type
-            string descWithBuffType = buffDesc[i].Replace("<Buff>", buffTitle[i]);
-            descText.text = descWithBuffType;
+            string buffDescription = $"Increases {buffTitle[i]} by {damageMultiplier}%";
+            descText.text = buffDescription;
 
             // Add your logic here for showing the panels
             if (i == 0)

@@ -5161,11 +5161,12 @@ MonoBehaviour:
   basePanel: {fileID: 5907959068461915938, guid: 1686b6c7468a7e94baa94a8c85ed4f47,
     type: 3}
   buffTitle:
-  - Test I
-  - Test II
+  - Attack I
+  - Health I
   buffDesc:
-  - Desc
-  - Desc II
+  - 
+  - 
+  instantiatedPanels: []
 --- !u!4 &1666390444
 Transform:
   m_ObjectHideFlags: 0
