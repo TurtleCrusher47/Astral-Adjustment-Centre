@@ -35,8 +35,7 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    [SerializeField]
-    MapPrefabManager mPrefabManager;
+    [SerializeField] MapPrefabManager mPrefabManager;
     [SerializeField] int seed;
     [SerializeField] Vector3Int size;
     [SerializeField] int roomCount;
@@ -540,7 +539,7 @@ public class Generator3D : MonoBehaviour {
         // spawn light in intervals
         if (pathIndex % 3 == 0)
         {
-            obj = ObjectPoolManager.Instance.SpawnObject(hallwayLightPrefab, curr + tileOffset + new Vector3(0, 0.9f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+            obj = ObjectPoolManager.Instance.SpawnObject(hallwayLightPrefab, curr + tileOffset + new Vector3(0, 0.975f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
             mapContent.Add(obj);
         }
     }
