@@ -38,6 +38,17 @@ public abstract class Weapon : MonoBehaviour
     // E
     protected abstract void UseAbility();
 
+    // Checks
+    protected bool CanUseSecondary()
+    {
+        return secondaryCooldownTimer <= 0;
+    }
+
+    protected bool CanUseAbility()
+    {
+        return abilityCooldownTimer <= 0;
+    }
+
     // Effects
     protected abstract void OnPrimary();
 

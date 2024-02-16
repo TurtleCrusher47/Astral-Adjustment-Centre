@@ -6,11 +6,18 @@ public class Shuriken : GameObjectRangedWeapon
 {
     protected override void UseAbility()
     {
-        throw new System.NotImplementedException();
+        if (CanUseAbility())
+        {
+
+        }
     }
 
     protected override void UseSecondary()
     {
+        if (CanUseSecondary())
+        {
+
+        }
     }
 
     protected override void OnSecondary()

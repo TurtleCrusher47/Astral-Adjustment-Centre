@@ -38,6 +38,17 @@ public abstract class RangedWeapon : Weapon
         {
             UseAbility();
         }
+
+        // Cooldowns
+        if (secondaryCooldownTimer > 0)
+        {
+            secondaryCooldownTimer -= Time.deltaTime;
+        }
+
+        if (abilityCooldownTimer > 0)
+        {
+            abilityCooldownTimer -= Time.deltaTime;
+        }
     }
     
 
