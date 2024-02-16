@@ -67,12 +67,6 @@ public class Generator3D : MonoBehaviour {
     [SerializeField]
     GameObject endObj;
 
-
-
-    // Temp
-    [SerializeField]
-    GameObject weaponToSpawn;
-
     Random random;
     Grid3D<CellType> grid;
     List<Room> rooms;
@@ -170,9 +164,6 @@ public class Generator3D : MonoBehaviour {
         playerObj.transform.position = pathList[0][0];
         camObj.transform.position = pathList[0][0];
         endObj.transform.position = pathList[pathList.Count - 1][0];
-
-        // Temp
-        ObjectPoolManager.Instance.SpawnObject(weaponToSpawn, playerObj.transform.position, Quaternion.identity);
     }
 
     void Triangulate() {
