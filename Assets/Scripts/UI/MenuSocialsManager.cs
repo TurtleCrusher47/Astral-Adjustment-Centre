@@ -7,8 +7,8 @@ public class MenuSocialsManager : MonoBehaviour
 {
     [SerializeField] private CinemachineBrain mainCamBrain;
     [SerializeField] private CinemachineVirtualCamera currCamera;
-    [SerializeField] private CinemachineVirtualCamera creditsCamera, secondFloorEntranceCamera;
-    [SerializeField ] private CinemachineVirtualCamera socialsCamera;
+    [SerializeField] private CinemachineVirtualCamera creditsCamera, secondFloorEntranceCamera, secondFloorExitCamera;
+    [SerializeField ] private CinemachineVirtualCamera menuCamera, socialsCamera;
 
     [SerializeField] private MenuButtonClick friendsButton, leaderboardButton, guildsButton;
     [SerializeField] private GameObject menuTarget, friendsTarget, leaderboardTarget, guildsTarget, myGuildTarget, nextTarget;
@@ -50,10 +50,16 @@ public class MenuSocialsManager : MonoBehaviour
 
     public void GoToSocials()
     {
-        Debug.Log("GoToSocials()");
         StopAllCoroutines();
 
         StartCoroutine(TransitionToSocials());
+    }
+
+    public void GoToMenu()
+    {
+        StopAllCoroutines();
+
+        StartCoroutine(TransitionToMenu());
     }
 
     public void UpdateCamera(CinemachineVirtualCamera target)
@@ -139,6 +145,21 @@ public class MenuSocialsManager : MonoBehaviour
         yield return new WaitUntil(() => !mainCamBrain.IsBlending);
 
         StartCoroutine(ChangeCameraPriority(socialsCamera, null, false));
+    }
+
+    private IEnumerator TransitionToMenu()
+    {
+        currCamera = mainCamBrain.ActiveVirtualCamera as CinemachineVirtualCamera;
+
+        yield return new WaitUntil(() => currCamera != null);
+
+        StartCoroutine(ChangeCameraPriority(secondFloorExitCamera, null, false));
+
+        yield return new WaitUntil(() => mainCamBrain.IsBlending);
+        yield return new WaitForSeconds(1.25f);
+
+        StartCoroutine(ChangeCameraPriority(menuCamera, null, false));
+        StartCoroutine(DelayedShowPanel(menuPanel, menuMat, true, defaultDelay));
     }
 
     private IEnumerator HologramDissolve(Material mat, bool show)
