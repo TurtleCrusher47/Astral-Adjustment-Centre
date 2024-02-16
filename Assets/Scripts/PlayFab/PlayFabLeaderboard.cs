@@ -24,7 +24,6 @@ public class PlayFabLeaderboard : MonoBehaviour
         FRIENDS
     }
 
-    public PlayFabObjectPoolManager opManager;
     public static List<GameObject> lbItems = new List<GameObject>();
 
     [SerializeField] public GameObject rowPrefab;
@@ -134,7 +133,7 @@ public class PlayFabLeaderboard : MonoBehaviour
 
         for (int i = 0; i < lbItems.Count; i++)
         {
-            PlayFabObjectPoolManager.ReturnObjectToPool(lbItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]));
         }
 
         ResetAllRows();
@@ -170,7 +169,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]));
         }
 
         ResetAllRows();
@@ -213,7 +212,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         
         for (int i = 0; i < lbItems.Count; i++)
         {
-            ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(lbItems[i]));
         }
 
         ResetAllRows();
@@ -271,7 +270,7 @@ public class PlayFabLeaderboard : MonoBehaviour
 
     private void UpdateRow(PlayerLeaderboardEntry item, int rank)
     {
-        GameObject newRow = opManager.SpawnObject(rowPrefab); //, new Vector3(0, 0, 0), Quaternion.identity, ObjectPoolManager.PoolType.None
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(rowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         lbItems.Add(newRow);
 
         newRow.transform.SetParent(lbGroup.transform);

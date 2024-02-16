@@ -14,14 +14,19 @@ public class MenuSocialsManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera guildsCamera;
 
     [SerializeField] private MenuButtonClick friendsButton, leaderboardButton, guildsButton;
-    [SerializeField] private GameObject friendsTarget, leaderboardTarget, guildsTarget, nextTarget;
-    [SerializeField] private GameObject friendsPanel, leaderboardPanel, guildsPanel, nextPanel;
+    [SerializeField] private GameObject menuTarget, friendsTarget, leaderboardTarget, guildsTarget, nextTarget;
+    [SerializeField] private GameObject menuPanel, friendsPanel, leaderboardPanel, guildsPanel, nextPanel;
+    [SerializeField] private Material menuMat, friendsMat, leaderboardMat, guildsMat;
 
     void Awake()
     {
         SetAllButtonClick(true);
-        SetAllTargets(false);
         SetAllPanels(false);
+
+        menuMat = menuTarget.GetComponent<Renderer>().material;
+        friendsMat = friendsTarget.GetComponent<Renderer>().material;
+        leaderboardMat = leaderboardTarget.GetComponent<Renderer>().material;
+        guildsMat = guildsTarget.GetComponent<Renderer>().material;
     }
 
     private void SetAllButtonClick(bool active)
@@ -29,13 +34,6 @@ public class MenuSocialsManager : MonoBehaviour
         friendsButton.enabled = active;
         leaderboardButton.enabled = active;
         guildsButton.enabled = active;
-    }
-
-    private void SetAllTargets(bool active)
-    {
-        friendsTarget.SetActive(active);
-        leaderboardTarget.SetActive(active);
-        guildsTarget.SetActive(active);
     }
 
     private void SetAllPanels(bool active)
@@ -53,39 +51,42 @@ public class MenuSocialsManager : MonoBehaviour
         StartCoroutine(TransitionToSocials());
     }
 
-    public void SwitchPanel(CinemachineVirtualCamera target)
+    public void UpdateCamera(CinemachineVirtualCamera target)
     {
-        bool inSocials = false;
+        switch (currCamera.name)
+        {
+            case "FriendsCamera":
+                StartCoroutine(DelayedShowPanel(friendsPanel, null, false));
+                StartCoroutine(HologramDissolve(friendsMat, false));
+                break;
+            case "LeaderboardCamera":
+                StartCoroutine(DelayedShowPanel(leaderboardPanel, null, false));
+                StartCoroutine(HologramDissolve(leaderboardMat, false));
+                break;
+            case "GuildsCamera":
+                StartCoroutine(DelayedShowPanel(guildsPanel, null, false));
+                StartCoroutine(HologramDissolve(guildsMat, false));
+                break;
+        }
+
+        currCamera.Priority--;
+        currCamera.gameObject.SetActive(false);
+        currCamera = target;
+        currCamera.gameObject.SetActive(true);
+        currCamera.Priority++;
 
         switch (target.name)
         {
             case "FriendsCamera":
-                SetAllButtonClick(false);
-                nextTarget = friendsTarget;
-                nextPanel = friendsPanel;
-                inSocials = true;
+                StartCoroutine(DelayedShowPanel(friendsPanel, friendsMat, true));
                 break;
             case "LeaderboardCamera":
-                SetAllButtonClick(false);
-                nextTarget = leaderboardTarget;
-                nextPanel = leaderboardPanel;
-                inSocials = true;
+                StartCoroutine(DelayedShowPanel(leaderboardPanel, leaderboardMat, true));
                 break;
             case "GuildsCamera":
-                SetAllButtonClick(false);
-                nextTarget = guildsTarget;
-                nextPanel = guildsPanel;
-                inSocials = true;
-                break;
-            case "SocialsCamera":
-                SetAllButtonClick(true);
+                StartCoroutine(DelayedShowPanel(guildsPanel, guildsMat, true));
                 break;
         }
-
-        SetAllTargets(false);
-        SetAllPanels(false);
-
-        StartCoroutine(ChangeCameraPriority(target, inSocials));
     }
 
     private IEnumerator TransitionToSocials()
@@ -94,20 +95,64 @@ public class MenuSocialsManager : MonoBehaviour
 
         yield return new WaitUntil(() => currCamera != null);
 
-        StartCoroutine(ChangeCameraPriority(creditsCamera, false));
+        StartCoroutine(ChangeCameraPriority(creditsCamera, null, false));
+        StartCoroutine(DelayedShowPanel(menuPanel, null, false));
+        StartCoroutine(HologramDissolve(menuMat, false));
 
         yield return new WaitUntil(() => mainCamBrain.IsBlending);
         yield return new WaitForSeconds(1.25f);
 
-        StartCoroutine(ChangeCameraPriority(secondFloorEntranceCamera, false));
+        StartCoroutine(ChangeCameraPriority(secondFloorEntranceCamera, null, false));
 
         yield return new WaitUntil(() => mainCamBrain.IsBlending);
         yield return new WaitUntil(() => !mainCamBrain.IsBlending);
 
-        StartCoroutine(ChangeCameraPriority(socialsCamera, false));
+        StartCoroutine(ChangeCameraPriority(socialsCamera, null, false));
     }
 
-    private IEnumerator ChangeCameraPriority(CinemachineVirtualCamera target, bool inSocials)
+    private IEnumerator HologramDissolve(Material mat, bool show)
+    {
+        float dissolveValue = mat.GetFloat("_DissolveValue");
+
+        if (show)
+        {
+            while (dissolveValue > 0)
+            {
+                dissolveValue -= Time.deltaTime;
+                mat.SetFloat("_DissolveValue", dissolveValue);
+
+                yield return null;
+            }
+        }
+        else
+        {
+            while (dissolveValue < 1)
+            {
+                dissolveValue += Time.deltaTime;
+                mat.SetFloat("_DissolveValue", dissolveValue);
+
+                yield return null;
+            }
+        }
+    }
+
+    private IEnumerator DelayedShowPanel(GameObject panel, Material mat, bool show)
+    {
+        if (show)
+        {
+            yield return new WaitUntil(() => mainCamBrain.IsBlending);
+
+            yield return new WaitForSeconds(0.25f);
+
+            StartCoroutine(HologramDissolve(mat, show));
+
+            yield return new WaitUntil(() => !mainCamBrain.IsBlending);
+        }
+
+        panel.SetActive(show);
+    }
+
+    private IEnumerator ChangeCameraPriority(CinemachineVirtualCamera target, Material mat, bool inSocials)
     {
         if (inSocials)
         {
@@ -122,10 +167,7 @@ public class MenuSocialsManager : MonoBehaviour
 
         if (inSocials)
         {
-            yield return new WaitUntil(() => mainCamBrain.IsBlending);
-            yield return new WaitUntil(() => !mainCamBrain.IsBlending);
-
-            nextPanel.SetActive(true);
+            StartCoroutine(DelayedShowPanel(nextPanel, mat, true));
         }
 
         yield return null;

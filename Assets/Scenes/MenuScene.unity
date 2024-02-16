@@ -1704,7 +1704,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3934542636007682397}
         m_TargetAssemblyTypeName: MenuSocialsManager, Assembly-CSharp
-        m_MethodName: SwitchPanel
+        m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 581901729}
@@ -3514,7 +3514,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3934542636007682397}
         m_TargetAssemblyTypeName: MenuSocialsManager, Assembly-CSharp
-        m_MethodName: SwitchPanel
+        m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 581901729}
@@ -7031,7 +7031,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b5a754be977bf447a838a742d3b445a, type: 2}
+  - {fileID: 2100000, guid: c53a022f478500a43afc3f1ba702178b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7078,7 +7078,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3934542636007682397}
         m_TargetAssemblyTypeName: MenuSocialsManager, Assembly-CSharp
-        m_MethodName: SwitchPanel
+        m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1219072487}
@@ -11844,7 +11844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &885383753
 Transform:
   m_ObjectHideFlags: 0
@@ -12356,7 +12356,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b5a754be977bf447a838a742d3b445a, type: 2}
+  - {fileID: 2100000, guid: c53a022f478500a43afc3f1ba702178b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12403,7 +12403,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3934542636007682397}
         m_TargetAssemblyTypeName: MenuSocialsManager, Assembly-CSharp
-        m_MethodName: SwitchPanel
+        m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1473398178}
@@ -15419,7 +15419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1196496827
 Transform:
   m_ObjectHideFlags: 0
@@ -16417,7 +16417,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3934542636007682397}
         m_TargetAssemblyTypeName: MenuSocialsManager, Assembly-CSharp
-        m_MethodName: SwitchPanel
+        m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 581901729}
@@ -23303,7 +23303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b5a754be977bf447a838a742d3b445a, type: 2}
+  - {fileID: 2100000, guid: c53a022f478500a43afc3f1ba702178b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23350,7 +23350,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3934542636007682397}
         m_TargetAssemblyTypeName: MenuSocialsManager, Assembly-CSharp
-        m_MethodName: SwitchPanel
+        m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1809258075}
@@ -76121,8 +76121,17 @@ MonoBehaviour:
   menuCamera: {fileID: 2117462643}
   loadSceneCamera: {fileID: 603554599}
   loginPanel: {fileID: 496852478}
+  menuPanel: {fileID: 2000418645}
   settingsPanel: {fileID: 670931453}
   creditsPanel: {fileID: 94747877}
+  loginTarget: {fileID: 2028025071}
+  menuTarget: {fileID: 1205697455}
+  settingsTarget: {fileID: 870463066}
+  creditsTarget: {fileID: 1970100144}
+  loginMat: {fileID: 0}
+  menuMat: {fileID: 0}
+  settingsMat: {fileID: 0}
+  creditsMat: {fileID: 0}
 --- !u!114 &3934542636007682397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76146,14 +76155,20 @@ MonoBehaviour:
   friendsButton: {fileID: 917310406}
   leaderboardButton: {fileID: 530169018}
   guildsButton: {fileID: 1838834404}
+  menuTarget: {fileID: 1205697455}
   friendsTarget: {fileID: 1196496826}
   leaderboardTarget: {fileID: 885383752}
   guildsTarget: {fileID: 2134629681}
   nextTarget: {fileID: 0}
+  menuPanel: {fileID: 2000418645}
   friendsPanel: {fileID: 630372104}
   leaderboardPanel: {fileID: 802382662}
   guildsPanel: {fileID: 1868083473}
   nextPanel: {fileID: 0}
+  menuMat: {fileID: 0}
+  friendsMat: {fileID: 0}
+  leaderboardMat: {fileID: 0}
+  guildsMat: {fileID: 0}
 --- !u!114 &3934542636007682398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76166,7 +76181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b53d2077c001f043b5074187e33a5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opManager: {fileID: 3934542636007682399}
   rowPrefab: {fileID: 6200564809918243054, guid: 4b40b3d248c358541b2fdebe3d7db641,
     type: 3}
   lbGroup: {fileID: 695732530}
@@ -76197,7 +76211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089f6f6675cc65344b357bfe5b0895ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opManager: {fileID: 3934542636007682399}
   friendRowPrefab: {fileID: 4839543273566889319, guid: 8a353bd34c660c14eb192e5a7146ced7,
     type: 3}
   requestRowPrefab: {fileID: 9144032814278937216, guid: 0f16d9a758ac04a44b7bd1c559710bd7,

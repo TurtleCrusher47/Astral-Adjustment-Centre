@@ -6,6 +6,7 @@ using TMPro;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.Json;
+using Unity.VisualScripting;
 
 public class PlayFabSocial : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class PlayFabSocial : MonoBehaviour
         FRIENDLIST,
         REQUESTPENDINGLIST
     }
-
-    public PlayFabObjectPoolManager opManager;
 
     public static List<GameObject> friendItems = new List<GameObject>();
     public static List<GameObject> requestItems = new List<GameObject>();
@@ -606,7 +605,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < friendItems.Count; i++)
         {
-            PlayFabObjectPoolManager.ReturnObjectToPool(friendItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(friendItems[i]));
         }
 
         ResetAllRows(friendListGroup, friendItems, 0);
@@ -629,12 +628,12 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < requestItems.Count; i++)
         {
-            PlayFabObjectPoolManager.ReturnObjectToPool(requestItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(requestItems[i]));
         }
 
         for (int i = 0; i < pendingItems.Count; i++)
         {
-            PlayFabObjectPoolManager.ReturnObjectToPool(pendingItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(pendingItems[i]));
         }
 
         ResetAllRows(requestAndPendingListGroup, requestItems, 1);
@@ -663,7 +662,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < tradeItems.Count; i++)
         {
-            PlayFabObjectPoolManager.ReturnObjectToPool(tradeItems[i]);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(tradeItems[i]));
         }
 
         ResetAllRows(tradeListGroup, tradeItems, 3);
@@ -676,7 +675,7 @@ public class PlayFabSocial : MonoBehaviour
 
     private void UpdateFriendListRow(FriendInfo item)
     {
-        GameObject newRow = opManager.SpawnObject(friendRowPrefab);
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(friendRowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         friendItems.Add(newRow);
 
         newRow.transform.SetParent(friendListGroup.transform);
@@ -704,7 +703,7 @@ public class PlayFabSocial : MonoBehaviour
 
     private void UpdateRequestListRow(FriendInfo item)
     {
-        GameObject newRow = opManager.SpawnObject(requestRowPrefab);
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(requestRowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         requestItems.Add(newRow);
 
         newRow.transform.SetParent(requestAndPendingListGroup.transform);
@@ -732,7 +731,7 @@ public class PlayFabSocial : MonoBehaviour
 
     private void UpdatePendingListRow(FriendInfo item)
     {
-        GameObject newRow = opManager.SpawnObject(pendingRowPrefab);
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(pendingRowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         pendingItems.Add(newRow);
 
         newRow.transform.SetParent(requestAndPendingListGroup.transform);
@@ -758,7 +757,7 @@ public class PlayFabSocial : MonoBehaviour
 
     private void UpdateTradeListRow(TradeInfo info, string traderDN)
     {
-        GameObject newRow = opManager.SpawnObject(tradeRowPrefab);
+        GameObject newRow = ObjectPoolManager.Instance.SpawnObject(tradeRowPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         tradeItems.Add(newRow);
         Debug.Log(newRow.gameObject.name);
 
