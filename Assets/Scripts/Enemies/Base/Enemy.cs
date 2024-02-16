@@ -5,10 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckable
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
-    public float CurrentHealth { get; set; }
-    public Rigidbody2D rb { get; set; }
+    [field: SerializeField] public float CurrentHealth { get; set; }
+    public Rigidbody rb { get; set; }
+    public Animator animator;
 
-    public bool isFacingRight { get; set; } = false;
+    //public bool isFacingRight { get; set; } = false;
 
 #region state machine variables
       
@@ -56,7 +57,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
         CurrentHealth = MaxHealth;
 
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
         enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
@@ -69,12 +71,28 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     private void Update()
     {
         stateMachine.currEnemyState.FrameUpdate();
+        UpdateAnimator();
 
     }
 
     private void FixedUpdate()
     {
         stateMachine.currEnemyState.PhysicsUpdate();
+    }
+
+    private void UpdateAnimator()
+    {
+
+
+        if (Mathf.Abs(rb.velocity.x) > 0.01f || Mathf.Abs(rb.velocity.z) > 0.01f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 
 
@@ -99,28 +117,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
 #region movement functions
 
-    public void MoveEnemy(Vector2 velocity)
+    public void MoveEnemy(Vector3 velocity)
     {
         rb.velocity = velocity;
-        CheckDirectionFacing(velocity);
-
-    }
-
-    public void CheckDirectionFacing(Vector2 velocity)
-    {
-       if (isFacingRight && velocity.x < 0f)
-       {
-            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(rotator);
-            isFacingRight = !isFacingRight;
-       }
-
-        else if (isFacingRight && velocity.x > 0f)
-       {
-            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(rotator);
-            isFacingRight = !isFacingRight;
-       }
     }
 
 #endregion
@@ -151,4 +150,19 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     }
 
 #endregion
+
+    public List<GameObject> FindChildObjectsWithTag(GameObject parent, string tag)
+    {
+        List<GameObject> children = new();
+ 
+        foreach(Transform transform in parent.transform) 
+        {
+            if(transform.CompareTag(tag)) 
+            {
+                children.Add(transform.gameObject);
+            }
+        }
+        
+        return children;
+    }
 }

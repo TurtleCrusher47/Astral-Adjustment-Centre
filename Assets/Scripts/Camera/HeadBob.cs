@@ -45,7 +45,7 @@ public class HeadBob : MonoBehaviour
         pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * frequency / 2f) * amount * 1.6f, smooth * Time.deltaTime);
         transform.localPosition += pos;
 
-        weaponHolder.localPosition -= pos;
+        // weaponHolder.localPosition -= pos;
 
         return pos;
     }
@@ -55,6 +55,6 @@ public class HeadBob : MonoBehaviour
         if (transform.localPosition == startPos)
         return;
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, 1 * Time.deltaTime);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, 5 * Time.deltaTime);
     }
 }
