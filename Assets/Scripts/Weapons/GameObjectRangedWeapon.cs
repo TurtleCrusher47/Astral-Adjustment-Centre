@@ -7,18 +7,25 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
     [SerializeField] protected GameObjectProjectileData gameObjectProjectileData;
     [SerializeField] protected GameObject projectile;
 
-    private GameObject currentProjectile;
-
     protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
             if (CanShoot())
             {
-                Debug.Log("Shot GameObject");
-                currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Projectile);
-                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.transform.forward;
+                // Debug.Log("Shot GameObject");
+                GameObject currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, transform.rotation, ObjectPoolManager.PoolType.Projectile);
+                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
+
+                RaycastHit hit;
+                if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range))
+                {
+                    currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;
+                    // Debug.Log(cam.forward);
+                }
+
                 currentProjectile.GetComponent<ShurikenProjectile>().MoveProjectile();
+
 
                 rangedWeaponData.currentAmmo--;
                 timeSinceLastShot = 0;

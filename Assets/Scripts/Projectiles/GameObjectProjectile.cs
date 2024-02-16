@@ -20,13 +20,12 @@ public abstract class GameObjectProjectile : MonoBehaviour
 
     private void OnEnable()
     {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
     }
 
     public void MoveProjectile()
     {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
-
         // Call a coroutine to return bullet to pool after a set amount of time
         Vector3 shootDirection = projectileDirection;
 
