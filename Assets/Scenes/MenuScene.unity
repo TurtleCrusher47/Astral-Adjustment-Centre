@@ -126139,6 +126139,7 @@ MonoBehaviour:
   playfabSocial: {fileID: 3934542636007682400}
   playfabLeaderboard: {fileID: 3934542636007682398}
   playfabGuild: {fileID: 3934542636007682401}
+  playfabMyGuild: {fileID: 3934542636007682402}
   playfabScripts: []
   loginPage: {fileID: 5276009537103711752}
   regPage: {fileID: 5276009536068887908}

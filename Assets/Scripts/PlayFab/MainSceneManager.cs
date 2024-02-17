@@ -13,6 +13,9 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] private PlayFabSocial playfabSocial;
     [SerializeField] private PlayFabLeaderboard playfabLeaderboard;
     [SerializeField] private PlayFabGuild playfabGuild;
+    [SerializeField] private PlayFabMyGuild playfabMyGuild;
+
+
     [SerializeField] private List<MonoBehaviour> playfabScripts;
     [SerializeField] private GameObject loginPage, regPage, forgetpassPage;
 
@@ -39,6 +42,7 @@ public class MainSceneManager : MonoBehaviour
         playfabScripts.Add(playfabSocial);
         playfabScripts.Add(playfabLeaderboard);
         playfabScripts.Add(playfabGuild);
+        playfabScripts.Add(playfabMyGuild);
     }
 
     public void ShowLoginPage()
