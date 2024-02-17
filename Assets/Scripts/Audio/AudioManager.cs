@@ -13,12 +13,7 @@ public class AudioManager : Singleton<AudioManager>
 
     void Awake()
     {
-        GetComponents(audSources);
-
-        // foreach (AudioSource audSource in gameObject.GetComponents<AudioSource>())
-        // {
-        //     audSources.Add(audSource);
-        // }
+        gameObject.GetComponents(audSources);
 
         bgmSource = audSources[0];
 
