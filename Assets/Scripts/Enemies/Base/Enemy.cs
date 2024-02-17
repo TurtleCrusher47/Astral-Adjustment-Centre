@@ -101,9 +101,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     {
        CurrentHealth -= damage;
 
+       animator.SetTrigger("isHit");
+
        if (CurrentHealth <= 0)
        {
-            Despawn();
+            animator.SetTrigger("isDead");
        }
     }
 
