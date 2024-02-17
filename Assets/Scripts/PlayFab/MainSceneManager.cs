@@ -14,6 +14,8 @@ public class MainSceneManager : MonoBehaviour
 
     void Awake()
     {
+        AudioManager.Instance.PlayBGM("BGMDemonSky");
+
         if (PlayFabManager.currPlayFabID == null || PlayFabManager.currPlayFabID == "")
         {
             regPage.SetActive(false);

@@ -173,6 +173,7 @@ public class MenuSocialsManager : MonoBehaviour
 
         if (show)
         {
+            AudioManager.Instance.PlaySFX("SFXHologramOpen");
             while (dissolveValue > 0)
             {
                 dissolveValue -= Time.deltaTime;
@@ -183,6 +184,7 @@ public class MenuSocialsManager : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.PlaySFX("SFXHologramClose");
             while (dissolveValue < 1)
             {
                 dissolveValue += Time.deltaTime;
