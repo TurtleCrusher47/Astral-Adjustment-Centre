@@ -7,6 +7,7 @@ using TMPro;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.GroupsModels;
+using Michsky.UI.Shift;
 
 public class PlayFabGuild : MonoBehaviour
 {
@@ -48,7 +49,6 @@ public class PlayFabGuild : MonoBehaviour
     [SerializeField] public TMP_InputField if_guildName;
 
     [SerializeField] public TMP_InputField if_searchByGuildName;
-    [SerializeField] public TMP_InputField if_searchByLeaderName;
 
     public List<string> guildIDs;
     public List<string> guildDatas;
@@ -77,7 +77,7 @@ public class PlayFabGuild : MonoBehaviour
 
                 detail2Text.text = "Status";
                 if_searchByGuildName.gameObject.SetActive(false);
-                listTypeButton.GetComponentInChildren<TMP_Text>().text = "Guilds";
+                listTypeButton.GetComponent<MainButton>().ChangeText("GUILDS");
                 listTypeButton.interactable = false;
 
                 OnButtonRequestsList();
@@ -90,7 +90,7 @@ public class PlayFabGuild : MonoBehaviour
 
                 detail2Text.text = "Guild Leader";
                 if_searchByGuildName.gameObject.SetActive(true);
-                listTypeButton.GetComponentInChildren<TMP_Text>().text = "Requests";
+                listTypeButton.GetComponent<MainButton>().ChangeText("REQUESTS");
                 listTypeButton.interactable = false;
 
                 OnButtonGuildsList();
@@ -100,12 +100,12 @@ public class PlayFabGuild : MonoBehaviour
         if (PlayFabManager.currGuildID == null)
         {
             myGuildButton.interactable = false;
-            myGuildButton.GetComponentInChildren<TMP_Text>().text = "My Guild";
+            myGuildButton.GetComponent<MainButton>().ChangeText("MY GUILD");
         }
         else
         {
             myGuildButton.interactable = true;
-            myGuildButton.GetComponentInChildren<TMP_Text>().text = "<> " + PlayFabManager.currGuildName + " <>";
+            myGuildButton.GetComponent<MainButton>().ChangeText("<> " + PlayFabManager.currGuildName + " <>");
         }
     }
 
@@ -114,12 +114,12 @@ public class PlayFabGuild : MonoBehaviour
         if (PlayFabManager.currGuildID == null)
         {
             myGuildButton.interactable = false;
-            myGuildButton.GetComponentInChildren<TMP_Text>().text = "My Guild";
+            myGuildButton.GetComponent<MainButton>().ChangeText("MY GUILD");
         }
         else
         {
             myGuildButton.interactable = true;
-            myGuildButton.GetComponentInChildren<TMP_Text>().text = "<> " + PlayFabManager.currGuildName + " <>";
+            myGuildButton.GetComponent<MainButton>().ChangeText("<> " + PlayFabManager.currGuildName + " <>");
         }
 
         OnButtonGuildsList();
@@ -129,26 +129,10 @@ public class PlayFabGuild : MonoBehaviour
     {
         if (if_searchByGuildName.text != "")
         {
-            if_searchByLeaderName.text = "";
             StopAllCoroutines();
             StartCoroutine(DelayBeforeSearching(if_searchByGuildName.text, "Name"));
         }
-        else if (if_searchByGuildName.text == "" && if_searchByLeaderName.text == "")
-        {
-            StopAllCoroutines();
-            OnButtonGuildsList();
-        }
-    }
-
-    public void OnGuildLeaderInputChange()
-    {
-        if (if_searchByLeaderName.text != "")
-        {
-            if_searchByGuildName.text = "";
-            StopAllCoroutines();
-            StartCoroutine(DelayBeforeSearching(if_searchByLeaderName.text, "Leader"));
-        }
-        else if (if_searchByGuildName.text == "" && if_searchByLeaderName.text == "")
+        else if (if_searchByGuildName.text == "")
         {
             StopAllCoroutines();
             OnButtonGuildsList();
@@ -537,7 +521,7 @@ public class PlayFabGuild : MonoBehaviour
 
         ResetListRow(newRow, 0);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button joinBtn = FindChildWithTag(newRow, "JoinRequest").GetComponent<Button>();
@@ -583,7 +567,7 @@ public class PlayFabGuild : MonoBehaviour
 
         ResetListRow(newRow, 1);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button acceptBtn = FindChildWithTag(newRow, "AcceptRequest").GetComponent<Button>();
@@ -615,7 +599,7 @@ public class PlayFabGuild : MonoBehaviour
 
     private void ResetListRow(GameObject row, int type)
     {
-        Image background = FindChildWithTag(row, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(row, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(row, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(row, "SocialDetail2Text").GetComponent<TMP_Text>();
         Color32 defaultColor = new Color32(255, 255, 255, 255);
@@ -671,15 +655,13 @@ public class PlayFabGuild : MonoBehaviour
                 break;
         }
 
-        Color bgColor = background.color;
+        background.alpha = 0;
         Color32 nameColor = detail1Text.color;
         Color32 leaderColor = detail2Text.color;
 
-        bgColor.a = 0;
         nameColor.a = 0;
         leaderColor.a = 0;
 
-        background.color = bgColor;
         detail1Text.color = nameColor;
         detail2Text.color = leaderColor;
 
@@ -687,7 +669,7 @@ public class PlayFabGuild : MonoBehaviour
         detail2Text.text = "";
     }
 
-    private IEnumerator FadeInRow(GridLayoutGroup glGroup, Image background, TMP_Text name, TMP_Text status, Button btn1, Button btn2, float delay)
+    private IEnumerator FadeInRow(GridLayoutGroup glGroup, CanvasGroup background, TMP_Text name, TMP_Text status, Button btn1, Button btn2, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -730,17 +712,13 @@ public class PlayFabGuild : MonoBehaviour
         yield return fadeInTextAndButton;
     }
 
-    private IEnumerator FadeInBG(Image background)
+    private IEnumerator FadeInBG(CanvasGroup background)
     {
-        Color bgColor = background.color;
+        float targetAlpha = 1f;
 
-        float targetAlpha = 0.75f;
-
-        while (Mathf.Abs(bgColor.a - targetAlpha) > 0)
+        while (Mathf.Abs(background.alpha - targetAlpha) > 0)
         {
-            bgColor.a = Mathf.Lerp(bgColor.a, targetAlpha, 10 * Time.deltaTime);
-            
-            background.color = bgColor;
+            background.alpha = Mathf.Lerp(background.alpha, targetAlpha, 10 * Time.deltaTime);
 
             yield return null;
         }
