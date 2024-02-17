@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 
 public class MenuSocialsManager : MonoBehaviour
@@ -51,6 +52,7 @@ public class MenuSocialsManager : MonoBehaviour
     public void GoToSocials()
     {
         StopAllCoroutines();
+        SetAllButtonClick(false);
 
         StartCoroutine(TransitionToSocials());
     }
@@ -149,6 +151,8 @@ public class MenuSocialsManager : MonoBehaviour
         yield return new WaitUntil(() => !mainCamBrain.IsBlending);
 
         StartCoroutine(ChangeCameraPriority(socialsCamera, null, false));
+
+        SetAllButtonClick(true);
     }
 
     private IEnumerator TransitionToMenu()

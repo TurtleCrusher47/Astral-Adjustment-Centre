@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Michsky.UI.Shift;
 
 public class SettingManager : MonoBehaviour
 {
-    public Toggle fullscreenToggle, vsyncToggle, fpsToggle;
+    public SwitchManager vsyncButton, fullscreenButton, fpsButton;
     public List<ResItem> resolutions = new List<ResItem>();
     private int selectedResolution;
 
@@ -27,15 +28,15 @@ public class SettingManager : MonoBehaviour
     {
         GrabScreenResolution();
 
-        fullscreenToggle.isOn = Screen.fullScreen;
+        fullscreenButton.isOn = Screen.fullScreen;
 
         if(QualitySettings.vSyncCount == 0)
         {
-            vsyncToggle.isOn = false;
+            vsyncButton.isOn = false;
         }
         else
         {
-            vsyncToggle.isOn = true;
+            vsyncButton.isOn = true;
         }
 
     }
@@ -115,9 +116,9 @@ public class SettingManager : MonoBehaviour
 
     public void ApplySettings()
     {
-        Screen.fullScreen = fullscreenToggle.isOn;
+        Screen.fullScreen = fullscreenButton.isOn;
 
-        if (vsyncToggle.isOn)
+        if (vsyncButton.isOn)
         {
             QualitySettings.vSyncCount = 1;
         }
@@ -126,7 +127,7 @@ public class SettingManager : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
 
-        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
+        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenButton.isOn);
     }
 
     private void DisplayFPS()
@@ -134,7 +135,7 @@ public class SettingManager : MonoBehaviour
         frameDeltaTimeArray[frameIndex] = Time.deltaTime;
         frameIndex = (frameIndex + 1) % frameDeltaTimeArray.Length;
 
-        fpsText.text = Mathf.RoundToInt(CalculateFPS()).ToString();
+        fpsText.text = "FPS : " + Mathf.RoundToInt(CalculateFPS()).ToString();
     }
 
     private float CalculateFPS()

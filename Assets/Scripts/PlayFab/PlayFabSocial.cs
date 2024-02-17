@@ -7,6 +7,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.Json;
 using Unity.VisualScripting;
+using Michsky.UI.Shift;
 
 public class PlayFabSocial : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class PlayFabSocial : MonoBehaviour
 
                 friendListGroup.gameObject.SetActive(false);
 
-                listTypeButton.GetComponentInChildren<TMP_Text>().text = "Friend List";
+                listTypeButton.GetComponent<MainButton>().ChangeText("FRIEND LIST");
 
                 OnButtonRequestAndPendingList();
                 break;
@@ -80,7 +81,7 @@ public class PlayFabSocial : MonoBehaviour
 
                 requestAndPendingListGroup.gameObject.SetActive(false);
 
-                listTypeButton.GetComponentInChildren<TMP_Text>().text = "Requests / Pending";
+                listTypeButton.GetComponent<MainButton>().ChangeText("REQUEST / PENDING");
 
                 OnButtonFriendList();
                 break;
@@ -662,7 +663,7 @@ public class PlayFabSocial : MonoBehaviour
 
         for (int i = 0; i < tradeItems.Count; i++)
         {
-            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(tradeItems[i]));
+            ObjectPoolManager.Instance.ReturnObjectToPool(tradeItems[i]);
         }
 
         ResetAllRows(tradeListGroup, tradeItems, 3);
@@ -685,7 +686,7 @@ public class PlayFabSocial : MonoBehaviour
 
         ResetListRow(newRow, 0);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button tradeBtn = FindChildWithTag(newRow, "TradeButton").GetComponent<Button>();
@@ -695,6 +696,7 @@ public class PlayFabSocial : MonoBehaviour
         detail2Text.text = item.Profile.LastLogin.ToString();
 
         tradeBtn.enabled = false;
+        tradeBtn.GetComponent<Animator>().SetTrigger("Disabled");
 
         tradeBtn.onClick.AddListener( delegate { OnButtonTradeRequest(tradeBtn.gameObject); });
         removeBtn.onClick.AddListener( delegate { OnButtonDenyFriendRequest(removeBtn.gameObject); });
@@ -715,7 +717,7 @@ public class PlayFabSocial : MonoBehaviour
 
         ResetListRow(newRow, 1);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button acceptBtn = FindChildWithTag(newRow, "AcceptRequest").GetComponent<Button>();
@@ -743,7 +745,7 @@ public class PlayFabSocial : MonoBehaviour
 
         ResetListRow(newRow, 2);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button cancelBtn = FindChildWithTag(newRow, "CancelRequest").GetComponent<Button>();
@@ -770,7 +772,7 @@ public class PlayFabSocial : MonoBehaviour
 
         ResetListRow(newRow, 3);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         
         GameObject detail2 = FindChildWithTag(newRow, "SocialDetail2Text");
@@ -826,7 +828,7 @@ public class PlayFabSocial : MonoBehaviour
 
     private void ResetListRow(GameObject row, int type)
     {
-        Image background = FindChildWithTag(row, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(row, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(row, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text;
         Color32 statusColor;
@@ -930,19 +932,16 @@ public class PlayFabSocial : MonoBehaviour
                 break;
         }
 
-        Color bgColor = background.color;
+        background.alpha = 0;
+
         Color32 nameColor = detail1Text.color;
-
-        bgColor.a = 0;
         nameColor.a = 0;
-
-        background.color = bgColor;
         detail1Text.color = nameColor;
 
         detail1Text.text = "";
     }
 
-    private IEnumerator FadeInRow(GridLayoutGroup glGroup, Image background, TMP_Text name, TMP_Text status, Button btn1, Button btn2, Image item1, Image item2, float delay)
+    private IEnumerator FadeInRow(GridLayoutGroup glGroup, CanvasGroup background, TMP_Text name, TMP_Text status, Button btn1, Button btn2, Image item1, Image item2, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -974,17 +973,13 @@ public class PlayFabSocial : MonoBehaviour
         yield return fadeInTextAndButton;
     }
 
-    private IEnumerator FadeInBG(Image background)
+    private IEnumerator FadeInBG(CanvasGroup background)
     {
-        Color bgColor = background.color;
+        float targetAlpha = 1f;
 
-        float targetAlpha = 0.75f;
-
-        while (Mathf.Abs(bgColor.a - targetAlpha) > 0)
+        while (Mathf.Abs(background.alpha - targetAlpha) > 0)
         {
-            bgColor.a = Mathf.Lerp(bgColor.a, targetAlpha, 10 * Time.deltaTime);
-            
-            background.color = bgColor;
+            background.alpha = Mathf.Lerp(background.alpha, targetAlpha, 10 * Time.deltaTime);
 
             yield return null;
         }

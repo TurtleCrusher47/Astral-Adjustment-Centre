@@ -24,5 +24,21 @@ namespace Michsky.UI.Shift
                 if (pressedText != null) { pressedText.text = buttonText; }
             }
         }
+
+        public void ChangeText(string newText)
+        {
+            if (normalText != null)
+            {
+                normalText.text = newText;
+            }
+            if (highlightedText != null)
+            {
+                highlightedText.text = newText;
+            }
+            if (pressedText != null)
+            {
+                pressedText.text = newText;
+            }
+        }
     }
 }

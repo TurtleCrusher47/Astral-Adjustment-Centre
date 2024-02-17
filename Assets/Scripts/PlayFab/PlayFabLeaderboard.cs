@@ -6,6 +6,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
+using Michsky.UI.Shift;
 
 public class PlayFabLeaderboard : MonoBehaviour
 {
@@ -49,19 +50,19 @@ public class PlayFabLeaderboard : MonoBehaviour
         {
             case StatisticType.OVERALL:
                 currStatType = StatisticType.DAILY;
-                statTypeButton.GetComponentInChildren<TMP_Text>().text = "Current : Daily";
+                statTypeButton.GetComponent<MainButton>().ChangeText("CURRENT : DAILY");
                 break;
             case StatisticType.DAILY:
                 currStatType = StatisticType.WEEKLY;
-                statTypeButton.GetComponentInChildren<TMP_Text>().text = "Current : Weekly";
+                statTypeButton.GetComponent<MainButton>().ChangeText("CURRENT : WEEKLY");
                 break;
             case StatisticType.WEEKLY:
                 currStatType = StatisticType.MONTHLY;
-                statTypeButton.GetComponentInChildren<TMP_Text>().text = "Current : Monthly";
+                statTypeButton.GetComponent<MainButton>().ChangeText("CURRENT : MONTHLY");
                 break;
             case StatisticType.MONTHLY:
                 currStatType = StatisticType.OVERALL;
-                statTypeButton.GetComponentInChildren<TMP_Text>().text = "Current : Overall";
+                statTypeButton.GetComponent<MainButton>().ChangeText("CURRENT : OVERALL");
                 break;
         }
 
@@ -75,17 +76,17 @@ public class PlayFabLeaderboard : MonoBehaviour
             case LeaderboardType.GLOBAL:
                 currLBType = LeaderboardType.NEARBY;
                 titleText.text = "NEARBY LEADERBOARD";
-                lbTypeButton.GetComponentInChildren<TMP_Text>().text = "Friend Leaderboard";
+                lbTypeButton.GetComponent<MainButton>().ChangeText("FRIEND LEADERBOARD");
                 break;
             case LeaderboardType.NEARBY:
                 currLBType = LeaderboardType.FRIENDS;
                 titleText.text = "FRIEND LEADERBOARD";
-                lbTypeButton.GetComponentInChildren<TMP_Text>().text = "Global Leaderboard";
+                lbTypeButton.GetComponent<MainButton>().ChangeText("GLOBAL LEADERBOARD");
                 break;
             case LeaderboardType.FRIENDS:
                 currLBType = LeaderboardType.GLOBAL;
                 titleText.text = "GLOBAL LEADERBOARD";
-                lbTypeButton.GetComponentInChildren<TMP_Text>().text = "Nearby Leaderboard";
+                lbTypeButton.GetComponent<MainButton>().ChangeText("NEARBY LEADERBOARD");
                 break;
         }
 
@@ -280,7 +281,7 @@ public class PlayFabLeaderboard : MonoBehaviour
 
         ResetRow(newRow);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text rankText = FindChildWithTag(newRow, "RankText").GetComponent<TMP_Text>();
         TMP_Text nameText = FindChildWithTag(newRow, "DisplayNameText").GetComponent<TMP_Text>();
         TMP_Text scoreText = FindChildWithTag(newRow, "ScoreText").GetComponent<TMP_Text>();
@@ -310,22 +311,20 @@ public class PlayFabLeaderboard : MonoBehaviour
 
     private void ResetRow(GameObject row)
     {
-        Image background = FindChildWithTag(row, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(row, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text rankText = FindChildWithTag(row, "RankText").GetComponent<TMP_Text>();
         TMP_Text nameText = FindChildWithTag(row, "DisplayNameText").GetComponent<TMP_Text>();
         TMP_Text scoreText = FindChildWithTag(row, "ScoreText").GetComponent<TMP_Text>();
 
-        Color bgColor = background.color;
+        background.alpha = 0;
         Color32 rankColor = rankText.color;
         Color32 nameColor = nameText.color;
         Color32 scoreColor = scoreText.color;
 
-        bgColor.a = 0;
         rankColor.a = 0;
         nameColor.a = 0;
         scoreColor.a = 0;
 
-        background.color = bgColor;
         rankText.color = rankColor;
         nameText.color = nameColor;
         scoreText.color = scoreColor;
@@ -335,7 +334,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         scoreText.text = "";
     }
 
-    private IEnumerator FadeInRow(Image background, TMP_Text rank, TMP_Text name, TMP_Text score, float delay)
+    private IEnumerator FadeInRow(CanvasGroup background, TMP_Text rank, TMP_Text name, TMP_Text score, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -350,17 +349,13 @@ public class PlayFabLeaderboard : MonoBehaviour
         yield return fadeInTexts;
     }
 
-    private IEnumerator FadeInBG(Image background)
+    private IEnumerator FadeInBG(CanvasGroup background)
     {
-        Color bgColor = background.color;
+        float targetAlpha = 1f;
 
-        float targetAlpha = 0.75f;
-
-        while (Mathf.Abs(bgColor.a - targetAlpha) > 0)
+        while (Mathf.Abs(background.alpha - targetAlpha) > 0)
         {
-            bgColor.a = Mathf.Lerp(bgColor.a, targetAlpha, 10 * Time.deltaTime);
-            
-            background.color = bgColor;
+            background.alpha = Mathf.Lerp(background.alpha, targetAlpha, 10 * Time.deltaTime);
 
             yield return null;
         }

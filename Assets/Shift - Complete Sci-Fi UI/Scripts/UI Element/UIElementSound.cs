@@ -9,11 +9,6 @@ namespace Michsky.UI.Shift
     {
         [Header("Resources")]
         public UIManager UIManagerAsset;
-        public AudioSource audioObject;
-
-        [Header("Custom SFX")]
-        public AudioClip hoverSFX;
-        public AudioClip clickSFX;
 
         [Header("Settings")]
         public bool enableHoverSound = true;
@@ -30,36 +25,35 @@ namespace Michsky.UI.Shift
                 catch { Debug.Log("<b>[UI Element Sound]</b> No UI Manager found.", this); this.enabled = false; }
             }
 
-            if (Application.isPlaying == true && audioObject == null)
+            if (checkForInteraction == true)
             {
-                try { audioObject = GameObject.Find("UI Audio").GetComponent<AudioSource>(); }
-                catch { Debug.Log("<b>[UI Element Sound]</b> No Audio Source found.", this); }
+                sourceButton = gameObject.GetComponent<Button>();
             }
-
-            if (checkForInteraction == true) { sourceButton = gameObject.GetComponent<Button>(); }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (checkForInteraction == true && sourceButton != null && sourceButton.interactable == false)
+            {
                 return;
+            }
 
             if (enableHoverSound == true)
             {
-                if (hoverSFX == null) { audioObject.PlayOneShot(UIManagerAsset.hoverSound); }
-                else { audioObject.PlayOneShot(hoverSFX); }
+                AudioManager.Instance.PlaySFX("SFXButtonHover");
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             if (checkForInteraction == true && sourceButton != null && sourceButton.interactable == false)
+            {
                 return;
+            }
 
             if (enableClickSound == true)
             {
-                if (clickSFX == null) { audioObject.PlayOneShot(UIManagerAsset.clickSound); }
-                else { audioObject.PlayOneShot(clickSFX); }
+                AudioManager.Instance.PlaySFX("SFXButtonClick");
             }
         }
     }

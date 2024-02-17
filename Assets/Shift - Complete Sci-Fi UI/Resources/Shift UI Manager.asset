@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableDynamicUpdate: 1
   enableExtendedColorPicker: 0
-  editorHints: 1
+  editorHints: 0
   backgroundColorTint: {r: 0.627451, g: 0.88235295, b: 1, a: 1}
   backgroundType: 1
   backgroundImage: {fileID: 21300000, guid: 59da25cc8872f164da4db6b05ad99d57, type: 3}
@@ -23,7 +23,7 @@ MonoBehaviour:
   backgroundSpeed: 1.25
   primaryColor: {r: 1, g: 0.8156863, b: 0.64705884, a: 1}
   secondaryColor: {r: 1, g: 0.99607843, b: 0.76862746, a: 1}
-  primaryReversed: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 1}
+  primaryReversed: {r: 0.37254903, g: 0.5294118, b: 0.78431374, a: 1}
   negativeColor: {r: 0.5058824, g: 0.8901961, b: 1, a: 1}
   backgroundColor: {r: 0.21568628, g: 0.29803923, b: 0.32156864, a: 1}
   lightFont: {fileID: 11400000, guid: 501c3584798b7544daed173223ef3afd, type: 2}
