@@ -13,23 +13,29 @@ using static UnityEngine.GraphicsBuffer;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using static UnityEditor.FilePathAttribute;
+using System.Data;
 
-public class Generator3D : MonoBehaviour {
-    enum CellType {
+public class Generator3D : MonoBehaviour 
+{
+    private enum CellType 
+    {
         None,
         Room,
         Hallway,
         Stairs
     }
 
-    class Room {
+    private class Room 
+    {
         public BoundsInt bounds;
 
-        public Room(Vector3Int location, Vector3Int size) {
+        public Room(Vector3Int location, Vector3Int size) 
+        {
             bounds = new BoundsInt(location, size);
         }
 
-        public static bool Intersect(Room a, Room b) {
+        public static bool Intersect(Room a, Room b) 
+        {
             return !((a.bounds.position.x >= (b.bounds.position.x + b.bounds.size.x)) || ((a.bounds.position.x + a.bounds.size.x) <= b.bounds.position.x)
                 || (a.bounds.position.y >= (b.bounds.position.y + b.bounds.size.y)) || ((a.bounds.position.y + a.bounds.size.y) <= b.bounds.position.y)
                 || (a.bounds.position.z >= (b.bounds.position.z + b.bounds.size.z)) || ((a.bounds.position.z + a.bounds.size.z) <= b.bounds.position.z));
@@ -57,14 +63,16 @@ public class Generator3D : MonoBehaviour {
     Random random;
     Grid3D<CellType> grid;
     List<Room> rooms;
+    List<Room> enemyRooms;
+    List<RoomData> enemyRoomData;
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
     List<List<Vector3Int>> pathList;
+    List<GameObject> doorList;
     List<GameObject> mapContent;
 
     void Start()
     {
-        pathList = new List<List<Vector3Int>>();
         ChangeSeed();
         InitializeMap();
     }
@@ -80,6 +88,8 @@ public class Generator3D : MonoBehaviour {
             }
             InitializeMap();
         }
+
+        CheckEnemyRoomActivation();
     }
 
     private void ChangeSeed()
@@ -92,7 +102,10 @@ public class Generator3D : MonoBehaviour {
         random = new Random(seed);
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
+        enemyRooms = new List<Room>();
+        enemyRoomData = new List<RoomData>();
         pathList = new List<List<Vector3Int>>();
+        doorList = new List<GameObject>();
         mapContent = new();
 
         PlaceRooms();
@@ -103,8 +116,9 @@ public class Generator3D : MonoBehaviour {
         InitRoomObjects();
     }
 
-    void PlaceRooms() {
-        for (int i = 0; i < roomCount; i++) {
+    private void PlaceRooms() {
+        for (int i = 0; i < roomCount; i++) 
+        {
 
             Vector3Int roomSize = new Vector3Int(
                 random.Next(roomMinSize.x + 1, roomMaxSize.x + 1),
@@ -122,8 +136,10 @@ public class Generator3D : MonoBehaviour {
             Room newRoom = new Room(location, roomSize);
             Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2));
 
-            foreach (var room in rooms) {
-                if (Room.Intersect(room, buffer)) {
+            foreach (var room in rooms) 
+            {
+                if (Room.Intersect(room, buffer)) 
+                {
                     add = false;
                     break;
                 }
@@ -131,15 +147,18 @@ public class Generator3D : MonoBehaviour {
 
             if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
                 || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y
-                || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z) {
+                || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z) 
+            {
                 add = false;
             }
 
-            if (add) {
+            if (add) 
+            {
                 rooms.Add(newRoom);
                 PlaceRoom(newRoom.bounds.position, newRoom.bounds.size);
 
-                foreach (var pos in newRoom.bounds.allPositionsWithin) {
+                foreach (var pos in newRoom.bounds.allPositionsWithin) 
+                {
                     grid[pos] = CellType.Room;
                 }
             }
@@ -150,7 +169,8 @@ public class Generator3D : MonoBehaviour {
     {
         List<Vertex> vertices = new List<Vertex>();
 
-        foreach (var room in rooms) {
+        foreach (var room in rooms) 
+        {
             vertices.Add(new Vertex<Room>((Vector3)room.bounds.position + ((Vector3)room.bounds.size) / 2, room));
         }
 
@@ -161,7 +181,8 @@ public class Generator3D : MonoBehaviour {
     {
         List<Prim.Edge> edges = new List<Prim.Edge>();
 
-        foreach (var edge in delaunay.Edges) {
+        foreach (var edge in delaunay.Edges) 
+        {
             edges.Add(new Prim.Edge(edge.U, edge.V));
         }
 
@@ -171,8 +192,10 @@ public class Generator3D : MonoBehaviour {
         var remainingEdges = new HashSet<Prim.Edge>(edges);
         remainingEdges.ExceptWith(selectedEdges);
 
-        foreach (var edge in remainingEdges) {
-            if (random.NextDouble() < 0.65) {
+        foreach (var edge in remainingEdges) 
+        {
+            if (random.NextDouble() < 0.65) 
+            {
                 selectedEdges.Add(edge);
             }
         }
@@ -182,7 +205,8 @@ public class Generator3D : MonoBehaviour {
     {
         DungeonPathfinder3D aStar = new DungeonPathfinder3D(size);
 
-        foreach (var edge in selectedEdges) {
+        foreach (var edge in selectedEdges) 
+        {
             var startRoom = (edge.U as Vertex<Room>).Item;
             var endRoom = (edge.V as Vertex<Room>).Item;
 
@@ -191,25 +215,34 @@ public class Generator3D : MonoBehaviour {
             var startPos = new Vector3Int((int)startPosf.x, (int)(startPosf.y - 0.5f), (int)startPosf.z);
             var endPos = new Vector3Int((int)endPosf.x, (int)(endPosf.y - 0.5f), (int)endPosf.z);
 
-            var path = aStar.FindPath(startPos, endPos, (DungeonPathfinder3D.Node a, DungeonPathfinder3D.Node b) => {
+            var path = aStar.FindPath(startPos, endPos, (DungeonPathfinder3D.Node a, DungeonPathfinder3D.Node b) => 
+            {
                 var pathCost = new DungeonPathfinder3D.PathCost();
 
                 var delta = b.Position - a.Position;
 
-                if (delta.y == 0) {
+                if (delta.y == 0) 
+                {
                     //flat hallway
                     pathCost.cost = Vector3Int.Distance(b.Position, endPos);    //heuristic
 
-                    if (grid[b.Position] == CellType.Stairs) {
+                    if (grid[b.Position] == CellType.Stairs) 
+                    {
                         return pathCost;
-                    } else if (grid[b.Position] == CellType.Room) {
+                    } 
+                    else if (grid[b.Position] == CellType.Room) 
+                    {
                         pathCost.cost += 5;
-                    } else if (grid[b.Position] == CellType.None) {
+                    } 
+                    else if (grid[b.Position] == CellType.None) 
+                    {
                         pathCost.cost += 1;
                     }
 
                     pathCost.traversable = true;
-                } else {
+                } 
+                else 
+                {
                     //staircase
                     if ((grid[a.Position] != CellType.None && grid[a.Position] != CellType.Hallway)
                         || (grid[b.Position] != CellType.None && grid[b.Position] != CellType.Hallway)) return pathCost;
@@ -223,14 +256,16 @@ public class Generator3D : MonoBehaviour {
 
                     if (!grid.InBounds(a.Position + verticalOffset)
                         || !grid.InBounds(a.Position + horizontalOffset)
-                        || !grid.InBounds(a.Position + verticalOffset + horizontalOffset)) {
+                        || !grid.InBounds(a.Position + verticalOffset + horizontalOffset)) 
+                    {
                         return pathCost;
                     }
 
                     if (grid[a.Position + horizontalOffset] != CellType.None
                         || grid[a.Position + horizontalOffset * 2] != CellType.None
                         || grid[a.Position + verticalOffset + horizontalOffset] != CellType.None
-                        || grid[a.Position + verticalOffset + horizontalOffset * 2] != CellType.None) {
+                        || grid[a.Position + verticalOffset + horizontalOffset * 2] != CellType.None) 
+                    {
                         return pathCost;
                     }
 
@@ -241,23 +276,28 @@ public class Generator3D : MonoBehaviour {
                 return pathCost;
             });
 
-            if (path != null) {
+            if (path != null) 
+            {
 
                 pathList.Add(path);
 
-                for (int i = 0; i < path.Count; i++) {
+                for (int i = 0; i < path.Count; i++) 
+                {
                     var current = path[i];
 
-                    if (grid[current] == CellType.None) {
+                    if (grid[current] == CellType.None) 
+                    {
                         grid[current] = CellType.Hallway;
                     }
 
-                    if (i > 0) {
+                    if (i > 0) 
+                    {
                         var prev = path[i - 1];
 
                         var delta = current - prev;
 
-                        if (delta.y != 0) {
+                        if (delta.y != 0) 
+                        {
                             int xDir = Mathf.Clamp(delta.x, -1, 1);
                             int zDir = Mathf.Clamp(delta.z, -1, 1);
                             Vector3Int verticalOffset = new Vector3Int(0, delta.y, 0);
@@ -269,13 +309,10 @@ public class Generator3D : MonoBehaviour {
                             grid[prev + verticalOffset + horizontalOffset * 2] = CellType.Stairs;
 
                             // spawn stairs
-                            // stair landing
-                            // stair
-                            Vector3 tilePos1 = prev + (Vector3)horizontalOffset * 1.5f + new Vector3(0.5f, -1.5f, 0.5f);
-                            Vector3 tilePos2 = prev + verticalOffset + (Vector3)horizontalOffset * 1.5f + new Vector3(0.5f, -1.5f, 0.5f);
                             // going up
                             if (delta.y > 0)
                             {
+                                Vector3 tilePos1 = prev + (Vector3)horizontalOffset * 1.5f + new Vector3(0.5f, -1.5f, 0.5f);
                                 if (delta.x > 0)
                                 {
                                     SpawnTileWithRotation(stairPrefab, tilePos1, -90);
@@ -294,8 +331,9 @@ public class Generator3D : MonoBehaviour {
                                 }
                             }
                             // goind down
-                            else if (delta.y < 0)
+                            if (delta.y < 0)
                             {
+                                Vector3 tilePos2 = prev + verticalOffset + (Vector3)horizontalOffset * 1.5f + new Vector3(0.5f, -1.5f, 0.5f);
                                 if (delta.x > 0)
                                 {
                                     SpawnTileWithRotation(stairPrefab, tilePos2, 90);
@@ -316,7 +354,7 @@ public class Generator3D : MonoBehaviour {
                         }
                     }
                 }
-
+                // spawn hallway
                 List<Vector3Int> tempList = new List<Vector3Int>();
                 for(int i = 0; i < path.Count; i++) 
                 {
@@ -352,27 +390,29 @@ public class Generator3D : MonoBehaviour {
 
     private void DeleteWalls()
     {
-        List<Vector3> doorList = new List<Vector3>();
+        // get paths
         foreach (var path in pathList)
         {
             if (path != null)
             {
-                Vector3 offset = new Vector3(0.55f, -1.0f, 0.5f);
-
+                Vector3 offset = new Vector3(0.55f, -0.75f, 0.5f);
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    Debug.DrawLine(path[i] + offset, path[i + 1] + offset, UnityEngine.Color.blue, 1000, false);
+                    // check in between each path node
+                    Debug.DrawLine(path[i] + offset, path[i + 1] + offset, UnityEngine.Color.blue, 60, false);
                     RaycastHit[] hitList = Physics.RaycastAll(path[i] + offset, path[i + 1] - path[i], (path[i] - path[i + 1]).magnitude);
                     foreach (RaycastHit hit in hitList)
                     {
+                        // if theres a wall
                         if (hit.transform.CompareTag("MapWallTile"))
                         {
+                            // place pillars object
                             if (hit.transform.gameObject.name != "Wall")
                             {
                                 bool placeDoor = true;
-                                foreach (Vector3 doorPos in doorList)
+                                foreach (var doorPos in doorList)
                                 {
-                                    if (hit.transform.position == doorPos)
+                                    if (hit.transform.position == doorPos.transform.position)
                                     {
                                         placeDoor = false;
                                         break;
@@ -380,8 +420,7 @@ public class Generator3D : MonoBehaviour {
                                 }
                                 if (placeDoor)
                                 {
-                                    SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y);
-                                    doorList.Add(hit.transform.position);
+                                    doorList.Add(SpawnTileWithRotation(wallDoorPrefab, hit.transform.position, hit.transform.eulerAngles.y));
                                 }
                             }
                             // Destroy because it is unable to be pooled as it is part of a prefab
@@ -390,14 +429,17 @@ public class Generator3D : MonoBehaviour {
                         }
                     }
                 }
-                Debug.DrawLine(path[0] + offset, path[1] + offset, UnityEngine.Color.green, 1000, false);
-                Debug.DrawLine(path[path.Count - 2] + offset, path[path.Count - 1] + offset, UnityEngine.Color.red, 1000, false);
+                Debug.DrawLine(path[0] + offset, path[1] + offset, UnityEngine.Color.green, 60, false);
+                Debug.DrawLine(path[path.Count - 2] + offset, path[path.Count - 1] + offset, UnityEngine.Color.red, 60, false);
             }
         }
     }
 
-    void InitRoomObjects()
+    private void InitRoomObjects()
     {
+        // place light in the middle of the room
+        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, rooms[0].bounds.center + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+        mapContent.Add(obj);
         PlaceRoomObjects(rooms[0].bounds.position, rooms[0].bounds.size, mPrefabManager.startRoomData);
         Vector3 playerStartPos = rooms[0].bounds.center + Vector3.down;
         playerObj.transform.position = playerStartPos;
@@ -406,6 +448,10 @@ public class Generator3D : MonoBehaviour {
         bool isEndPlaced = false;
         for (int i = 1; i < rooms.Count; i++)
         {
+            // place light in the middle of the room
+            obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, rooms[i].bounds.center + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+            mapContent.Add(obj);
+
             if (!isEndPlaced)
             {
                 // try place end
@@ -420,23 +466,41 @@ public class Generator3D : MonoBehaviour {
                 // randomise other tyes of rooms
                 else
                 {
-                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.lootRoomData);
+                    int contentRoomIndex = RandomR.Range(0, mPrefabManager.contentRoomData.Count);
+                    if (mPrefabManager.contentRoomData[contentRoomIndex].name.Contains("Enemy"))
+                    {
+                        // add room to enemy room for later spawning
+                        enemyRooms.Add(rooms[i]);
+                        enemyRoomData.Add(mPrefabManager.contentRoomData[contentRoomIndex]);
+                    }
+                    else
+                    {
+                        // place rest of the objects
+                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.contentRoomData[contentRoomIndex]);
+                    }
                 }
             }
             // randomise other tyes of rooms
             else
             {
-                PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.lootRoomData);
+                int contentRoomIndex = RandomR.Range(0, mPrefabManager.contentRoomData.Count);
+                if (mPrefabManager.contentRoomData[contentRoomIndex].name.Contains("Enemy"))
+                {
+                    // add room to enemy room for later spawning
+                    enemyRooms.Add(rooms[i]);
+                    enemyRoomData.Add(mPrefabManager.contentRoomData[contentRoomIndex]);
+                }
+                else
+                {
+                    // place rest of the objects
+                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.contentRoomData[contentRoomIndex]);
+                }
             }
         }
     }
 
     private void PlaceRoomObjects(Vector3Int location, Vector3Int size, RoomData data)
     {
-        // place light in the middle of the room
-        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, location + new Vector3(size.x / 2, size.y - 1.65f, size.z / 2), Quaternion.identity, ObjectPoolManager.PoolType.Map);
-        mapContent.Add(obj);
-
         // set room type
         RoomData roomData = data;
         // create list of available spaces
@@ -445,7 +509,7 @@ public class Generator3D : MonoBehaviour {
         {
             for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
             {
-                vacantSpaces.Add(location + new Vector3(x, -0.35f, z));
+                vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
             }
         }
         // loops all items
@@ -465,7 +529,7 @@ public class Generator3D : MonoBehaviour {
                         int randIndex = RandomR.Range(0, vacantSpaces.Count);
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
-                        obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         mapContent.Add(obj);
                         obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                     }
@@ -474,6 +538,32 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
+    private void CheckEnemyRoomActivation()
+    {
+        for (int i = 0; i < enemyRooms.Count; i++)
+        {
+            Collider[] colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 - 0.25f));
+            foreach (var col in colliders)
+            {
+                if (col.CompareTag("PlayerCollider"))
+                {
+                    // place enemies
+                    PlaceRoomObjects(enemyRooms[i].bounds.position, enemyRooms[i].bounds.size, enemyRoomData[i]);
+                    enemyRooms.RemoveAt(i);
+                    enemyRoomData.RemoveAt(i);
+
+                    // lock players in
+                    // PLACEHOLDER
+                    foreach (var door in doorList)
+                    {
+                        door.GetComponent<DoorTrigger>().ToggleDoor(true);
+                    }
+                    // PLACEHOLDER
+                }
+            }
+        }
+    }
+     
     private void PlaceRoom(Vector3Int location, Vector3Int size) 
     {
         GameObject obj;
@@ -569,10 +659,11 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    private void SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
+    private GameObject SpawnTileWithRotation(GameObject go, Vector3 location, float angle)
     {
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(go, location, Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
         obj.transform.eulerAngles = new Vector3(0, angle, 0);
+        return obj;
     }
 }
