@@ -126136,6 +126136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a33c55aff972a143bc0073c6a1be67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playfabSocial: {fileID: 3934542636007682400}
+  playfabLeaderboard: {fileID: 3934542636007682398}
+  playfabGuild: {fileID: 3934542636007682401}
+  playfabScripts: []
   loginPage: {fileID: 5276009537103711752}
   regPage: {fileID: 5276009536068887908}
   forgetpassPage: {fileID: 5276009536566619173}

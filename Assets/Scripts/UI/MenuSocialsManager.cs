@@ -66,6 +66,7 @@ public class MenuSocialsManager : MonoBehaviour
 
     public void UpdateCamera(CinemachineVirtualCamera target)
     {
+        SetAllButtonClick(false);
         bool delay = false;
 
         switch (currCamera.name)
