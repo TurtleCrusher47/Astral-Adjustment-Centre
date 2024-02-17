@@ -26,9 +26,11 @@ public class Shuriken : GameObjectRangedWeapon
             middleShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward;
             middleShuriken.GetComponent<ShurikenProjectile>().MoveProjectile();
 
+
             GameObject leftShuriken = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
             leftShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward - cam.right;
             leftShuriken.GetComponent<ShurikenProjectile>().MoveProjectile();
+
 
             GameObject rightShuriken = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
             rightShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward + cam.right;

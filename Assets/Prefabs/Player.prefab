@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227330586}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.32891485, y: -0.30551478, z: 0.5472531, w: 0.7063921}
+  m_LocalPosition: {x: 0.025, y: 0.17, z: 0.052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -606,9 +606,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 0}
-    m_Mid: {fileID: 0}
-    m_Tip: {fileID: 0}
+    m_Root: {fileID: 7774105144243887349}
+    m_Mid: {fileID: 7296277073800304653}
+    m_Tip: {fileID: 3058291381335876760}
     m_Target: {fileID: 8948947016762759188}
     m_Hint: {fileID: 8365425269064887626}
     m_TargetPositionWeight: 1
@@ -2475,7 +2475,7 @@ GameObject:
   - component: {fileID: 6063671664277991897}
   m_Layer: 0
   m_Name: Orientation
-  m_TagString: Untagged
+  m_TagString: Orientation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

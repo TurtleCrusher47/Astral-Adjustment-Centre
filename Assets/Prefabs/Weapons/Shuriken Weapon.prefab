@@ -56,6 +56,10 @@ MonoBehaviour:
     type: 2}
   projectile: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
     type: 3}
+  weaponLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  abilityProjectile: {fileID: 0}
 --- !u!54 &2234285575767978175
 Rigidbody:
   m_ObjectHideFlags: 0
