@@ -11,6 +11,8 @@ public class LoadingScene : MonoBehaviour
     public TMP_Text loadingText;
     public Slider loadingBar;
 
+    [SerializeField] private Color baseColor, altColor;
+
     //private float realProgress = 0.0f;
     private float fakeProgress = 0f;
 
@@ -23,6 +25,8 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
+        bool switchColor = false;
+        loadingBarText.color = baseColor;
 
         // Begin to load the Scene you specify
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(GameManager.Instance.nextSceneName);
@@ -31,16 +35,22 @@ public class LoadingScene : MonoBehaviour
 
         // When the load is still in progress, output the Text and progress bar
         while (!asyncOperation.isDone)
-        {
+        {   
             // Simulate a delay for loading time
             yield return new WaitForSeconds(0.01f); // Adjust the time as needed
 
             // Continue incrementing fake progress even after Unity's progress reaches 0.9
-            fakeProgress = Mathf.Clamp01(fakeProgress + 0.0030f); // Adjust the increment as needed
+            fakeProgress = Mathf.Clamp01(fakeProgress + 0.01f); // Adjust the increment as needed
 
             // Output the current progress
             float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
             progress = Mathf.Lerp(progress, fakeProgress, 1f); // Interpolate between Unity's progress and fake progress
+
+            if (progress > 0.45f && !switchColor)
+            {
+                switchColor = true;
+                loadingBarText.color = altColor;
+            }
 
             loadingBarText.text = (progress * 100f).ToString("F0") + "%";
             loadingBar.value = progress;
