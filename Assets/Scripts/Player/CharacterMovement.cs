@@ -182,29 +182,29 @@ public class CharacterMovement : MonoBehaviour
 	void SetAnimator()
 	{
 
-		// if (isMoving)
-		// {
-		// 	if(playerData.moveSpeed > playerData.walkSpeed + 0.3)
-		// 	{
-		// 		animator.SetBool("isRunning", true);
-		// 		animator.SetBool("isWalking", false);
-		// 	}
+		//  if (isMoving)
+		//  {
+		//  	if(playerData.moveSpeed > playerData.walkSpeed + 0.3)
+		//  	{
+		//  		animator.SetBool("isRunning", true);
+		//  		animator.SetBool("isWalking", false);
+		//  	}
 
-		// 	else
-		// 	{
-		// 		animator.SetBool("isWalking", true);
-		// 		animator.SetBool("isRunning", false);
-		// 	}
-		// }
+		//  	else
+		//  	{
+		//  		animator.SetBool("isWalking", true);
+		//  		animator.SetBool("isRunning", false);
+		//  	}
+		//  }
 		
-		// else
-		// {
-		// 	animator.SetBool("isWalking", false);
-		// 	animator.SetBool("isRunning", false);
+		//  else
+		//  {
+		//  	animator.SetBool("isWalking", false);
+		//  	animator.SetBool("isRunning", false);
 
-		// }
+		//  }
 
-		// animator.SetBool("isCrouching", isCrouching);
+		//  animator.SetBool("isCrouching", isCrouching);
 
 	}
 

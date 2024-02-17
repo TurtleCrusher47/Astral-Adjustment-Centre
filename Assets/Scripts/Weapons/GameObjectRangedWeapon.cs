@@ -7,6 +7,9 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
     [SerializeField] protected GameObjectProjectileData gameObjectProjectileData;
     [SerializeField] protected GameObject projectile;
 
+    [SerializeField] protected LayerMask weaponLayer;
+
+
     protected override void UsePrimary()
     {
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
@@ -18,10 +21,11 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
                 currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
 
                 RaycastHit hit;
-                if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range))
+                if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range, ~weaponLayer))
                 {
+                    Debug.Log("Ray " + hit.collider.gameObject.name);
                     currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;
-                    // Debug.Log(cam.forward);
+
                 }
 
                 currentProjectile.GetComponent<ShurikenProjectile>().MoveProjectile();
