@@ -133,8 +133,8 @@ public class MainSceneManager : MonoBehaviour
         PlayFabManager.currGuildRole = "";
 
         ClearAllLeaderboard();
-        ClearAllStoreItems();
-        ClearAllInventoryItems();
+        //ClearAllStoreItems();
+        //ClearAllInventoryItems();
         ClearFriendListItems();
         ClearFriendRequestListItems();
         ClearFriendPendingListItems();
@@ -149,7 +149,7 @@ public class MainSceneManager : MonoBehaviour
 
         PlayFabClientAPI.ForgetAllCredentials();
 
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MenuScene");
     }
 
     // public void SetDisplayName(string name)

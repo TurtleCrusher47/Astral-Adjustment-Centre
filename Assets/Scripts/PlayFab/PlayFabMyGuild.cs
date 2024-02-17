@@ -9,6 +9,7 @@ using TMPro;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.GroupsModels;
+using Michsky.UI.Shift;
 
 public class PlayFabMyGuild : MonoBehaviour
 {
@@ -71,7 +72,7 @@ public class PlayFabMyGuild : MonoBehaviour
                 membersListGroup.gameObject.SetActive(false);
 
                 detail2Text.text = "Application Expiry";
-                listTypeButton.GetComponentInChildren<TMP_Text>().text = "Members";
+                listTypeButton.GetComponent<MainButton>().ChangeText("MEMBERS");
 
                 OnButtonRequestsList();
                 break;
@@ -82,7 +83,7 @@ public class PlayFabMyGuild : MonoBehaviour
                 requestAndPendingListGroup.gameObject.SetActive(false);
 
                 detail2Text.text = "Rank";
-                listTypeButton.GetComponentInChildren<TMP_Text>().text = "Requests / Pending";
+                listTypeButton.GetComponent<MainButton>().ChangeText("REQUEST / PENDING");
 
                 OnButtonMembersList();
                 break;
@@ -477,7 +478,7 @@ public class PlayFabMyGuild : MonoBehaviour
 
         ResetListRow(newRow, 0);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button kickBtn = FindChildWithTag(newRow, "Kick").GetComponent<Button>();
@@ -512,7 +513,7 @@ public class PlayFabMyGuild : MonoBehaviour
 
         ResetListRow(newRow, 1);
 
-        Image background = FindChildWithTag(newRow, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(newRow, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(newRow, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(newRow, "SocialDetail2Text").GetComponent<TMP_Text>();
         Button acceptBtn = FindChildWithTag(newRow, "AcceptRequest").GetComponent<Button>();
@@ -544,7 +545,7 @@ public class PlayFabMyGuild : MonoBehaviour
 
     private void ResetListRow(GameObject row, int type)
     {
-        Image background = FindChildWithTag(row, "RowBG").GetComponent<Image>();
+        CanvasGroup background = FindChildWithTag(row, "RowBG").GetComponent<CanvasGroup>();
         TMP_Text detail1Text = FindChildWithTag(row, "SocialDetail1Text").GetComponent<TMP_Text>();
         TMP_Text detail2Text = FindChildWithTag(row, "SocialDetail2Text").GetComponent<TMP_Text>();
         Color32 defaultColor = new Color32(255, 255, 255, 255);
@@ -600,15 +601,13 @@ public class PlayFabMyGuild : MonoBehaviour
                 break;
         }
 
-        Color bgColor = background.color;
+        background.alpha = 0;
         Color32 nameColor = detail1Text.color;
         Color32 leaderColor = detail2Text.color;
 
-        bgColor.a = 0;
         nameColor.a = 0;
         leaderColor.a = 0;
 
-        background.color = bgColor;
         detail1Text.color = nameColor;
         detail2Text.color = leaderColor;
 
@@ -616,7 +615,7 @@ public class PlayFabMyGuild : MonoBehaviour
         detail2Text.text = "";
     }
 
-    private IEnumerator FadeInRow(GridLayoutGroup glGroup, Image background, TMP_Text name, TMP_Text status, Button btn1, Button btn2, float delay)
+    private IEnumerator FadeInRow(GridLayoutGroup glGroup, CanvasGroup background, TMP_Text name, TMP_Text status, Button btn1, Button btn2, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -651,17 +650,13 @@ public class PlayFabMyGuild : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeInBG(Image background)
+    private IEnumerator FadeInBG(CanvasGroup background)
     {
-        Color bgColor = background.color;
+        float targetAlpha = 1f;
 
-        float targetAlpha = 0.75f;
-
-        while (Mathf.Abs(bgColor.a - targetAlpha) > 0)
+        while (Mathf.Abs(background.alpha - targetAlpha) > 0)
         {
-            bgColor.a = Mathf.Lerp(bgColor.a, targetAlpha, 10 * Time.deltaTime);
-            
-            background.color = bgColor;
+            background.alpha = Mathf.Lerp(background.alpha, targetAlpha, 10 * Time.deltaTime);
 
             yield return null;
         }

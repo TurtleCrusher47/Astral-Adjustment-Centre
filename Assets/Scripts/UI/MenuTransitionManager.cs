@@ -71,6 +71,10 @@ public class MenuTransitionManager : MonoBehaviour
 
         switch (target.name)
         {
+            case "StartCamera":
+                loginTarget.SetActive(true);
+                StartCoroutine(DelayedShowPanel(loginPanel, loginMat, true));
+                break;
             case "MenuCamera":
                 menuTarget.SetActive(true);
                 StartCoroutine(DelayedShowPanel(menuPanel, menuMat, true));

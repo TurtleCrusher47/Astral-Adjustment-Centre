@@ -51,12 +51,12 @@ public class AudioManager : Singleton<AudioManager>
             }
         }
 
-        for (int i = 0; i < audSources.Count; i++)
+        for (int i = 0; i < sfxSources.Count; i++)
         {
-            if (!audSources[i].isPlaying)
+            if (!sfxSources[i].isPlaying)
             {
-                audSources[i].clip = clipToPlay;
-                audSources[i].Play();
+                sfxSources[i].clip = clipToPlay;
+                sfxSources[i].Play();
                 break;
             }
         }
