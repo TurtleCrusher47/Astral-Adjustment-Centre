@@ -548,25 +548,30 @@ public class Generator3D : MonoBehaviour
 
     private void CheckEnemyRoomActivation()
     {
+        if (enemyRooms.Count == 0)
+        {
+            return;
+        }
         for (int i = 0; i < enemyRooms.Count; i++)
         {
-            Collider[] colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 - 0.25f));
+            Collider[] colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2 - 0.25f, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 - 0.25f));
             foreach (var col in colliders)
             {
                 if (col.CompareTag("PlayerCollider"))
                 {
+                    // lock players in
+                    colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2 + 0.5f, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 + 0.5f));
+                    foreach (var collider in colliders)
+                    {
+                        if (collider.CompareTag("Kick"))
+                        {
+                            collider.GetComponent<DoorTrigger>().ToggleDoor(true);
+                        }
+                    }
                     // place enemies
                     PlaceRoomObjects(enemyRooms[i].bounds.position, enemyRooms[i].bounds.size, enemyRoomData[i]);
                     enemyRooms.RemoveAt(i);
                     enemyRoomData.RemoveAt(i);
-
-                    // lock players in
-                    // PLACEHOLDER
-                    foreach (var door in doorList)
-                    {
-                        door.GetComponent<DoorTrigger>().ToggleDoor(true);
-                    }
-                    // PLACEHOLDER
                 }
             }
         }

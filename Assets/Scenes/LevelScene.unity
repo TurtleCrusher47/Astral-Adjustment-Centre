@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.041701302, g: 0.042751, b: 0.056766093, a: 1}
+  m_IndirectSpecularColor: {r: 0.030008795, g: 0.031996623, b: 0.042541724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,7 +156,7 @@ MonoBehaviour:
   startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
   endRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
   contentRoomData:
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
 --- !u!114 &108134767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,9 @@ GameObject:
   - component: {fileID: 2036406989094617423}
   - component: {fileID: 389016990241709007}
   - component: {fileID: 3364898564859113933}
-  m_Layer: 0
+  - component: {fileID: 3364898564859113934}
+  - component: {fileID: 3364898564859113935}
+  m_Layer: 10
   m_Name: B_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,6 +1309,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3364898564859113934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563831979046401102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac15eb201c34f604e85e674609320a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &3364898564859113935
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563831979046401102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.023339564, y: 0.019999996, z: 0.019999998}
+  m_Center: {x: -0.0016697815, y: 0, z: -0.000000014901161}
 --- !u!4 &3780806762476225761
 Transform:
   m_ObjectHideFlags: 0
