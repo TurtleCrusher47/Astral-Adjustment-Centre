@@ -45,6 +45,7 @@ public class ForgetPasswordManager : MonoBehaviour
     void OnEmailSentSuccess(SendAccountRecoveryEmailResult r)
     {
         txt_info.text = "Recovery email has been sent ! ";
+        if_email.text = string.Empty;
         btn_send.interactable = false;
 
         try
