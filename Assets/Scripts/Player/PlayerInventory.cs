@@ -10,6 +10,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject invGridElementPrefab;
     [SerializeField] private LayerMask targetableLayer;
     [SerializeField] private int invSlots;
+    [SerializeField] private Transform cam;
 
     [SerializeField] private List<Sprite> weaponIcons = new List<Sprite>();
     public static GameObject selectBorder;
@@ -139,7 +140,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && invWeapons.Count == maxInvSlots)
         {
-            Vector3 direction = Camera.main.transform.forward;
+            Vector3 direction = cam.forward;
 
             GameObject hitObj = GetLOSObject(direction, false, targetableLayer);
 
@@ -162,14 +163,14 @@ public class PlayerInventory : MonoBehaviour
     {
         if (!ignoreLayers)
         {
-            if (Physics.Raycast(Camera.main.transform.position, dir, out RaycastHit hit, 1000, mask))
+            if (Physics.Raycast(cam.position, dir, out RaycastHit hit, 1000, mask))
             {
                 return hit.collider.gameObject;
             }
         }
         else
         {
-            if (Physics.Raycast(Camera.main.transform.position, dir, out RaycastHit hit, 1000, ~mask))
+            if (Physics.Raycast(cam.position, dir, out RaycastHit hit, 1000, ~mask))
             {
                 return hit.collider.gameObject;
             }
