@@ -20,15 +20,9 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
                 GameObject currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
                 currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
 
-                RaycastHit hit;
-                if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range, ~weaponLayer))
-                {
-                    Debug.Log("Ray " + hit.collider.gameObject.name);
-                    currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;
+                SetDirection(currentProjectile);
 
-                }
-
-                currentProjectile.GetComponent<ShurikenProjectile>().MoveProjectile();
+                currentProjectile.GetComponent<GameObjectProjectile>().MoveProjectile();
 
                 // Only deduct ammo if the ammo is not infinite
                 if (!rangedWeaponData.infiniteAmmo)
@@ -45,5 +39,15 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
 
     protected override void OnPrimary()
     {
+    }
+
+    protected void SetDirection(GameObject projectile)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range, ~weaponLayer))
+        {
+            Debug.Log("Ray " + hit.collider.gameObject.name);
+            projectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;
+        }
     }
 }

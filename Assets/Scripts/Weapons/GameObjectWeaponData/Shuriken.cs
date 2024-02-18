@@ -11,8 +11,11 @@ public class Shuriken : GameObjectRangedWeapon
         if (CanUseAbility())
         {
             GameObject kunai = ObjectPoolManager.Instance.SpawnObject(abilityProjectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
-            kunai.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward;
-            kunai.GetComponent<ShurikenProjectile>().MoveProjectile();   
+            kunai.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
+
+            SetDirection(kunai);
+
+            kunai.GetComponent<GameObjectProjectile>().MoveProjectile();   
 
             abilityCooldownTimer = rangedWeaponData.abilitycooldown;
         }
@@ -23,18 +26,18 @@ public class Shuriken : GameObjectRangedWeapon
         if (CanUseSecondary())
         {
             GameObject middleShuriken = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
-            middleShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward;
-            middleShuriken.GetComponent<ShurikenProjectile>().MoveProjectile();
+            middleShuriken.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
+            middleShuriken.GetComponent<GameObjectProjectile>().MoveProjectile();
 
 
             GameObject leftShuriken = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
-            leftShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward - cam.right;
-            leftShuriken.GetComponent<ShurikenProjectile>().MoveProjectile();
+            leftShuriken.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward - cam.right;
+            leftShuriken.GetComponent<GameObjectProjectile>().MoveProjectile();
 
 
             GameObject rightShuriken = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
-            rightShuriken.GetComponent<ShurikenProjectile>().projectileDirection = cam.forward + cam.right;
-            rightShuriken.GetComponent<ShurikenProjectile>().MoveProjectile();
+            rightShuriken.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward + cam.right;
+            rightShuriken.GetComponent<GameObjectProjectile>().MoveProjectile();
 
             secondaryCooldownTimer = rangedWeaponData.secondarycooldown;
         }
