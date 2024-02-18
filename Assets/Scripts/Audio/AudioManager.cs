@@ -26,7 +26,6 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayBGM(string name)
     {
         AudioClip bgmToPlay = null;
-        bgmSource.loop = true;
 
         for (int i = 0; i < bgmClips.Count; i++)
         {
@@ -36,7 +35,9 @@ public class AudioManager : Singleton<AudioManager>
             }
         }
 
-        bgmSource.PlayOneShot(bgmToPlay);
+        bgmSource.clip = bgmToPlay;
+        bgmSource.Play();
+        bgmSource.loop = true;
     }
 
     public void PlaySFX(string name)
