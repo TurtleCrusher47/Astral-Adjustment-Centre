@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerWeaponDrop : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private Camera cam;
+    [SerializeField] private Transform cam;
 
     [SerializeField] private float dropForwardForce, dropUpwardForce;
 
@@ -29,7 +29,7 @@ public class PlayerWeaponDrop : MonoBehaviour
 
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
 
-        rb.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
+        rb.AddForce(cam.forward * dropForwardForce, ForceMode.Impulse);
 
         float random = Random.Range(-1, 1);
 
