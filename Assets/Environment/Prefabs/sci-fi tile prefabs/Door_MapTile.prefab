@@ -590,10 +590,9 @@ GameObject:
   m_Component:
   - component: {fileID: 614567079374594137}
   - component: {fileID: 3595810891524663377}
-  - component: {fileID: 3506285791391905749}
   m_Layer: 0
   m_Name: Pillar_MapTile
-  m_TagString: Kick
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,19 +627,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11304759, y: 0.39838558, z: 0.111614324}
   m_Center: {x: -0.008653087, y: 0.19985597, z: -0.00031123162}
---- !u!114 &3506285791391905749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031096167296530566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa525862e39806c46986488cfd6f88cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: {fileID: 4933406057509150444}
 --- !u!1 &6350621333058703917
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7147627235797150406}
+  - component: {fileID: 7577170043474391611}
   m_Layer: 0
   m_Name: Door_MapTile
   m_TagString: Untagged
@@ -707,3 +694,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &7577170043474391611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147627235797150405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa525862e39806c46986488cfd6f88cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 4933406057509150444}
