@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Railgun : MonoBehaviour
+public class Railgun : RaycastRangedWeapon
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnSecondary()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnSkill()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    protected override void UseAbility()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void UseSecondary()
+    {
+        throw new System.NotImplementedException();
     }
 }
