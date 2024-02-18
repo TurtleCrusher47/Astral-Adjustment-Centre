@@ -71,6 +71,14 @@ public class Generator3D : MonoBehaviour
     List<GameObject> doorList;
     List<GameObject> mapContent;
 
+    void Awake()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBGM("BGMSunsetSchool");
+        }
+    }
+
     void Start()
     {
         ChangeSeed();
