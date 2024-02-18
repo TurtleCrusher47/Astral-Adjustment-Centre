@@ -15,4 +15,4 @@ MonoBehaviour:
   ObjectsList:
   - {fileID: 1165792392210164609, guid: 86927605401ce0d4797db526abf3832c, type: 3}
   maxMinChanceList:
-  - {x: 10, y: 10, z: 100}
+  - {x: 1, y: 1, z: 100}

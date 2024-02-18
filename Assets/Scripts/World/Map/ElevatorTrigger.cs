@@ -8,5 +8,6 @@ public class ElevatorTrigger : MonoBehaviour
     {
         // load next level
         Debug.Log("Next Level");
+        GameManager.Instance.ChangeScene("LevelScene");
     }
 }
