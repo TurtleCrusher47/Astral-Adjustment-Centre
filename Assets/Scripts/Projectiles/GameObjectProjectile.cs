@@ -9,7 +9,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
     protected Rigidbody rb;
     private Transform cam;
     private Transform firePoint;
-    public Vector3 projectileDirection;
+    [HideInInspector] public Vector3 projectileDirection;
 
     void Awake()
     {
@@ -22,6 +22,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = gameObjectProjectileData.angularVelocity;
+        rb.constraints = ~RigidbodyConstraints.FreezePosition;
     }
 
     public void MoveProjectile()
