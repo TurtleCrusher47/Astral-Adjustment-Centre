@@ -22,6 +22,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = gameObjectProjectileData.angularVelocity;
+        rb.constraints = ~RigidbodyConstraints.FreezePosition;
     }
 
     public void MoveProjectile()

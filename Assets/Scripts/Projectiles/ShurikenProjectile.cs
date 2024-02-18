@@ -6,14 +6,23 @@ public class ShurikenProjectile : GameObjectProjectile
 {
     public override void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Player")
+        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
         return;
 
         // Debug.Log(collider.transform.name);
-        IDamageable damageable = collider.transform.GetComponent<IDamageable>();
-        damageable?.Damage(gameObjectProjectileData.damage);
+        // IDamageable damageable = collider.transform.GetComponent<IDamageable>();
+        // damageable?.Damage(gameObjectProjectileData.damage);
+        if (collider.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
+        {
+            damageable.Damage(gameObjectProjectileData.damage);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
+        }
 
-        // Return back to object pool
-        ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject);
+        Debug.Log(collider.name);
     }
 }

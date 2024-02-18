@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class ExplosiveKunaiProjectile : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         

@@ -27,6 +27,18 @@ TagManager:
   - AcceptRequest
   - DenyRequest
   - Orientation
+  - ItemName
+  - ItemBG
+  - ItemDescription
+  - ItemBuy
+  - ItemIcon
+  - ItemCost
+  - ItemOwned
+  - SocialDetail3Text
+  - JoinRequest
+  - Item2
+  - Item1
+  - WeaponCollider
   layers:
   - Default
   - TransparentFX
