@@ -204,6 +204,9 @@ public class LoginPanelManager : MonoBehaviour
             }, OnError);
         }
 
+        if_userid.text = string.Empty;
+        if_password.text = string.Empty;
+
         PlayFabGroupsAPI.ListMembership(new ListMembershipRequest
         {
 

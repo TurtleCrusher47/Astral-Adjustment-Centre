@@ -204,6 +204,7 @@ public class PlayFabMyGuild : MonoBehaviour
             }, inviteResult=>
             {
                 invitePlayerText.text = "Invited : " + aiResult.AccountInfo.TitleInfo.DisplayName;
+                if_displayName.text = string.Empty;
             }, OnError);
         }, error=>
         {

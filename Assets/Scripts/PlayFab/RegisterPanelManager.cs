@@ -84,6 +84,13 @@ public class RegisterPanelManager : MonoBehaviour
     void OnRegisterSuccess(RegisterPlayFabUserResult r)
     {
         mainSceneManager.SetStatusText("Register Successful " + if_displayname.text + " !\nContinue on to Login Page.");
+
+        if_displayname.text = string.Empty;
+        if_username.text = string.Empty;
+        if_email.text = string.Empty;
+        if_password.text = string.Empty;
+        if_confirmpassword.text = string.Empty;
+
         mainSceneManager.ShowLoginPage();
     }
 }
