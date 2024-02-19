@@ -104,6 +104,15 @@ public class Generator3D : MonoBehaviour
             }
             InitializeMap();
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach (var obj in mapContent)
+            {
+                //Destroy(obj);
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
+            }
+            InitializeMap();
+        }
 
         if (Input.GetKeyDown(KeyCode.O))
         {
