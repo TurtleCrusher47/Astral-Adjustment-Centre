@@ -7,9 +7,16 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 using Michsky.UI.Shift;
+using System.Linq;
 
 public class PlayFabLeaderboard : MonoBehaviour
 {
+    [System.Serializable]
+    public class GetRunsCompletedResults
+    {
+        public List<string> RunsCompleted = new();
+    }
+
     public enum StatisticType
     {
         OVERALL,
@@ -26,6 +33,7 @@ public class PlayFabLeaderboard : MonoBehaviour
     }
 
     public static List<GameObject> lbItems = new List<GameObject>();
+    public List<string> playersRunCompleted;
 
     [SerializeField] public GameObject rowPrefab;
     [SerializeField] public GridLayoutGroup lbGroup;
@@ -112,6 +120,36 @@ public class PlayFabLeaderboard : MonoBehaviour
         }
     }
 
+    private void GetLeaderboardIcon(List<PlayerLeaderboardEntry> entries)
+    {
+        List<string> playfabIDs = new List<string>();
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            playfabIDs.Add(entries[i].PlayFabId);
+        }
+
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest
+        {
+            FunctionName = "GetPlayerDatas",
+            FunctionParameter = new
+            {
+                PlayFabIDs = JSONManager.StringListToJSON("IDs", playfabIDs)
+            }
+        }, csResult=>
+        {
+            var jsonString = csResult.FunctionResult.ToString();
+            var runsCompleted = JsonUtility.FromJson<GetRunsCompletedResults>(jsonString);
+
+            playersRunCompleted = runsCompleted.RunsCompleted.ToList();
+
+            for (int i = 0; i < entries.Count; i++)
+            {
+                UpdateRow(entries[i], i + 1);
+            }
+        }, OnLeaderboardError);
+    }
+
     public void OnButtonGetLeaderboard()
     {
         currLBType = LeaderboardType.GLOBAL;
@@ -142,10 +180,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         List<PlayerLeaderboardEntry> entries = r.Leaderboard;
         entries.Reverse();
 
-        for (int i = 0; i < entries.Count; i++)
-        {
-            UpdateRow(entries[i], i + 1);
-        }
+        GetLeaderboardIcon(entries);
     }
 
     public void OnButtonGetNearbyLeaderboard()
@@ -175,10 +210,7 @@ public class PlayFabLeaderboard : MonoBehaviour
 
         ResetAllRows();
 
-        for (int i = 0; i < r.Leaderboard.Count; i++)
-        {
-            UpdateRow(r.Leaderboard[i], r.Leaderboard[i].Position + 1);
-        }
+        GetLeaderboardIcon(r.Leaderboard);
     }
 
     public void OnButtonGetFriendLeaderboard()
@@ -235,10 +267,7 @@ public class PlayFabLeaderboard : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < entryList.Count; i++)
-        {
-            UpdateRow(entryList[i], i + 1);
-        }
+        GetLeaderboardIcon(entryList);
     }
 
     public void OnButtonRefreshLB()
@@ -286,9 +315,45 @@ public class PlayFabLeaderboard : MonoBehaviour
         TMP_Text nameText = FindChildWithTag(newRow, "DisplayNameText").GetComponent<TMP_Text>();
         TMP_Text scoreText = FindChildWithTag(newRow, "ScoreText").GetComponent<TMP_Text>();
 
+        int runs = int.Parse(playersRunCompleted[rank - 1]);
+        string rankIcon = "";
+
+        if (runs >= 40)
+        {
+            rankIcon = "<sprite name=\"M8\"> ";
+        }
+        else if (runs >= 35)
+        {
+            rankIcon = "<sprite name=\"M7\"> ";
+        }
+        else if (runs >= 30)
+        {
+            rankIcon = "<sprite name=\"M6\"> ";
+        }
+        else if (runs >= 25)
+        {
+            rankIcon = "<sprite name=\"M5\"> ";
+        }
+        else if (runs >= 20)
+        {
+            rankIcon = "<sprite name=\"M4\"> ";
+        }
+        else if (runs >= 15)
+        {
+            rankIcon = "<sprite name=\"M3\"> ";
+        }
+        else if (runs >= 10)
+        {
+            rankIcon = "<sprite name=\"M2\"> ";
+        }
+        else if (runs >= 5)
+        {
+            rankIcon = "<sprite name=\"M1\"> ";
+        }
+
         newRow.transform.SetSiblingIndex(rank);
         rankText.text = AddOrdinal(rank);
-        nameText.text = item.DisplayName;
+        nameText.text = rankIcon + item.DisplayName;
         scoreText.text = ConvertSecondsToHHMMSS(item.StatValue);
 
         delay += 0.25f;
