@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,6 +47,12 @@ public class PlayerData : ScriptableObject
 	public float mainVolume;
 	public float sfxVolume;
 
+	[Header("Buffs")]
+	public float healthLevel;
+	public float attackLevel;
+	public float speedLevel;
+	public float atkSpeedLevel;
+	public float fireRateLevel;
 
     public void ResetValues()
     {

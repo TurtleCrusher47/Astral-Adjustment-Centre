@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuffManager : BaseBuff
 {
     public GameObject roguePanel;
 
     public ScriptableSpeedBuff buff;
+    public PlayerData playerData;
 
     [Header("Buff Panel")]
     public GameObject basePanel;
@@ -63,6 +65,14 @@ public class BuffManager : BaseBuff
             // Construct the description text based on the buff type
             descText.text = "Increases " + buff.buffName + " by " +  buff.buffBonus[i] + " %";
 
+            
+            Button button = buffPanel.GetComponent<Button>();
+            if (button != null)
+            {
+                int index = i;
+                button.onClick.AddListener(() => OnPanelClick(index));
+            }
+
             // Add your logic here for showing the panels
             if (i == 0)
             {
@@ -110,5 +120,12 @@ public class BuffManager : BaseBuff
     public void ClearButton()
     {
         DestroyOldPanels();
+    }
+
+    private void OnPanelClick(int index)
+    {
+        Debug.Log("Panel clicked index: " + index + "\n" + "                   " +
+            "Panel Name: " + instantiatedPanels[index]);
+        playerData.speedLevel++;
     }
 }

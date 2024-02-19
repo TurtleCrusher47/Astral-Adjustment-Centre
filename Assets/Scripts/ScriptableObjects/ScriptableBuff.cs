@@ -10,6 +10,8 @@ public abstract class ScriptableBuff : ScriptableObject
 
     public float[] buffBonus;
 
+
+    //------------ Below here is just a test -------------------------------
     /**
      * Time duration of the buff in seconds.
      */
