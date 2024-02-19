@@ -19,10 +19,13 @@ public class SubtitleManager : MonoBehaviour
 
     public void NextLine()
     {
-        subtitleText.text = subtitles[currLine];
+        if (subtitles.Count >= currLine)
+        {
+            subtitleText.text = subtitles[currLine];
 
-        AudioManager.Instance.PlayVL(voicelineNames[currLine]);
+            AudioManager.Instance.PlayVL(voicelineNames[currLine]);
 
-        currLine++;
+            currLine++;
+        }
     }
 }

@@ -110,6 +110,31 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-1742127600066220101
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d37350d650fe24db041ff498d383c5, type: 3}
+  m_Name: FogPostProcess
+  m_EditorClassIdentifier: 
+  active: 1
+  fogColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  fogDensity:
+    m_OverrideState: 1
+    m_Value: 0.045
+  fogOffset:
+    m_OverrideState: 1
+    m_Value: 0
+  farFogFactor:
+    m_OverrideState: 1
+    m_Value: 0.95
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,4 +151,4 @@ MonoBehaviour:
   - {fileID: -5604119305519933318}
   - {fileID: -9203428469118998633}
   - {fileID: -4495970664763653012}
-  - {fileID: -6398527101899500863}
+  - {fileID: -1742127600066220101}

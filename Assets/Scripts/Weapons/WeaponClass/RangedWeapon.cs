@@ -7,7 +7,7 @@ public abstract class RangedWeapon : Weapon
 {
     [SerializeField] protected RangedWeaponData rangedWeaponData;
     [SerializeField] protected Transform firePoint;
-    [SerializeField] protected LayerMask layersToIgnore;
+    [SerializeField] protected LayerMask targetLayers;
     protected Transform cam;
     protected Transform orientation;
     // [SerializeField] protected Recoil recoil;
