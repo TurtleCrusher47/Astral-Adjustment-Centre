@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class BuffManager : BaseBuff
+public class BuffManager : MonoBehaviour
 {
-    public GameObject roguePanel;
+    [SerializeField]
+    private GameObject roguePanel;
 
-    public ScriptableSpeedBuff buff;
+    [Header("Buff Data")]
+    public List<ScriptableBuff> buffs;
+
     public PlayerData playerData;
 
     [Header("Buff Panel")]
     public GameObject basePanel;
-
-    public List<string> buffTitle = new List<string>();
-    public List<string> buffDesc = new List<string>();
 
     // Just to see if its instantiating
     private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
@@ -29,51 +30,52 @@ public class BuffManager : BaseBuff
         //ShowRandomBuffPanels(2);
     }
 
-    /*
-    private void ShuffleBuffPanel()
+    private void ShuffleBuffList()
     {
-        int n = instantiatedPanels.Count;
+        int n = buffs.Count;
         while (n > 1)
         {
             n--;
             int k = Random.Range(0, n + 1);
-            GameObject temp = instantiatedPanels[k];
-            instantiatedPanels[k] = instantiatedPanels[n];
-            instantiatedPanels[n] = temp;
+            ScriptableBuff temp = buffs[k];
+            buffs[k] = buffs[n];
+            buffs[n] = temp;
         }
-    }*/
+    }
 
     private void InstantiateBuffPanels()
     {
         // Destroy the previous buff panels
         DestroyOldPanels();
 
+        // Shuffle the buff order to randomize panel positions
+        ShuffleBuffList();
+
         // Instantiate buff panels from the lists
-        for (int i = 0; i < 2 && i < buffTitle.Count && i < buffDesc.Count; i++)
+        for (int i = 0; i < 2 && i < buffs.Count; i++)
         {
             // Instantiate the base buff panel
             GameObject buffPanel = Instantiate(basePanel, roguePanel.transform);
-            instantiatedPanels.Add(buffPanel); // Keep track of instantiated panel
+            instantiatedPanels.Add(buffPanel);
+            //buffIndices.Add(i); // Store the buff index for this panel
 
-            // Get the Title and Desc Text components from the instantiated panel
+            // Get the Title and Desc Text components
             TMP_Text titleText = buffPanel.transform.Find("TitleText").GetComponent<TMP_Text>();
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
-            // Set the text dynamically
-            titleText.text = buff.buffName + " " + buff.buffTiers[i];
+            // Set text dynamically using generic buff properties
+            titleText.text = buffs[i].buffName + " " + buffs[i].buffTiers[0]; // Show Level 1 initially
 
-            // Construct the description text based on the buff type
-            descText.text = "Increases " + buff.buffName + " by " +  buff.buffBonus[i] + " %";
+            descText.text = "Increases " + buffs[i].buffName + " by " + buffs[i].buffBonus[0] + " %";
 
-            
+            // Add click listener to the button
             Button button = buffPanel.GetComponent<Button>();
             if (button != null)
             {
-                int index = i;
+                int index = i; // Capture loop index for OnPanelClick
                 button.onClick.AddListener(() => OnPanelClick(index));
             }
 
-            // Add your logic here for showing the panels
             if (i == 0)
             {
                 // Reset Buff Panel
@@ -98,34 +100,101 @@ public class BuffManager : BaseBuff
 
     private void DestroyOldPanels()
     {
-        // Destroy the previous instantiated panels
         foreach (GameObject panel in instantiatedPanels)
         {
             Destroy(panel);
         }
-        instantiatedPanels.Clear(); // Clear the list of instantiated panels
+        instantiatedPanels.Clear();
+        //buffIndices.Clear();
     }
 
     public void RerollButton()
     {
-        // Destroy the previous buff panels before rerolling
         DestroyOldPanels();
-
-        // Reroll logic
-        //ShuffleBuffPanel();
         InstantiateBuffPanels();
-        //ShowRandomBuffPanels(2);
     }
 
     public void ClearButton()
     {
         DestroyOldPanels();
     }
-
     private void OnPanelClick(int index)
     {
-        Debug.Log("Panel clicked index: " + index + "\n" + "                   " +
-            "Panel Name: " + instantiatedPanels[index]);
-        playerData.speedLevel++;
+        // Ensure the index is valid
+        if (index >= 0 && index < buffs.Count)
+        {
+            // Get the selected buff
+            ScriptableBuff selectedBuff = buffs[index];
+
+            // Update PlayerData based on the selected buff
+            switch (selectedBuff.buffName)
+            {
+                case "Speed":
+                    playerData.speedLevel += 1;
+                    break;
+
+                case "Health":
+                    playerData.healthLevel += 1;
+                    break;
+
+                case "Attack":
+                    playerData.attackLevel += 1;
+                    break;
+
+                case "Atk Spd":
+                    playerData.atkSpeedLevel += 1;
+                    break;
+
+                case "Fire Rate":
+                    playerData.fireRateLevel += 1;
+                    break;
+
+                // Add more cases if you have additional buff types
+
+                default:
+                    Debug.LogWarning("Unknown buff type: " + selectedBuff.buffName);
+                    break;
+            }
+
+            // Get the player's level for the selected buff
+            int playerLevel = 0;
+
+            switch (selectedBuff.buffName)
+            {
+                case "Speed":
+                    playerLevel = playerData.speedLevel;
+                    break;
+
+                case "Health":
+                    playerLevel = playerData.healthLevel;
+                    break;
+
+                case "Attack":
+                    playerLevel = playerData.attackLevel;
+                    break;
+
+                case "Atk Spd":
+                    playerLevel = playerData.atkSpeedLevel;
+                    break;
+
+                case "Fire Rate":
+                    playerLevel = playerData.fireRateLevel;
+                    break;
+
+                // Add more cases if you have additional buff types
+                default:
+                    Debug.LogWarning("Unknown buff type: " + selectedBuff.buffName);
+                    break;
+            }
+
+            // Use playerLevel as an index for buffTiers and buffBonus arrays
+            int arrayIndex = Mathf.Clamp(playerLevel, 0, selectedBuff.buffTiers.Length - 1);
+            selectedBuff.buffTiers[0] = selectedBuff.buffTiers[arrayIndex];
+            selectedBuff.buffBonus[0] = selectedBuff.buffBonus[arrayIndex];
+
+            // Reroll panels with the updated levels, tiers, and bonus
+            DestroyOldPanels();
+            InstantiateBuffPanels();
+        }
     }
 }

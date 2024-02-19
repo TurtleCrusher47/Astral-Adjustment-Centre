@@ -5422,22 +5422,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roguePanel: {fileID: 847264408}
-  buff: {fileID: 11400000, guid: 8a2fc865221b50b47a573e8f0c7e98fd, type: 2}
+  buffs:
+  - {fileID: 11400000, guid: 8a2fc865221b50b47a573e8f0c7e98fd, type: 2}
+  - {fileID: 11400000, guid: 4f81666b29c39914483ca982029adf92, type: 2}
+  - {fileID: 11400000, guid: 318118b03da6e46449edaea514a367ec, type: 2}
+  - {fileID: 11400000, guid: a27b8827e3f7fb348a19ad62c2e4ae37, type: 2}
+  - {fileID: 11400000, guid: bac2e410ecf0ec242a399b6c67a29b6e, type: 2}
   playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   basePanel: {fileID: 5907959068461915938, guid: 1686b6c7468a7e94baa94a8c85ed4f47,
     type: 3}
-  buffTitle:
-  - 
-  - 
-  - 
-  - 
-  - 
-  buffDesc:
-  - 
-  - 
-  - 
-  - 
-  - 
 --- !u!4 &1666390444
 Transform:
   m_ObjectHideFlags: 0
@@ -5725,7 +5718,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.43137255}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}

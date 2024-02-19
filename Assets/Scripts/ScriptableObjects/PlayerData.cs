@@ -48,15 +48,24 @@ public class PlayerData : ScriptableObject
 	public float sfxVolume;
 
 	[Header("Buffs")]
-	public float healthLevel;
-	public float attackLevel;
-	public float speedLevel;
-	public float atkSpeedLevel;
-	public float fireRateLevel;
+	public int healthLevel;
+	public int attackLevel;
+	public int speedLevel;
+	public int atkSpeedLevel;
+	public int fireRateLevel;
+
+	private float resetLevel = 0;
 
     public void ResetValues()
     {
         currentHealth = maxHealth;
+
+		// Reset buff
+		resetLevel = healthLevel;
+		resetLevel = attackLevel;
+		resetLevel = speedLevel;
+		resetLevel = atkSpeedLevel;
+		resetLevel = fireRateLevel;
     }
 
 }

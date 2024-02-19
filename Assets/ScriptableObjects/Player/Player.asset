@@ -37,7 +37,7 @@ MonoBehaviour:
   maxHealth: 100
   mainVolume: 50
   sfxVolume: 50
-  healthLevel: 0
+  healthLevel: 2
   attackLevel: 0
   speedLevel: 0
   atkSpeedLevel: 0
