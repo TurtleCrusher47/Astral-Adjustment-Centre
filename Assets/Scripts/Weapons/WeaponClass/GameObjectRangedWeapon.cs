@@ -41,7 +41,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
     protected void SetDirection(GameObject projectile)
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range, ~layersToIgnore))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range, targetLayers))
         {
             Debug.Log("Ray " + hit.collider.gameObject.name);
             projectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;

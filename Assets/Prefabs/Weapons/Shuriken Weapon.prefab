@@ -55,7 +55,7 @@ MonoBehaviour:
   firePoint: {fileID: 2234285575901989128}
   layersToIgnore:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 65
   gameObjectProjectileData: {fileID: 11400000, guid: c67cb6062c630dc4fa17e9bcc62d06c3,
     type: 2}
   projectile: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
