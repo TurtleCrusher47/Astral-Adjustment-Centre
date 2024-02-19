@@ -7,7 +7,7 @@ public abstract class Trap : MonoBehaviour
     [SerializeField] public TrapData trapData;
     [SerializeField] protected LayerMask collidableLayers;
 
-    private bool isTriggered;
+    protected bool isTriggered;
 
     private void OnEnable()
     {

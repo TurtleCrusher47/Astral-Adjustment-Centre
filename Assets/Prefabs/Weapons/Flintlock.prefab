@@ -190,6 +190,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 8153578986637794482}
   abilityBarrel: {fileID: 1373836180465060501, guid: aa29dc22ab0cc724f94d53e67bbf0b32,
     type: 3}
+  secondaryTargetLayers:
+    serializedVersion: 2
+    m_Bits: 6209
   groundMask:
     serializedVersion: 2
     m_Bits: 64

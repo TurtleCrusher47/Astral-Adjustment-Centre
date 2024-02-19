@@ -6,18 +6,18 @@ public class BarrelTrap : Trap
 {
     protected override void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.layer == collidableLayers)
+        if (collider.gameObject.layer == collidableLayers && !isTriggered)
         {
-
+            TriggerTrap();
         }
     }
 
-    protected override void OnTrapTriggered()
+    protected override void TriggerTrap()
     {
-        throw new System.NotImplementedException();
+       Debug.Log("Triggered Trap");
     }
 
-    protected override void TriggerTrap()
+    protected override void OnTrapTriggered()
     {
         throw new System.NotImplementedException();
     }
