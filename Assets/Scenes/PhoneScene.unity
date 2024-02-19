@@ -5423,6 +5423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roguePanel: {fileID: 847264408}
   buff: {fileID: 11400000, guid: 8a2fc865221b50b47a573e8f0c7e98fd, type: 2}
+  playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   basePanel: {fileID: 5907959068461915938, guid: 1686b6c7468a7e94baa94a8c85ed4f47,
     type: 3}
   buffTitle:
