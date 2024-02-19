@@ -17,7 +17,8 @@ public class PlayFabManager : MonoBehaviour
     public static string currGuildName;
     public static string currGuildRole;
 
-    public static string nextSceneName;
+    public static bool isNewPlayer;
+    public static int runsCompleted;
 
     private void Awake()
     {

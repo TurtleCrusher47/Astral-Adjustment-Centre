@@ -7,44 +7,45 @@ using PlayFab.ClientModels;
 
 public class JSONManager : MonoBehaviour
 {
+
     void Awake()
     {
-        //ship = new Ship();
+        
     }
 
-    /*public void SendJSON(Ship ship)
+    /*public void SendJSON(int runsCompleted)
     {
-        string stringListAsJson = JsonUtility.ToJson(ship);
+        //string stringListAsJson = JsonUtility.ToJson(ship);
 
-        var req = new UpdateUserDataRequest
+        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
             {
-                {"LastUsedShip", stringListAsJson}
+                {"RunsCompleted", runsCompleted.ToString()}
             }
-        };
-
-        PlayFabClientAPI.UpdateUserData(req, result => Debug.Log("Data sent successfully !"), OnError);
-    }
-
-    public void LoadJSON()
-    {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), 
-        result=>{
-            Debug.Log("Received JSON Data.");
-
-            JsonUtility.FromJsonOverwrite(result.Data["LastUsedShip"].Value, ship);
-
-            if (result.Data != null && result.Data.ContainsKey("LastUsedShip"))
-            {
-                Debug.Log("JSON LOAD : " + ship.stats.name);
-            }
+        }, result=>
+        {
+            Debug.Log("Data sent successfully !");
         }, OnError);
     }
 
-    public Ship GetShip()
+    public int GetRunsCompleted()
     {
-        return ship;
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), 
+        result=>
+        {
+            Debug.Log("Received JSON Data.");
+
+            JsonUtility.FromJsonOverwrite(result.Data["RunsCompleted"].Value, runsCompleted);
+
+            if (result.Data != null && result.Data.ContainsKey("RunsCompleted"))
+            {
+                Debug.Log("JSON LOAD : " + result.Data["RunsCompleted"].Value);
+                //runsCompleted = int.Parse(result.Data["RunsCompleted"].Value);
+            }
+        }, OnError);
+
+        return 0;
     }*/
 
     public static string StringListToJSON(string key, List<string> values)

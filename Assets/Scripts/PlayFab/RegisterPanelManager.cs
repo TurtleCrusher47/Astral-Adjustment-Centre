@@ -91,6 +91,18 @@ public class RegisterPanelManager : MonoBehaviour
         if_password.text = string.Empty;
         if_confirmpassword.text = string.Empty;
 
-        mainSceneManager.ShowLoginPage();
+        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
+        {
+            Data = new Dictionary<string, string>()
+            {
+                {"NewPlayer", 1.ToString()},
+                {"RunsCompleted", 0.ToString()}
+            }
+        }, result => 
+        {
+            Debug.Log("Successfully updated user data.");
+
+            mainSceneManager.ShowLoginPage();
+        }, OnError);
     }
 }

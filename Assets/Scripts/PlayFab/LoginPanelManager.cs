@@ -207,6 +207,34 @@ public class LoginPanelManager : MonoBehaviour
         if_userid.text = string.Empty;
         if_password.text = string.Empty;
 
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest()
+        {
+
+        }, result=>
+        {
+            if (result.Data != null && result.Data.ContainsKey("NewPlayer"))
+            {
+                switch (int.Parse(result.Data["NewPlayer"].Value))
+                {
+                    case 0:
+                        PlayFabManager.isNewPlayer = false;
+                        Debug.Log("NewPlayer : false");
+                        break;
+                    case 1:
+                        PlayFabManager.isNewPlayer = true;
+                        Debug.Log("NewPlayer : true");
+                        break;
+                }
+            }
+
+            if (result.Data != null && result.Data.ContainsKey("RunsCompleted"))
+            {
+                Debug.Log("RunsCompleted : " + result.Data["RunsCompleted"].Value);
+
+                PlayFabManager.runsCompleted = int.Parse(result.Data["RunsCompleted"].Value);
+            }
+        }, OnError);
+
         PlayFabGroupsAPI.ListMembership(new ListMembershipRequest
         {
 
