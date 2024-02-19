@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be09921356a18d74ab18e3d42b532bfb, type: 3}
+  m_Name: Flintlock
+  m_EditorClassIdentifier: 
+  weaponName: Flintlock
+  infiniteAmmo: 1
+  currentAmmo: 0
+  magazineSize: 0
+  fireRate: 30
+  reloadTime: 0
+  reloading: 0
+  recoil: {x: 0, y: 0, z: 0}
+  secondarycooldown: 0
+  abilitycooldown: 3
