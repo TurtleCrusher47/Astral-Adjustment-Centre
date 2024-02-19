@@ -46,7 +46,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
         }
 
         Debug.Log(Vector3.Distance(transform.position, _targetPos));
-        if (Vector3.Distance(transform.position, _targetPos) <= 0.13f)
+        if (Vector3.Distance(transform.position, _targetPos) <= 0.31f)
         {
             //add timer to pause at waypoint
             _timer += Time.deltaTime;
