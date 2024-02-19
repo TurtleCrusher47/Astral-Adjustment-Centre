@@ -28,7 +28,7 @@ public class DualRevolvers : RaycastRangedWeapon
             if (CanUseSecondary())
             {
                 // Debug.Log("Shoot");
-                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, ~layersToIgnore))
+                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, targetLayers))
                 {
                     StartCoroutine(RenderSecondTraceLine(hitInfo.point));
                     Debug.Log(hitInfo.transform.name);
