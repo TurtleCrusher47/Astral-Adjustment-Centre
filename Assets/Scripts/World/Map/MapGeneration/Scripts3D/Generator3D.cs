@@ -82,7 +82,7 @@ public class Generator3D : MonoBehaviour
     {
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayBGM("BGMSunsetSchool");
+            // AudioManager.Instance.PlayBGM("BGMSunsetSchool");
         }
     }
 
@@ -97,6 +97,15 @@ public class Generator3D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             ChangeSeed();
+            foreach (var obj in mapContent)
+            {
+                //Destroy(obj);
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
+            }
+            InitializeMap();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
             foreach (var obj in mapContent)
             {
                 //Destroy(obj);

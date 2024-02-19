@@ -25,6 +25,7 @@ public class PlayerWeaponPickup : MonoBehaviour
 
             canPickUp = false;
 
+            weapon.layer = LayerMask.NameToLayer("Weapons");
             foreach (Transform child in weapon.transform)
             {
                 child.gameObject.layer = LayerMask.NameToLayer("Weapons");
