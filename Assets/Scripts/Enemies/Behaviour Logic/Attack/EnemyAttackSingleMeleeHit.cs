@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Attack- Single Straight Shot", menuName = "Enemy Logic/Attack State/Single Straight Shot")]
+[CreateAssetMenu(fileName = "Attack- Single Melee Hit", menuName = "Enemy Logic/Attack State/Single Melee Hit")]
 
-public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
+public class EnemyAttackSingleMeleeHit : EnemyAttackSOBase
 {
-    public GameObject BulletPrefab;
-   
-    [SerializeField] private float _shotCooldown = 3f;
-    [SerializeField] private float _bulletSpeed = 1f;
+    [SerializeField] private float _hitCooldown = 2f;
 
     [SerializeField] private float _timeTillExit = 2f;
     [SerializeField] private float _distanceToCountExit = 4.5f;
 
-    private RangedEnemy rangedEnemy;
+    private Animator animator;
 
 
     private float _exitTimer;
@@ -23,7 +20,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        rangedEnemy = enemy.gameObject.GetComponent<RangedEnemy>();
+        animator = enemy.gameObject.GetComponent<Animator>();
     }
 
     public override void DoExitLogic()
@@ -45,16 +42,14 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
         _timer += Time.deltaTime;
 
-        if (_timer > _shotCooldown)
+        if (_timer > _hitCooldown)
         {
             _timer = 0f;
 
-            Vector3 dir = (playerTransform.position - rangedEnemy.firePoint.position).normalized;
+            //trigger animator to play punch animation
+            //set gauntlet trigger collider on and off in animation
 
-            GameObject bullet = ObjectPoolManager.Instance.SpawnObject(BulletPrefab, rangedEnemy.firePoint.position, enemy.transform.localRotation);
-
-            bullet.GetComponent<EnemyProjectileBasic>().ScaleProjectile(playerTransform.localScale);
-            bullet.GetComponent<EnemyProjectileBasic>().MoveProjectile(dir * _bulletSpeed);
+            animator.SetTrigger("isPunch");
 
         }
 
@@ -95,3 +90,4 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         base.ResetValues();
     }
 }
+

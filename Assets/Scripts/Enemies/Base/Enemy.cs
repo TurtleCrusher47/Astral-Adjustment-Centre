@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     [field: SerializeField] public float CurrentHealth { get; set; }
-    [field: SerializeField] public Transform firePoint;
     public Rigidbody rb { get; set; }
     public Animator animator;
 

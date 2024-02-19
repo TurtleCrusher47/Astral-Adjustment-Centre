@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : Enemy
+public class MeleeEnemy : Enemy
 {
-    [SerializeField] public Transform firePoint;
-
+    
 }
