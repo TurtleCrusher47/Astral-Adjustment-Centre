@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 {
-    public Rigidbody BulletPrefab;
-    private float _timer;
-    private float _shotCooldown = 3f;
+    public GameObject BulletPrefab;
+   
+    [SerializeField] private float _shotCooldown = 3f;
+    [SerializeField] private float _bulletSpeed = 1f;
+
+    [SerializeField] private float _timeTillExit = 2f;
+    [SerializeField] private float _distanceToCountExit = 4.5f;
+
 
     private float _exitTimer;
-    private float _timeTillExit = 2f;
-    private float _distanceToCountExit = 4.5f;
-
-    private float _bulletSpeed = 5f;
-
-    private float _movementSpeed = 2.0f;
+    private float _timer;
+   
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
@@ -31,12 +32,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        //enemy.MoveEnemy(Vector3.zero);
-
-        Vector3 moveDirection = (playerTransform.position - enemy.transform.position).normalized;
-        moveDirection.y = 0;
-
-        enemy.MoveEnemy(moveDirection * _movementSpeed);
+        enemy.MoveEnemy(Vector3.zero);
 
         Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
         lookPos.y = 0;
@@ -50,15 +46,16 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         {
             _timer = 0f;
 
-            Vector3 dir = (playerTransform.position - enemy.transform.position).normalized;
+            Vector3 dir = (playerTransform.position - enemy.firePoint.position).normalized;
 
-            Rigidbody bullet = GameObject.Instantiate(BulletPrefab, enemy.transform.position, enemy.transform.localRotation);
+            GameObject bullet = ObjectPoolManager.Instance.SpawnObject(BulletPrefab, enemy.firePoint.position, enemy.transform.localRotation);
 
-            bullet.velocity = dir * _bulletSpeed;
+            bullet.GetComponent<EnemyProjectileBasic>().ScaleProjectile(playerTransform.localScale);
+            bullet.GetComponent<EnemyProjectileBasic>().MoveProjectile(dir * _bulletSpeed);
 
         }
 
-        if (Vector3.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
+        if (Vector3.Distance(playerTransform.position, enemy.transform.position) > (_distanceToCountExit * playerTransform.localScale.x))
         {
             _exitTimer += Time.deltaTime;
 

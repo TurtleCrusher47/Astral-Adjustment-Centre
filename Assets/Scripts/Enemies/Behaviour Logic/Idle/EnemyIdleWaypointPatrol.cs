@@ -5,9 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Idle-Waypoint Patrol", menuName = "Enemy Logic/Idle Logic/Waypoint Patrol")]
 
 public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
-{
-
-    
+{   
     [SerializeField]
     private List<GameObject> waypoints = new List<GameObject>();
 
@@ -22,7 +20,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
         base.DoEnterLogic();
 
         waypoints = enemy.FindChildObjectsWithTag(enemy.gameObject.transform.parent.gameObject, "Waypoint");
-        Debug.Log(enemy.gameObject.transform.parent.gameObject.name);
+        //Debug.Log(enemy.gameObject.transform.parent.gameObject.name);
         _targetPos = waypoints[_targetIndex].transform.position;
         _direction = ( _targetPos - transform.position).normalized;
     }
@@ -36,7 +34,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
     {
         base.DoFrameUpdateLogic();
 
-        enemy.MoveEnemy(_direction * movementSpeed);
+        enemy.MoveEnemy(_direction * movementSpeed * playerTransform.localScale.x);
 
         Vector3 lookPos = (waypoints[_targetIndex].transform.position - transform.position).normalized;
         lookPos.y = 0;
@@ -47,7 +45,8 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
         }
 
-        if (Vector3.Distance(transform.position, _targetPos) <= 0.1f)
+        Debug.Log(Vector3.Distance(transform.position, _targetPos));
+        if (Vector3.Distance(transform.position, _targetPos) <= 0.31f)
         {
             //add timer to pause at waypoint
             _timer += Time.deltaTime;
@@ -63,11 +62,6 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
                     targetIndex = 0;
                 }
                 
-                // Vector3 lookPos = (waypoints[targetIndex].transform.position - transform.position).normalized;
-                // lookPos.y = 0;
-
-                // Quaternion lookRotation = Quaternion.LookRotation(lookPos);
-                // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
             }
 
             else
