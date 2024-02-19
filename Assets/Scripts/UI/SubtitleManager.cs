@@ -7,6 +7,7 @@ public class SubtitleManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text subtitleText;
     [SerializeField] private List<string> subtitles;
+    [SerializeField] private List<string> voicelineNames;
 
     int currLine;
 
@@ -19,6 +20,9 @@ public class SubtitleManager : MonoBehaviour
     public void NextLine()
     {
         subtitleText.text = subtitles[currLine];
+
+        AudioManager.Instance.PlayVL(voicelineNames[currLine]);
+
         currLine++;
     }
 }

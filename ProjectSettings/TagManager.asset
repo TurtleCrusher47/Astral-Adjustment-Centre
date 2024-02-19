@@ -41,6 +41,9 @@ TagManager:
   - WeaponCollider
   - FirePoint2
   - Enemy
+  - BGM
+  - SFX
+  - VL
   layers:
   - Default
   - TransparentFX
