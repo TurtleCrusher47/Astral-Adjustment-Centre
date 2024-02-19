@@ -39,6 +39,7 @@ TagManager:
   - Item2
   - Item1
   - WeaponCollider
+  - FirePoint2
   layers:
   - Default
   - TransparentFX

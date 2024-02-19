@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class RaycastRangedWeapon : RangedWeapon
 {
-    [SerializeField] private RaycastProjectileData raycastProjectileData;
-    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] protected RaycastProjectileData raycastProjectileData;
+    [SerializeField] protected LineRenderer lineRenderer;
 
     protected override void UsePrimary()
     {
@@ -14,7 +14,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 // Debug.Log("Shoot");
-                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance))
+                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, ~layersToIgnore))
                 {
                     StartCoroutine(RenderTraceLine(hitInfo.point));
                     Debug.Log(hitInfo.transform.name);

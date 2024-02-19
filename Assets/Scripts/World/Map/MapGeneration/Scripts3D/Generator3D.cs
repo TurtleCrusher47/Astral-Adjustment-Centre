@@ -82,7 +82,7 @@ public class Generator3D : MonoBehaviour
     {
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayBGM("BGMSunsetSchool");
+            // AudioManager.Instance.PlayBGM("BGMSunsetSchool");
         }
     }
 

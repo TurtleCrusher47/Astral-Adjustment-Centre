@@ -37,6 +37,7 @@ public class PlayerWeaponDrop : MonoBehaviour
 
         StartCoroutine(AllowPickUp(weapon));
 
+        weapon.layer = LayerMask.NameToLayer("DroppedWeapons");
         foreach (Transform child in weapon.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("DroppedWeapons");
