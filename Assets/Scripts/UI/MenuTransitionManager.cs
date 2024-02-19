@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class MenuTransitionManager : MonoBehaviour
 {
+    [SerializeField] private PlayableDirector cutsceneDirector;
+    [SerializeField] private GameObject subtitlePanel;
     [SerializeField] private List<GameObject> virtualCameras;
     [SerializeField] private CinemachineVirtualCamera currCamera;
     [SerializeField] private CinemachineBrain mainCamBrain;
@@ -160,17 +163,21 @@ public class MenuTransitionManager : MonoBehaviour
 
         yield return new WaitUntil(() => !mainCamBrain.IsBlending);
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.2f);
 
-        currCamera.Priority--;
-        currCamera.gameObject.SetActive(false);
-        currCamera = loadSceneCamera;
-        currCamera.gameObject.SetActive(true);
-        currCamera.Priority++;
+        // currCamera.Priority--;
+        // currCamera.gameObject.SetActive(false);
+        // currCamera = loadSceneCamera;
+        // currCamera.gameObject.SetActive(true);
+        // currCamera.Priority++;
 
-        yield return new WaitUntil(() => mainCamBrain.IsBlending);
+        cutsceneDirector.Play();
+
+        yield return new WaitUntil(() => cutsceneDirector.state == PlayState.Paused);
 
         yield return new WaitForSeconds(0.75f);
+
+        subtitlePanel.SetActive(false);
 
         GameManager.Instance.ChangeScene("LevelScene");
     }
