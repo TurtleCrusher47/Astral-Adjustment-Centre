@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Michsky.UI.Shift;
+using UnityEngine.Audio;
 
 public class SettingManager : MonoBehaviour
 {
@@ -19,13 +20,49 @@ public class SettingManager : MonoBehaviour
     private float currentRefreshRate;
     private int currentResolutionIndex = 0;
 
-    // FPS Variables
-    private int frameIndex;
-    private float[] frameDeltaTimeArray;
+    [SerializeField] private AudioMixer globalMixer;
+    [SerializeField] private Slider bgmSlider, sfxSlider, vlSlider;
 
-    // Start is called before the first frame update
+    private float bgmBefore, sfxBefore, vlBefore;
+
+    public bool appliedSettings = false;
+
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey("BGMVolume"))
+        {
+            bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+        }
+        else
+        {
+            bgmSlider.value = 1;
+        }
+
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        }
+        else
+        {
+            sfxSlider.value = 1;
+        }
+
+        if (PlayerPrefs.HasKey("VLVolume"))
+        {
+            vlSlider.value = PlayerPrefs.GetFloat("VLVolume");
+        }
+        else
+        {
+            vlSlider.value = 1;
+        }
+    }
+
     void Start()
     {
+        globalMixer.SetFloat("BGMVolume", Mathf.Log10(bgmSlider.value) * 20);
+        globalMixer.SetFloat("SFXVolume", Mathf.Log10(sfxSlider.value) * 20);
+        globalMixer.SetFloat("VLVolume", Mathf.Log10(vlSlider.value) * 20);
+
         GrabScreenResolution();
 
         fullscreenButton.isOn = Screen.fullScreen;
@@ -38,13 +75,51 @@ public class SettingManager : MonoBehaviour
         {
             vsyncButton.isOn = true;
         }
+    }
 
+    public void ResetAppliedSettingsBool()
+    {
+        appliedSettings = false;
+    }
+
+    public void SetInitialVolumes()
+    {
+        bgmBefore = bgmSlider.value;
+        sfxBefore = sfxSlider.value;
+        vlBefore = vlSlider.value;
+    }
+
+    public void ResetVolumes()
+    {
+        if (!appliedSettings)
+        {
+            bgmSlider.value = bgmBefore;
+            sfxSlider.value = sfxBefore;
+            vlSlider.value = vlBefore;
+
+            globalMixer.SetFloat("BGMVolume", Mathf.Log10(bgmSlider.value) * 20);
+            globalMixer.SetFloat("SFXVolume", Mathf.Log10(sfxSlider.value) * 20);
+            globalMixer.SetFloat("VLVolume", Mathf.Log10(vlSlider.value) * 20);
+        }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        globalMixer.SetFloat("BGMVolume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        globalMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetVLVolume(float volume)
+    {
+        globalMixer.SetFloat("VLVolume", Mathf.Log10(volume) * 20);
     }
 
     private void GrabScreenResolution()
     {
-        frameDeltaTimeArray = new float[50];
-
         res = Screen.resolutions;
         filteredResolutions = new List<Resolution>();
 
@@ -64,6 +139,7 @@ public class SettingManager : MonoBehaviour
         {
             string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRate + " Hz";
             options.Add(resolutionOption);
+
             if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
@@ -81,41 +157,12 @@ public class SettingManager : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //DisplayFPS();
-    }
-
-    /*
-    public void ResLeft()
-    {
-        selectedResolution--;
-        if(selectedResolution < 0)
-        {
-            selectedResolution = 0;
-        }
-
-        UpdateResLabel();
-    }
-
-    public void ResRight()
-    {
-        selectedResolution++;
-        if(selectedResolution > resolutions.Count - 1)
-        {
-            selectedResolution = resolutions.Count - 1; 
-        }
-        UpdateResLabel();
-    }
-
-    public void UpdateResLabel()
-    {
-        resolutionLabel.text = resolutions[selectedResolution].horizontal.ToString() + " X " + resolutions[selectedResolution].vertical.ToString();
-    }*/
-
     public void ApplySettings()
     {
+        PlayerPrefs.SetFloat("BGMVolume", bgmSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
+        PlayerPrefs.SetFloat("VLVolume", vlSlider.value);
+
         Screen.fullScreen = fullscreenButton.isOn;
 
         if (vsyncButton.isOn)
@@ -127,26 +174,9 @@ public class SettingManager : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
 
-        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenButton.isOn);
-    }
-
-    private void DisplayFPS()
-    {
-        frameDeltaTimeArray[frameIndex] = Time.deltaTime;
-        frameIndex = (frameIndex + 1) % frameDeltaTimeArray.Length;
-
-        fpsText.text = "FPS : " + Mathf.RoundToInt(CalculateFPS()).ToString();
-    }
-
-    private float CalculateFPS()
-    {
-        float total = 0f;
-        foreach (float deltaTime in frameDeltaTimeArray)
-        {
-            total += deltaTime;
-        }
-
-        return frameDeltaTimeArray.Length / total;
+        //Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenButton.isOn);
+    
+        appliedSettings = true;
     }
 }
 
