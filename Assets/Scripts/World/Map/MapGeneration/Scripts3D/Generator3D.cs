@@ -125,11 +125,14 @@ public class Generator3D : MonoBehaviour
         random = new Random(seed);
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
-        enemyRooms = new List<Room>();
-        enemyRoomData = new List<RoomData>();
+        delaunay = null;
+        selectedEdges = null;
+
         pathList = new List<List<Vector3Int>>();
         doorList = new List<GameObject>();
         mapContent = new List<GameObject>();
+        enemyRooms = new List<Room>();
+        enemyRoomData = new List<RoomData>();
         currEnemiesInRoom = new List<GameObject>();
 
         PlaceRooms();
@@ -736,6 +739,7 @@ public class Generator3D : MonoBehaviour
                     collider.GetComponent<DoorTrigger>().ToggleDoor(false);
                 }
             }
+            currEnemyRoom = null;
         }
     }
 
