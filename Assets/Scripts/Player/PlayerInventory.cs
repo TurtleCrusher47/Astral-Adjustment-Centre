@@ -26,7 +26,17 @@ public class PlayerInventory : MonoBehaviour
 
     void Awake()
     {
-        if (invSlots > maxInvSlots)
+        selectBorder = null;
+        invWeaponIcons = new List<Sprite>();
+        invWeapons = new List<GameObject>();
+        invUISlots = new List<GameObject>();
+
+        maxInvSlots = 0;
+        selectedWeaponIndex = 0;
+        currWeaponIndex = 0;
+        prevWeaponIndex = 0;
+
+        if (invSlots >= maxInvSlots)
         {
             maxInvSlots = invSlots;
         }
@@ -35,6 +45,8 @@ public class PlayerInventory : MonoBehaviour
         int newWidth = 150 * maxInvSlots;
 
         invGridLayoutGroupTransform.sizeDelta = new Vector2(newWidth, 150);
+
+        Debug.Log(maxInvSlots);
 
         for (int i = 0; i < maxInvSlots; i++)
         {
