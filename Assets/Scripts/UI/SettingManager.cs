@@ -84,7 +84,7 @@ public class SettingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DisplayFPS();
+        //DisplayFPS();
     }
 
     /*
