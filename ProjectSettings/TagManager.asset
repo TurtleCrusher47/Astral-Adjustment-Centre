@@ -40,6 +40,7 @@ TagManager:
   - Item1
   - WeaponCollider
   - FirePoint2
+  - Enemy
   layers:
   - Default
   - TransparentFX

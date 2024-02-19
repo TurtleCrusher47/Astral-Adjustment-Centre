@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a68eb15a0f595b42ab10f1fdbef6d1b, type: 3}
   m_Name: SIngle Straight Shot
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 336527436455612483, guid: e183caf1ac55aa8469d8061e84677a05,
+  BulletPrefab: {fileID: 7878606138352981416, guid: e183caf1ac55aa8469d8061e84677a05,
     type: 3}
+  _shotCooldown: 3
+  _bulletSpeed: 1
+  _timeTillExit: 2
+  _distanceToCountExit: 4.5

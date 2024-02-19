@@ -97,9 +97,19 @@ public class Generator3D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             ChangeSeed();
-            for (int i = 0; i < mapContent.Count; i++)
+            foreach (var obj in mapContent)
             {
-                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(mapContent[i]));
+                //Destroy(obj);
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
+            }
+            InitializeMap();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach (var obj in mapContent)
+            {
+                //Destroy(obj);
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
             }
             InitializeMap();
         }
@@ -125,12 +135,15 @@ public class Generator3D : MonoBehaviour
         random = new Random(seed);
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
-        enemyRooms = new List<Room>();
-        enemyRoomData = new List<RoomData>();
+
         pathList = new List<List<Vector3Int>>();
         doorList = new List<GameObject>();
         mapContent = new List<GameObject>();
+        enemyRooms = new List<Room>();
+        enemyRoomData = new List<RoomData>();
         currEnemiesInRoom = new List<GameObject>();
+        currEnemyRoom = null;
+
 
         PlaceRooms();
         Triangulate();
@@ -138,6 +151,17 @@ public class Generator3D : MonoBehaviour
         PathfindHallways();
         DeleteWalls();
         InitRoomObjects();
+    }
+
+    public IEnumerator LoadNextLevel()
+    {
+        foreach (var obj in mapContent)
+        {
+            //Destroy(obj);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
+        }
+        yield return null;
+        GameManager.Instance.ChangeScene("LevelScene");
     }
 
     private void PlaceRooms() 
@@ -450,7 +474,7 @@ public class Generator3D : MonoBehaviour
                             }
                             // Destroy because it is unable to be pooled as it is part of a prefab
                             // (To create path through rooms)
-                            Destroy(hit.transform.gameObject);
+                            hit.transform.gameObject.SetActive(false);
                         }
                     }
                 }
@@ -736,6 +760,7 @@ public class Generator3D : MonoBehaviour
                     collider.GetComponent<DoorTrigger>().ToggleDoor(false);
                 }
             }
+            currEnemyRoom = null;
         }
     }
 
@@ -749,6 +774,10 @@ public class Generator3D : MonoBehaviour
         {
             obj = ObjectPoolManager.Instance.SpawnObject(hallwayLightPrefab, curr + tileOffset + new Vector3(0, 0.975f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
             mapContent.Add(obj);
+            for (int i = 0; i < obj.transform.childCount; i++)
+            {
+                obj.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 
