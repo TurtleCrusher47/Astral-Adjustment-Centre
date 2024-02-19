@@ -213,6 +213,37 @@ Transform:
   m_Father: {fileID: 2579301963728207559}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1072747505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072747506}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072747506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072747505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.095, z: 0.644}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2579301963728207559}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317966616
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +870,7 @@ GameObject:
   - component: {fileID: 1949679903694584027}
   m_Layer: 0
   m_Name: Ranged Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,6 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
+  firePoint: {fileID: 1072747506}
   animator: {fileID: 1949679902077625559}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
   enemyChaseBase: {fileID: 11400000, guid: 046e02beeb055d54f9c1f1894fdd585c, type: 2}
@@ -908,10 +940,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.27406323
   m_Height: 1.828897
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8879192, z: 0}
+  m_Center: {x: 0.01745556, y: 0.8879192, z: 0}
 --- !u!95 &1949679902077625559
 Animator:
   serializedVersion: 5
@@ -1165,7 +1197,7 @@ GameObject:
   - component: {fileID: 1949679902744178466}
   m_Layer: 0
   m_Name: Ranged Enemy Group
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1179,7 +1211,7 @@ Transform:
   m_GameObject: {fileID: 1949679902744178465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1949679902182158197}
@@ -1712,6 +1744,7 @@ Transform:
   - {fileID: 1063713236}
   - {fileID: 1468506326}
   - {fileID: 270743239}
+  - {fileID: 1072747506}
   m_Father: {fileID: 2177517510929094737}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -8.519, y: -0.001, z: 0.005}
