@@ -65,6 +65,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             {
                 spawnableObject.transform.SetParent(parentObject.transform);
             }
+            Debug.Log("Test1");
         }
         else
         {
@@ -73,6 +74,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             spawnableObject.transform.rotation = spawnRotation;
             pool.InactiveObjects.Remove(spawnableObject);
             spawnableObject.SetActive(true);
+            //Debug.Log("Test2");
         }
 
         return spawnableObject;
@@ -83,7 +85,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         yield return new WaitForSeconds(timeBeforeReturn);
 
         // By taking off 7 letters of the string, we are removing (Clone) from the name of the passed inobj
-        Debug.Log(obj.name);
+        //Debug.Log(obj.name);
         string goName = obj.name.Substring(0, obj.name.Length - 7); 
 
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
@@ -102,6 +104,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         {
             obj.SetActive(false);
             pool.InactiveObjects.Add(obj);
+            //Debug.Log("returned");
         }
     }
 
