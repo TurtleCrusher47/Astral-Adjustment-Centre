@@ -2221,9 +2221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f731c1d03ea8d4cbf346a28d64c61b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullscreenToggle: {fileID: 1295916079}
-  vsyncToggle: {fileID: 853866727}
-  fpsToggle: {fileID: 684981605}
+  vsyncButton: {fileID: 0}
+  fullscreenButton: {fileID: 0}
+  fpsButton: {fileID: 0}
   resolutions: []
   resolutionLabel: {fileID: 0}
   fpsText: {fileID: 1219023700}
@@ -3026,7 +3026,7 @@ RectTransform:
   m_GameObject: {fileID: 751161723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 179731944}
@@ -5421,23 +5421,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12de38354a4ad247bf927b31ca80073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffId: 0
   roguePanel: {fileID: 847264408}
+  buff: {fileID: 11400000, guid: 8a2fc865221b50b47a573e8f0c7e98fd, type: 2}
+  playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   basePanel: {fileID: 5907959068461915938, guid: 1686b6c7468a7e94baa94a8c85ed4f47,
     type: 3}
   buffTitle:
-  - Attack
-  - Health
-  - Speed
-  - AtkSpd
-  - FireRate
+  - 
+  - 
+  - 
+  - 
+  - 
   buffDesc:
   - 
   - 
   - 
   - 
   - 
-  instantiatedPanels: []
 --- !u!4 &1666390444
 Transform:
   m_ObjectHideFlags: 0

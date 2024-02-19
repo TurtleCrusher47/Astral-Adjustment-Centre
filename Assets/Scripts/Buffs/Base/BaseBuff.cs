@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,39 +6,36 @@ using static BaseBuff;
 
 public class BaseBuff : MonoBehaviour
 {
-    public int buffId;
-
     // Buff Tiers
     public enum BuffTiers
     {
-        TierI,
-        TierII,
-        TierIII,
-        TierIV,
-        TierV,
+        Tier1,
+        Tier2,
+        Tier3,
+        Tier4,
+        Tier5,
         // Can Add more if you want to
     }
 
     // Damage
     public float damageMultiplier { get; private set; } = 1.2f;
-    public BuffTiers damageBuff { get; private set; } = BuffTiers.TierI;
-    public string damageBuffString { get { return GetBuffTierstring(damageBuff); } }
+    public BuffTiers damageBuff { get; private set; } = BuffTiers.Tier1;
+
     // Health
     public float healthMultiplier { get; private set; } = 1.5f;
-    public BuffTiers healthBuff { get; private set; } = BuffTiers.TierI;
-    public string healthBuffString { get { return GetBuffTierstring(healthBuff); } }
+    public BuffTiers healthBuff { get; private set; } = BuffTiers.Tier1;
+
     // Movement Speed
     public float movementMultiplier { get; private set; } = 0.8f;
-    public BuffTiers movementBuff { get; private set; } = BuffTiers.TierI;
-    public string movementBuffString { get { return GetBuffTierstring(movementBuff); } }
+    public BuffTiers movementBuff { get; private set; } = BuffTiers.Tier1;
+
     // Melee Attack Speed
     public float atkSpdMultiplier { get; private set; } = 0.5f;
-    public BuffTiers atkSpdBuff { get; private set; } = BuffTiers.TierI;
-    public string atkSpdBuffString { get { return GetBuffTierstring(atkSpdBuff); } }
+    public BuffTiers atkSpdBuff { get; private set; } = BuffTiers.Tier1;
+
     // Ranged Fire Rate
     public float firerateMultiplier { get; private set; } = 0.2f;
-    public BuffTiers firerateBuff { get; private set; } = BuffTiers.TierI;
-    public string firerateBuffString { get { return GetBuffTierstring(firerateBuff); } }
+    public BuffTiers firerateBuff { get; private set; } = BuffTiers.Tier1;
 
     // Function to update buff multiplier based on tier
     public void UpdateBuffMultiplier()
@@ -54,18 +52,18 @@ public class BaseBuff : MonoBehaviour
     {
         switch (tier)
         {
-            case BuffTiers.TierI:
+            case BuffTiers.Tier1:
                 return "I";
-            case BuffTiers.TierII:
+            case BuffTiers.Tier2:
                 return "II";
-            case BuffTiers.TierIII:
+            case BuffTiers.Tier3:
                 return "III";
-            case BuffTiers.TierIV:
+            case BuffTiers.Tier4:
                 return "IV";
-            case BuffTiers.TierV:
+            case BuffTiers.Tier5:
                 return "V";
             default:
-                return "";
+                throw new ArgumentOutOfRangeException(nameof(tier), tier, "Invalid buff tier.");
         }
     }
 
@@ -74,18 +72,18 @@ public class BaseBuff : MonoBehaviour
     {
         switch (tier)
         {
-            case BuffTiers.TierI:
+            case BuffTiers.Tier1:
+                return 1.0f;
+            case BuffTiers.Tier2:
                 return 1.2f;
-            case BuffTiers.TierII:
+            case BuffTiers.Tier3:
                 return 1.4f;
-            case BuffTiers.TierIII:
+            case BuffTiers.Tier4:
                 return 1.6f;
-            case BuffTiers.TierIV:
+            case BuffTiers.Tier5:
                 return 1.8f;
-            case BuffTiers.TierV:
-                return 2.0f;
             default:
-                return 1.0f; // Default multiplier for unknown tier
+                throw new ArgumentOutOfRangeException(nameof(tier), tier, "Invalid buff tier.");
         }
     }
 }

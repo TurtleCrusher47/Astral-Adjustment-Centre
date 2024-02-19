@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuffManager : BaseBuff
 {
     public GameObject roguePanel;
+
+    public ScriptableSpeedBuff buff;
+    public PlayerData playerData;
 
     [Header("Buff Panel")]
     public GameObject basePanel;
@@ -14,10 +18,10 @@ public class BuffManager : BaseBuff
     public List<string> buffDesc = new List<string>();
 
     // Just to see if its instantiating
-    public List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
+    private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Move this to Awake Function or Call them. When player interacts with Chest/Wateve idk
         //ShuffleBuffPanel();
@@ -56,14 +60,18 @@ public class BuffManager : BaseBuff
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
             // Set the text dynamically
-            titleText.text = buffTitle[i];
-
-            // Update the buff multiplier based on tier for the specific buff type
-            UpdateBuffMultiplierForType(buffTitle[i]);
+            titleText.text = buff.buffName + " " + buff.buffTiers[i];
 
             // Construct the description text based on the buff type
-            string buffDescription = GetBuffDescription(buffTitle[i]);
-            descText.text = buffDescription;
+            descText.text = "Increases " + buff.buffName + " by " +  buff.buffBonus[i] + " %";
+
+            
+            Button button = buffPanel.GetComponent<Button>();
+            if (button != null)
+            {
+                int index = i;
+                button.onClick.AddListener(() => OnPanelClick(index));
+            }
 
             // Add your logic here for showing the panels
             if (i == 0)
@@ -114,36 +122,10 @@ public class BuffManager : BaseBuff
         DestroyOldPanels();
     }
 
-    private void UpdateBuffMultiplierForType(string buffType)
+    private void OnPanelClick(int index)
     {
-        switch (buffType)
-        {
-            case "Attack":
-                UpdateBuffMultiplier();
-                break;
-            case "Health":
-                UpdateBuffMultiplier();
-                break;
-                // Add cases for other buff types (movement, atkSpd, firerate) as needed
-        }
-    }
-
-    private string GetBuffDescription(string buffType)
-    {
-        switch (buffType)
-        {
-            case "Attack":
-                return $"Increases {buffType} by {GetMultiplierForTier(damageBuff)}%";
-            case "Health":
-                return $"Increases {buffType} by {GetMultiplierForTier(healthBuff)}%";
-            case "Movement":
-                return $"Increases {buffType} by {GetMultiplierForTier(movementBuff)}%";
-            case "AtkSpeed":
-                return $"Increases {buffType} by {GetMultiplierForTier(atkSpdBuff)}%";
-            case "FireRate":
-                return $"Increases {buffType} by {GetMultiplierForTier(firerateBuff)}%";
-            default:
-                return "";
-        }
+        Debug.Log("Panel clicked index: " + index + "\n" + "                   " +
+            "Panel Name: " + instantiatedPanels[index]);
+        playerData.speedLevel++;
     }
 }
