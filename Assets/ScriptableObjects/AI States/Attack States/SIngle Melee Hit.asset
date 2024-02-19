@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6916d514de5fa48922ca59676001ff, type: 3}
   m_Name: SIngle Melee Hit
   m_EditorClassIdentifier: 
-  _hitCooldown: 3
+  _hitCooldown: 1.5
   _timeTillExit: 2
-  _distanceToCountExit: 2
+  _distanceToCountExit: 1

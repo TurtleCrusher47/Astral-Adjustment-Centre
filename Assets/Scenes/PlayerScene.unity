@@ -1462,7 +1462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1485344229
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2059,7 +2059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1990038888
 Transform:
   m_ObjectHideFlags: 0
@@ -3020,10 +3020,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.27406323
-  m_Height: 1.828897
+  m_Radius: 0.22184634
+  m_Height: 1.8947613
   m_Direction: 1
-  m_Center: {x: 0.01745556, y: 0.8879192, z: 0}
+  m_Center: {x: 0.017455567, y: 0.8549871, z: 0.0034040213}
 --- !u!54 &1949679902083003258
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3327,7 +3327,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1949679903687372662
 MonoBehaviour:
@@ -3488,6 +3488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shuriken Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1894228115505754429, guid: bfba75cc7669c084693521bd7906c7fc,
         type: 3}

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0e87a28107e0f42add70e443b69956, type: 3}
   m_Name: Direct Chase
   m_EditorClassIdentifier: 
-  _movementSpeed: 1.75
+  _movementSpeed: 3

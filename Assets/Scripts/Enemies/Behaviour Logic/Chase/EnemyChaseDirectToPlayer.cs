@@ -6,10 +6,14 @@ using UnityEngine;
 public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 {
     [SerializeField] private float _movementSpeed = 4.0f;
+
+    private Animator animator;
    
    public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+
+        animator = gameObject.GetComponent<Animator>();
     }
 
     public override void DoExitLogic()
@@ -24,7 +28,16 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
         Vector3 moveDirection = (playerTransform.position - enemy.transform.position).normalized;
         moveDirection.y = 0;
 
-        enemy.MoveEnemy(moveDirection * _movementSpeed);
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("YBotPunch"))
+        {
+            enemy.MoveEnemy(Vector3.zero);
+        }
+
+        else
+        {
+            enemy.MoveEnemy(moveDirection * _movementSpeed * playerTransform.localScale.x);
+        }
+
 
         Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
         lookPos.y = 0;
