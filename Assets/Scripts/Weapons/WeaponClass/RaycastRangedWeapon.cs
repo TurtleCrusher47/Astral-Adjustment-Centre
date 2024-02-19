@@ -46,7 +46,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
 
     }
 
-    private IEnumerator RenderTraceLine(Vector3 hitPosition)
+    protected IEnumerator RenderTraceLine(Vector3 hitPosition)
     {
         // audController.PlayAudio("shoot");
         
