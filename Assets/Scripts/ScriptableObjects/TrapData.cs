@@ -9,5 +9,5 @@ public class TrapData : ScriptableObject
     public int damage;
     public int damageRange;
     public float timeBeforeDestroy;
-    public bool triggerRange;
+    public float triggerRange;
 }

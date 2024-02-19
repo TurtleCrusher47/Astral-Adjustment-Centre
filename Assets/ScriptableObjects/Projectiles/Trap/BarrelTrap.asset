@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ea8f7c598e52c445bc4e1f771fce96c, type: 3}
-  m_Name: FlintlockProjectile
+  m_Script: {fileID: 11500000, guid: afe70cb64b81a4e45b37dbf48a0f295c, type: 3}
+  m_Name: BarrelTrap
   m_EditorClassIdentifier: 
-  damage: 50
-  maxDistance: 300
+  damage: 200
+  damageRange: 5
+  timeBeforeDestroy: 30
+  triggerRange: 0
