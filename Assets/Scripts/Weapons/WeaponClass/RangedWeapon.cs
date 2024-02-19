@@ -6,8 +6,9 @@ using UnityEngine;
 public abstract class RangedWeapon : Weapon
 {
     [SerializeField] protected RangedWeaponData rangedWeaponData;
+    [SerializeField] protected Transform firePoint;
+    [SerializeField] protected LayerMask layersToIgnore;
     protected Transform cam;
-    protected Transform firePoint;
     protected Transform orientation;
     // [SerializeField] protected Recoil recoil;
 
@@ -18,7 +19,7 @@ public abstract class RangedWeapon : Weapon
     protected override void Start()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
-        firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
+        // firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
         orientation = GameObject.FindGameObjectWithTag("Orientation").transform;
     }
 

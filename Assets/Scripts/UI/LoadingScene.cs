@@ -72,8 +72,6 @@ public class LoadingScene : MonoBehaviour
                 asyncOperation.allowSceneActivation = true;
             }
 
-            Debug.Log("Progress : " + progress);
-
             yield return null;
         }
     }

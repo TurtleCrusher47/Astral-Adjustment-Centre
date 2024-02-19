@@ -1,26 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    [SerializeField] List<AudioSource> audSources = new List<AudioSource>();
-    [SerializeField] AudioSource bgmSource;
-    [SerializeField] List<AudioSource> sfxSources = new List<AudioSource>();
+    [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private List<AudioSource> sfxSources = new List<AudioSource>();
+    [SerializeField] private List<AudioSource> vlSources = new List<AudioSource>();
 
-    [SerializeField] List<AudioClip> bgmClips = new List<AudioClip>();
-    [SerializeField] List<AudioClip> sfxClips = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> bgmClips = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> sfxClips = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> vlClips = new List<AudioClip>();
 
     void Awake()
     {
-        gameObject.GetComponents(audSources);
-
-        bgmSource = audSources[0];
-
-        for (int i = 1; i < audSources.Count; i++)
-        {
-            sfxSources.Add(audSources[i]);
-        }
+        bgmSource = GameManager.Instance.FindChildWithTag(gameObject, "BGM").GetComponent<AudioSource>();
+        sfxSources = GameManager.Instance.FindChildWithTag(gameObject, "SFX").GetComponents<AudioSource>().ToList();
+        vlSources = GameManager.Instance.FindChildWithTag(gameObject, "VL").GetComponents<AudioSource>().ToList();
     }
 
     public void PlayBGM(string name)
@@ -58,6 +55,29 @@ public class AudioManager : Singleton<AudioManager>
             {
                 sfxSources[i].clip = clipToPlay;
                 sfxSources[i].Play();
+                break;
+            }
+        }
+    }
+
+    public void PlayVL(string name)
+    {
+        AudioClip clipToPlay = null;
+
+        for (int i = 0; i < vlClips.Count; i++)
+        {
+            if (vlClips[i].name == name)
+            {
+                clipToPlay = vlClips[i];
+            }
+        }
+
+        for (int i = 0; i < vlSources.Count; i++)
+        {
+            if (!vlSources[i].isPlaying)
+            {
+                vlSources[i].clip = clipToPlay;
+                vlSources[i].Play();
                 break;
             }
         }

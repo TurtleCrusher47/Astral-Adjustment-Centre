@@ -52,13 +52,14 @@ MonoBehaviour:
   inInventory: 0
   inventoryPosition: 0
   rangedWeaponData: {fileID: 11400000, guid: 8f53ca047d14931478533f68d6f5c0c3, type: 2}
+  firePoint: {fileID: 2234285575901989128}
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 128
   gameObjectProjectileData: {fileID: 11400000, guid: c67cb6062c630dc4fa17e9bcc62d06c3,
     type: 2}
   projectile: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
     type: 3}
-  weaponLayer:
-    serializedVersion: 2
-    m_Bits: 512
   abilityProjectile: {fileID: 1686820092174708099, guid: a9ffd673cc4a69e4da0b24650de27d41,
     type: 3}
 --- !u!54 &2234285575767978175
