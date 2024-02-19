@@ -22,6 +22,8 @@ public class MenuTransitionManager : MonoBehaviour
 
     void Awake()
     {
+        subtitlePanel.SetActive(false);
+
         for (int i = 0; i < virtualCameras.Count; i++)
         {
             virtualCameras[i].SetActive(false);
@@ -176,8 +178,6 @@ public class MenuTransitionManager : MonoBehaviour
         yield return new WaitUntil(() => cutsceneDirector.state == PlayState.Paused);
 
         yield return new WaitForSeconds(0.75f);
-
-        subtitlePanel.SetActive(false);
 
         GameManager.Instance.ChangeScene("LevelScene");
     }
