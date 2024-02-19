@@ -10,4 +10,5 @@ public class TrapData : ScriptableObject
     public int damageRange;
     public float timeBeforeDestroy;
     public float triggerRange;
+    public float triggerDelay;
 }

@@ -22,7 +22,7 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
     {
         yield return new WaitForSeconds(3);
 
-        foreach (var collider in Physics.OverlapSphere(transform.position, 1))
+        foreach (var collider in Physics.OverlapSphere(transform.position, 3))
         {
             if (collider.TryGetComponent<IDamageable>(out var damageable))
             {

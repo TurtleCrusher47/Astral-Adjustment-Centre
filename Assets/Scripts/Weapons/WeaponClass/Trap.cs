@@ -16,7 +16,7 @@ public abstract class Trap : MonoBehaviour
 
     protected abstract void OnTriggerEnter(Collider collider);
 
-    protected abstract void TriggerTrap();
+    public abstract IEnumerator TriggerTrap();
 
     // Effects + SFX
     protected abstract void OnTrapTriggered();

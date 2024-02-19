@@ -42,9 +42,9 @@ public class Flintlock : RaycastRangedWeapon
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, secondaryTargetLayers, QueryTriggerInteraction.Collide))
             {
                 StartCoroutine(RenderTraceLine(hitInfo.point));
-                Debug.Log(hitInfo.transform.name);
-                IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
-                damageable?.Damage(raycastProjectileData.damage);
+                // Debug.Log(hitInfo.transform.name);
+                BarrelTrap barrelTrap = hitInfo.transform.GetComponent<BarrelTrap>();
+                StartCoroutine(barrelTrap?.TriggerTrap());
             }
             else
             {

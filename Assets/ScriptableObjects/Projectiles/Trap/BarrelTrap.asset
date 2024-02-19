@@ -16,3 +16,4 @@ MonoBehaviour:
   damageRange: 5
   timeBeforeDestroy: 30
   triggerRange: 0
+  triggerDelay: 0.3
