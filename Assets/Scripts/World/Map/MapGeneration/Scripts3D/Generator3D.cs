@@ -743,7 +743,7 @@ public class Generator3D : MonoBehaviour
         }
     }
 
-    private void RemoveEnemyFromRoom(GameObject enemy)
+    public void RemoveEnemyFromRoom(GameObject enemy)
     {
         currEnemiesInRoom.Remove(enemy);
         StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(enemy));
