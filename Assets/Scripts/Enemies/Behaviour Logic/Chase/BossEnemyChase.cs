@@ -5,56 +5,64 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase- Boss Chase", menuName = "Enemy Logic/Chase State/Boss Chase")]
 public class BossEnemyChase : EnemyChaseSOBase
 {
+    [SerializeField] private float _movementSpeed = 4.0f;
+
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-
-        //any get components, other entry logic do here
-        //var component = gameObject.GetComponent<something>();
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        
-        //exit logic here
-        //if you need to reset any values, return anything to pool at end of state
     }
 
     public override void DoFrameUpdateLogic()
     {
-        base.DoFrameUpdateLogic();
+        BossEnemy self = transform.GetComponent<BossEnemy>();
+        if (enemy.isInStrikingDistance)
+        {
+            self.attackState = new EnemyAttackState(self, self.stateMachine);
+            if (self.CurrentHealth <= self.MaxHealth / 2)
+            {
+                Debug.Log("Ultimate");
+                self.enemyAttackBaseInstance = Instantiate(self.enemyUltimateAttackBase);
+                self.enemyAttackBaseInstance.Init(gameObject, self);
+            }
+            else
+            {
+                int check = Random.Range(0, 2);
+                switch (check)
+                {
+                case 0:
+                        Debug.Log("Normal");
+                        self.enemyAttackBaseInstance = Instantiate(self.enemyAttackOverrideBase);
+                        self.enemyAttackBaseInstance.Init(gameObject, self);
+                        break;
+                case 1:
+                        Debug.Log("AOE");
+                        self.enemyAttackBaseInstance = Instantiate(self.enemyAreaAttackBase);
+                        self.enemyAttackBaseInstance.Init(gameObject, self);
+                        break;
+                }
+            }
+            enemy.stateMachine.ChangeState(enemy.attackState);
+        }
+        if (!enemy.isAggroed)
+        {
+            enemy.stateMachine.ChangeState(enemy.idleState);
+        }
 
-        //do state logic here 
+        Vector3 moveDirection = (playerTransform.position - enemy.transform.position).normalized;
+        moveDirection.y = 0;
 
-        //example for if you wanna move the enemy
-        //Vector3 moveDir = some vector3;
-        //enemy.MoveEnemy(moveDir);
+        enemy.MoveEnemy(moveDirection * _movementSpeed);
 
-        //if you need to reference this enemy's transform or gameObject they are defined in the base class
-        //transform.localScale = Vector3(10, 10 ,10);
-        //gameObject.GetComponent<WHATEVER U WANT>();
+        Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
+        lookPos.y = 0;
 
-        // The players transform can be called, is also defined in base class
-        //playerTransform.whateverThingUWantFromTranformBro = (idk man anything u want);
-
-        //if u wanna change state 
-        //this example is after a certain distance away and like cetain time has passed
-        // if (Vector3.Distance(playerTransform.position, enemy.transform.position) > (_distanceToCountExit * playerTransform.localScale.x))
-        // {
-        //     _exitTimer += Time.deltaTime;
-
-        //     if (_exitTimer >= _timeTillExit)
-        //     {
-        //         enemy.stateMachine.ChangeState(enemy.chaseState);
-        //     }
-        // }
-
-        // else
-        // {
-        //     _exitTimer = 0;
-        // }
-
+        Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
     }
 
     public override void DoPhysicsLogic()
