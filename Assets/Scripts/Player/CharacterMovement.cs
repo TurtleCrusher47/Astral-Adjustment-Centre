@@ -7,7 +7,6 @@ public class CharacterMovement : MonoBehaviour
 {
 	[SerializeField] PlayerData playerData;
 	[SerializeField] Transform orientation;
-	[SerializeField] Animator animator;
 		
 	[Header("Crouch and Prone")]
 	[SerializeField] Camera cam;
@@ -48,7 +47,6 @@ public class CharacterMovement : MonoBehaviour
 		PlayerInput();
 		ControlDrag();
 		ControlSpeed();
-		SetAnimator();
 		ClimbStep();
 
 		// Get the perpendicular angle of the plane
@@ -177,35 +175,6 @@ public class CharacterMovement : MonoBehaviour
 		{
 			rb.AddForce(moveDirection.normalized * playerData.moveSpeed * playerData.airMultiplier, ForceMode.Acceleration);
 		}
-	}
-
-	void SetAnimator()
-	{
-
-		//  if (isMoving)
-		//  {
-		//  	if(playerData.moveSpeed > playerData.walkSpeed + 0.3)
-		//  	{
-		//  		animator.SetBool("isRunning", true);
-		//  		animator.SetBool("isWalking", false);
-		//  	}
-
-		//  	else
-		//  	{
-		//  		animator.SetBool("isWalking", true);
-		//  		animator.SetBool("isRunning", false);
-		//  	}
-		//  }
-		
-		//  else
-		//  {
-		//  	animator.SetBool("isWalking", false);
-		//  	animator.SetBool("isRunning", false);
-
-		//  }
-
-		//  animator.SetBool("isCrouching", isCrouching);
-
 	}
 
 	private bool OnSlope()
