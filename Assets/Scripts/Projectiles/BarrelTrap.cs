@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BarrelTrap : Trap
 {
+    [SerializeField] private GameObject effectObject;
+
     protected override void OnTriggerEnter(Collider collider)
     {
         // Do nothing for the barrel as it does not care about being hit by other colliders
@@ -31,11 +33,13 @@ public class BarrelTrap : Trap
         }
 
         isTriggered = true;
+        OnTrapTriggered();
         StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
     }
 
     protected override void OnTrapTriggered()
     {
-        throw new System.NotImplementedException();
+        GameObject explosion = ObjectPoolManager.Instance.SpawnObject(effectObject, transform.position, Quaternion.identity);
+        ObjectPoolManager.Instance.StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(explosion, 1.9f));
     }
 }

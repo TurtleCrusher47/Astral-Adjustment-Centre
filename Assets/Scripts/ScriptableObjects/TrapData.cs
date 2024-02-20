@@ -7,7 +7,7 @@ public class TrapData : ScriptableObject
 {
     [Header("Trap")]
     public int damage;
-    public int damageRange;
+    public float damageRange;
     public float timeBeforeDestroy;
     public float triggerRange;
     public float triggerDelay;
