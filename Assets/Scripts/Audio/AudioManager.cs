@@ -122,34 +122,4 @@ public class AudioManager : Singleton<AudioManager>
             }
         }
     }
-
-    public IEnumerator SetBGMSourcesVol(float vol)
-    {
-        bool fadeIn = vol > bgmSources[0].volume;
-
-        if (fadeIn)
-        {
-            while (bgmSources[0].volume < vol)
-            {
-                foreach (AudioSource source in bgmSources)
-                {
-                    source.volume += Time.deltaTime / 2;
-                }
-
-                yield return null;
-            }
-        }
-        else
-        {
-            while (bgmSources[0].volume > vol)
-            {
-                foreach (AudioSource source in bgmSources)
-                {
-                    source.volume -= Time.deltaTime / 2;
-                }
-
-                yield return null;
-            }
-        }
-    }
 }

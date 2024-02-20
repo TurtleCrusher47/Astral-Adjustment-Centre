@@ -23,8 +23,6 @@ public class TimelineManager : Singleton<TimelineManager>
 
     public IEnumerator PlayCutscene(string cutsceneName, string nextScene)
     {
-        AudioManager.Instance.StartCoroutine(AudioManager.Instance.SetBGMSourcesVol(0.2f));
-
         for (int i = 0; i < timelines.Count; i++)
         {
             if (timelines[i].name == (cutsceneName + "Cutscene"))

@@ -6,43 +6,29 @@ using UnityEngine;
 public class SubtitleManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup subtitlePanel;
-    [SerializeField] private TMP_Text playerSubtitleText, enemySubtitleText;
-    [SerializeField] private List<string> playerSubtitles, enemySubtitles;
-    [SerializeField] private List<string> playerVoicelines, enemyVoicelines;
+    [SerializeField] private TMP_Text subtitleText;
+    [SerializeField] private List<string> subtitles;
+    [SerializeField] private List<string> voicelineNames;
 
-    private int playerCurrLine;
-    private int enemyCurrLine;
+    int currLine;
 
     void Awake()
     {
         subtitlePanel.gameObject.SetActive(false);
         subtitlePanel.alpha = 0;
-        playerSubtitleText.text = string.Empty;
-        enemySubtitleText.text = string.Empty;
-        playerCurrLine = 0;
+        subtitleText.text = string.Empty;
+        currLine = 0;
     }
 
-    public void PlayerNextLine()
+    public void NextLine()
     {
-        if (playerSubtitles.Count >= playerCurrLine)
+        if (subtitles.Count >= currLine)
         {
-            playerSubtitleText.text = playerSubtitles[playerCurrLine];
+            subtitleText.text = subtitles[currLine];
 
-            AudioManager.Instance.PlayVL(playerVoicelines[playerCurrLine]);
+            AudioManager.Instance.PlayVL(voicelineNames[currLine]);
 
-            playerCurrLine++;
-        }
-    }
-
-    public void EnemyNextLine()
-    {
-        if (enemySubtitles.Count >= enemyCurrLine)
-        {
-            enemySubtitleText.text = enemySubtitles[enemyCurrLine];
-
-            AudioManager.Instance.PlayVL(enemyVoicelines[enemyCurrLine]);
-
-            enemyCurrLine++;
+            currLine++;
         }
     }
 }
