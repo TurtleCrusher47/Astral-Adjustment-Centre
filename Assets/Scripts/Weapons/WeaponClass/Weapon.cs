@@ -56,5 +56,5 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract void OnSecondary();
 
-    protected abstract void OnSkill();
+    protected abstract void OnAbility();
 }
