@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DualRevolversProjectile
   m_EditorClassIdentifier: 
   damage: 60
-  maxDistance: 300
+  maxDistance: 20

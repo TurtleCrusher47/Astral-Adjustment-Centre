@@ -15,7 +15,7 @@ public class ShurikenProjectile : GameObjectProjectile
         if (collider.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.Damage(gameObjectProjectileData.damage);
-            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
+            // StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
         }
         else
         {

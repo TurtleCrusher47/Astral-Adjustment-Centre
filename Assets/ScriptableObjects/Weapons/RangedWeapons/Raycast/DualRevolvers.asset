@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: DualRevolvers
   infiniteAmmo: 0
-  currentAmmo: 300
-  magazineSize: 18
+  currentAmmo: 24
+  magazineSize: 24
   fireRate: 60
-  reloadTime: 0
+  reloadTime: 3
   reloading: 0
   recoil: {x: 0, y: 0, z: 0}
   secondarycooldown: 1
