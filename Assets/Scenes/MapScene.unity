@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.032675125, g: 0.03440554, b: 0.045723163, a: 1}
+  m_IndirectSpecularColor: {r: 0.018646564, g: 0.020048946, b: 0.026781386, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +266,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 481941754}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &481941759 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 298486189, guid: 0bbd65290f4f544458a9576dfaebbf6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 481941754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &756050444
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +369,26 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &794771951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9197273063978293058, guid: 0bbd65290f4f544458a9576dfaebbf6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 481941754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &794771953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794771951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64fbb2301004d514ba3f104f06d084eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snappiness: 20
+  returnSpeed: 3
 --- !u!4 &844793782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9099374036349862845, guid: ed5dc1bd0e8791a4b8228583125542f5,
@@ -819,6 +845,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d244549007415c498da20b897999406, type: 3}
+--- !u!1 &1506565795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9099374036349862844, guid: ed5dc1bd0e8791a4b8228583125542f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2137435107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1506565796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506565795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71062001af25d6b4f96f9aa9db6d2dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHolder: {fileID: 481941759}
+  amount: 0.01
+  frequency: 10
+  smooth: 50
 --- !u!1 &1518373004
 GameObject:
   m_ObjectHideFlags: 0

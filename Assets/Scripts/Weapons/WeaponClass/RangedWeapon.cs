@@ -10,6 +10,7 @@ public abstract class RangedWeapon : Weapon
     [SerializeField] protected LayerMask targetLayers;
     protected Transform cam;
     protected Transform orientation;
+    protected Recoil recoil;
     // [SerializeField] protected Recoil recoil;
 
     // [SerializeField] protected UpdateAmmoText updateAmmoText;
@@ -19,8 +20,8 @@ public abstract class RangedWeapon : Weapon
     protected override void Start()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
-        // firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
         orientation = GameObject.FindGameObjectWithTag("Orientation").transform;
+        recoil = GameObject.FindGameObjectWithTag("CameraRotation").GetComponent<Recoil>();
     }
 
     public void Update()

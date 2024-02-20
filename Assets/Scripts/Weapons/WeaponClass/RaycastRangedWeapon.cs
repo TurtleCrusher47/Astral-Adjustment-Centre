@@ -33,6 +33,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
                 rangedWeaponData.currentAmmo--;
 
                 timeSinceLastShot = 0;
+                recoil.GunRecoil(rangedWeaponData.recoil);
                 OnPrimary();
                 // recoil.GunRecoil(gunData.recoil);
 
