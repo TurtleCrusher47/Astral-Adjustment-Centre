@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Railgun
   infiniteAmmo: 0
-  currentAmmo: 14
+  currentAmmo: 50
   magazineSize: 50
   fireRate: 30
-  reloadTime: 5
+  reloadTime: 3
   reloading: 0
   recoil: {x: 0, y: 0, z: 0}
   secondarycooldown: 0
