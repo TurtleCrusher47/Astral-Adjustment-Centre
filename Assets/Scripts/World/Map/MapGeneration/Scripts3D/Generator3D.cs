@@ -4,17 +4,6 @@ using UnityEngine;
 using Random = System.Random;
 using RandomR = UnityEngine.Random;
 using Graphs;
-using UnityEngine.SceneManagement;
-using System;
-using System.Drawing;
-using Unity.VisualScripting;
-using System.IO;
-using static UnityEngine.GraphicsBuffer;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
-using static UnityEditor.FilePathAttribute;
-using System.Data;
-using UnityEditor.Rendering;
 
 public class Generator3D : MonoBehaviour 
 {
