@@ -58,6 +58,8 @@ public class BossEnemyAttack : EnemyAttackSOBase
             }
         }
 
+        BossEnemy self = transform.GetComponent<BossEnemy>();
+        self.indicator.DoCharge(transform.position + transform.forward / 2, new Vector3(0, enemy.transform.eulerAngles.y + 180, 0), new Vector3(0.5f, 1, 1), _chargeUpTimer, _timer);
     }
 
     public override void DoPhysicsLogic()

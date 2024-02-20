@@ -10,4 +10,6 @@ public class BossEnemy : Enemy
     public EnemyAttackSOBase enemyAreaAttackBase;
     [SerializeField]
     public EnemyAttackSOBase enemyUltimateAttackBase;
+    [SerializeField]
+    public EnemyAttackIndicator indicator;
 }
