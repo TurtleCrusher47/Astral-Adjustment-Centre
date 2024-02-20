@@ -43,8 +43,10 @@ public class Flintlock : RaycastRangedWeapon
             {
                 StartCoroutine(RenderTraceLine(hitInfo.point));
                 // Debug.Log(hitInfo.transform.name);
-                BarrelTrap barrelTrap = hitInfo.transform.GetComponent<BarrelTrap>();
-                StartCoroutine(barrelTrap?.TriggerTrap());
+                if (hitInfo.transform.TryGetComponent<BarrelTrap>(out BarrelTrap barrelTrap))
+                {
+                    StartCoroutine(barrelTrap?.TriggerTrap());
+                }
             }
             else
             {
