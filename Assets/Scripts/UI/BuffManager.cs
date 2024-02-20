@@ -116,6 +116,18 @@ public class BuffManager : MonoBehaviour
     {
         DestroyOldPanels();
     }
+
+    /*
+    public void ResetBuffs()
+    {
+        ScriptableBuff.ResetBuffTier();
+        buffs.ResetAttack();
+        buffs.ResetAtkSpd();
+        buffs.ResetFireRate();
+        buffs.ResetHealth();
+        buffs.ResetSpeed();
+    }*/
+
     private void OnPanelClick(int index)
     {
         // Ensure the index is valid
@@ -129,22 +141,27 @@ public class BuffManager : MonoBehaviour
             {
                 case "Speed":
                     playerData.speedLevel += 1;
+                    playerData.walkSpeed *= 1 + selectedBuff.buffBonus[0];
                     break;
 
                 case "Health":
                     playerData.healthLevel += 1;
+                    // Buff HP
                     break;
 
                 case "Attack":
                     playerData.attackLevel += 1;
+                    // Buff Player
                     break;
 
                 case "Atk Spd":
                     playerData.atkSpeedLevel += 1;
+                    // Buff Atk Spd
                     break;
 
                 case "Fire Rate":
                     playerData.fireRateLevel += 1;
+                    // Buff Fire Rate
                     break;
 
                 // Add more cases if you have additional buff types
@@ -187,10 +204,10 @@ public class BuffManager : MonoBehaviour
             int arrayIndex = Mathf.Clamp(playerLevel, 0, selectedBuff.buffTiers.Length - 1);
 
             // Use playerLevel as an index for buffTiers and buffBonus arrays
-            selectedBuff.buffTiers[playerLevel] = selectedBuff.buffTiers[arrayIndex];
-            selectedBuff.buffBonus[playerLevel] = selectedBuff.buffBonus[arrayIndex];
+            selectedBuff.buffTiers[0] = selectedBuff.buffTiers[arrayIndex];
+            selectedBuff.buffBonus[0] = selectedBuff.buffBonus[arrayIndex];
 
-            Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff);
+            Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff + "\n" + "Buff Bonus: " + selectedBuff.buffBonus);
 
             // Reroll panels with the updated levels, tiers, and bonus
             DestroyOldPanels();

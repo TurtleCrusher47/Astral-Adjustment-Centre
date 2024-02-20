@@ -9,4 +9,10 @@ public abstract class ScriptableBuff : ScriptableObject
     public string[] buffTiers;
 
     public float[] buffBonus;
+
+    // Reset  Buff
+    public void ResetBuffTier()
+    {
+        buffTiers[0] = "I";
+    }
 }

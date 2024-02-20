@@ -60,6 +60,8 @@ public class PlayerData : ScriptableObject
     {
         currentHealth = maxHealth;
 
+		
+
 		// Reset buff
 		resetLevel = healthLevel;
 		resetLevel = attackLevel;

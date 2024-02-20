@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89363a4c26de94db93a7541fca0ee1, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  moveSpeed: 22.66031
+  moveSpeed: 15
   airMultiplier: 0.5
   walkSpeed: 15
   sprintSpeed: 18
@@ -37,8 +37,8 @@ MonoBehaviour:
   maxHealth: 100
   mainVolume: 50
   sfxVolume: 50
-  healthLevel: 2
+  healthLevel: 0
   attackLevel: 0
-  speedLevel: 0
+  speedLevel: 3
   atkSpeedLevel: 0
   fireRateLevel: 0

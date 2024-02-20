@@ -20,12 +20,8 @@ MonoBehaviour:
   - IV
   - V
   buffBonus:
-  - 0.3
-  - 0.6
-  - 0.9
-  - 1.2
+  - 0.5
+  - 1
   - 1.5
-  Duration: 0
-  IsDurationStacked: 0
-  IsEffectStacked: 0
-  AttackIncrease: 0
+  - 2
+  - 2.5
