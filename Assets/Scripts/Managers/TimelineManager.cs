@@ -17,6 +17,8 @@ public class TimelineManager : Singleton<TimelineManager>
 
         director = GetComponent<PlayableDirector>();
         director.playableAsset = timelines[cutsceneIndex];
+
+        subtitlePanel.SetActive(false);
     }
 
     public IEnumerator PlayCutscene(string cutsceneName, string nextScene)
