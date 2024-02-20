@@ -625,6 +625,7 @@ public class Generator3D : MonoBehaviour
         RoomData roomData = data;
         // create list of available spaces
         List<Vector3> vacantSpaces = new List<Vector3>();
+        List<Vector3> allSpaces = new List<Vector3>();
         for (float x = 0.5f; x < size.x - 0.5f; x += 0.5f)
         {
             for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
@@ -632,6 +633,7 @@ public class Generator3D : MonoBehaviour
                 vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
             }
         }
+        allSpaces = vacantSpaces;
         // loops all items
         for (int i = 0; i < roomData.maxMinChanceList.Count; i++)
         {
@@ -650,8 +652,20 @@ public class Generator3D : MonoBehaviour
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
                         GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                         mapContent.Add(obj);
                         currEnemiesInRoom.Add(obj);
+
+                        // randomize waypoint pos
+                        for (int k = 0; k < obj.transform.childCount; k++)
+                        {
+                            randIndex = RandomR.Range(0, allSpaces.Count);
+                            randPos = allSpaces[randIndex];
+                            if (obj.transform.GetChild(k).CompareTag("Waypoint"))
+                            {
+                                obj.transform.GetChild(k).transform.position = randPos;
+                            }
+                        }
                     }
                 }
             }
@@ -769,15 +783,15 @@ public class Generator3D : MonoBehaviour
         // spawn floor
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            obj.transform.GetChild(i).gameObject.SetActive(true);
+        }
         // spawn light in intervals
         if (pathIndex % 3 == 0)
         {
             obj = ObjectPoolManager.Instance.SpawnObject(hallwayLightPrefab, curr + tileOffset + new Vector3(0, 0.975f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
             mapContent.Add(obj);
-            for (int i = 0; i < obj.transform.childCount; i++)
-            {
-                obj.transform.GetChild(i).gameObject.SetActive(true);
-            }
         }
     }
 
