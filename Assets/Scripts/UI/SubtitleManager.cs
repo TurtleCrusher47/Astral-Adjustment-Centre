@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SubtitleManager : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup subtitlePanel;
     [SerializeField] private TMP_Text subtitleText;
     [SerializeField] private List<string> subtitles;
     [SerializeField] private List<string> voicelineNames;
@@ -13,6 +14,8 @@ public class SubtitleManager : MonoBehaviour
 
     void Awake()
     {
+        subtitlePanel.gameObject.SetActive(false);
+        subtitlePanel.alpha = 0;
         subtitleText.text = string.Empty;
         currLine = 0;
     }

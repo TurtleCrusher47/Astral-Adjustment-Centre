@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private GameObject subtitlePanel;
     public string nextSceneName;
 
     public void ChangeScene(string sceneName)
@@ -17,17 +16,6 @@ public class GameManager : Singleton<GameManager>
         nextSceneName = sceneName;
 
         Debug.Log("Next Scene : " + nextSceneName);
-
-        StartCoroutine(DelayHidePanel());
-    }
-
-    private IEnumerator DelayHidePanel()
-    {
-        yield return null;
-
-        Debug.Log("Test");
-
-        subtitlePanel.SetActive(false);
     }
 
     public GameObject FindChildWithTag(GameObject parent, string tag)
