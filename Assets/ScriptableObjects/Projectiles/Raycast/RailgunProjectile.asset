@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RailgunProjectile
   m_EditorClassIdentifier: 
   damage: 50
-  maxDistance: 500
+  maxDistance: 30

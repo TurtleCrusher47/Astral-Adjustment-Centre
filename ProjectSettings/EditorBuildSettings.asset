@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelScene.unity
     guid: c95a0a5256fb12d4a88ed15839e30994
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MapScene.unity
     guid: 8064f998062f41a4a811f6c15a63b63e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PhoneScene.unity
     guid: b0f778bb8248f404bb71037f61c920fe
   m_configObjects: {}

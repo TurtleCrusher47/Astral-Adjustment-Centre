@@ -6,8 +6,9 @@ using UnityEngine;
 public abstract class RangedWeapon : Weapon
 {
     [SerializeField] protected RangedWeaponData rangedWeaponData;
+    [SerializeField] protected Transform firePoint;
+    [SerializeField] protected LayerMask targetLayers;
     protected Transform cam;
-    protected Transform firePoint;
     protected Transform orientation;
     // [SerializeField] protected Recoil recoil;
 
@@ -18,7 +19,7 @@ public abstract class RangedWeapon : Weapon
     protected override void Start()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
-        firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
+        // firePoint = GameManager.Instance.FindChildWithTag(this.gameObject, "FirePoint").transform; 
         orientation = GameObject.FindGameObjectWithTag("Orientation").transform;
     }
 
@@ -26,6 +27,7 @@ public abstract class RangedWeapon : Weapon
     {
         timeSinceLastShot += Time.deltaTime;
 
+        // Left mouse button is being held down
         if (Input.GetMouseButton(0))
         {
             UsePrimary();
@@ -34,9 +36,14 @@ public abstract class RangedWeapon : Weapon
         {
             StartReload();
         }
-        if (Input.GetMouseButtonDown(1))
+        // Right mouse button is clicked
+        if (Input.GetMouseButton(1))
         {
             UseSecondary();
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            UseSecondaryUp();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -54,7 +61,6 @@ public abstract class RangedWeapon : Weapon
             abilityCooldownTimer -= Time.deltaTime;
         }
     }
-    
 
     protected bool CanShoot()
     {

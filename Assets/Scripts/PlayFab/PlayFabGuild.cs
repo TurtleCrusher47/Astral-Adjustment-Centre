@@ -320,6 +320,7 @@ public class PlayFabGuild : MonoBehaviour
                 }, addDataResult=>
                 {
                     createGuildText.text = "Created Guild";
+                    if_guildName.text = string.Empty;
                     myGuildButton.interactable = true;
                     OnButtonGuildsList();
                 }, OnError);

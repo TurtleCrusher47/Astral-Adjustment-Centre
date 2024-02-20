@@ -84,6 +84,25 @@ public class RegisterPanelManager : MonoBehaviour
     void OnRegisterSuccess(RegisterPlayFabUserResult r)
     {
         mainSceneManager.SetStatusText("Register Successful " + if_displayname.text + " !\nContinue on to Login Page.");
-        mainSceneManager.ShowLoginPage();
+
+        if_displayname.text = string.Empty;
+        if_username.text = string.Empty;
+        if_email.text = string.Empty;
+        if_password.text = string.Empty;
+        if_confirmpassword.text = string.Empty;
+
+        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
+        {
+            Data = new Dictionary<string, string>()
+            {
+                {"NewPlayer", 1.ToString()},
+                {"RunsCompleted", 0.ToString()}
+            }
+        }, result => 
+        {
+            Debug.Log("Successfully updated user data.");
+
+            mainSceneManager.ShowLoginPage();
+        }, OnError);
     }
 }

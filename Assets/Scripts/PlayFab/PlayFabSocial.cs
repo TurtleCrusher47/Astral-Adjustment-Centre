@@ -179,6 +179,7 @@ public class PlayFabSocial : MonoBehaviour
         PlayFabClientAPI.ExecuteCloudScript(req, result=>
         {
             addFriendText.text = "Friend Request Sent";
+            if_recipient.text = string.Empty;
         }, OnError);
     }
 

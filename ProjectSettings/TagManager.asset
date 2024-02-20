@@ -39,7 +39,11 @@ TagManager:
   - Item2
   - Item1
   - WeaponCollider
+  - FirePoint2
   - Enemy
+  - BGM
+  - SFX
+  - VL
   layers:
   - Default
   - TransparentFX
@@ -52,8 +56,8 @@ TagManager:
   - Player
   - DroppedWeapons
   - Door
-  - 
-  - 
+  - Enemy
+  - Barrel
   - 
   - 
   - 

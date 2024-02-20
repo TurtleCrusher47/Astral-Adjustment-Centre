@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.03069058, g: 0.032644324, b: 0.043396644, a: 1}
+  m_IndirectSpecularColor: {r: 0.023136085, g: 0.024818067, b: 0.033113334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 1
+  subtitlePanel: {fileID: 0}
   nextSceneName: 
 --- !u!4 &73930766
 Transform:
@@ -241,6 +242,11 @@ PrefabInstance:
       propertyPath: cameraPosition
       value: 
       objectReference: {fileID: 1112341258}
+    - target: {fileID: 9197273063404761048, guid: 0bbd65290f4f544458a9576dfaebbf6a,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 6007
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bbd65290f4f544458a9576dfaebbf6a, type: 3}
 --- !u!4 &481941755 stripped

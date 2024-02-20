@@ -70,9 +70,14 @@ public class LoadingScene : MonoBehaviour
                 // loadingText.text = "Continue";
                 // Wait until you press the space key to activate the Scene
                 asyncOperation.allowSceneActivation = true;
-            }
 
-            Debug.Log("Progress : " + progress);
+                switch (GameManager.Instance.nextSceneName)
+                {
+                    case "LevelScene":
+                        TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("PostIntro", null));
+                        break;
+                }
+            }
 
             yield return null;
         }

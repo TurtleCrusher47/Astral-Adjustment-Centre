@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dummy : MonoBehaviour, IDamageable
 {
     // [SerializeField] Animator animator;
-    private int health = 100;
+    private float health = 100;
     private float immunityTimer = 0;
     private bool isDead;
 
@@ -17,7 +17,7 @@ public class Dummy : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         if (immunityTimer <= 0)
         {

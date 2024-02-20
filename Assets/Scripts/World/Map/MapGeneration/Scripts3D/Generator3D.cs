@@ -4,16 +4,6 @@ using UnityEngine;
 using Random = System.Random;
 using RandomR = UnityEngine.Random;
 using Graphs;
-using UnityEngine.SceneManagement;
-using System;
-using System.Drawing;
-using Unity.VisualScripting;
-using System.IO;
-using static UnityEngine.GraphicsBuffer;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
-using static UnityEditor.FilePathAttribute;
-using System.Data;
 
 public class Generator3D : MonoBehaviour 
 {
@@ -42,34 +32,48 @@ public class Generator3D : MonoBehaviour
         }
     }
 
-    [SerializeField] MapPrefabManager mPrefabManager;
-    [SerializeField] int seed;
-    [SerializeField] Vector3Int size;
-    [SerializeField] int roomCount;
-    [SerializeField] Vector3Int roomMaxSize;
-    [SerializeField] Vector3Int roomMinSize;
-    [SerializeField] List<GameObject> floorPrefab;
-    [SerializeField] GameObject ceilingPrefab;
-    [SerializeField] List<GameObject> wallPrefab;
-    [SerializeField] GameObject wallDoorPrefab;
-    [SerializeField] GameObject hallwayPrefab;
-    [SerializeField] GameObject stairPrefab;
-    [SerializeField] GameObject roomLightPrefab;
-    [SerializeField] GameObject hallwayLightPrefab;
-    [SerializeField] GameObject playerObj;
-    [SerializeField] GameObject camObj;
-    [SerializeField] GameObject endObj;
+    [SerializeField] private MapPrefabManager mPrefabManager;
+    [SerializeField] private int seed;
+    [SerializeField] private Vector3Int size;
+    [SerializeField] private int roomCount;
+    [SerializeField] private Vector3Int roomMaxSize;
+    [SerializeField] private Vector3Int roomMinSize;
+    [SerializeField] private List<GameObject> floorPrefab;
+    [SerializeField] private GameObject ceilingPrefab;
+    [SerializeField] private List<GameObject> wallPrefab;
+    [SerializeField] private GameObject wallDoorPrefab;
+    [SerializeField] private GameObject hallwayPrefab;
+    [SerializeField] private GameObject stairPrefab;
+    [SerializeField] private GameObject roomLightPrefab;
+    [SerializeField] private GameObject hallwayLightPrefab;
+    [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject camObj;
+    [SerializeField] private GameObject endObj;
 
-    Random random;
-    Grid3D<CellType> grid;
-    List<Room> rooms;
-    List<Room> enemyRooms;
-    List<RoomData> enemyRoomData;
-    Delaunay3D delaunay;
-    HashSet<Prim.Edge> selectedEdges;
-    List<List<Vector3Int>> pathList;
-    List<GameObject> doorList;
-    List<GameObject> mapContent;
+    // algorithm & others
+    private Random random;
+    private Grid3D<CellType> grid;
+    private List<Room> rooms;
+    private Delaunay3D delaunay;
+    private HashSet<Prim.Edge> selectedEdges;
+    // storage lists
+    private List<List<Vector3Int>> pathList;
+    private List<GameObject> doorList;
+    private List<GameObject> mapContent;
+    private List<Room> enemyRooms;
+    private List<RoomData> enemyRoomData;
+    // enemy room
+    private List<GameObject> currEnemiesInRoom;
+    private Room currEnemyRoom;
+
+
+    void Awake()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlayBGM("BGMSunsetSchool"));
+        }
+    }
 
     void Start()
     {
@@ -77,16 +81,34 @@ public class Generator3D : MonoBehaviour
         InitializeMap();
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
             ChangeSeed();
-            for (int i = 0; i < mapContent.Count; i++)
+            foreach (var obj in mapContent)
             {
-                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(mapContent[i]));
+                //Destroy(obj);
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
             }
             InitializeMap();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach (var obj in mapContent)
+            {
+                //Destroy(obj);
+                StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
+            }
+            InitializeMap();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            foreach (var enemy in currEnemiesInRoom)
+            {
+                RemoveEnemyFromRoom(enemy);
+            }
         }
 
         CheckEnemyRoomActivation();
@@ -102,11 +124,15 @@ public class Generator3D : MonoBehaviour
         random = new Random(seed);
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
-        enemyRooms = new List<Room>();
-        enemyRoomData = new List<RoomData>();
+
         pathList = new List<List<Vector3Int>>();
         doorList = new List<GameObject>();
-        mapContent = new();
+        mapContent = new List<GameObject>();
+        enemyRooms = new List<Room>();
+        enemyRoomData = new List<RoomData>();
+        currEnemiesInRoom = new List<GameObject>();
+        currEnemyRoom = null;
+
 
         PlaceRooms();
         Triangulate();
@@ -116,7 +142,19 @@ public class Generator3D : MonoBehaviour
         InitRoomObjects();
     }
 
-    private void PlaceRooms() {
+    public IEnumerator LoadNextLevel()
+    {
+        foreach (var obj in mapContent)
+        {
+            //Destroy(obj);
+            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
+        }
+        yield return null;
+        GameManager.Instance.ChangeScene("LevelScene");
+    }
+
+    private void PlaceRooms() 
+    {
         for (int i = 0; i < roomCount; i++) 
         {
 
@@ -425,7 +463,7 @@ public class Generator3D : MonoBehaviour
                             }
                             // Destroy because it is unable to be pooled as it is part of a prefab
                             // (To create path through rooms)
-                            Destroy(hit.transform.gameObject);
+                            hit.transform.gameObject.SetActive(false);
                         }
                     }
                 }
@@ -540,30 +578,89 @@ public class Generator3D : MonoBehaviour
 
     private void CheckEnemyRoomActivation()
     {
+        if (enemyRooms.Count == 0)
+        {
+            return;
+        }
         for (int i = 0; i < enemyRooms.Count; i++)
         {
-            Collider[] colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 - 0.25f));
+            Collider[] colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2 - 0.25f, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 - 0.25f));
             foreach (var col in colliders)
             {
                 if (col.CompareTag("PlayerCollider"))
                 {
+                    // lock players in
+                    colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2 + 0.5f, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 + 0.5f));
+                    foreach (var collider in colliders)
+                    {
+                        if (collider.CompareTag("Kick"))
+                        {
+                            collider.GetComponent<DoorTrigger>().ToggleDoor(true);
+                        }
+                    }
                     // place enemies
-                    PlaceRoomObjects(enemyRooms[i].bounds.position, enemyRooms[i].bounds.size, enemyRoomData[i]);
+                    PlaceEnemies(enemyRooms[i].bounds.position, enemyRooms[i].bounds.size, enemyRoomData[i]);
+                    currEnemyRoom = enemyRooms[i];
                     enemyRooms.RemoveAt(i);
                     enemyRoomData.RemoveAt(i);
-
-                    // lock players in
-                    // PLACEHOLDER
-                    foreach (var door in doorList)
-                    {
-                        door.GetComponent<DoorTrigger>().ToggleDoor(true);
-                    }
-                    // PLACEHOLDER
                 }
             }
         }
     }
-     
+
+    private void PlaceEnemies(Vector3Int location, Vector3Int size, RoomData data)
+    {
+        // set room type
+        RoomData roomData = data;
+        // create list of available spaces
+        List<Vector3> vacantSpaces = new List<Vector3>();
+        List<Vector3> allSpaces = new List<Vector3>();
+        for (float x = 0.5f; x < size.x - 0.5f; x += 0.5f)
+        {
+            for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
+            {
+                vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
+            }
+        }
+        allSpaces = vacantSpaces;
+        // loops all items
+        for (int i = 0; i < roomData.maxMinChanceList.Count; i++)
+        {
+            // check if item is spawned
+            if (RandomR.Range(1, 100) < roomData.maxMinChanceList[i].z)
+            {
+                // check the number of times that item spawns
+                int amount = RandomR.Range((int)roomData.maxMinChanceList[i].x, (int)roomData.maxMinChanceList[i].x);
+                for (int j = 0; j < amount; j++)
+                {
+                    // find random space and places object
+                    // removes that space from list of vacant spaces
+                    if (vacantSpaces.Count > 0)
+                    {
+                        int randIndex = RandomR.Range(0, vacantSpaces.Count);
+                        Vector3 randPos = vacantSpaces[randIndex];
+                        vacantSpaces.RemoveAt(randIndex);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                        mapContent.Add(obj);
+                        currEnemiesInRoom.Add(obj);
+
+                        // randomize waypoint pos
+                        for (int k = 0; k < obj.transform.childCount; k++)
+                        {
+                            randIndex = RandomR.Range(0, allSpaces.Count);
+                            randPos = allSpaces[randIndex];
+                            if (obj.transform.GetChild(k).CompareTag("Waypoint"))
+                            {
+                                obj.transform.GetChild(k).transform.position = randPos;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private void PlaceRoom(Vector3Int location, Vector3Int size) 
     {
         GameObject obj;
@@ -646,11 +743,39 @@ public class Generator3D : MonoBehaviour
         }
     }
 
+    public void RemoveEnemyFromRoom(GameObject enemy)
+    {
+        currEnemiesInRoom.Remove(enemy);
+        StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(enemy));
+        CheckAllEnemiedDead();
+    }
+
+    private void CheckAllEnemiedDead()
+    {
+        if (currEnemiesInRoom != null || currEnemiesInRoom.Count <= 0)
+        {
+            // unlock doors
+            Collider[] colliders = Physics.OverlapBox(currEnemyRoom.bounds.center, new Vector3(currEnemyRoom.bounds.size.x / 2 + 0.5f, currEnemyRoom.bounds.size.y, currEnemyRoom.bounds.size.z / 2 + 0.5f));
+            foreach (var collider in colliders)
+            {
+                if (collider.CompareTag("Kick"))
+                {
+                    collider.GetComponent<DoorTrigger>().ToggleDoor(false);
+                }
+            }
+            currEnemyRoom = null;
+        }
+    }
+
     private void PlaceHallway(Vector3Int curr, int pathIndex) {
         Vector3 tileOffset = new Vector3(0.5f, -1.5f, 0.5f);
         // spawn floor
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(hallwayPrefab, curr + tileOffset, Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            obj.transform.GetChild(i).gameObject.SetActive(true);
+        }
         // spawn light in intervals
         if (pathIndex % 3 == 0)
         {
