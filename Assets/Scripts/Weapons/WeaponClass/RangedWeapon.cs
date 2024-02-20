@@ -27,6 +27,7 @@ public abstract class RangedWeapon : Weapon
     {
         timeSinceLastShot += Time.deltaTime;
 
+        // Left mouse button is being held down
         if (Input.GetMouseButton(0))
         {
             UsePrimary();
@@ -35,9 +36,14 @@ public abstract class RangedWeapon : Weapon
         {
             StartReload();
         }
-        if (Input.GetMouseButtonDown(1))
+        // Right mouse button is clicked
+        if (Input.GetMouseButton(1))
         {
             UseSecondary();
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            UseSecondaryUp();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -55,7 +61,6 @@ public abstract class RangedWeapon : Weapon
             abilityCooldownTimer -= Time.deltaTime;
         }
     }
-    
 
     protected bool CanShoot()
     {

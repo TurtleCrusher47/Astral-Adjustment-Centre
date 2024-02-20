@@ -14,7 +14,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         healthText.text = playerData.currentHealth.ToString() + " HP";
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         playerData.currentHealth -= damage;
         if (playerData.currentHealth < 0)

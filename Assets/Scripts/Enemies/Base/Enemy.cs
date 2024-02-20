@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
 
 #region health functions
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
        CurrentHealth -= damage;
 

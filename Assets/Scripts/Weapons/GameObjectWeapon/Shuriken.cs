@@ -45,11 +45,9 @@ public class Shuriken : GameObjectRangedWeapon
 
     protected override void OnSecondary()
     {
-        throw new System.NotImplementedException();
     }
 
-    protected override void OnSkill()
+    protected override void OnAbility()
     {
-        throw new System.NotImplementedException();
     }
 }
