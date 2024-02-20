@@ -60,6 +60,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
+        Debug.Log(enemyIdleBase.name);
+        Debug.Log(enemyIdleBaseInstance.name);
+
         enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
