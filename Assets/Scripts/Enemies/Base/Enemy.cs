@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     [field: SerializeField] public float CurrentHealth { get; set; }
     public Rigidbody rb { get; set; }
     public Animator animator;
-    public Generator3D generator;
+    private Generator3D generator;
 
     //public bool isFacingRight { get; set; } = false;
 
@@ -60,9 +60,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        Debug.Log(enemyIdleBase.name);
-        Debug.Log(enemyIdleBaseInstance.name);
 
         enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
