@@ -20,9 +20,8 @@ MonoBehaviour:
   - IV
   - V
   buffBonus:
+  - 0.5
   - 1
+  - 1.5
   - 2
-  - 3
-  - 4
-  - 5
-  AtkSpdIncrease: 0
+  - 2.5
