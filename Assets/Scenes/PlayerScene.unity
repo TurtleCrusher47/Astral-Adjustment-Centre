@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.035310365, g: 0.036666553, b: 0.04869559, a: 1}
+  m_IndirectSpecularColor: {r: 0.04138252, g: 0.0424178, b: 0.056316495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -200,7 +200,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cameraPosition
       value: 
-      objectReference: {fileID: 476688392}
+      objectReference: {fileID: 6063671662278408674}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bbd65290f4f544458a9576dfaebbf6a, type: 3}
 --- !u!1 &98653957
@@ -502,12 +502,6 @@ Transform:
   m_Father: {fileID: 184419177}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &476688392 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6063671663159817118, guid: ed5dc1bd0e8791a4b8228583125542f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 898288252}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &548574328
 Transform:
   m_ObjectHideFlags: 0
@@ -832,6 +826,21 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 645044951}
+    - target: {fileID: 6526542572435625080, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_Data.m_HintWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526542572435625080, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_Data.m_MaintainTargetPositionOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526542572435625080, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: m_Data.m_MaintainTargetRotationOffset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!1 &952878660
@@ -4933,6 +4942,12 @@ Transform:
   m_Father: {fileID: 841889297393506298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 83.19383, y: -38.58771, z: -43.04266}
+--- !u!4 &6063671662278408674 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6063671663159817118, guid: ed5dc1bd0e8791a4b8228583125542f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 898288252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6095461770436671504
 GameObject:
   m_ObjectHideFlags: 0
