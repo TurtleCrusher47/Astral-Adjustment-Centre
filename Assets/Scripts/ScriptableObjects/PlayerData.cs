@@ -40,7 +40,7 @@ public class PlayerData : ScriptableObject
 	public float airDrag = 2f;
 
     [Header("Health")]
-    public int currentHealth = 100;
+    public float currentHealth = 100;
     public int maxHealth = 100;
 
 	[Header("Player Settings")]

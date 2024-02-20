@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     [field: SerializeField] public float CurrentHealth { get; set; }
     public Rigidbody rb { get; set; }
     public Animator animator;
+    private Generator3D generator;
 
     //public bool isFacingRight { get; set; } = false;
 
@@ -60,15 +61,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        Debug.Log(enemyIdleBase.name);
-        Debug.Log(enemyIdleBaseInstance.name);
-
         enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
 
         stateMachine.Init(idleState);   
         
+        generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
     }
 
     private void Update()
@@ -100,7 +99,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
 
 #region health functions
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
        CurrentHealth -= damage;
 
@@ -115,7 +114,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public void Despawn()
     {
         //change later to use object pooling
-        Destroy(gameObject);
+        generator.RemoveEnemyFromRoom(gameObject.transform.parent.gameObject);
     }
 
 #endregion

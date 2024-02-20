@@ -26,7 +26,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
                 }
                 else
                 {
-                    StartCoroutine(RenderTraceLine(cam.forward * raycastProjectileData.maxDistance));
+                    StartCoroutine(RenderTraceLine(cam.forward.normalized * raycastProjectileData.maxDistance));
                 }
 
                 if (!rangedWeaponData.infiniteAmmo)
@@ -46,7 +46,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
 
     }
 
-    protected IEnumerator RenderTraceLine(Vector3 hitPosition)
+    protected IEnumerator RenderTraceLine(Vector3 hitPosition, float renderedTime = 0.1f)
     {
         // audController.PlayAudio("shoot");
         
@@ -54,7 +54,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, hitPosition);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(renderedTime);
 
         lineRenderer.positionCount = 0;
     }

@@ -1,19 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject phonePanel, optionPanel, roguePanel;
-
-    [Header("GameObjects")]
-    public GameObject optionButton, exitButton;
-
-    [Header("Buff Panels")]
-    public List<GameObject> buffPanels = new List<GameObject>();
-
-    private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
+    public GameObject phonePanel;
+    public GameObject optionPanel;
+    public GameObject roguePanel;
 
     private void Start()
     {
@@ -24,14 +20,6 @@ public class UIManager : MonoBehaviour
         // Reset Option Panel
         optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
         optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
-
-        //Debug.Log("GameObjects in List: " + buffPanels.Count);
-
-        /*
-        foreach( GameObject buffPanel in buffPanels)
-        {
-            Debug.Log("GameObject Name: " + buffPanel.name);
-        }*/
     }
 
     private void Update()
@@ -66,6 +54,16 @@ public class UIManager : MonoBehaviour
         CloseOptionAnimation();
     }
 
+    public void ExitToMainMenu()
+    {
+        LoadMainMenuScene();
+    }
+
+    public void QuitGame()
+    {
+        QuitGameApplication();
+    }
+
     private void OpenPhoneAnimation()
     {
         LeanTween.moveLocal(phonePanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutQuart);
@@ -88,5 +86,15 @@ public class UIManager : MonoBehaviour
     {
         LeanTween.scale(optionPanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
         LeanTween.scale(phonePanel, new Vector3(1f, 1f, 1f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
+    }
+
+    private void QuitGameApplication()
+    {
+        Application.Quit();
+    }
+
+    private void LoadMainMenuScene()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }

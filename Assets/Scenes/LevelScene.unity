@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.042559654, g: 0.04365168, b: 0.057977613, a: 1}
+  m_IndirectSpecularColor: {r: 0.030963015, g: 0.032865454, b: 0.043683857, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 108134766}
   m_Layer: 0
   m_Name: MapGenerator
-  m_TagString: Untagged
+  m_TagString: TradeButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
     type: 3}
   hallwayLightPrefab: {fileID: 4587904980839318902, guid: 0861ca3d33089e144a30fe77feaf1923,
     type: 3}
-  playerObj: {fileID: 1043347683}
+  playerObj: {fileID: 1174318290}
   camObj: {fileID: 135899573}
   endObj: {fileID: 6653203107403685663}
 --- !u!4 &108134768
@@ -285,7 +285,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873507396
 GameObject:
@@ -363,12 +363,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873507396}
   m_CullTransparentMesh: 1
---- !u!1 &1043347683 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6063671662139761669, guid: ed5dc1bd0e8791a4b8228583125542f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1174318288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1174318288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -381,6 +375,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2138456471}
     - target: {fileID: 8406932, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
+      propertyPath: invGridLayoutGroup
+      value: 
+      objectReference: {fileID: 1270919070}
+    - target: {fileID: 414919080928100211, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 135899575}
+    - target: {fileID: 3053727766965237680, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: weaponContainer
+      value: 
+      objectReference: {fileID: 9197273063184683886}
+    - target: {fileID: 3053727766965237687, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 135899575}
+    - target: {fileID: 3053727766965237687, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: selectedBorder
+      value: 
+      objectReference: {fileID: 2138456471}
+    - target: {fileID: 3053727766965237687, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
       propertyPath: invGridLayoutGroup
       value: 
       objectReference: {fileID: 1270919070}
@@ -469,8 +488,35 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Orientation
       objectReference: {fileID: 0}
+    - target: {fileID: 9099374035464393762, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 135899575}
+    - target: {fileID: 9099374035464393763, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 535182517}
+    - target: {fileID: 9099374035464393765, guid: ed5dc1bd0e8791a4b8228583125542f5,
+        type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1525211068}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
+--- !u!4 &1174318289 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9099374036349862845, guid: ed5dc1bd0e8791a4b8228583125542f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174318288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1174318290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9099374035464393766, guid: ed5dc1bd0e8791a4b8228583125542f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174318288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1270919068
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,12 +619,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270919068}
   m_CullTransparentMesh: 1
---- !u!4 &1278038716 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6063671663159817118, guid: ed5dc1bd0e8791a4b8228583125542f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1174318288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1525211066
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +850,7 @@ RectTransform:
   - {fileID: 1525211067}
   - {fileID: 873507397}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1854,6 +1894,12 @@ PrefabInstance:
         type: 3}
       propertyPath: cameraPosition
       value: 
-      objectReference: {fileID: 1278038716}
+      objectReference: {fileID: 1174318289}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bbd65290f4f544458a9576dfaebbf6a, type: 3}
+--- !u!1 &9197273063184683886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 298486188, guid: 0bbd65290f4f544458a9576dfaebbf6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 9197273063184683885}
+  m_PrefabAsset: {fileID: 0}

@@ -34,6 +34,12 @@ public abstract class Weapon : MonoBehaviour
     // Left Click
     protected abstract void UsePrimary();
 
+    // Left Click Up
+    protected virtual void UseSecondaryUp()
+    {
+
+    }
+
     // Right Click
     protected abstract void UseSecondary();
 
@@ -56,5 +62,5 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract void OnSecondary();
 
-    protected abstract void OnSkill();
+    protected abstract void OnAbility();
 }

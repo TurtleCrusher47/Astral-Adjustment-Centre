@@ -13,7 +13,7 @@ public class Flintlock : RaycastRangedWeapon
         
     }
 
-    protected override void OnSkill()
+    protected override void OnAbility()
     {
         
     }
