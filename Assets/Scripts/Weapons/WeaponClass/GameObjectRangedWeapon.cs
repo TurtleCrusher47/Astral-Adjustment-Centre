@@ -6,6 +6,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
 {
     [SerializeField] protected GameObjectProjectileData gameObjectProjectileData;
     [SerializeField] protected GameObject projectile;
+    [SerializeField] protected Animator animator;
 
     protected override void UsePrimary()
     {
@@ -36,6 +37,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
 
     protected override void OnPrimary()
     {
+        animator.SetTrigger("Primary");
     }
 
     protected void SetDirection(GameObject projectile)
