@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class BuffManager : MonoBehaviour
@@ -105,7 +104,6 @@ public class BuffManager : MonoBehaviour
             Destroy(panel);
         }
         instantiatedPanels.Clear();
-        //buffIndices.Clear();
     }
 
     public void RerollButton()
@@ -180,17 +178,19 @@ public class BuffManager : MonoBehaviour
                 case "Fire Rate":
                     playerLevel = playerData.fireRateLevel;
                     break;
-
-                // Add more cases if you have additional buff types
                 default:
                     Debug.LogWarning("Unknown buff type: " + selectedBuff.buffName);
                     break;
             }
 
-            // Use playerLevel as an index for buffTiers and buffBonus arrays
+            // Clamp playerLevel between the array
             int arrayIndex = Mathf.Clamp(playerLevel, 0, selectedBuff.buffTiers.Length - 1);
-            selectedBuff.buffTiers[0] = selectedBuff.buffTiers[arrayIndex];
-            selectedBuff.buffBonus[0] = selectedBuff.buffBonus[arrayIndex];
+
+            // Use playerLevel as an index for buffTiers and buffBonus arrays
+            selectedBuff.buffTiers[playerLevel] = selectedBuff.buffTiers[arrayIndex];
+            selectedBuff.buffBonus[playerLevel] = selectedBuff.buffBonus[arrayIndex];
+
+            Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff);
 
             // Reroll panels with the updated levels, tiers, and bonus
             DestroyOldPanels();

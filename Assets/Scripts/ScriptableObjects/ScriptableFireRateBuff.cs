@@ -6,9 +6,4 @@ using UnityEngine;
 public class ScriptableFireRateBuff : ScriptableBuff
 {
     public float FireRateIncrease;
-
-    public override TimedBuff InitializeBuff(GameObject obj)
-    {
-        return new TimedSpeedBuff(this, obj);
-    }
 }

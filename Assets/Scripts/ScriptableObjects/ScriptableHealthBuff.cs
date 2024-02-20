@@ -6,9 +6,4 @@ using UnityEngine;
 public class ScriptableHealthBuff : ScriptableBuff
 {
     public float HealthIncrease;
-
-    public override TimedBuff InitializeBuff(GameObject obj)
-    {
-        return new TimedSpeedBuff(this, obj);
-    }
 }
