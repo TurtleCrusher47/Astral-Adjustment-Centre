@@ -14,18 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: Fire Rate
   buffTiers:
-  - I
+  - II
   - II
   - III
   - IV
   - V
   buffBonus:
-  - 0.7
-  - 1.4
-  - 2.1
-  - 2.8
-  - 3.5
-  Duration: 0
-  IsDurationStacked: 0
-  IsEffectStacked: 0
+  - 2
+  - 2
+  - 3
+  - 4
+  - 5
   FireRateIncrease: 0

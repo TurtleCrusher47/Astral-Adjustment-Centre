@@ -9,6 +9,8 @@ public class BuffManager : MonoBehaviour
     [SerializeField]
     private GameObject roguePanel;
 
+    public TMP_Text healthText, atkText, spdText, atkSpdText, fireRatetext;
+
     [Header("Buff Data")]
     public List<ScriptableBuff> buffs;
 
@@ -129,6 +131,7 @@ public class BuffManager : MonoBehaviour
             {
                 case "Speed":
                     playerData.speedLevel += 1;
+                    playerData.moveSpeed *= 1 + selectedBuff.buffBonus[0] / 100f;
                     break;
 
                 case "Health":
@@ -187,8 +190,8 @@ public class BuffManager : MonoBehaviour
             int arrayIndex = Mathf.Clamp(playerLevel, 0, selectedBuff.buffTiers.Length - 1);
 
             // Use playerLevel as an index for buffTiers and buffBonus arrays
-            selectedBuff.buffTiers[playerLevel] = selectedBuff.buffTiers[arrayIndex];
-            selectedBuff.buffBonus[playerLevel] = selectedBuff.buffBonus[arrayIndex];
+            selectedBuff.buffTiers[0] = selectedBuff.buffTiers[arrayIndex];
+            selectedBuff.buffBonus[0] = selectedBuff.buffBonus[arrayIndex];
 
             Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff);
 
