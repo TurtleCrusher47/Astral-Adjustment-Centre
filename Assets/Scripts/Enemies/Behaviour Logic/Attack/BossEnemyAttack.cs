@@ -47,13 +47,14 @@ public class BossEnemyAttack : EnemyAttackSOBase
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 // play follow through anim
-                animator.SetTrigger("isPunchEnd");
+                animator.SetBool("isPunchEnd", true);
             }
             // wait for follow through anim to finish
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 // swap back to chase
                 enemy.stateMachine.ChangeState(enemy.chaseState);
+                animator.SetBool("isPunchEnd", false);
             }
         }
 
