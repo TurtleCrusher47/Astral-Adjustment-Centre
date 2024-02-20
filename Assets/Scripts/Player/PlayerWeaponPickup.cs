@@ -16,11 +16,12 @@ public class PlayerWeaponPickup : MonoBehaviour
         {
             weapon.transform.SetParent(weaponContainer.transform);
 
-            weapon.transform.localPosition = Vector3.zero;
+            weapon.transform.localPosition = new Vector3(0, 0, 0);
             weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             weapon.GetComponent<Weapon>().inInventory = true;
             weapon.GetComponent<Weapon>().enabled = true;
+            weapon.GetComponent<Animator>().enabled = true;
             weapon.GetComponent<Rigidbody>().isKinematic = true;
 
             canPickUp = false;
