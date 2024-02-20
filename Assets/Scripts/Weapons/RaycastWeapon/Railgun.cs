@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Railgun : RaycastRangedWeapon
 {
-    protected override void OnSecondary()
+    protected override void UseSecondary()
     {
     }
 
-    protected override void OnAbility()
+    protected override void UseSecondaryUp()
     {
+        Debug.Log("RB Up");
     }
 
     protected override void UseAbility()
     {
     }
 
-    protected override void UseSecondary()
+    protected override void OnSecondary()
+    {
+    }
+
+    protected override void OnAbility()
     {
     }
 }
