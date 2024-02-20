@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class RangedEnemy : Enemy
 {
-    void Start()
-    {
-        MaxHealth = 50;
-        CurrentHealth = MaxHealth;
-    }
+    [SerializeField] public Transform firePoint;
+
 }

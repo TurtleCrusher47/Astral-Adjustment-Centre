@@ -17,4 +17,4 @@ MonoBehaviour:
   _shotCooldown: 3
   _bulletSpeed: 1
   _timeTillExit: 2
-  _distanceToCountExit: 4.5
+  _distanceToCountExit: 3

@@ -14,6 +14,8 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     [SerializeField] private float _timeTillExit = 2f;
     [SerializeField] private float _distanceToCountExit = 4.5f;
 
+    private RangedEnemy rangedEnemy;
+
 
     private float _exitTimer;
     private float _timer;
@@ -21,6 +23,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        rangedEnemy = enemy.gameObject.GetComponent<RangedEnemy>();
     }
 
     public override void DoExitLogic()
@@ -46,9 +49,9 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         {
             _timer = 0f;
 
-            Vector3 dir = (playerTransform.position - enemy.firePoint.position).normalized;
+            Vector3 dir = (playerTransform.position - rangedEnemy.firePoint.position).normalized;
 
-            GameObject bullet = ObjectPoolManager.Instance.SpawnObject(BulletPrefab, enemy.firePoint.position, enemy.transform.localRotation);
+            GameObject bullet = ObjectPoolManager.Instance.SpawnObject(BulletPrefab, rangedEnemy.firePoint.position, enemy.transform.localRotation);
 
             bullet.GetComponent<EnemyProjectileBasic>().ScaleProjectile(playerTransform.localScale);
             bullet.GetComponent<EnemyProjectileBasic>().MoveProjectile(dir * _bulletSpeed);

@@ -7,7 +7,6 @@ public class EnemyAttackSOBase : ScriptableObject
     protected Enemy enemy;
     protected Transform transform;
     protected GameObject gameObject;
-
     protected Transform playerTransform;
 
     public virtual void Init(GameObject gameObject, Enemy enemy)

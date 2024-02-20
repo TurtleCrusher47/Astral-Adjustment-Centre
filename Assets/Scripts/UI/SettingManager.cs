@@ -25,7 +25,7 @@ public class SettingManager : MonoBehaviour
 
     private float bgmBefore, sfxBefore, vlBefore;
 
-    public bool appliedSettings = false;
+    public bool appliedSettings = false, localFullscreenBool;
 
     void Awake()
     {
@@ -54,6 +54,28 @@ public class SettingManager : MonoBehaviour
         else
         {
             vlSlider.value = 1;
+        }
+
+        if (PlayerPrefs.HasKey("Fullscreen"))
+        {
+            string localFullscreen = PlayerPrefs.GetString("Fullscreen");
+
+            if (localFullscreen.ToLower() == "true")
+            {
+                localFullscreenBool = true;
+            }
+            else if (localFullscreen.ToLower() == "false")
+            {
+                localFullscreenBool = false;
+            }
+
+            Screen.fullScreen = localFullscreenBool;
+
+            Debug.Log("Loaded PlayerPrefs (FullscreenBool) : " + localFullscreenBool);
+        }
+        else
+        {
+            Screen.fullScreen = true;
         }
     }
 
@@ -177,6 +199,8 @@ public class SettingManager : MonoBehaviour
         //Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenButton.isOn);
     
         appliedSettings = true;
+
+        PlayerPrefs.Save();
     }
 }
 

@@ -23,7 +23,7 @@ public class MainSceneManager : MonoBehaviour
 
     void Awake()
     {
-        AudioManager.Instance.PlayBGM("BGMDemonSky");
+        //StartCoroutine(AudioManager.Instance.PlayBGM("BGMDemonSky"));
 
         if (PlayFabManager.currPlayFabID == null || PlayFabManager.currPlayFabID == "")
         {
@@ -43,6 +43,11 @@ public class MainSceneManager : MonoBehaviour
         playfabScripts.Add(playfabLeaderboard);
         playfabScripts.Add(playfabGuild);
         playfabScripts.Add(playfabMyGuild);
+    }
+
+    void Start()
+    {
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlayBGM("BGMDemonSky"));
     }
 
     public void ShowLoginPage()
