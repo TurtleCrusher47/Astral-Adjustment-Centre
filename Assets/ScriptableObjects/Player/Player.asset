@@ -39,6 +39,6 @@ MonoBehaviour:
   sfxVolume: 50
   healthLevel: 0
   attackLevel: 0
-  speedLevel: 3
+  speedLevel: 0
   atkSpeedLevel: 0
   fireRateLevel: 0
