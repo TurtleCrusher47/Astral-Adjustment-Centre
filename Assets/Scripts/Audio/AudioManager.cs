@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private List<AudioSource> bgmSources = new List<AudioSource>();
     [SerializeField] private List<AudioSource> sfxSources = new List<AudioSource>();
     [SerializeField] private List<AudioSource> vlSources = new List<AudioSource>();
 
@@ -15,14 +15,17 @@ public class AudioManager : Singleton<AudioManager>
 
     void Awake()
     {
-        bgmSource = GameManager.Instance.FindChildWithTag(gameObject, "BGM").GetComponent<AudioSource>();
+        bgmSources = GameManager.Instance.FindChildWithTag(gameObject, "BGM").GetComponents<AudioSource>().ToList();
         sfxSources = GameManager.Instance.FindChildWithTag(gameObject, "SFX").GetComponents<AudioSource>().ToList();
         vlSources = GameManager.Instance.FindChildWithTag(gameObject, "VL").GetComponents<AudioSource>().ToList();
     }
 
-    public void PlayBGM(string name)
+    public IEnumerator PlayBGM(string name)
     {
+        AudioSource currSource = new AudioSource();
+        AudioSource newSource = new AudioSource();
         AudioClip bgmToPlay = null;
+        int sourcesNotPlaying = 0;
 
         for (int i = 0; i < bgmClips.Count; i++)
         {
@@ -32,9 +35,46 @@ public class AudioManager : Singleton<AudioManager>
             }
         }
 
-        bgmSource.clip = bgmToPlay;
-        bgmSource.Play();
-        bgmSource.loop = true;
+        for (int i = 0; i < bgmSources.Count; i++)
+        {
+            if (bgmSources[i].isPlaying)
+            {
+                currSource = bgmSources[i];
+            }
+            else
+            {
+                newSource = bgmSources[i];
+                sourcesNotPlaying++;
+            }
+        }
+
+        newSource.volume = 0;
+        newSource.clip = bgmToPlay;
+        newSource.loop = true;
+        newSource.Play();
+
+        if (sourcesNotPlaying >= bgmSources.Count)
+        {
+            while (newSource.volume < 1)
+            {
+                newSource.volume += Time.deltaTime / 2;
+
+                yield return null;
+            }
+        }
+        else if (currSource.isPlaying)
+        {
+            while (currSource.volume > 0 || newSource.volume < 1)
+            {
+                currSource.volume -= Time.deltaTime / 2;
+                newSource.volume += Time.deltaTime / 2;
+
+                yield return null;
+            }
+
+            currSource.volume = 0;
+            newSource.volume = 1;
+        }
     }
 
     public void PlaySFX(string name)
