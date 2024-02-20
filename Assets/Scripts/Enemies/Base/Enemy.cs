@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     [field: SerializeField] public float CurrentHealth { get; set; }
     public Rigidbody rb { get; set; }
     public Animator animator;
+    public Generator3D generator;
 
     //public bool isFacingRight { get; set; } = false;
 
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
         stateMachine.Init(idleState);   
         
+        generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
     }
 
     private void Update()
@@ -115,7 +117,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public void Despawn()
     {
         //change later to use object pooling
-        Destroy(gameObject);
+        generator.RemoveEnemyFromRoom(gameObject.transform.parent.gameObject);
     }
 
 #endregion
