@@ -6,8 +6,14 @@ public class EnemyAttackIndicator : MonoBehaviour
 {
     [SerializeField] private GameObject maxDistance;
     [SerializeField] private GameObject chargeDistance;
+    private PlayerCombat player;
     private Vector3 max;
     private float charge;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
+    }
 
     private void Update()
     {
@@ -31,5 +37,18 @@ public class EnemyAttackIndicator : MonoBehaviour
     {
         // set charge level
         charge = (chargeTime - currTime) * (max.z / chargeTime);
+    }
+
+    public void ActivateHit(float dmg)
+    {
+        Collider[] colliders = Physics.OverlapBox(transform.position, maxDistance.transform.localScale / 2);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("PlayerCollider"))
+            {
+                player.Damage(dmg);
+                Debug.Log("Player Hit");
+            }
+        }
     }
 }

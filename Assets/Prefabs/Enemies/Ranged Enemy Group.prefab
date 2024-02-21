@@ -909,11 +909,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
-  firePoint: {fileID: 1072747506}
   animator: {fileID: 1949679902077625559}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
   enemyChaseBase: {fileID: 11400000, guid: 046e02beeb055d54f9c1f1894fdd585c, type: 2}
   enemyAttackBase: {fileID: 11400000, guid: faa4792a7ee8d474eac26507e8c4246c, type: 2}
+  firePoint: {fileID: 1072747506}
 --- !u!54 &1949679902077625558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -928,7 +928,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1949679902077625557
 CapsuleCollider:

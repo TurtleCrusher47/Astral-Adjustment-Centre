@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRange: {x: 1.5, y: 1, z: 2}
   _posOffset: 1
+  _damage: 35
   _chargeUpTimer: 2

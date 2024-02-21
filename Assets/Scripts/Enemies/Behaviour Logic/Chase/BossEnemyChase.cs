@@ -64,7 +64,7 @@ public class BossEnemyChase : EnemyChaseSOBase
         lookPos.y = 0;
 
         Quaternion lookRotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2);
 
         if (_timer > 0)
         {
