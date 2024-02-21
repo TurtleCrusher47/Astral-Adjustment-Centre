@@ -8,7 +8,7 @@ public class DualRevolvers : RaycastRangedWeapon
 
     protected override void OnSecondary()
     {
-        
+        animator.SetTrigger("Secondary");
     }
 
     protected override void OnAbility()

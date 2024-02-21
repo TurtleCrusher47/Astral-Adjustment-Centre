@@ -41,7 +41,7 @@ public abstract class MeleeWeapon : Weapon
     {
         attackQueue.Clear();
         attackStep = -1;
-        animator.SetInteger("attack", attackStep);
+        animator.SetInteger("Attack", attackStep);
         slashCoroutine = null;
     }
 
@@ -51,7 +51,7 @@ public abstract class MeleeWeapon : Weapon
 		attackQueue.Dequeue();
 
 		attackStep = (attackStep + 1) % 3;
-		animator.SetInteger("slash", attackStep);
+		animator.SetInteger("Attack", attackStep);
 		
 		while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Sword Slash " + attackStep))
 		yield return null;
@@ -63,7 +63,7 @@ public abstract class MeleeWeapon : Weapon
 		{
 			// Stop slashing when no more buttons in queue
 			attackStep = -1;
-			animator.SetInteger("slash", attackStep);
+			animator.SetInteger("Attack", attackStep);
 			slashCoroutine = null;
 		}
 

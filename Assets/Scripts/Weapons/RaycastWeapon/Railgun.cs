@@ -81,6 +81,7 @@ public class Railgun : RaycastRangedWeapon
 
     protected override void OnSecondary()
     {
+        animator.SetTrigger("Primary");
     }
 
     protected override void OnAbility()

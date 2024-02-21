@@ -9,6 +9,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
 
     protected override void UsePrimary()
     {
+        animator.ResetTrigger("Primary");
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
             if (CanShoot())
@@ -33,7 +34,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
                 rangedWeaponData.currentAmmo--;
 
                 timeSinceLastShot = 0;
-                recoil.GunRecoil(rangedWeaponData.recoil);
+                //recoil.GunRecoil(rangedWeaponData.recoil);
                 OnPrimary();
                 // recoil.GunRecoil(gunData.recoil);
 
@@ -44,7 +45,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
 
     protected override void OnPrimary()
     {
-
+        animator.SetTrigger("Primary");
     }
 
     protected IEnumerator RenderTraceLine(Vector3 hitPosition, float renderedTime = 0.1f)

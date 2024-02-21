@@ -10,7 +10,7 @@ public class Sword : MeleeWeapon
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PlayerCollider") || other.gameObject.CompareTag("WeaponCollider"))
+        if ( other.gameObject.CompareTag("WeaponCollider"))
         return;
 
         if (other.CompareTag("PlayerCollider") && !inInventory)
@@ -27,7 +27,11 @@ public class Sword : MeleeWeapon
 
     protected override void UsePrimary()
     {
-        attackQueue.Enqueue(null);
+        int i = 0;
+        attackQueue.Enqueue(i);
+
+        Debug.Log("use sword primary");
+        Debug.Log("Queue " + attackQueue.Count);
     }
 
     protected override void UseAbility()

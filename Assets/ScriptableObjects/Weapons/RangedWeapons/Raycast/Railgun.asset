@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Railgun
   infiniteAmmo: 0
-  currentAmmo: 50
+  currentAmmo: 28
   magazineSize: 50
   fireRate: 30
   reloadTime: 3

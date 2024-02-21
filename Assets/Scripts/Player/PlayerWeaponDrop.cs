@@ -25,7 +25,7 @@ public class PlayerWeaponDrop : MonoBehaviour
 
         weapon.GetComponent<Weapon>().enabled = false;
         weapon.GetComponent<Rigidbody>().isKinematic = false;
-            weapon.GetComponent<Animator>().enabled = false;
+        weapon.GetComponent<Animator>().enabled = false;
         rb = weapon.GetComponent<Rigidbody>();
 
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
