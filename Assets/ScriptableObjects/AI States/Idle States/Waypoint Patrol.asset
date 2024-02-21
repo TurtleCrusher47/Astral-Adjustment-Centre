@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Waypoint Patrol
   m_EditorClassIdentifier: 
   waypoints: []
-  movementSpeed: 2
+  movementSpeed: 1

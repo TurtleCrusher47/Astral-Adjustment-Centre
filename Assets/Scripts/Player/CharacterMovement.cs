@@ -201,20 +201,18 @@ public class CharacterMovement : MonoBehaviour
         if (Physics.Raycast(stepRayLower.transform.position, orientation.transform.forward, out hitLower, 0.1f))
         {
             RaycastHit hitUpper;
-            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.transform.forward, out hitUpper, 0.1f))
+            if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.transform.forward, out hitUpper, 0.2f))
             {
-				Debug.Log("Stairs");
                 rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
             }
         }
 
 		RaycastHit hitLower45;
-    if (Physics.Raycast(stepRayLower.transform.position, orientation.transform.forward + orientation.transform.right, out hitLower45, 0.1f))
+		if (Physics.Raycast(stepRayLower.transform.position, orientation.transform.forward + orientation.transform.right, out hitLower45, 0.1f))
         {
             RaycastHit hitUpper45;
             if (!Physics.Raycast(stepRayUpper.transform.position, orientation.transform.forward + orientation.transform.right, out hitUpper45, 0.2f))
             {
-				Debug.Log("Stairs");
                 rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
             }
         }
