@@ -40,11 +40,14 @@ public class Shuriken : GameObjectRangedWeapon
             rightShuriken.GetComponent<GameObjectProjectile>().MoveProjectile();
 
             secondaryCooldownTimer = rangedWeaponData.secondarycooldown;
+
+            OnSecondary();
         }
     }
 
     protected override void OnSecondary()
     {
+        animator.SetTrigger("Primary");
     }
 
     protected override void OnAbility()

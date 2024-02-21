@@ -21,6 +21,7 @@ public class PlayerWeaponPickup : MonoBehaviour
 
             weapon.GetComponent<Weapon>().inInventory = true;
             weapon.GetComponent<Weapon>().enabled = true;
+            weapon.GetComponent<Animator>().enabled = true;
             weapon.GetComponent<Rigidbody>().isKinematic = true;
 
             canPickUp = false;
