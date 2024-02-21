@@ -12,6 +12,7 @@ public class BossEnemyAttack : EnemyAttackSOBase
 
     public Vector3 _attackRange;
     public float _posOffset;
+    public float _damage;
     public float _chargeUpTimer;
     private float _timer;
 
@@ -64,6 +65,7 @@ public class BossEnemyAttack : EnemyAttackSOBase
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 // swap back to chase
+                self.indicator.ActivateHit(_damage);
                 enemy.stateMachine.ChangeState(enemy.chaseState);
                 animator.SetBool("isPunchEnd", false);
                 self.indicator.gameObject.SetActive(false);

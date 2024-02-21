@@ -11,12 +11,6 @@ public class Recoil : MonoBehaviour
     private Vector3 currentRotation;
     private Vector3 targetRotation;
    
-    
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         targetRotation  = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
