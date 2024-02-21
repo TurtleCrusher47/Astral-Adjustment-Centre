@@ -9,10 +9,8 @@ using UnityEngine.Audio;
 public class SettingManager : MonoBehaviour
 {
     public SwitchManager vsyncButton, fullscreenButton, fpsButton;
-    public List<ResItem> resolutions = new List<ResItem>();
-    private int selectedResolution;
 
-    public TMP_Text resolutionLabel, fpsText;
+    public TMP_Text fpsText;
 
     private Resolution[] res;
     private List<Resolution> filteredResolutions;
