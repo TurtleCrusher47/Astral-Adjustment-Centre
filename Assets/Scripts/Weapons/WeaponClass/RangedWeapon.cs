@@ -103,4 +103,12 @@ public abstract class RangedWeapon : Weapon
     {
         return rangedWeaponData.currentAmmo;
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerCollider") && !inInventory)
+        {
+            other.transform.parent.GetComponent<PlayerWeaponPickup>().PickUpWeapon(gameObject);
+        }
+    }
 }

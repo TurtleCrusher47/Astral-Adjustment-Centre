@@ -23,6 +23,6 @@ public class ShurikenProjectile : GameObjectProjectile
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
         }
 
-        Debug.Log(collider.name);
+        // Debug.Log(collider.name);
     }
 }
