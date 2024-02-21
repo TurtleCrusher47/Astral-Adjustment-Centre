@@ -57,12 +57,7 @@ public class UIManager : MonoBehaviour
     {
         LoadMainMenuScene();
     }
-
-    public void QuitGame()
-    {
-        QuitGameApplication();
-    }
-
+    
     private void OpenPhoneAnimation()
     {
         LeanTween.moveLocal(phonePanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutQuart);
@@ -85,11 +80,6 @@ public class UIManager : MonoBehaviour
     {
         LeanTween.scale(optionPanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
         LeanTween.scale(phonePanel, new Vector3(1f, 1f, 1f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
-    }
-
-    private void QuitGameApplication()
-    {
-        Application.Quit();
     }
 
     private void LoadMainMenuScene()
