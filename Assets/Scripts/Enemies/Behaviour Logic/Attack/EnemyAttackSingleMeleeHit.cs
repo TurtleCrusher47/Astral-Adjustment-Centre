@@ -20,7 +20,6 @@ public class EnemyAttackSingleMeleeHit : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        animator = enemy.gameObject.GetComponent<Animator>();
     }
 
     public override void DoExitLogic()
@@ -83,6 +82,8 @@ public class EnemyAttackSingleMeleeHit : EnemyAttackSOBase
     public override void Init(GameObject gameObject, Enemy enemy)
     {
         base.Init(gameObject, enemy);
+
+        animator = enemy.gameObject.GetComponent<Animator>();
     }
 
     public override void ResetValues()

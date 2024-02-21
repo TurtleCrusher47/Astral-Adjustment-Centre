@@ -12,8 +12,6 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
    public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-
-        animator = gameObject.GetComponent<Animator>();
     }
 
     public override void DoExitLogic()
@@ -59,6 +57,8 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
     public override void Init(GameObject gameObject, Enemy enemy)
     {
         base.Init(gameObject, enemy);
+
+        animator = gameObject.GetComponent<Animator>();
     }
 
     public override void ResetValues()
