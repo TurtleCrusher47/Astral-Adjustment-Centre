@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttackIndicator
+  m_Name: AttackIndicatorFilled
   m_Shader: {fileID: -6465566751694194690, guid: bca5f43529a065648bfbd1faaece30c4,
     type: 3}
   m_ValidKeywords:
@@ -104,7 +104,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _IntersectionDepth: 0.25
+    - _IntersectionDepth: 1
     - _Metallic: 0
     - _Noise_Scale: 50
     - _OcclusionStrength: 1
@@ -129,7 +129,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 2, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IntersectionColor: {r: 191.74902, g: 11.043138, b: 11.043138, a: 1}
+    - _IntersectionColor: {r: 95.87451, g: 4.5176473, b: 4.5176473, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &9138982467115448667

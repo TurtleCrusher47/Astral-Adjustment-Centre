@@ -12,10 +12,10 @@ public class EnemyAttackIndicator : MonoBehaviour
     private void Update()
     {
         // updates max distance
-        maxDistance.transform.localScale = new Vector3(max.x, 0.25f, max.z);
+        maxDistance.transform.localScale = new Vector3(max.x, 0.5f, max.z);
         // calculates & updates curr charging distance
         charge = Mathf.Max(Mathf.Min(charge, max.z), 0);
-        chargeDistance.transform.localScale = new Vector3(max.x, 0.26f, charge);
+        chargeDistance.transform.localScale = new Vector3(max.x, 0.5f, charge);
         chargeDistance.transform.localPosition = new Vector3(0, 0, -(0.5f * max.z) + (charge / 2));
     }
 

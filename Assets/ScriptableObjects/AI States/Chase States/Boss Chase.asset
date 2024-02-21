@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d7095f84fddb246a9990753c7d515e, type: 3}
   m_Name: Boss Chase
   m_EditorClassIdentifier: 
-  _movementSpeed: 2
-  _attackCooldown: 2
+  _movementSpeed: 1
+  _attackCooldown: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyRoomData
   m_EditorClassIdentifier: 
   ObjectsList:
-  - {fileID: 1949679902744178465, guid: 75eed5cce29cb4b47864397ac428a453, type: 3}
+  - {fileID: 2741984546336638953, guid: aa1ed538939212b4fb7b51ab5ef54483, type: 3}
   maxMinChanceList:
   - {x: 1, y: 1, z: 100}

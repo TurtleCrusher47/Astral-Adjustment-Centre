@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6336223905048318373}
   - component: {fileID: 3594256023798363030}
   - component: {fileID: 8263492836414573563}
-  - component: {fileID: 9215837355279328678}
+  - component: {fileID: 3492138486097554828}
   m_Layer: 6
   m_Name: Mesh22
   m_TagString: Untagged
@@ -118,7 +118,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9215837355279328678
+--- !u!65 &3492138486097554828
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,5 +129,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.39999998, y: 0.04, z: 0.39999998}
-  m_Center: {x: -0.27597916, y: 0.02, z: -0.19999999}
+  m_Size: {x: 0.41, y: 0.04, z: 0.41}
+  m_Center: {x: -0.27597916, y: 0.02, z: -0.19999997}
