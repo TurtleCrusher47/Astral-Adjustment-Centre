@@ -32,7 +32,7 @@ public class Generator3D : MonoBehaviour
         }
     }
 
-    [SerializeField] private MapPrefabManager mPrefabManager;
+    [SerializeField] private List<MapRoomObjManagerData> mRoomObjManagerList;
     [SerializeField] private int seed;
     [SerializeField] private Vector3Int size;
     [SerializeField] private int roomCount;
@@ -65,7 +65,9 @@ public class Generator3D : MonoBehaviour
     // enemy room
     private List<GameObject> currEnemiesInRoom;
     private Room currEnemyRoom;
-
+    // floor
+    private MapRoomObjManagerData mRoomObjManager;
+    private int floorNum;
 
     void Awake()
     {
@@ -88,7 +90,6 @@ public class Generator3D : MonoBehaviour
             ChangeSeed();
             foreach (var obj in mapContent)
             {
-                //Destroy(obj);
                 StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
             }
             InitializeMap();
@@ -97,7 +98,6 @@ public class Generator3D : MonoBehaviour
         {
             foreach (var obj in mapContent)
             {
-                //Destroy(obj);
                 StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
             }
             InitializeMap();
@@ -132,7 +132,13 @@ public class Generator3D : MonoBehaviour
         enemyRoomData = new List<RoomData>();
         currEnemiesInRoom = new List<GameObject>();
         currEnemyRoom = null;
-
+        Debug.Log("Level " + GameManager.Instance.floorNum);
+        if (floorNum >= mRoomObjManagerList.Count + 1)
+        {
+            GameManager.Instance.floorNum--;
+        }
+        floorNum = GameManager.Instance.floorNum;
+        mRoomObjManager = mRoomObjManagerList[floorNum - 1];
 
         PlaceRooms();
         Triangulate();
@@ -144,9 +150,9 @@ public class Generator3D : MonoBehaviour
 
     public IEnumerator LoadNextLevel()
     {
+        GameManager.Instance.floorNum = floorNum + 1;
         foreach (var obj in mapContent)
         {
-            //Destroy(obj);
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(obj));
         }
         yield return null;
@@ -478,7 +484,7 @@ public class Generator3D : MonoBehaviour
         // place light in the middle of the room
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, rooms[0].bounds.center + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
-        PlaceRoomObjects(rooms[0].bounds.position, rooms[0].bounds.size, mPrefabManager.startRoomData);
+        PlaceRoomObjects(rooms[0].bounds.position, rooms[0].bounds.size, mRoomObjManager.startRoomData);
         Vector3 playerStartPos = rooms[0].bounds.center + Vector3.down;
         playerObj.transform.position = playerStartPos;
         camObj.transform.position = playerStartPos;
@@ -498,40 +504,40 @@ public class Generator3D : MonoBehaviour
                 if (Vector3.Distance(playerStartPos, playerEndPos) > size.x / 2 || 1 == roomCount - 1)
                 {
                     isEndPlaced = true;
-                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.endRoomData);
+                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.endRoomData);
                     endObj.transform.position = playerEndPos + new Vector3(0, -1.8f, 0);
                 }
                 // randomise other tyes of rooms
                 else
                 {
-                    int contentRoomIndex = RandomR.Range(0, mPrefabManager.contentRoomData.Count);
-                    if (mPrefabManager.contentRoomData[contentRoomIndex].name.Contains("Enemy"))
+                    int contentRoomIndex = RandomR.Range(0, mRoomObjManager.contentRoomData.Count);
+                    if (mRoomObjManager.contentRoomData[contentRoomIndex].name.Contains("Enemy"))
                     {
                         // add room to enemy room for later spawning
                         enemyRooms.Add(rooms[i]);
-                        enemyRoomData.Add(mPrefabManager.contentRoomData[contentRoomIndex]);
+                        enemyRoomData.Add(mRoomObjManager.contentRoomData[contentRoomIndex]);
                     }
                     else
                     {
                         // place rest of the objects
-                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.contentRoomData[contentRoomIndex]);
+                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.contentRoomData[contentRoomIndex]);
                     }
                 }
             }
             // randomise other tyes of rooms
             else
             {
-                int contentRoomIndex = RandomR.Range(0, mPrefabManager.contentRoomData.Count);
-                if (mPrefabManager.contentRoomData[contentRoomIndex].name.Contains("Enemy"))
+                int contentRoomIndex = RandomR.Range(0, mRoomObjManager.contentRoomData.Count);
+                if (mRoomObjManager.contentRoomData[contentRoomIndex].name.Contains("Enemy"))
                 {
                     // add room to enemy room for later spawning
                     enemyRooms.Add(rooms[i]);
-                    enemyRoomData.Add(mPrefabManager.contentRoomData[contentRoomIndex]);
+                    enemyRoomData.Add(mRoomObjManager.contentRoomData[contentRoomIndex]);
                 }
                 else
                 {
                     // place rest of the objects
-                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mPrefabManager.contentRoomData[contentRoomIndex]);
+                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.contentRoomData[contentRoomIndex]);
                 }
             }
         }
@@ -615,7 +621,7 @@ public class Generator3D : MonoBehaviour
         // create list of available spaces
         List<Vector3> vacantSpaces = new List<Vector3>();
         List<Vector3> allSpaces = new List<Vector3>();
-        for (float x = 0.5f; x < size.x - 0.5f; x += 0.5f)
+        for (float x = 0.5f; x < size.x - 0.5f; x+= 0.5f)
         {
             for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
             {
@@ -752,7 +758,7 @@ public class Generator3D : MonoBehaviour
 
     private void CheckAllEnemiedDead()
     {
-        if (currEnemiesInRoom != null || currEnemiesInRoom.Count <= 0)
+        if (currEnemiesInRoom.Count <= 0)
         {
             // unlock doors
             Collider[] colliders = Physics.OverlapBox(currEnemyRoom.bounds.center, new Vector3(currEnemyRoom.bounds.size.x / 2 + 0.5f, currEnemyRoom.bounds.size.y, currEnemyRoom.bounds.size.z / 2 + 0.5f));

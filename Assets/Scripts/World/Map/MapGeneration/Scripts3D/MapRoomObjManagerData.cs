@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapPrefabManager : MonoBehaviour
+[CreateAssetMenu]
+public class MapRoomObjManagerData : ScriptableObject
 {
     [SerializeField] public RoomData startRoomData;
     [SerializeField] public RoomData endRoomData;

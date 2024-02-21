@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.022108618, g: 0.02368015, b: 0.031615637, a: 1}
+  m_IndirectSpecularColor: {r: 0.034651518, g: 0.035063155, b: 0.04657835, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 108134768}
   - component: {fileID: 108134767}
-  - component: {fileID: 108134766}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: TradeButton
@@ -141,25 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &108134766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108134765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 095e30edf3aea064482b9724f78e4d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
-  endRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
-  contentRoomData:
-  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
 --- !u!114 &108134767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2adc24e688e8841887873ee6b3e08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPrefabManager: {fileID: 108134766}
+  mRoomObjManagerList:
+  - {fileID: 11400000, guid: 188e126c70c190848923ff91a0780177, type: 2}
+  - {fileID: 11400000, guid: 51bc0c469b689ea48be7092c14512c11, type: 2}
+  - {fileID: 11400000, guid: 3cf582f464c737e4ba4d33ce004d36bb, type: 2}
+  - {fileID: 11400000, guid: 423ca0948f1fe1e4ca4edd2944960ff9, type: 2}
   seed: 0
   size: {x: 40, y: 7, z: 40}
   roomCount: 30
@@ -199,6 +183,8 @@ MonoBehaviour:
   playerObj: {fileID: 1174318290}
   camObj: {fileID: 135899573}
   endObj: {fileID: 6653203107403685663}
+  currEnemiesInRoom: []
+  mRoomObjManager: {fileID: 0}
 --- !u!4 &108134768
 Transform:
   m_ObjectHideFlags: 0
@@ -1080,6 +1066,7 @@ GameObject:
   - component: {fileID: 1620353995856431678}
   - component: {fileID: 7295807276963201058}
   - component: {fileID: 6236427048431693182}
+  - component: {fileID: 7295807276963201059}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -1714,6 +1701,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708012466133250993}
   m_Mesh: {fileID: -2745519390412981159, guid: 660f1bcc114f56f4ca4655692b4b485e, type: 3}
+--- !u!65 &7295807276963201059
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708012466133250993}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.02002597, z: 0.017962482}
+  m_Center: {x: 0, y: 0.000012986826, z: -0.0010187554}
 --- !u!33 &7433703563271539997
 MeshFilter:
   m_ObjectHideFlags: 0

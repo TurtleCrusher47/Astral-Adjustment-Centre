@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095e30edf3aea064482b9724f78e4d36, type: 3}
+  m_Name: Floor 4
+  m_EditorClassIdentifier: 
+  startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
+  endRoomData: {fileID: 11400000, guid: 8d804e9678e87d44abbd58dd93b2bba4, type: 2}
+  contentRoomData:
+  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
+  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  - {fileID: 11400000, guid: fe69f1924e1c3b942925baea159b5fa0, type: 2}
+  - {fileID: 11400000, guid: aea5faa86af193141a04ad4a7efa8c9e, type: 2}
+  - {fileID: 11400000, guid: aea5faa86af193141a04ad4a7efa8c9e, type: 2}
+  - {fileID: 11400000, guid: aea5faa86af193141a04ad4a7efa8c9e, type: 2}
