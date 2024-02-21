@@ -13,6 +13,7 @@ public class EnemyAttackGas : EnemyAttackSOBase
     private Animator gasAnimator;
 
     private Animator animator;
+    private GameObject gasObject;
 
 
     private float _exitTimer;
@@ -21,11 +22,18 @@ public class EnemyAttackGas : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+
+        gasObject.SetActive(true);
+
+        animator.SetTrigger("isLaugh");
+        gasAnimator.SetTrigger("isExpand");
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+
+        gasAnimator.SetTrigger("isShrink");
     }
 
     public override void DoFrameUpdateLogic()
@@ -33,6 +41,27 @@ public class EnemyAttackGas : EnemyAttackSOBase
         base.DoFrameUpdateLogic();
 
         enemy.MoveEnemy(Vector3.zero);
+
+        Vector3 lookPos = (playerTransform.transform.position - transform.position).normalized;
+        lookPos.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+
+        if (Vector3.Distance(playerTransform.position, enemy.transform.position) > (_distanceToCountExit * playerTransform.localScale.x))
+        {
+            _exitTimer += Time.deltaTime;
+
+            if (_exitTimer >= _timeTillExit)
+            {
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+        }
+
+        else
+        {
+            _exitTimer = 0;
+        }
 
     }
 
@@ -52,6 +81,8 @@ public class EnemyAttackGas : EnemyAttackSOBase
 
         animator = enemy.gameObject.GetComponent<Animator>();
         gasAnimator = enemy.gameObject.GetComponent<GasEnemy>().gasAnimator;
+        gasObject = enemy.gameObject.GetComponent<GasEnemy>().gasObject;
+
     }
 
     public override void ResetValues()
