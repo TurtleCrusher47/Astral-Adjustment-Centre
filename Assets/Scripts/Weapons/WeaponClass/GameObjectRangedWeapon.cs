@@ -14,8 +14,8 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 // Debug.Log("Shot GameObject");
-                GameObject currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, cam.rotation, ObjectPoolManager.PoolType.Projectile);
-                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = cam.forward;
+                GameObject currentProjectile = ObjectPoolManager.Instance.SpawnObject(projectile, firePoint.position, camRotation.rotation, ObjectPoolManager.PoolType.Projectile);
+                currentProjectile.GetComponent<GameObjectProjectile>().projectileDirection = camRotation.forward;
 
                 SetDirection(currentProjectile);
 
@@ -41,7 +41,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
     protected void SetDirection(GameObject projectile)
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range, targetLayers))
+        if (Physics.Raycast(cam.position, camRotation.forward, out hit, gameObjectProjectileData.range, targetLayers))
         {
             Debug.Log("Ray " + hit.collider.gameObject.name);
             projectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;

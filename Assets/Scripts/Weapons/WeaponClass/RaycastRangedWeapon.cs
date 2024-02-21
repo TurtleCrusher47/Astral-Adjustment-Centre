@@ -14,7 +14,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 // Debug.Log("Shoot");
-                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, targetLayers))
+                if (Physics.Raycast(camRotation.position, camRotation.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, targetLayers))
                 {
                     StartCoroutine(RenderTraceLine(hitInfo.point));
                     Debug.Log(hitInfo.transform.name);
@@ -26,13 +26,14 @@ public abstract class RaycastRangedWeapon : RangedWeapon
                 }
                 else
                 {
-                    StartCoroutine(RenderTraceLine(cam.forward.normalized * raycastProjectileData.maxDistance));
+                    StartCoroutine(RenderTraceLine(camRotation.forward.normalized * raycastProjectileData.maxDistance));
                 }
 
                 if (!rangedWeaponData.infiniteAmmo)
                 rangedWeaponData.currentAmmo--;
 
                 timeSinceLastShot = 0;
+                recoil.GunRecoil(rangedWeaponData.recoil);
                 OnPrimary();
                 // recoil.GunRecoil(gunData.recoil);
 

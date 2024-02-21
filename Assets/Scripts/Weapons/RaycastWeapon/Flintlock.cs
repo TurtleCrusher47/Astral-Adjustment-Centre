@@ -22,7 +22,7 @@ public class Flintlock : RaycastRangedWeapon
     {
         if (CanUseAbility())
         {
-            if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, 1, groundMask))
+            if (Physics.Raycast(cam.position, camRotation.forward, out RaycastHit hitInfo, 1, groundMask))
             {
                 GameObject barrel = ObjectPoolManager.Instance.SpawnObject(abilityBarrel, new Vector3(hitInfo.point.x, cam.transform.position.y, hitInfo.point.z), abilityBarrel.transform.rotation, ObjectPoolManager.PoolType.Projectile);
                 Debug.Log("Raycast Hit");
@@ -39,7 +39,7 @@ public class Flintlock : RaycastRangedWeapon
     {
         if (CanUseSecondary())
         {
-            if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, secondaryTargetLayers, QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(cam.position, camRotation.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, secondaryTargetLayers, QueryTriggerInteraction.Collide))
             {
                 StartCoroutine(RenderTraceLine(hitInfo.point));
                 // Debug.Log(hitInfo.transform.name);
