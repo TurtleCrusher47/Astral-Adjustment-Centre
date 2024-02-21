@@ -5,9 +5,9 @@ using UnityEngine;
 public class BossEnemy : Enemy
 {
     [SerializeField]
-    public EnemyAttackSOBase enemyAttackOverrideBase;
-    [SerializeField]
-    public EnemyAttackSOBase enemyAreaAttackBase;
+    public List<EnemyAttackSOBase> enemyAttackOverrideBase;
     [SerializeField]
     public EnemyAttackSOBase enemyUltimateAttackBase;
+    [SerializeField]
+    public EnemyAttackIndicator indicator;
 }

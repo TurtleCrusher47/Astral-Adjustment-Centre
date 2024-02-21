@@ -4948,7 +4948,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 45
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 375725383}
@@ -5309,7 +5309,7 @@ RectTransform:
   m_GameObject: {fileID: 442950473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 209527641}
@@ -7369,17 +7369,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f731c1d03ea8d4cbf346a28d64c61b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vsyncButton: {fileID: 0}
-  fullscreenButton: {fileID: 0}
-  fpsButton: {fileID: 0}
-  resolutions: []
-  resolutionLabel: {fileID: 0}
+  vsyncButton: {fileID: 368477707}
+  fullscreenButton: {fileID: 1385042174}
+  fpsButton: {fileID: 653397289}
   fpsText: {fileID: 1219023700}
-  resolutionDropdown: {fileID: 0}
-  globalMixer: {fileID: 0}
-  bgmSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  vlSlider: {fileID: 0}
+  resolutionDropdown: {fileID: 1330473174}
+  globalMixer: {fileID: 24100000, guid: a4f13dd0cc60af144b7aabfa7b9884f7, type: 2}
+  bgmSlider: {fileID: 322163448}
+  sfxSlider: {fileID: 1472498934}
+  vlSlider: {fileID: 2117878761}
   appliedSettings: 0
   localFullscreenBool: 0
 --- !u!4 &585101681
@@ -15390,7 +15388,7 @@ RectTransform:
   m_GameObject: {fileID: 1324970589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -18.3}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 595026337}
