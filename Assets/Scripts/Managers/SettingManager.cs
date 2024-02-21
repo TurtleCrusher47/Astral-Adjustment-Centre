@@ -25,7 +25,7 @@ public class SettingManager : MonoBehaviour
 
     private float bgmBefore, sfxBefore, vlBefore;
 
-    public bool appliedSettings = false, localFullscreenBool;
+    public bool appliedSettings = false, localFullscreenBool, localFPSBool;
 
     void Awake()
     {
@@ -77,6 +77,20 @@ public class SettingManager : MonoBehaviour
         {
             Screen.fullScreen = true;
         }
+
+        // Retrieve the saved state of the fpsButton from PlayerPrefs
+        bool savedFPSState = PlayerPrefs.GetInt("FPSButtonState", 0) == 1;
+        fpsButton.isOn = savedFPSState;
+
+        // Show or hide FPS based on the retrieved state
+        if (!savedFPSState)
+        {
+            HideFPS();
+        }
+        else
+        {
+            ShowFPS();
+        }
     }
 
     void Start()
@@ -98,8 +112,19 @@ public class SettingManager : MonoBehaviour
             vsyncButton.isOn = true;
         }
 
-        // Set the initial state of fpsButton to false
-        fpsButton.isOn = false;
+        // Retrieve the saved state of the fpsButton from PlayerPrefs
+        bool savedFPSState = PlayerPrefs.GetInt("FPSButtonState", 0) == 1;
+        fpsButton.isOn = savedFPSState;
+
+        // Show or hide FPS based on the retrieved state
+        if (!savedFPSState)
+        {
+            HideFPS();
+        }
+        else
+        {
+            ShowFPS();
+        }
     }
 
     public void ResetAppliedSettingsBool()
@@ -198,16 +223,16 @@ public class SettingManager : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
-
-        Debug.Log("Vsync Active " + vsyncButton.isOn);
-        Debug.Log("FullScreen Active " + Screen.fullScreen);
-    
+        
+        // Set the resolution based on the selected index of the dropdown
+        SetResolution(resolutionDropdown.value);
+        
         // Save the state of the fpsButton to PlayerPrefs
         PlayerPrefs.SetInt("FPSButtonState", fpsButton.isOn ? 1 : 0);
 
-        appliedSettings = true;
+        Debug.Log("Save State" + PlayerPrefs.GetInt("FPSButtonState"));
 
-        PlayerPrefs.Save();
+        appliedSettings = true;
 
         // Show or hide FPS based on the state of the fpsButton
         if (fpsButton.isOn)
@@ -218,6 +243,8 @@ public class SettingManager : MonoBehaviour
         {
             HideFPS();
         }
+
+        PlayerPrefs.Save();
     }
 
     private void HideFPS()
