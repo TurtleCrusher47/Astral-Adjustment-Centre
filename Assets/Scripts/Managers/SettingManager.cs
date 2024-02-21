@@ -111,20 +111,6 @@ public class SettingManager : MonoBehaviour
         {
             vsyncButton.isOn = true;
         }
-
-        // Retrieve the saved state of the fpsButton from PlayerPrefs
-        bool savedFPSState = PlayerPrefs.GetInt("FPSButtonState", 0) == 1;
-        fpsButton.isOn = savedFPSState;
-
-        // Show or hide FPS based on the retrieved state
-        if (!savedFPSState)
-        {
-            HideFPS();
-        }
-        else
-        {
-            ShowFPS();
-        }
     }
 
     public void ResetAppliedSettingsBool()
