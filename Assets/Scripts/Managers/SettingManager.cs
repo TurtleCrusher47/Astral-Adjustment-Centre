@@ -75,7 +75,7 @@ public class SettingManager : MonoBehaviour
         }
         else
         {
-            Screen.fullScreen = true;
+            Screen.fullScreen = false;
         }
 
         // Retrieve the saved state of the fpsButton from PlayerPrefs
@@ -100,8 +100,6 @@ public class SettingManager : MonoBehaviour
         globalMixer.SetFloat("VLVolume", Mathf.Log10(vlSlider.value) * 20);
 
         GrabScreenResolution();
-
-        fullscreenButton.isOn = Screen.fullScreen;
 
         if(QualitySettings.vSyncCount == 0)
         {
@@ -201,6 +199,8 @@ public class SettingManager : MonoBehaviour
 
         Screen.fullScreen = fullscreenButton.isOn;
 
+        Debug.Log("FullScreen " + fullscreenButton.isOn + " Fullscreen Active " + Screen.fullScreen);
+
         if (vsyncButton.isOn)
         {
             QualitySettings.vSyncCount = 1;
@@ -215,8 +215,6 @@ public class SettingManager : MonoBehaviour
         
         // Save the state of the fpsButton to PlayerPrefs
         PlayerPrefs.SetInt("FPSButtonState", fpsButton.isOn ? 1 : 0);
-
-        Debug.Log("Save State" + PlayerPrefs.GetInt("FPSButtonState"));
 
         appliedSettings = true;
 
