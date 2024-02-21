@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class MeleeWeapon : Weapon
 {
+    [SerializeField] protected MeleeWeaponData meleeWeaponData;
     // protected override void Start()
     // {
     // }
