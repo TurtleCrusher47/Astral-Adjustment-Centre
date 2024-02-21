@@ -5,12 +5,14 @@ using TMPro;
 using UnityEngine.UI;
 using Michsky.UI.Shift;
 using UnityEngine.Audio;
+using Unity.VisualScripting;
+using UnityEngine.PlayerLoop;
 
 public class SettingManager : MonoBehaviour
 {
     public SwitchManager vsyncButton, fullscreenButton, fpsButton;
 
-    public TMP_Text fpsText;
+    public GameObject fpsBox;
 
     private Resolution[] res;
     private List<Resolution> filteredResolutions;
@@ -95,6 +97,9 @@ public class SettingManager : MonoBehaviour
         {
             vsyncButton.isOn = true;
         }
+
+        // Set the initial state of fpsButton to false
+        fpsButton.isOn = false;
     }
 
     public void ResetAppliedSettingsBool()
@@ -194,11 +199,35 @@ public class SettingManager : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
 
-        //Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenButton.isOn);
+        Debug.Log("Vsync Active " + vsyncButton.isOn);
+        Debug.Log("FullScreen Active " + Screen.fullScreen);
     
+        // Save the state of the fpsButton to PlayerPrefs
+        PlayerPrefs.SetInt("FPSButtonState", fpsButton.isOn ? 1 : 0);
+
         appliedSettings = true;
 
         PlayerPrefs.Save();
+
+        // Show or hide FPS based on the state of the fpsButton
+        if (fpsButton.isOn)
+        {
+            ShowFPS();
+        }
+        else
+        {
+            HideFPS();
+        }
+    }
+
+    private void HideFPS()
+    {
+        fpsBox.SetActive(false);
+    }
+
+    private void ShowFPS()
+    {
+        fpsBox.SetActive(true);
     }
 }
 
