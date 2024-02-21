@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Chase- Boss Chase", menuName = "Enemy Logic/Chase State/Boss Chase")]
@@ -7,9 +8,13 @@ public class BossEnemyChase : EnemyChaseSOBase
 {
     [SerializeField] private float _movementSpeed = 4.0f;
 
+    [SerializeField] private float _attackCooldown;
+    private float _timer;
+
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        _timer = _attackCooldown;
     }
 
     public override void DoExitLogic()
@@ -20,31 +25,28 @@ public class BossEnemyChase : EnemyChaseSOBase
     public override void DoFrameUpdateLogic()
     {
         BossEnemy self = transform.GetComponent<BossEnemy>();
-        if (enemy.isInStrikingDistance)
+        if (enemy.isInStrikingDistance && _timer <= 0)
         {
             self.attackState = new EnemyAttackState(self, self.stateMachine);
             if (self.CurrentHealth <= self.MaxHealth / 2)
             {
-                Debug.Log("Ultimate");
-                self.enemyAttackBaseInstance = Instantiate(self.enemyUltimateAttackBase);
-                self.enemyAttackBaseInstance.Init(gameObject, self);
+                int check = Random.Range(0, self.enemyAttackOverrideBase.Count + 2);
+                if (check >= self.enemyAttackOverrideBase.Count)
+                {
+                    self.enemyAttackBaseInstance = Instantiate(self.enemyUltimateAttackBase);
+                    self.enemyAttackBaseInstance.Init(gameObject, self);
+                }
+                else
+                {
+                    self.enemyAttackBaseInstance = Instantiate(self.enemyAttackOverrideBase[check]);
+                    self.enemyAttackBaseInstance.Init(gameObject, self);
+                }
             }
             else
             {
-                int check = Random.Range(0, 2);
-                switch (check)
-                {
-                case 0:
-                        Debug.Log("Normal");
-                        self.enemyAttackBaseInstance = Instantiate(self.enemyAttackOverrideBase);
-                        self.enemyAttackBaseInstance.Init(gameObject, self);
-                        break;
-                case 1:
-                        Debug.Log("AOE");
-                        self.enemyAttackBaseInstance = Instantiate(self.enemyAreaAttackBase);
-                        self.enemyAttackBaseInstance.Init(gameObject, self);
-                        break;
-                }
+                int check = Random.Range(0, self.enemyAttackOverrideBase.Count);
+                self.enemyAttackBaseInstance = Instantiate(self.enemyAttackOverrideBase[check]);
+                self.enemyAttackBaseInstance.Init(gameObject, self);
             }
             enemy.stateMachine.ChangeState(enemy.attackState);
         }
@@ -62,7 +64,12 @@ public class BossEnemyChase : EnemyChaseSOBase
         lookPos.y = 0;
 
         Quaternion lookRotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1);
+
+        if (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+        }
     }
 
     public override void DoPhysicsLogic()

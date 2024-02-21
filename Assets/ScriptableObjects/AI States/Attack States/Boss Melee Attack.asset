@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293f6e554861bbb42b65a9b9b2a3208e, type: 3}
   m_Name: Boss Melee Attack
   m_EditorClassIdentifier: 
-  _chargeUpTimer: 3
+  _attackRange: {x: 0.4, y: 1, z: 0.5}
+  _posOffset: 0.25
+  _chargeUpTimer: 1
