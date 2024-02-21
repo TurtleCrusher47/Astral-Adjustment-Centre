@@ -8,7 +8,10 @@ using UnityEngine;
 public class BossEnemyAttack : EnemyAttackSOBase
 {
     private Animator animator;
+    private BossEnemy self;
 
+    public Vector3 _attackRange;
+    public float _posOffset;
     public float _chargeUpTimer;
     private float _timer;
 
@@ -18,9 +21,17 @@ public class BossEnemyAttack : EnemyAttackSOBase
 
         //any get components, other entry logic do here
         animator = enemy.gameObject.GetComponent<Animator>();
+        self = transform.GetComponent<BossEnemy>();
         // play back swing anim
         animator.SetTrigger("isPunch");
         _timer = _chargeUpTimer;
+        // set attack indicator
+        self.indicator.gameObject.SetActive(true);
+        self.indicator.SetChargeParameters(
+                                            transform.position + (transform.forward * _posOffset), 
+                                            new Vector3(0, transform.localEulerAngles.y, 0),
+                                            _attackRange
+                                            );
     }
 
     public override void DoExitLogic()
@@ -55,11 +66,11 @@ public class BossEnemyAttack : EnemyAttackSOBase
                 // swap back to chase
                 enemy.stateMachine.ChangeState(enemy.chaseState);
                 animator.SetBool("isPunchEnd", false);
+                self.indicator.gameObject.SetActive(false);
             }
         }
-
-        BossEnemy self = transform.GetComponent<BossEnemy>();
-        self.indicator.DoCharge(transform.position + transform.forward / 2, new Vector3(0, enemy.transform.eulerAngles.y + 180, 0), new Vector3(0.5f, 1, 1), _chargeUpTimer, _timer);
+        // update attack indicator
+        self.indicator.DoCharge(_chargeUpTimer, _timer);
     }
 
     public override void DoPhysicsLogic()
