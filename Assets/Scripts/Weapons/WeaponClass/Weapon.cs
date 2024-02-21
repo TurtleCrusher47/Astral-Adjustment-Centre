@@ -23,13 +23,7 @@ public abstract class Weapon : MonoBehaviour
     protected abstract void Start();
 
     // For weapon pickup
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("PlayerCollider") && !inInventory)
-        {
-            other.transform.parent.GetComponent<PlayerWeaponPickup>().PickUpWeapon(gameObject);
-        }
-    }
+    protected abstract void OnTriggerEnter(Collider other);
 
     // Left Click
     protected abstract void UsePrimary();

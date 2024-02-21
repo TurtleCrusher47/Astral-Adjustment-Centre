@@ -39,7 +39,7 @@ public class Railgun : RaycastRangedWeapon
             ResetValues();
             return;
         }
-        RaycastHit[] hits = Physics.RaycastAll(cam.position, cam.forward, raycastProjectileData.maxDistance, targetLayers);
+        RaycastHit[] hits = Physics.RaycastAll(cam.position, camRotation.forward, raycastProjectileData.maxDistance, targetLayers);
         // Assign furthestHit to the first point in hits
         furthestHit = hits[0];
         for (int i = 0; i < hits.Length; i++)

@@ -65,6 +65,8 @@ MonoBehaviour:
   collidableLayers:
     serializedVersion: 2
     m_Bits: 128
+  effectObject: {fileID: 3806640428471623052, guid: d419cafd82867594896482c33941ee17,
+    type: 3}
 --- !u!54 &1373836180465060498
 Rigidbody:
   m_ObjectHideFlags: 0

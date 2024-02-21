@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059912394599682268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4036901772902887950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5708176101791789949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1264,7 +1264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418405428031260292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1381,7 +1381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 853271960254069532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1477,7 +1477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5655662914449446486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1672,7 +1672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4927628679540186220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,7 +2294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1432174303769018647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2750,7 +2750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620642641743655868}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step_MapTile (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

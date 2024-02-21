@@ -1,3 +1,4 @@
+using PlayFab.MultiplayerModels;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,33 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attack- Boss Attack", menuName = "Enemy Logic/Attack State/Boss Attack")]
 
 public class BossEnemyAttack : EnemyAttackSOBase
-{  
+{
+    private Animator animator;
+    private BossEnemy self;
+
+    public Vector3 _attackRange;
+    public float _posOffset;
+    public float _damage;
+    public float _chargeUpTimer;
+    private float _timer;
+
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
 
         //any get components, other entry logic do here
-        //var component = gameObject.GetComponent<something>();
+        animator = enemy.gameObject.GetComponent<Animator>();
+        self = transform.GetComponent<BossEnemy>();
+        // play back swing anim
+        animator.SetTrigger("isPunch");
+        _timer = _chargeUpTimer;
+        // set attack indicator
+        self.indicator.gameObject.SetActive(true);
+        self.indicator.SetChargeParameters(
+                                            transform.position + (transform.forward * _posOffset), 
+                                            new Vector3(0, transform.localEulerAngles.y, 0),
+                                            _attackRange
+                                            );
     }
 
     public override void DoExitLogic()
@@ -26,37 +47,32 @@ public class BossEnemyAttack : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        //do state logic here 
-
-        //example for if you wanna move the enemy
-        //Vector3 moveDir = some vector3;
-        //enemy.MoveEnemy(moveDir);
-
-        //if you need to reference this enemy's transform or gameObject they are defined in the base class
-        //transform.localScale = Vector3(10, 10 ,10);
-        //gameObject.GetComponent<WHATEVER U WANT>();
-
-        // The players transform can be called, is also defined in base class
-        //playerTransform.whateverThingUWantFromTranformBro = (idk man anything u want);
-
-        //if u wanna change state 
-        //this example is after a certain distance away and like cetain time has passed
-        // if (Vector3.Distance(playerTransform.position, enemy.transform.position) > (_distanceToCountExit * playerTransform.localScale.x))
-        // {
-        //     _exitTimer += Time.deltaTime;
-
-        //     if (_exitTimer >= _timeTillExit)
-        //     {
-        //         enemy.stateMachine.ChangeState(enemy.chaseState);
-        //     }
-        // }
-
-        // else
-        // {
-        //     _exitTimer = 0;
-        // }
-
-
+        //do state logic here
+        enemy.MoveEnemy(Vector3.zero);
+        // charge timer
+        if (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+        }
+        else if (_timer <= 0)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                // play follow through anim
+                animator.SetBool("isPunchEnd", true);
+            }
+            // wait for follow through anim to finish
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                // swap back to chase
+                self.indicator.ActivateHit(_damage);
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+                animator.SetBool("isPunchEnd", false);
+                self.indicator.gameObject.SetActive(false);
+            }
+        }
+        // update attack indicator
+        self.indicator.DoCharge(_chargeUpTimer, _timer);
     }
 
     public override void DoPhysicsLogic()

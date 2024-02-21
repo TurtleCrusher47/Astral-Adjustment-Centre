@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BarrelTrap
   m_EditorClassIdentifier: 
   damage: 200
-  damageRange: 5
+  damageRange: 1
   timeBeforeDestroy: 30
   triggerRange: 0
   triggerDelay: 0.3

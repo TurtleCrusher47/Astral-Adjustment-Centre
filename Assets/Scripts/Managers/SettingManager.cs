@@ -5,14 +5,14 @@ using TMPro;
 using UnityEngine.UI;
 using Michsky.UI.Shift;
 using UnityEngine.Audio;
+using Unity.VisualScripting;
+using UnityEngine.PlayerLoop;
 
 public class SettingManager : MonoBehaviour
 {
     public SwitchManager vsyncButton, fullscreenButton, fpsButton;
-    public List<ResItem> resolutions = new List<ResItem>();
-    private int selectedResolution;
 
-    public TMP_Text resolutionLabel, fpsText;
+    public GameObject fpsBox;
 
     private Resolution[] res;
     private List<Resolution> filteredResolutions;
@@ -25,7 +25,7 @@ public class SettingManager : MonoBehaviour
 
     private float bgmBefore, sfxBefore, vlBefore;
 
-    public bool appliedSettings = false, localFullscreenBool;
+    public bool appliedSettings = false, localFullscreenBool, localFPSBool;
 
     void Awake()
     {
@@ -75,7 +75,21 @@ public class SettingManager : MonoBehaviour
         }
         else
         {
-            Screen.fullScreen = true;
+            Screen.fullScreen = false;
+        }
+
+        // Retrieve the saved state of the fpsButton from PlayerPrefs
+        bool savedFPSState = PlayerPrefs.GetInt("FPSButtonState", 0) == 1;
+        fpsButton.isOn = savedFPSState;
+
+        // Show or hide FPS based on the retrieved state
+        if (!savedFPSState)
+        {
+            HideFPS();
+        }
+        else
+        {
+            ShowFPS();
         }
     }
 
@@ -86,8 +100,6 @@ public class SettingManager : MonoBehaviour
         globalMixer.SetFloat("VLVolume", Mathf.Log10(vlSlider.value) * 20);
 
         GrabScreenResolution();
-
-        fullscreenButton.isOn = Screen.fullScreen;
 
         if(QualitySettings.vSyncCount == 0)
         {
@@ -187,6 +199,8 @@ public class SettingManager : MonoBehaviour
 
         Screen.fullScreen = fullscreenButton.isOn;
 
+        Debug.Log("FullScreen " + fullscreenButton.isOn + " Fullscreen Active " + Screen.fullScreen);
+
         if (vsyncButton.isOn)
         {
             QualitySettings.vSyncCount = 1;
@@ -195,12 +209,36 @@ public class SettingManager : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
+        
+        // Set the resolution based on the selected index of the dropdown
+        SetResolution(resolutionDropdown.value);
+        
+        // Save the state of the fpsButton to PlayerPrefs
+        PlayerPrefs.SetInt("FPSButtonState", fpsButton.isOn ? 1 : 0);
 
-        //Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenButton.isOn);
-    
         appliedSettings = true;
 
+        // Show or hide FPS based on the state of the fpsButton
+        if (fpsButton.isOn)
+        {
+            ShowFPS();
+        }
+        else
+        {
+            HideFPS();
+        }
+
         PlayerPrefs.Save();
+    }
+
+    private void HideFPS()
+    {
+        fpsBox.SetActive(false);
+    }
+
+    private void ShowFPS()
+    {
+        fpsBox.SetActive(true);
     }
 }
 

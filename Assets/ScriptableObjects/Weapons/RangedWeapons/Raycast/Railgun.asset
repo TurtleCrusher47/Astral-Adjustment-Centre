@@ -19,6 +19,6 @@ MonoBehaviour:
   fireRate: 30
   reloadTime: 3
   reloading: 0
-  recoil: {x: 0, y: 0, z: 0}
+  recoil: {x: -10, y: 3, z: 0.3}
   secondarycooldown: 0
   abilitycooldown: 0
