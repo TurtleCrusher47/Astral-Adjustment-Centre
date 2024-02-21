@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public string nextSceneName;
+    public int floorNum = 1;
 
     public void ChangeScene(string sceneName)
     {

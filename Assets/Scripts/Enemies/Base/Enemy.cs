@@ -68,13 +68,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         stateMachine.Init(idleState);   
         
         generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
+        rb.isKinematic = false;
     }
 
     private void Update()
     {
         stateMachine.currEnemyState.FrameUpdate();
         UpdateAnimator();
-
     }
 
     private void FixedUpdate()
@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
        if (CurrentHealth <= 0)
        {
             animator.SetTrigger("isDead");
+            rb.isKinematic = true;
        }
     }
 
