@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class BuffManager : MonoBehaviour
 
     public PlayerData playerData;
 
+    public TMP_Text rerollText;
+
     [Header("Buff Panel")]
     public GameObject basePanel;
 
@@ -26,7 +29,11 @@ public class BuffManager : MonoBehaviour
         // Move this to Awake Function or Call them. When player interacts with Chest/Wateve idk
         //ShuffleBuffPanel();
         //InstantiateBuffPanels();
-        //ShowRandomBuffPanels(2);
+    }
+
+    void Start()
+    {
+        rerollText.text = "2";
     }
 
     private void ShuffleBuffList()
@@ -44,9 +51,6 @@ public class BuffManager : MonoBehaviour
 
     private void InstantiateBuffPanels()
     {
-        // Destroy the previous buff panels
-        DestroyOldPanels();
-
         // Shuffle the buff order to randomize panel positions
         ShuffleBuffList();
 
@@ -109,6 +113,9 @@ public class BuffManager : MonoBehaviour
     public void RerollButton()
     {
         DestroyOldPanels();
+
+        
+
         InstantiateBuffPanels();
     }
 
