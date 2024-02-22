@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ScriptableBuff : ScriptableObject
+[CreateAssetMenu]
+public class ScriptableBuff : ScriptableObject
 {
     public string buffName;
 
-    public int currBuffTier;
+    public int currBuffTier = 0;
 
-    public string[] buffTiers;
+    [SerializeField] public string[] buffTiers = new string[] { "I", "II", "III", "IV", "V" };
 
-    public float[] buffBonus;
+    [SerializeField] public float[] buffBonus = new float[] { 1.1f, 1.2f, 1.3f, 1.4f, 1.5f };
 
     // Reset  Buff
     public void ResetBuffTier()
