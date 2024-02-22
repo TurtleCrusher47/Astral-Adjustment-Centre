@@ -638,10 +638,10 @@ public class Generator3D : MonoBehaviour
         {
             for (float z = 1.0f; z < size.z - 1.0f; z += 0.5f)
             {
-                vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
+                vacantSpaces.Add(location + new Vector3(x, -0.25f, z));
             }
         }
-        allSpaces = vacantSpaces;
+        allSpaces.AddRange(vacantSpaces);
         // loops all items
         for (int i = 0; i < roomData.maxMinChanceList.Count; i++)
         {

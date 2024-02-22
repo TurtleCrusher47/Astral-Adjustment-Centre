@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,8 @@ public class BuffManager : MonoBehaviour
 
     public PlayerData playerData;
     private GameObject player;
+
+    public TMP_Text rerollText;
 
     [Header("Buff Panel")]
     public GameObject basePanel;
@@ -136,6 +139,9 @@ public class BuffManager : MonoBehaviour
     public void RerollButton()
     {
         DestroyOldPanels();
+
+        
+
         InstantiateBuffPanels();
     }
 
