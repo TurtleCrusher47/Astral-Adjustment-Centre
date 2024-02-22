@@ -42,6 +42,9 @@ public class PlayerWeaponDrop : MonoBehaviour
         foreach (Transform child in weapon.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("DroppedWeapons");
+
+            foreach (Transform secondaryChild in child.transform)
+                secondaryChild.gameObject.layer = LayerMask.NameToLayer("DroppedWeapons");
         }
     }
 

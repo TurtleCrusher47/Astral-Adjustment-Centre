@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89363a4c26de94db93a7541fca0ee1, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  moveSpeed: 15.000011
+  moveSpeed: 20.071821
   airMultiplier: 0.5
-  walkSpeed: 15
-  sprintSpeed: 18
+  walkSpeed: 10
+  sprintSpeed: 15
   acceleration: 5
   jumpForce: 6.5
   jumpKey: 32
@@ -23,7 +23,7 @@ MonoBehaviour:
   crouchKey: 306
   proneKey: 99
   crouchScale: 0.5
-  crouchSpeed: 25
+  crouchSpeed: 7
   proneScale: 0.2
   proneSpeed: 15
   standScale: 1
