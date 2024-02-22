@@ -11,19 +11,14 @@ public abstract class GameObjectProjectile : MonoBehaviour
     private Transform firePoint;
     [HideInInspector] public Vector3 projectileDirection;
 
-    void Awake()
+    private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         cam = GameObject.FindWithTag("CameraHolder").transform;
         firePoint = GameObject.FindWithTag("FirePoint").transform;
     }
 
-    private void OnEnable()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
-        rb.constraints = ~RigidbodyConstraints.FreezePosition;
-    }
+    protected abstract void OnEnable();
 
     public void MoveProjectile()
     {
