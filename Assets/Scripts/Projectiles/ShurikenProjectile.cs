@@ -11,7 +11,7 @@ public class ShurikenProjectile : GameObjectProjectile
 
     public override void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
+        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider") || collider.gameObject.CompareTag("AggroRadius") || collider.gameObject.CompareTag("StrikingDistance"))
         return;
 
         // Debug.Log(collider.transform.name);
@@ -30,6 +30,6 @@ public class ShurikenProjectile : GameObjectProjectile
 
         AudioManager.Instance.PlaySFX("SFXShurikenImpact");
 
-        // Debug.Log(collider.name);
+        Debug.Log(collider.gameObject.name);
     }
 }

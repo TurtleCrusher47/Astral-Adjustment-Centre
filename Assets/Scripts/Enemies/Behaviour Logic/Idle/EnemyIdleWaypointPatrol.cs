@@ -45,7 +45,7 @@ public class EnemyIdleWaypointPatrol : EnemyIdleSOBase
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
         }
 
-        Debug.Log(Vector3.Distance(transform.position, _targetPos));
+        //Debug.Log(Vector3.Distance(transform.position, _targetPos));
         if (Vector3.Distance(transform.position, _targetPos) <= 0.31f)
         {
             //add timer to pause at waypoint

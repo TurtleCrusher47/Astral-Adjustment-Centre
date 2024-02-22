@@ -44,6 +44,9 @@ TagManager:
   - BGM
   - SFX
   - VL
+  - Leave
+  - AggroRadius
+  - StrikingDistance
   layers:
   - Default
   - TransparentFX

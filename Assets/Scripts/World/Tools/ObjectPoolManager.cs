@@ -65,7 +65,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             {
                 spawnableObject.transform.SetParent(parentObject.transform);
             }
-            Debug.Log("Test1");
+            //Debug.Log("Test1");
         }
         else
         {

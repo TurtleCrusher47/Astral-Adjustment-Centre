@@ -9,7 +9,7 @@ public class EggProjectile : GameObjectProjectile
 
     public override void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
+        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider") || collider.gameObject.CompareTag("AggroRadius") || collider.gameObject.CompareTag("StrikingDistance"))
         return;
 
         if (collider.transform.TryGetComponent<IDamageable>(out IDamageable damageable))

@@ -11,7 +11,7 @@ public class AxeProjectile : GameObjectProjectile
 
     public override void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
+        if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider") || collider.gameObject.CompareTag("AggroRadius") || collider.gameObject.CompareTag("StrikingDistance"))
         return;
 
         // Debug.Log(collider.transform.name);
@@ -27,6 +27,6 @@ public class AxeProjectile : GameObjectProjectile
             rb.constraints = RigidbodyConstraints.FreezePosition;
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
         }
-        Debug.Log(collider.gameObject.name);
+        //Debug.Log(collider.gameObject.name);
     }
 }
