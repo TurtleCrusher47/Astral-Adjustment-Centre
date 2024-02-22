@@ -7,6 +7,16 @@ using UnityEngine;
 
 public class BossEnemyAttack : EnemyAttackSOBase
 {
+    private enum AttackType
+    {
+        NULL,
+        QUAD,
+        CIRCLE
+    }
+
+    [SerializeField] private AttackType type;
+    [SerializeField] private GameObject visualEffect;
+
     private Animator animator;
     private BossEnemy self;
 
@@ -28,11 +38,26 @@ public class BossEnemyAttack : EnemyAttackSOBase
         _timer = _chargeUpTimer;
         // set attack indicator
         self.indicator.gameObject.SetActive(true);
-        self.indicator.SetChargeParameters(
-                                            transform.position + (transform.forward * _posOffset), 
-                                            new Vector3(0, transform.localEulerAngles.y, 0),
-                                            _attackRange
-                                            );
+        switch (type)
+        {
+            case AttackType.QUAD:
+                self.indicator.SetChargeParameters(
+                    transform.position,
+                    transform.forward * _posOffset,
+                    transform.localEulerAngles.y,
+                    _attackRange
+                    );
+
+                break;
+
+            case AttackType.CIRCLE:
+                self.indicator.SetChargeParameters(
+                    transform.position,
+                    _attackRange
+                    );
+
+                break;
+        }
     }
 
     public override void DoExitLogic()
@@ -65,6 +90,11 @@ public class BossEnemyAttack : EnemyAttackSOBase
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 // swap back to chase
+                if (visualEffect != null)
+                {
+                    GameObject obj = Instantiate(visualEffect, transform.position, transform.rotation);
+                    Destroy(obj, 1);
+                }
                 self.indicator.ActivateHit(_damage);
                 enemy.stateMachine.ChangeState(enemy.chaseState);
                 animator.SetBool("isPunchEnd", false);

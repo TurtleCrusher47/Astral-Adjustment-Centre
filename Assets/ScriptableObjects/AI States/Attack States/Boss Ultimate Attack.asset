@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293f6e554861bbb42b65a9b9b2a3208e, type: 3}
   m_Name: Boss Ultimate Attack
   m_EditorClassIdentifier: 
-  _attackRange: {x: 1.5, y: 1, z: 2}
-  _posOffset: 1
+  type: 2
+  visualEffect: {fileID: 1314945738539566, guid: 31b0cae99840b674c92f759b2e83f72e,
+    type: 3}
+  _attackRange: {x: 2, y: 1, z: 2}
+  _posOffset: 0
   _damage: 35
   _chargeUpTimer: 2
