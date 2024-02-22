@@ -15,12 +15,12 @@ public class ElevatorTrigger : MonoBehaviour
             GameManager.Instance.timerActive = false;
             PlayFabManager.runsCompleted += 1;
 
-            JSONManager.SendJSON(PlayFabManager.runsCompleted);
+            JSONManager.Instance.SendJSON(PlayFabManager.runsCompleted);
 
-            SendLeaderboard("HighScore");
-            SendLeaderboard("HighScoreDaily");
-            SendLeaderboard("HighScoreWeekly");
-            SendLeaderboard("HighScoreMonthly");
+            JSONManager.Instance.SendLeaderboard("HighScore");
+            JSONManager.Instance.SendLeaderboard("HighScoreDaily");
+            JSONManager.Instance.SendLeaderboard("HighScoreWeekly");
+            JSONManager.Instance.SendLeaderboard("HighScoreMonthly");
 
             GameManager.Instance.ChangeScene("MenuScene");
         }
@@ -30,32 +30,5 @@ public class ElevatorTrigger : MonoBehaviour
             Debug.Log("Next Level");
             StartCoroutine(mapGenerator.LoadNextLevel());
         }
-    }
-
-    public void SendLeaderboard(string statName)
-    {
-        var req = new UpdatePlayerStatisticsRequest
-        {
-            Statistics = new List<StatisticUpdate>
-            {
-                new StatisticUpdate
-                {
-                    StatisticName = statName,
-                    Value = GameManager.Instance.seconds
-                }
-            }
-        };
-
-        PlayFabClientAPI.UpdatePlayerStatistics(req, OnLeaderboardUpdate, OnError);
-    }
-
-    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult r)
-    {
-        Debug.Log("Successful Leaderboard Sent : " + r.ToString());
-    }
-
-    void OnError(PlayFabError e)
-    {
-        Debug.Log("Error : " + e.GenerateErrorReport());
     }
 }
