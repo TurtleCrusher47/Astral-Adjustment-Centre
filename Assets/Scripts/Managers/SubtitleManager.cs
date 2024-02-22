@@ -32,12 +32,32 @@ public class SubtitleManager : MonoBehaviour
 
             playerCurrLine++;
         }
+        else
+        {
+            playerCurrLine = 0;
+
+            playerSubtitleText.text = playerSubtitles[playerCurrLine];
+
+            AudioManager.Instance.PlayVL(playerVoicelines[playerCurrLine]);
+
+            playerCurrLine++;
+        }
     }
 
     public void EnemyNextLine()
     {
         if (enemySubtitles.Count >= enemyCurrLine)
         {
+            enemySubtitleText.text = enemySubtitles[enemyCurrLine];
+
+            AudioManager.Instance.PlayVL(enemyVoicelines[enemyCurrLine]);
+
+            enemyCurrLine++;
+        }
+        else
+        {
+            enemyCurrLine = 0;
+
             enemySubtitleText.text = enemySubtitles[enemyCurrLine];
 
             AudioManager.Instance.PlayVL(enemyVoicelines[enemyCurrLine]);

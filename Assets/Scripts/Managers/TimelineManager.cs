@@ -77,4 +77,12 @@ public class TimelineManager : Singleton<TimelineManager>
 
         subtitlePanel.SetActive(false);
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Backslash))
+        {
+            GameManager.Instance.ChangeScene("MenuScene");
+        }
+    }
 }
