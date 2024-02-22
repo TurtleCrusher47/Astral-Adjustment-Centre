@@ -5,6 +5,7 @@ using UnityEngine;
 public class DualRevolvers : RaycastRangedWeapon
 {
     [SerializeField] Transform firePoint2;
+    [SerializeField] protected LineRenderer lineRenderer2;
 
     protected override void OnSecondary()
     {
@@ -57,12 +58,12 @@ public class DualRevolvers : RaycastRangedWeapon
     {
         // audController.PlayAudio("shoot");
         
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, firePoint2.position);
-        lineRenderer.SetPosition(1, hitPosition);
+        lineRenderer2.positionCount = 2;
+        lineRenderer2.SetPosition(0, firePoint2.position);
+        lineRenderer2.SetPosition(1, hitPosition);
 
         yield return new WaitForSeconds(0.1f);
 
-        lineRenderer.positionCount = 0;
+        lineRenderer2.positionCount = 0;
     }
 }
