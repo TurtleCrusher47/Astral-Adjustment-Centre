@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class ExplosiveKunaiProjectile : GameObjectProjectile
 {
-    protected override void OnEnable()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
-        rb.constraints = ~RigidbodyConstraints.FreezePosition;
-    }
-
     public override void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
@@ -22,6 +15,11 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
         rb.constraints = RigidbodyConstraints.FreezePosition;
         this.transform.SetParent(collider.transform);
         StartCoroutine(Explode());
+    }
+
+    protected override void SetAngularVelocity()
+    {
+        throw new System.NotImplementedException();
     }
 
     // Wait for a few seconds then explode
