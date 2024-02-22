@@ -14,6 +14,7 @@ public class BuffManager : Singleton<BuffManager>
     public List<ScriptableBuff> availableBuffs = new List<ScriptableBuff>();
 
     public PlayerData playerData;
+    private GameObject player;
 
     [Header("Buff Panel")]
     public GameObject basePanel;
@@ -21,17 +22,22 @@ public class BuffManager : Singleton<BuffManager>
     // Just to see if its instantiating
     private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        // Move this to Awake Function or Call them. When player interacts with Chest/Wateve idk
-        //ShuffleBuffList();
-        //InstantiateBuffPanels();
-    }
-
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        InitBuffPanel();
+    }
+
+    private void InitBuffPanel()
+    {
         ResetBuffs();
+        roguePanel.SetActive(false);
+    }
+
+    public void ShowBuffPanel()
+    {
+        roguePanel.SetActive(true);
+        player.SetActive(false);
         InstantiateBuffPanels();
     }
 
@@ -52,6 +58,7 @@ public class BuffManager : Singleton<BuffManager>
     {
         // unlock cursor
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         // Destroy the previous buff panels
         DestroyOldPanels();
 
@@ -122,6 +129,9 @@ public class BuffManager : Singleton<BuffManager>
 
     public void ClearButton()
     {
+        // lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         DestroyOldPanels();
     }
 
@@ -222,8 +232,8 @@ public class BuffManager : Singleton<BuffManager>
 
             Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff + "\n" + "Buff Bonus: " + selectedBuff.buffBonus);
 
-            // Reroll panels with the updated levels, tiers, and bonus
-            InstantiateBuffPanels();
+            player.SetActive(true);
+            ClearButton();
         }
     }
 }

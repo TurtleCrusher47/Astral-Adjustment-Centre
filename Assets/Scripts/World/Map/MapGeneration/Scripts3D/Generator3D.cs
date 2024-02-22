@@ -769,6 +769,7 @@ public class Generator3D : MonoBehaviour
                     collider.GetComponent<DoorTrigger>().ToggleDoor(false);
                 }
             }
+            BuffManager.Instance.ShowBuffPanel();
             currEnemyRoom = null;
         }
     }
