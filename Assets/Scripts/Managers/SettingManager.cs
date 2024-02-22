@@ -24,6 +24,7 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private Slider bgmSlider, sfxSlider, vlSlider;
 
     private float bgmBefore, sfxBefore, vlBefore;
+    private bool fullscreenBefore, fpsBefore, vsyncBefore;
 
     public bool appliedSettings = false, localFullscreenBool, localFPSBool;
 
@@ -69,13 +70,23 @@ public class SettingManager : MonoBehaviour
                 localFullscreenBool = false;
             }
 
-            Screen.fullScreen = localFullscreenBool;
+            if (localFullscreenBool)
+            {
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            }
+            else
+            {
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+            }
+
+            fullscreenButton.isOn = localFullscreenBool;
 
             Debug.Log("Loaded PlayerPrefs (FullscreenBool) : " + localFullscreenBool);
         }
         else
         {
-            Screen.fullScreen = false;
+            Screen.fullScreen = true;
+            fullscreenButton.isOn = true;
         }
 
         // Retrieve the saved state of the fpsButton from PlayerPrefs
@@ -101,7 +112,7 @@ public class SettingManager : MonoBehaviour
 
         GrabScreenResolution();
 
-        if(QualitySettings.vSyncCount == 0)
+        if (QualitySettings.vSyncCount == 0)
         {
             vsyncButton.isOn = false;
         }
@@ -123,6 +134,13 @@ public class SettingManager : MonoBehaviour
         vlBefore = vlSlider.value;
     }
 
+    public void SetInitialBooleans()
+    {
+        fullscreenBefore = fullscreenButton.isOn;
+        fpsBefore = fpsButton.isOn;
+        vsyncBefore = vsyncButton.isOn;
+    }
+
     public void ResetVolumes()
     {
         if (!appliedSettings)
@@ -134,6 +152,43 @@ public class SettingManager : MonoBehaviour
             globalMixer.SetFloat("BGMVolume", Mathf.Log10(bgmSlider.value) * 20);
             globalMixer.SetFloat("SFXVolume", Mathf.Log10(sfxSlider.value) * 20);
             globalMixer.SetFloat("VLVolume", Mathf.Log10(vlSlider.value) * 20);
+        }
+    }
+
+    public void ResetBooleans()
+    {
+        if (!appliedSettings)
+        {
+            fullscreenButton.isOn = fullscreenBefore;
+            fpsButton.isOn = fpsBefore;
+            vsyncButton.isOn = vsyncBefore;
+
+            if (fullscreenButton.isOn)
+            {
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            }
+            else
+            {
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+            }
+
+            if (fpsButton.isOn)
+            {
+                ShowFPS();
+            }
+            else
+            {
+                HideFPS();
+            }
+
+            if (vsyncButton.isOn)
+            {
+                QualitySettings.vSyncCount = 1;
+            }
+            else
+            {
+                QualitySettings.vSyncCount = 0;
+            }
         }
     }
 
@@ -150,6 +205,42 @@ public class SettingManager : MonoBehaviour
     public void SetVLVolume(float volume)
     {
         globalMixer.SetFloat("VLVolume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetFullscreen(bool isFullscreen)
+    {
+        if (isFullscreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+    }
+
+    public void SetVsync(bool isVsync)
+    {
+        if (isVsync)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+    }
+
+    public void SetFPS(bool isFPS)
+    {
+        if (isFPS)
+        {
+            ShowFPS();
+        }
+        else
+        {
+            HideFPS();
+        }
     }
 
     private void GrabScreenResolution()
@@ -188,47 +279,30 @@ public class SettingManager : MonoBehaviour
     public void SetResolution(int resIndex)
     {
         Resolution resolution = filteredResolutions[resIndex];
-        Screen.SetResolution(resolution.width, resolution.height, true);
+        Screen.SetResolution(resolution.width, resolution.height, fullscreenButton.isOn);
     }
 
     public void ApplySettings()
     {
+        appliedSettings = true;
+
+        SetInitialVolumes();
+        SetInitialBooleans();
+
         PlayerPrefs.SetFloat("BGMVolume", bgmSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
         PlayerPrefs.SetFloat("VLVolume", vlSlider.value);
 
-        Screen.fullScreen = fullscreenButton.isOn;
-
-        Debug.Log("FullScreen " + fullscreenButton.isOn + " Fullscreen Active " + Screen.fullScreen);
-
-        if (vsyncButton.isOn)
-        {
-            QualitySettings.vSyncCount = 1;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 0;
-        }
+        PlayerPrefs.SetString("Fullscreen", fullscreenButton.isOn ? "true" : "false");
+        PlayerPrefs.SetInt("VSync", vsyncButton.isOn ? 1 : 0);
+        PlayerPrefs.SetInt("FPSButtonState", fpsButton.isOn ? 1 : 0);
         
         // Set the resolution based on the selected index of the dropdown
         SetResolution(resolutionDropdown.value);
-        
-        // Save the state of the fpsButton to PlayerPrefs
-        PlayerPrefs.SetInt("FPSButtonState", fpsButton.isOn ? 1 : 0);
-
-        appliedSettings = true;
-
-        // Show or hide FPS based on the state of the fpsButton
-        if (fpsButton.isOn)
-        {
-            ShowFPS();
-        }
-        else
-        {
-            HideFPS();
-        }
 
         PlayerPrefs.Save();
+
+        appliedSettings = false;
     }
 
     private void HideFPS()

@@ -20,7 +20,7 @@ public class Sword : MeleeWeapon
 
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.Damage(meleeWeaponData.damage);
+            damageable.Damage(meleeWeaponData.damage * GetAtkMultiplier());
             // StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
         }
     }

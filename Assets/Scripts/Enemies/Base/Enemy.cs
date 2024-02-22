@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
 #endregion
 
-    void Awake()
+    void OnEnable()
     {
         
         stateMachine = new EnemyStateMachine();
@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         stateMachine.Init(idleState);   
         
         generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
-        rb.isKinematic = false;
     }
 
     private void Update()
@@ -115,6 +114,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public void Despawn()
     {
         //change later to use object pooling
+        rb.isKinematic = false;
         generator.RemoveEnemyFromRoom(gameObject.transform.parent.gameObject);
     }
 

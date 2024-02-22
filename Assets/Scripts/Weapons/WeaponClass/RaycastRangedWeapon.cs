@@ -20,7 +20,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
                     StartCoroutine(RenderTraceLine(hitInfo.point));
                     Debug.Log(hitInfo.transform.name);
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
-                    damageable?.Damage(raycastProjectileData.damage);
+                    damageable?.Damage(raycastProjectileData.damage * GetAtkMultiplier());
                     
                     // GameObject effect = ObjectPoolManager.SpawnObject(hitEffect, hitInfo.point, hitInfo.transform.rotation);
                     // Destroy(effect, 0.5f);

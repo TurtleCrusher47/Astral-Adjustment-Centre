@@ -11,18 +11,30 @@ public abstract class GameObjectProjectile : MonoBehaviour
     private Transform firePoint;
     [HideInInspector] public Vector3 projectileDirection;
 
-    void Awake()
+    protected ScriptableBuff atkBuff;
+    protected float atkBuffMultiplier;
+
+    private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         cam = GameObject.FindWithTag("CameraHolder").transform;
         firePoint = GameObject.FindWithTag("FirePoint").transform;
     }
 
-    private void OnEnable()
+    protected abstract void OnEnable();
+
+    protected float GetAtkMultiplier()
     {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
-        rb.constraints = ~RigidbodyConstraints.FreezePosition;
+        atkBuff = BuffManager.Instance.buffs[0];
+        if (atkBuff.currBuffTier > 0)
+        {
+            atkBuffMultiplier = atkBuff.buffBonus[atkBuff.currBuffTier - 1];
+        }
+        else
+        {
+            atkBuffMultiplier = 1;
+        }
+        return atkBuffMultiplier;
     }
 
     public void MoveProjectile()

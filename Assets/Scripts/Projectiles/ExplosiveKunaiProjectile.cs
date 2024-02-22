@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ExplosiveKunaiProjectile : GameObjectProjectile
 {
+    protected override void OnEnable()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
+        rb.constraints = ~RigidbodyConstraints.FreezePosition;
+    }
+
     public override void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
@@ -26,7 +33,7 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
         {
             if (collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.Damage(gameObjectProjectileData.damage);
+                damageable.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
             }
         }
         

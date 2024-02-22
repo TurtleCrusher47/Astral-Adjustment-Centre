@@ -25,6 +25,8 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
+
+        GameManager.Instance.timerActive = false;
         bool switchColor = false;
         loadingBarText.color = baseColor;
 
@@ -71,11 +73,16 @@ public class LoadingScene : MonoBehaviour
                 // Wait until you press the space key to activate the Scene
                 asyncOperation.allowSceneActivation = true;
 
-                switch (GameManager.Instance.nextSceneName)
+                if (GameManager.Instance.nextSceneName == "LevelScene")
                 {
-                    case "LevelScene":
+                    if (GameManager.Instance.floorNum <= 0)
+                    {
                         TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("PostIntro", null));
-                        break;
+                        GameManager.Instance.timer = 0;
+                        GameManager.Instance.seconds = 0;
+                    }
+                    
+                    GameManager.Instance.timerActive = true;
                 }
             }
 
