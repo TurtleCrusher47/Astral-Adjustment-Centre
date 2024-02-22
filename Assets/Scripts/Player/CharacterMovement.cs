@@ -130,32 +130,21 @@ public class CharacterMovement : MonoBehaviour
 
 	void ControlSpeed()
 	{
-		ScriptableBuff spdBuff = BuffManager.Instance.buffs[4];
-        float spdBuffMultiplier;
-        if (spdBuff.currBuffTier > 0)
-        {
-            spdBuffMultiplier = spdBuff.buffBonus[spdBuff.currBuffTier - 1];
-        }
-        else
-        {
-            spdBuffMultiplier = 1;
-        }
-
-        if (Input.GetKey(playerData.sprintKey) && isGrounded)	
+		if (Input.GetKey(playerData.sprintKey) && isGrounded)	
 		{
-			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.sprintSpeed * spdBuffMultiplier, playerData.acceleration * Time.deltaTime);
+			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.sprintSpeed, playerData.acceleration * Time.deltaTime);
 		}
 		else if (Input.GetKey(playerData.crouchKey) && isGrounded)
 		{
-			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.crouchSpeed * spdBuffMultiplier, playerData.acceleration * Time.deltaTime);
+			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.crouchSpeed, playerData.acceleration * Time.deltaTime);
 		}
 		else if (Input.GetKey(playerData.proneKey) && isGrounded)
 		{
-			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.proneSpeed * spdBuffMultiplier, playerData.acceleration * Time.deltaTime);
+			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.proneSpeed, playerData.acceleration * Time.deltaTime);
 		}
 		else
 		{
-			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.walkSpeed * spdBuffMultiplier, playerData.acceleration * Time.deltaTime);
+			playerData.moveSpeed = Mathf.Lerp(playerData.moveSpeed, playerData.walkSpeed, playerData.acceleration * Time.deltaTime);
 		}
 	}
 

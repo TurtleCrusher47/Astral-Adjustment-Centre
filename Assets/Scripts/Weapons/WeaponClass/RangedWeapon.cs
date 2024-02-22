@@ -19,23 +19,6 @@ public abstract class RangedWeapon : Weapon
 
     protected float timeSinceLastShot;
 
-    protected ScriptableBuff fireRateBuff;
-    protected float fireRateBuffMultiplier;
-
-    protected float GetFireRateMultiplier()
-    {
-        fireRateBuff = BuffManager.Instance.buffs[0];
-        if (fireRateBuff.currBuffTier > 0)
-        {
-            fireRateBuffMultiplier = fireRateBuff.buffBonus[fireRateBuff.currBuffTier - 1];
-        }
-        else
-        {
-            fireRateBuffMultiplier = 1;
-        }
-        return fireRateBuffMultiplier;
-    }
-
     protected override void Start()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
@@ -86,7 +69,7 @@ public abstract class RangedWeapon : Weapon
 
     protected bool CanShoot()
     {
-        return !rangedWeaponData.reloading && timeSinceLastShot > 1f / (rangedWeaponData.fireRate * GetFireRateMultiplier() / 60f);
+        return !rangedWeaponData.reloading && timeSinceLastShot > 1f / (rangedWeaponData.fireRate / 60f);
     }
 
     // Probably change later as we will not do disabling

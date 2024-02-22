@@ -33,7 +33,7 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
         {
             if (collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
+                damageable.Damage(gameObjectProjectileData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
             }
         }
         

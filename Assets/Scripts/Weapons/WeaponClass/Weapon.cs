@@ -19,23 +19,6 @@ public abstract class Weapon : MonoBehaviour
     protected float secondaryCooldownTimer;
     protected float abilityCooldownTimer;
 
-    protected ScriptableBuff atkBuff;
-    protected float atkBuffMultiplier;
-
-    protected float GetAtkMultiplier()
-    {
-        atkBuff = BuffManager.Instance.buffs[0];
-        if (atkBuff.currBuffTier > 0)
-        {
-            atkBuffMultiplier = atkBuff.buffBonus[atkBuff.currBuffTier - 1];
-        }
-        else
-        {
-            atkBuffMultiplier = 1;
-        }
-        return atkBuffMultiplier;
-    }
-
     // To init the weapon type
     protected abstract void Start();
 

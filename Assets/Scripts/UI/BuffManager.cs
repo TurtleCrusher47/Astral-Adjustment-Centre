@@ -80,7 +80,7 @@ public class BuffManager : Singleton<BuffManager>
             // Set text dynamically using generic buff properties
             titleText.text = availableBuffs[i].buffName + " " + availableBuffs[i].buffTiers[0]; // Show Level 1 initially
 
-            descText.text = "Increases " + availableBuffs[i].buffName + " by " + ((availableBuffs[i].buffBonus[0] - 1) * 100) + " %";
+            descText.text = "Increases " + availableBuffs[i].buffName + " by " + availableBuffs[i].buffBonus[0] + " %";
 
             // Add click listener to the button
             Button button = buffPanel.GetComponent<Button>();
@@ -162,14 +162,14 @@ public class BuffManager : Singleton<BuffManager>
             // Update PlayerData based on the selected buff
             switch (selectedBuff.buffName)
             {
-                case "Movement Speed":
+                case "MovementSpd":
                     playerData.speedLevel += 1;
+                    playerData.walkSpeed *= 1 + selectedBuff.buffBonus[0];
                     break;
 
                 case "Health":
                     playerData.healthLevel += 1;
                     // Buff HP
-                    playerData.UpdateHealth();
                     break;
 
                 case "Attack":
@@ -177,12 +177,12 @@ public class BuffManager : Singleton<BuffManager>
                     // Buff Player
                     break;
 
-                case "Attack Speed":
+                case "AttackSpd":
                     playerData.atkSpeedLevel += 1;
                     // Buff Atk Spd
                     break;
 
-                case "Fire Rate":
+                case "FireRate":
                     playerData.fireRateLevel += 1;
                     // Buff Fire Rate
                     break;
@@ -199,7 +199,7 @@ public class BuffManager : Singleton<BuffManager>
 
             switch (selectedBuff.buffName)
             {
-                case "Movement Speed":
+                case "Speed":
                     playerLevel = playerData.speedLevel;
                     break;
 
@@ -211,7 +211,7 @@ public class BuffManager : Singleton<BuffManager>
                     playerLevel = playerData.attackLevel;
                     break;
 
-                case "Attack Speed":
+                case "Atk Spd":
                     playerLevel = playerData.atkSpeedLevel;
                     break;
 
@@ -222,6 +222,13 @@ public class BuffManager : Singleton<BuffManager>
                     Debug.LogWarning("Unknown buff type: " + selectedBuff.buffName);
                     break;
             }
+
+            // Clamp playerLevel between the array
+            int arrayIndex = Mathf.Clamp(playerLevel, 0, selectedBuff.buffTiers.Length - 1);
+
+            // Use playerLevel as an index for buffTiers and buffBonus arrays
+            selectedBuff.buffTiers[0] = selectedBuff.buffTiers[arrayIndex];
+            selectedBuff.buffBonus[0] = selectedBuff.buffBonus[arrayIndex];
 
             Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff + "\n" + "Buff Bonus: " + selectedBuff.buffBonus);
 
