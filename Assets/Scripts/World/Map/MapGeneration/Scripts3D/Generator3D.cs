@@ -63,6 +63,7 @@ public class Generator3D : MonoBehaviour
     private List<Room> enemyRooms;
     private List<RoomData> enemyRoomData;
     // enemy room
+    private Room EndRoom;
     private List<GameObject> currEnemiesInRoom;
     private Room currEnemyRoom;
     // floor
@@ -132,6 +133,7 @@ public class Generator3D : MonoBehaviour
         enemyRoomData = new List<RoomData>();
         currEnemiesInRoom = new List<GameObject>();
         currEnemyRoom = null;
+        EndRoom = null;
         Debug.Log("Level " + GameManager.Instance.floorNum);
         if (floorNum >= mRoomObjManagerList.Count + 1)
         {
@@ -504,7 +506,18 @@ public class Generator3D : MonoBehaviour
                 if (Vector3.Distance(playerStartPos, playerEndPos) > size.x / 2 || 1 == roomCount - 1)
                 {
                     isEndPlaced = true;
-                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.endRoomData);
+                    if (mRoomObjManager.endRoomData.name.Contains("Boss"))
+                    {
+                        // add room to enemy room for later spawning
+                        enemyRooms.Add(rooms[i]);
+                        enemyRoomData.Add(mRoomObjManager.endRoomData);
+                        endObj.SetActive(false);
+                        EndRoom = rooms[i];
+                    }
+                    else
+                    {
+                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.endRoomData);
+                    }
                     endObj.transform.position = playerEndPos + new Vector3(0, -1.8f, 0);
                 }
                 // randomise other tyes of rooms
@@ -768,6 +781,10 @@ public class Generator3D : MonoBehaviour
                 {
                     collider.GetComponent<DoorTrigger>().ToggleDoor(false);
                 }
+            }
+            if (mRoomObjManager.endRoomData.name.Contains("Boss") && currEnemyRoom == EndRoom)
+            {
+                endObj.SetActive(true);
             }
             BuffManager.Instance.ShowBuffPanel();
             currEnemyRoom = null;

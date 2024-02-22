@@ -27,7 +27,7 @@ public class Crocodile : GameObjectRangedWeapon
 
                     Debug.Log(hitInfo.transform.name);
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
-                    damageable?.Damage(gameObjectProjectileData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
+                    damageable?.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
                     
                     // GameObject effect = ObjectPoolManager.SpawnObject(hitEffect, hitInfo.point, hitInfo.transform.rotation);
                     // Destroy(effect, 0.5f);

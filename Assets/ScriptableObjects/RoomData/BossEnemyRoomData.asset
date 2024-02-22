@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02cfd2420566ac444aa035e613651005, type: 3}
-  m_Name: BossRoomData
+  m_Name: BossEnemyRoomData
   m_EditorClassIdentifier: 
   ObjectsList:
   - {fileID: 2741984546336638953, guid: aa1ed538939212b4fb7b51ab5ef54483, type: 3}

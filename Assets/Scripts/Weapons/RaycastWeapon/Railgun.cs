@@ -52,7 +52,7 @@ public class Railgun : RaycastRangedWeapon
 
             if (hits[i].collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.Damage(raycastProjectileData.damage * chargeMultiplier * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
+                damageable.Damage(raycastProjectileData.damage * chargeMultiplier * GetAtkMultiplier());
             }
             Debug.Log(hits[i].transform.name);
 

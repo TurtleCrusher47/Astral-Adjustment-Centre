@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.030046053, g: 0.032029375, b: 0.04258374, a: 1}
+  m_IndirectSpecularColor: {r: 0.036725968, g: 0.037879825, b: 0.050283182, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -239,7 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12de38354a4ad247bf927b31ca80073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
   roguePanel: {fileID: 2135959441}
   buffs:
   - {fileID: 11400000, guid: 4f81666b29c39914483ca982029adf92, type: 2}
