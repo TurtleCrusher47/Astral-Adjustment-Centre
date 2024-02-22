@@ -104,6 +104,31 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    public IEnumerator PlaySFXLoop(string name)
+    {
+        AudioClip clipToPlay = null;
+
+        for (int i = 0; i < sfxClips.Count; i++)
+        {
+            if (sfxClips[i].name == name)
+            {
+                clipToPlay = sfxClips[i];
+            }
+        }
+
+        for (int i = 0; i < sfxSources.Count; i++)
+        {
+            if (sfxSources[i].clip == clipToPlay)
+            {
+                yield return new WaitUntil(() => !sfxSources[i].isPlaying);
+
+                sfxSources[i].clip = clipToPlay;
+                sfxSources[i].Play();
+                break;
+            }
+        }
+    }
+
     public void PlayVL(string name)
     {
         AudioClip clipToPlay = null;
