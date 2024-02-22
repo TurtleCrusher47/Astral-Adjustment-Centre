@@ -6,6 +6,8 @@ public abstract class ScriptableBuff : ScriptableObject
 {
     public string buffName;
 
+    public int currBuffTier;
+
     public string[] buffTiers;
 
     public float[] buffBonus;
@@ -14,5 +16,6 @@ public abstract class ScriptableBuff : ScriptableObject
     public void ResetBuffTier()
     {
         buffTiers[0] = "I";
+        currBuffTier = 0;
     }
 }

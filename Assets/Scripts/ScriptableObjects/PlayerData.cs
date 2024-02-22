@@ -60,14 +60,16 @@ public class PlayerData : ScriptableObject
     {
         currentHealth = maxHealth;
 
-		
-
-		// Reset buff
-		resetLevel = healthLevel;
-		resetLevel = attackLevel;
-		resetLevel = speedLevel;
-		resetLevel = atkSpeedLevel;
-		resetLevel = fireRateLevel;
+		ResetBuffs();
     }
 
+	public void ResetBuffs()
+	{
+        // Reset buff
+		healthLevel = 0;
+		attackLevel = 0;
+		speedLevel = 0;
+		atkSpeedLevel = 0;
+		fireRateLevel = 0;
+    }
 }
