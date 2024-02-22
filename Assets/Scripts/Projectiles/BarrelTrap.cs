@@ -20,7 +20,7 @@ public class BarrelTrap : Trap
         {
             if (collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.Damage(trapData.damage);
+                damageable.Damage(trapData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
             }
             else if (collider.TryGetComponent<BarrelTrap>(out var barrelTrap))
             {

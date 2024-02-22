@@ -20,7 +20,7 @@ public class Sword : MeleeWeapon
 
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.Damage(meleeWeaponData.damage);
+            damageable.Damage(meleeWeaponData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
             // StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
         }
     }

@@ -27,7 +27,7 @@ public class Crocodile : GameObjectRangedWeapon
 
                     Debug.Log(hitInfo.transform.name);
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
-                    damageable?.Damage(gameObjectProjectileData.damage);
+                    damageable?.Damage(gameObjectProjectileData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
                     
                     // GameObject effect = ObjectPoolManager.SpawnObject(hitEffect, hitInfo.point, hitInfo.transform.rotation);
                     // Destroy(effect, 0.5f);
@@ -39,7 +39,6 @@ public class Crocodile : GameObjectRangedWeapon
 
     protected override void UseSecondaryUp()
     {
-        elapsedTime = 0;
         lineRenderer.positionCount = 0;
     }
 
