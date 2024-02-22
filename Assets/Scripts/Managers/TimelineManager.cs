@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 public class TimelineManager : Singleton<TimelineManager>
 {
+    public Button skipButton;
     [SerializeField] private GameObject subtitlePanel;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private List<TimelineAsset> timelines = new List<TimelineAsset>();
+    public string nextSceneName;
     public int cutsceneIndex = 0;
+    public bool skipCutscene;
 
     void Awake()
     {
@@ -23,6 +27,8 @@ public class TimelineManager : Singleton<TimelineManager>
 
     public IEnumerator PlayCutscene(string cutsceneName, string nextScene)
     {
+        nextSceneName = nextScene;
+
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.SetBGMSourcesVol(0.2f));
 
         for (int i = 0; i < timelines.Count; i++)
@@ -51,6 +57,23 @@ public class TimelineManager : Singleton<TimelineManager>
         }
 
         yield return new WaitForSeconds (0.25f);
+
+        subtitlePanel.SetActive(false);
+    }
+
+    public void SkipCutscene()
+    {
+        StopAllCoroutines();
+
+        skipCutscene = true;
+        skipButton.gameObject.SetActive(false);
+
+        if (director.state == PlayState.Playing)
+        {
+            director.Stop();
+        }
+
+        GameManager.Instance.ChangeScene(nextSceneName);
 
         subtitlePanel.SetActive(false);
     }
