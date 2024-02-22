@@ -17,6 +17,7 @@ public class EnemyGauntlet : MonoBehaviour
         if (collider.CompareTag("PlayerCollider"))
         {
             player.Damage(damage);
+            AudioManager.Instance.PlaySFX("SFXPunchImpact");
             Debug.Log("Player Hit");
         }
     }

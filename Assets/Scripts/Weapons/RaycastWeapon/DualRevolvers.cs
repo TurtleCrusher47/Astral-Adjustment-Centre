@@ -7,9 +7,15 @@ public class DualRevolvers : RaycastRangedWeapon
     [SerializeField] Transform firePoint2;
     [SerializeField] protected LineRenderer lineRenderer2;
 
+    protected override void OnPrimary()
+    {
+        AudioManager.Instance.PlaySFX("SFXRevolverShoot");
+    }
+
     protected override void OnSecondary()
     {
         animator.SetTrigger("Secondary");
+        AudioManager.Instance.PlaySFX("SFXRevolverShoot");
     }
 
     protected override void OnAbility()

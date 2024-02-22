@@ -21,6 +21,7 @@ public class Sword : MeleeWeapon
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.Damage(meleeWeaponData.damage * GetAtkMultiplier());
+            AudioManager.Instance.PlaySFX("SFXMeleeImpact");
             // StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
         }
     }

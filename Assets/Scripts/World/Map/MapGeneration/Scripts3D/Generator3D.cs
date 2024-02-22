@@ -74,7 +74,20 @@ public class Generator3D : MonoBehaviour
     {
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlayBGM("BGMSunsetSchool"));
+            int rand = RandomR.Range(0, 2);
+            string bgmToPlay = string.Empty;
+
+            switch (rand)
+            {
+                case 0:
+                    bgmToPlay = "BGMSunsetSchool";
+                    break;
+                case 1:
+                    bgmToPlay = "BGMDistorted";
+                    break;
+            }
+
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlayBGM(bgmToPlay));
         }
     }
 
@@ -608,6 +621,25 @@ public class Generator3D : MonoBehaviour
             {
                 if (col.CompareTag("PlayerCollider"))
                 {
+                    int rand = RandomR.Range(0, 3);
+                    string bgmToPlay = string.Empty;
+
+                    switch (rand)
+                    {
+                        case 0:
+                            bgmToPlay = "BGMDemonDance";
+                            break;
+                        case 1:
+                            bgmToPlay = "BGMBeasTrap";
+                            break;
+                        case 2:
+                            bgmToPlay = "BGMTorsionPrinciple";
+                            break;
+                    }
+
+                    // BGM
+                    AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlayBGM(bgmToPlay));
+
                     // lock players in
                     colliders = Physics.OverlapBox(enemyRooms[i].bounds.center, new Vector3(enemyRooms[i].bounds.size.x / 2 + 0.5f, enemyRooms[i].bounds.size.y, enemyRooms[i].bounds.size.z / 2 + 0.5f));
                     foreach (var collider in colliders)
@@ -773,6 +805,22 @@ public class Generator3D : MonoBehaviour
     {
         if (currEnemiesInRoom.Count <= 0)
         {
+            int rand = RandomR.Range(0, 2);
+            string bgmToPlay = string.Empty;
+
+            switch (rand)
+            {
+                case 0:
+                    bgmToPlay = "BGMSunsetSchool";
+                    break;
+                case 1:
+                    bgmToPlay = "BGMDistorted";
+                    break;
+            }
+
+            // BGM
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlayBGM(bgmToPlay));
+
             // unlock doors
             Collider[] colliders = Physics.OverlapBox(currEnemyRoom.bounds.center, new Vector3(currEnemyRoom.bounds.size.x / 2 + 0.5f, currEnemyRoom.bounds.size.y, currEnemyRoom.bounds.size.z / 2 + 0.5f));
             foreach (var collider in colliders)

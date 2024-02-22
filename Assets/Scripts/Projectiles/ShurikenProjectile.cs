@@ -28,6 +28,8 @@ public class ShurikenProjectile : GameObjectProjectile
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
         }
 
+        AudioManager.Instance.PlaySFX("SFXShurikenImpact");
+
         // Debug.Log(collider.name);
     }
 }

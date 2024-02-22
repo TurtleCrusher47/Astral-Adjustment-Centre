@@ -22,6 +22,8 @@ public class ElevatorTrigger : MonoBehaviour
             GameManager.Instance.GetComponent<JSONManager>().SendLeaderboard("HighScoreWeekly");
             GameManager.Instance.GetComponent<JSONManager>().SendLeaderboard("HighScoreMonthly");
 
+            TimelineManager.Instance.cutsceneIndex = 0;
+
             GameManager.Instance.ChangeScene("MenuScene");
         }
         else
