@@ -227,11 +227,11 @@ public class LoginPanelManager : MonoBehaviour
                 }
             }
 
-            if (result.Data != null && result.Data.ContainsKey("RunsCompleted"))
+            if (result.Data != null && result.Data.ContainsKey("HighestFloor"))
             {
-                Debug.Log("RunsCompleted : " + result.Data["RunsCompleted"].Value);
+                Debug.Log("HighestFloor : " + result.Data["HighestFloor"].Value);
 
-                PlayFabManager.runsCompleted = int.Parse(result.Data["RunsCompleted"].Value);
+                PlayFabManager.highestFloor = int.Parse(result.Data["HighestFloor"].Value);
             }
         }, OnError);
 

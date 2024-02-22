@@ -12,9 +12,9 @@ using System.Linq;
 public class PlayFabLeaderboard : MonoBehaviour
 {
     [System.Serializable]
-    public class GetRunsCompletedResults
+    public class GetHighestFloorResults
     {
-        public List<string> RunsCompleted = new();
+        public List<string> HighestFloor = new();
     }
 
     public enum StatisticType
@@ -33,7 +33,7 @@ public class PlayFabLeaderboard : MonoBehaviour
     }
 
     public static List<GameObject> lbItems = new List<GameObject>();
-    public List<string> playersRunCompleted;
+    public List<string> playersHighestFloor;
 
     [SerializeField] public GameObject rowPrefab;
     [SerializeField] public GridLayoutGroup lbGroup;
@@ -139,9 +139,9 @@ public class PlayFabLeaderboard : MonoBehaviour
         }, csResult=>
         {
             var jsonString = csResult.FunctionResult.ToString();
-            var runsCompleted = JsonUtility.FromJson<GetRunsCompletedResults>(jsonString);
+            var highestFloor = JsonUtility.FromJson<GetHighestFloorResults>(jsonString);
 
-            playersRunCompleted = runsCompleted.RunsCompleted.ToList();
+            playersHighestFloor = highestFloor.HighestFloor.ToList();
 
             for (int i = 0; i < entries.Count; i++)
             {
@@ -315,7 +315,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         TMP_Text nameText = FindChildWithTag(newRow, "DisplayNameText").GetComponent<TMP_Text>();
         TMP_Text scoreText = FindChildWithTag(newRow, "ScoreText").GetComponent<TMP_Text>();
 
-        int runs = int.Parse(playersRunCompleted[rank - 1]);
+        int runs = int.Parse(playersHighestFloor[rank - 1]);
         string rankIcon = "";
 
         if (runs >= 40)
@@ -354,7 +354,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         newRow.transform.SetSiblingIndex(rank);
         rankText.text = AddOrdinal(rank);
         nameText.text = rankIcon + item.DisplayName;
-        scoreText.text = ConvertSecondsToHHMMSS(item.StatValue);
+        scoreText.text = item.StatValue.ToString();
 
         delay += 0.25f;
         StartCoroutine(FadeInRow(background, rankText, nameText, scoreText, delay));

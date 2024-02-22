@@ -18,7 +18,7 @@ public class PlayFabManager : MonoBehaviour
     public static string currGuildRole;
 
     public static bool isNewPlayer;
-    public static int runsCompleted;
+    public static int highestFloor;
 
     private void Awake()
     {
