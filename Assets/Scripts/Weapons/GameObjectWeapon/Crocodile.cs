@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Crocodile : GameObjectRangedWeapon
 {
-    [SerializeField] GameObject grenadePrefab;
-
     protected override void OnAbility()
     {
     }
