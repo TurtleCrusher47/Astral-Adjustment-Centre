@@ -33,6 +33,7 @@ public class Crocodile : GameObjectRangedWeapon
                     // Destroy(effect, 0.5f);
                 }
                 RenderLine(hitInfo.point);
+                animator.SetBool("isSecondary", true);
             }
         }
     }
@@ -41,6 +42,7 @@ public class Crocodile : GameObjectRangedWeapon
     {
         elapsedTime = 0;
         lineRenderer.positionCount = 0;
+        animator.SetBool("isSecondary", false);
     }
 
     protected override void OnSecondary()

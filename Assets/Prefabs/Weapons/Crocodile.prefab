@@ -578,7 +578,7 @@ Transform:
   m_GameObject: {fileID: 4402013094830998426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.04999999, y: 0.05, z: 0.04999999}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7414694213664581105}
@@ -623,9 +623,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402013094830998426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af324c4aa08cb8e4bbca2b3a44822a79, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402013094830998426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91f61538677dd7a46b7f39961b0909c2, type: 3}
   m_Name: 
@@ -1226,6 +1226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7414694213664581105}
   - component: {fileID: 7414694213664581104}
+  - component: {fileID: 2069525410}
   m_Layer: 9
   m_Name: Crocigator
   m_TagString: WeaponCollider
@@ -1263,6 +1264,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2069525410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903141931711954763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 7414694213664581105}
+  - {fileID: 1897876129074967919}
+  - {fileID: 8031530068501085023}
+  - {fileID: 3651175672056185669}
+  - {fileID: 4395020812330684294}
+  - {fileID: 5514257037588411990}
+  - {fileID: 6514872790182791622}
+  - {fileID: 4708407304517333443}
+  - {fileID: 4828080863625898942}
+  - {fileID: 5156795463706949874}
+  - {fileID: 6655586257779009547}
+  - {fileID: 4984196722999105428}
+  - {fileID: 8327921397421990262}
+  - {fileID: 7733531839587032833}
+  - {fileID: 6301838056954407564}
+  - {fileID: 6222266793771024189}
+  - {fileID: 9146812165811081280}
+  - {fileID: 2109401373196875214}
+  - {fileID: 6955643735497498211}
+  - {fileID: 3296675890762735056}
+  - {fileID: 7572638182051735943}
+  - {fileID: 4134221877435895602}
+  - {fileID: 6264390992856878737}
+  - {fileID: 5438542332739826020}
+  - {fileID: 2349706397308023242}
+  - {fileID: 2703368683109259968}
+  - {fileID: 755143052371487615}
+  - {fileID: 4479436868360710553}
+  - {fileID: 8309231776486928946}
+  - {fileID: 2377566384369711242}
+  - {fileID: 5951488801269497492}
 --- !u!1 &7926110161621268430
 GameObject:
   m_ObjectHideFlags: 0
