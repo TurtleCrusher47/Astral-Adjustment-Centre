@@ -75,7 +75,7 @@ public class LoadingScene : MonoBehaviour
 
                 if (GameManager.Instance.nextSceneName == "LevelScene")
                 {
-                    if (GameManager.Instance.floorNum <= 0)
+                    if (GameManager.Instance.floorNum <= 1)
                     {
                         TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("PostIntro", null));
                         GameManager.Instance.timer = 0;

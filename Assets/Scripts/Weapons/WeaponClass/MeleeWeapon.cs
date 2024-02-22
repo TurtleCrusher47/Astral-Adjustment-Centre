@@ -71,6 +71,7 @@ public abstract class MeleeWeapon : Weapon
 
 		attackStep = (attackStep + 1) % 3;
 		animator.SetInteger("Attack", attackStep);
+        AudioManager.Instance.PlaySFX("SFXMeleeSlash");
 		
 		while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Sword Slash " + attackStep))
 		yield return null;
