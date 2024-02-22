@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckable
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     [field: SerializeField] public float CurrentHealth { get; set; }
+
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Slider easeHealthSlider;
+
+    [SerializeField] private float lerpSpeed = 0.05f; 
+
     public Rigidbody rb { get; set; }
     public Animator animator;
     private Generator3D generator;
@@ -74,6 +81,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     {
         stateMachine.currEnemyState.FrameUpdate();
         UpdateAnimator();
+        HealthBarSlider();
     }
 
     private void FixedUpdate()
@@ -101,6 +109,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public void Damage(float damage)
     {
        CurrentHealth -= damage;
+
+       CurrentHealth = Mathf.Max(CurrentHealth, 0f);
 
        animator.SetTrigger("isHit");
 
@@ -170,4 +180,23 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         
         return children;
     }
+
+#region Enemy Health Bar
+
+    public void HealthBarSlider()
+    {
+        if(healthSlider.value != CurrentHealth)
+        {
+            healthSlider.value = CurrentHealth;
+        }
+
+        if(healthSlider.value != easeHealthSlider.value)
+        {
+            easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, CurrentHealth, lerpSpeed);
+        }
+
+        //Debug.Log("Enemy Health: " + healthSlider.value);
+    }
+
+#endregion
 }
