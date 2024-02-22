@@ -4,13 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuffManager : MonoBehaviour
+public class BuffManager : Singleton<BuffManager>
 {
     [SerializeField]
     private GameObject roguePanel;
 
     [Header("Buff Data")]
     public List<ScriptableBuff> buffs;
+    public List<ScriptableBuff> availableBuffs;
 
     public PlayerData playerData;
 
@@ -24,26 +25,33 @@ public class BuffManager : MonoBehaviour
     void Awake()
     {
         // Move this to Awake Function or Call them. When player interacts with Chest/Wateve idk
-        //ShuffleBuffPanel();
+        //ShuffleBuffList();
         //InstantiateBuffPanels();
-        //ShowRandomBuffPanels(2);
+    }
+
+    private void Start()
+    {
+        ResetBuffs();
+        InstantiateBuffPanels();
     }
 
     private void ShuffleBuffList()
     {
-        int n = buffs.Count;
+        int n = availableBuffs.Count;
         while (n > 1)
         {
             n--;
             int k = Random.Range(0, n + 1);
-            ScriptableBuff temp = buffs[k];
-            buffs[k] = buffs[n];
-            buffs[n] = temp;
+            ScriptableBuff temp = availableBuffs[k];
+            availableBuffs[k] = availableBuffs[n];
+            availableBuffs[n] = temp;
         }
     }
 
     private void InstantiateBuffPanels()
     {
+        // unlock cursor
+        Cursor.lockState = CursorLockMode.None;
         // Destroy the previous buff panels
         DestroyOldPanels();
 
@@ -51,7 +59,7 @@ public class BuffManager : MonoBehaviour
         ShuffleBuffList();
 
         // Instantiate buff panels from the lists
-        for (int i = 0; i < 2 && i < buffs.Count; i++)
+        for (int i = 0; i < 2 && i < availableBuffs.Count; i++)
         {
             // Instantiate the base buff panel
             GameObject buffPanel = Instantiate(basePanel, roguePanel.transform);
@@ -63,9 +71,9 @@ public class BuffManager : MonoBehaviour
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
             // Set text dynamically using generic buff properties
-            titleText.text = buffs[i].buffName + " " + buffs[i].buffTiers[0]; // Show Level 1 initially
+            titleText.text = availableBuffs[i].buffName + " " + availableBuffs[i].buffTiers[0]; // Show Level 1 initially
 
-            descText.text = "Increases " + buffs[i].buffName + " by " + buffs[i].buffBonus[0] + " %";
+            descText.text = "Increases " + availableBuffs[i].buffName + " by " + availableBuffs[i].buffBonus[0] + " %";
 
             // Add click listener to the button
             Button button = buffPanel.GetComponent<Button>();
@@ -117,24 +125,29 @@ public class BuffManager : MonoBehaviour
         DestroyOldPanels();
     }
 
-    /*
+
     public void ResetBuffs()
     {
-        ScriptableBuff.ResetBuffTier();
-        buffs.ResetAttack();
-        buffs.ResetAtkSpd();
-        buffs.ResetFireRate();
-        buffs.ResetHealth();
-        buffs.ResetSpeed();
-    }*/
+        foreach (var buff in buffs)
+        {
+            buff.ResetBuffTier();
+        }
+        playerData.ResetBuffs();
+        availableBuffs = buffs;
+    }
 
     private void OnPanelClick(int index)
     {
         // Ensure the index is valid
-        if (index >= 0 && index < buffs.Count)
+        if (index >= 0 && index < availableBuffs.Count)
         {
             // Get the selected buff
-            ScriptableBuff selectedBuff = buffs[index];
+            ScriptableBuff selectedBuff = availableBuffs[index];
+            availableBuffs[index].currBuffTier++;
+            if (availableBuffs[index].currBuffTier >= 5)
+            {
+                availableBuffs.Remove(availableBuffs[index]);
+            }
 
             // Update PlayerData based on the selected buff
             switch (selectedBuff.buffName)
@@ -210,7 +223,6 @@ public class BuffManager : MonoBehaviour
             Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff + "\n" + "Buff Bonus: " + selectedBuff.buffBonus);
 
             // Reroll panels with the updated levels, tiers, and bonus
-            DestroyOldPanels();
             InstantiateBuffPanels();
         }
     }
