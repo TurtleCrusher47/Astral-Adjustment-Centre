@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ShurikenProjectile : GameObjectProjectile
 {
+    protected override void OnEnable()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
+        rb.constraints = ~RigidbodyConstraints.FreezePosition;
+    }
+
     public override void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
@@ -14,7 +21,7 @@ public class ShurikenProjectile : GameObjectProjectile
         // damageable?.Damage(gameObjectProjectileData.damage);
         if (collider.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.Damage(gameObjectProjectileData.damage);
+            damageable.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
             // StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
         }
         else

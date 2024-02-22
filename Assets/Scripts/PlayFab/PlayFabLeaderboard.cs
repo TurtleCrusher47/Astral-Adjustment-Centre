@@ -12,7 +12,7 @@ using System.Linq;
 public class PlayFabLeaderboard : MonoBehaviour
 {
     [System.Serializable]
-    public class GetRunsCompletedResults
+    public class GetRunsCompletedResult
     {
         public List<string> RunsCompleted = new();
     }
@@ -33,7 +33,7 @@ public class PlayFabLeaderboard : MonoBehaviour
     }
 
     public static List<GameObject> lbItems = new List<GameObject>();
-    public List<string> playersRunCompleted;
+    public List<string> playersRunsCompleted;
 
     [SerializeField] public GameObject rowPrefab;
     [SerializeField] public GridLayoutGroup lbGroup;
@@ -139,9 +139,9 @@ public class PlayFabLeaderboard : MonoBehaviour
         }, csResult=>
         {
             var jsonString = csResult.FunctionResult.ToString();
-            var runsCompleted = JsonUtility.FromJson<GetRunsCompletedResults>(jsonString);
+            var runsCompleted = JsonUtility.FromJson<GetRunsCompletedResult>(jsonString);
 
-            playersRunCompleted = runsCompleted.RunsCompleted.ToList();
+            playersRunsCompleted = runsCompleted.RunsCompleted.ToList();
 
             for (int i = 0; i < entries.Count; i++)
             {
@@ -315,7 +315,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         TMP_Text nameText = FindChildWithTag(newRow, "DisplayNameText").GetComponent<TMP_Text>();
         TMP_Text scoreText = FindChildWithTag(newRow, "ScoreText").GetComponent<TMP_Text>();
 
-        int runs = int.Parse(playersRunCompleted[rank - 1]);
+        int runs = int.Parse(playersRunsCompleted[rank - 1]);
         string rankIcon = "";
 
         if (runs >= 40)

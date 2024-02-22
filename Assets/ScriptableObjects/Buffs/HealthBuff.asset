@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21ee8eba1b164b49b71dcb683b008f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa00893e83a9d6419341c4db2c038f5, type: 3}
   m_Name: HealthBuff
   m_EditorClassIdentifier: 
   buffName: Health
+  currBuffTier: 0
   buffTiers:
   - I
   - II
@@ -20,8 +21,8 @@ MonoBehaviour:
   - IV
   - V
   buffBonus:
-  - 0.5
-  - 1
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.4
   - 1.5
-  - 2
-  - 2.5

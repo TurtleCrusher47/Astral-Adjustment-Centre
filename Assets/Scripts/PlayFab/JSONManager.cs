@@ -13,9 +13,9 @@ public class JSONManager : MonoBehaviour
         
     }
 
-    /*public void SendJSON(int runsCompleted)
+    public static void SendJSON(int runsCompleted)
     {
-        //string stringListAsJson = JsonUtility.ToJson(ship);
+        string stringListAsJson = JsonUtility.ToJson(runsCompleted);
 
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
         {
@@ -29,7 +29,7 @@ public class JSONManager : MonoBehaviour
         }, OnError);
     }
 
-    public int GetRunsCompleted()
+    /*public int GetRunsCompleted()
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), 
         result=>
@@ -73,7 +73,7 @@ public class JSONManager : MonoBehaviour
         return stringBuilder.ToString();
     }
 
-    void OnError(PlayFabError e)
+    static void OnError(PlayFabError e)
     {
         Debug.Log("Error : " + e.GenerateErrorReport());
     }

@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuffManager : MonoBehaviour
 {
+    public static BuffManager Instance;
+
     [SerializeField]
     private GameObject roguePanel;
 
     [Header("Buff Data")]
     public List<ScriptableBuff> buffs;
+    public List<ScriptableBuff> availableBuffs = new List<ScriptableBuff>();
 
     public PlayerData playerData;
-
-    public TMP_Text rerollText;
+    private GameObject player;
 
     [Header("Buff Panel")]
     public GameObject basePanel;
@@ -23,39 +24,61 @@ public class BuffManager : MonoBehaviour
     // Just to see if its instantiating
     private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
-        // Move this to Awake Function or Call them. When player interacts with Chest/Wateve idk
-        //ShuffleBuffPanel();
-        //InstantiateBuffPanels();
+        if (Instance == null)
+        {
+            Instance = this;
+            InitBuffPanel();
+            player = GameObject.FindGameObjectWithTag("Player");
+            DontDestroyOnLoad(this);
+        }
+        else if (Instance != null)
+        {
+            Instance.player = GameObject.FindGameObjectWithTag("Player");
+            Destroy(this);
+        }
     }
 
-    void Start()
+    private void InitBuffPanel()
     {
-        rerollText.text = "2";
+        ResetBuffs();
+        roguePanel.SetActive(false);
+    }
+
+    public void ShowBuffPanel()
+    {
+        roguePanel.SetActive(true);
+        player.SetActive(false);
+        InstantiateBuffPanels();
     }
 
     private void ShuffleBuffList()
     {
-        int n = buffs.Count;
+        int n = availableBuffs.Count;
         while (n > 1)
         {
             n--;
             int k = Random.Range(0, n + 1);
-            ScriptableBuff temp = buffs[k];
-            buffs[k] = buffs[n];
-            buffs[n] = temp;
+            ScriptableBuff temp = availableBuffs[k];
+            availableBuffs[k] = availableBuffs[n];
+            availableBuffs[n] = temp;
         }
     }
 
     private void InstantiateBuffPanels()
     {
+        // unlock cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // Destroy the previous buff panels
+        DestroyOldPanels();
+
         // Shuffle the buff order to randomize panel positions
         ShuffleBuffList();
 
         // Instantiate buff panels from the lists
-        for (int i = 0; i < 2 && i < buffs.Count; i++)
+        for (int i = 0; i < 2 && i < availableBuffs.Count; i++)
         {
             // Instantiate the base buff panel
             GameObject buffPanel = Instantiate(basePanel, roguePanel.transform);
@@ -67,9 +90,9 @@ public class BuffManager : MonoBehaviour
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
             // Set text dynamically using generic buff properties
-            titleText.text = buffs[i].buffName + " " + buffs[i].buffTiers[0]; // Show Level 1 initially
+            titleText.text = availableBuffs[i].buffName + " " + availableBuffs[i].buffTiers[availableBuffs[i].currBuffTier]; // Show Level 1 initially
 
-            descText.text = "Increases " + buffs[i].buffName + " by " + buffs[i].buffBonus[0] + " %";
+            descText.text = "Increases " + availableBuffs[i].buffName + " by " + ((availableBuffs[i].buffBonus[availableBuffs[i].currBuffTier] - 1) * 100) + " %";
 
             // Add click listener to the button
             Button button = buffPanel.GetComponent<Button>();
@@ -113,47 +136,52 @@ public class BuffManager : MonoBehaviour
     public void RerollButton()
     {
         DestroyOldPanels();
-
-        
-
         InstantiateBuffPanels();
     }
 
     public void ClearButton()
     {
+        // lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         DestroyOldPanels();
     }
 
-    /*
+
     public void ResetBuffs()
     {
-        ScriptableBuff.ResetBuffTier();
-        buffs.ResetAttack();
-        buffs.ResetAtkSpd();
-        buffs.ResetFireRate();
-        buffs.ResetHealth();
-        buffs.ResetSpeed();
-    }*/
+        foreach (var buff in buffs)
+        {
+            buff.ResetBuffTier();
+        }
+        playerData.ResetBuffs();
+        availableBuffs.AddRange(buffs);
+    }
 
     private void OnPanelClick(int index)
     {
         // Ensure the index is valid
-        if (index >= 0 && index < buffs.Count)
+        if (index >= 0 && index < availableBuffs.Count)
         {
             // Get the selected buff
-            ScriptableBuff selectedBuff = buffs[index];
+            ScriptableBuff selectedBuff = availableBuffs[index];
+            availableBuffs[index].currBuffTier++;
+            if (availableBuffs[index].currBuffTier >= 5)
+            {
+                availableBuffs.Remove(availableBuffs[index]);
+            }
 
             // Update PlayerData based on the selected buff
             switch (selectedBuff.buffName)
             {
-                case "Speed":
+                case "Movement Speed":
                     playerData.speedLevel += 1;
-                    playerData.walkSpeed *= 1 + selectedBuff.buffBonus[0];
                     break;
 
                 case "Health":
                     playerData.healthLevel += 1;
                     // Buff HP
+                    playerData.UpdateHealth();
                     break;
 
                 case "Attack":
@@ -161,7 +189,7 @@ public class BuffManager : MonoBehaviour
                     // Buff Player
                     break;
 
-                case "Atk Spd":
+                case "Attack Speed":
                     playerData.atkSpeedLevel += 1;
                     // Buff Atk Spd
                     break;
@@ -183,7 +211,7 @@ public class BuffManager : MonoBehaviour
 
             switch (selectedBuff.buffName)
             {
-                case "Speed":
+                case "Movement Speed":
                     playerLevel = playerData.speedLevel;
                     break;
 
@@ -195,7 +223,7 @@ public class BuffManager : MonoBehaviour
                     playerLevel = playerData.attackLevel;
                     break;
 
-                case "Atk Spd":
+                case "Attack Speed":
                     playerLevel = playerData.atkSpeedLevel;
                     break;
 
@@ -207,18 +235,10 @@ public class BuffManager : MonoBehaviour
                     break;
             }
 
-            // Clamp playerLevel between the array
-            int arrayIndex = Mathf.Clamp(playerLevel, 0, selectedBuff.buffTiers.Length - 1);
-
-            // Use playerLevel as an index for buffTiers and buffBonus arrays
-            selectedBuff.buffTiers[0] = selectedBuff.buffTiers[arrayIndex];
-            selectedBuff.buffBonus[0] = selectedBuff.buffBonus[arrayIndex];
-
             Debug.Log("Level: " + playerLevel + "\n" + "Buff Selected: " + selectedBuff + "\n" + "Buff Bonus: " + selectedBuff.buffBonus);
 
-            // Reroll panels with the updated levels, tiers, and bonus
-            DestroyOldPanels();
-            InstantiateBuffPanels();
+            player.SetActive(true);
+            ClearButton();
         }
     }
 }
