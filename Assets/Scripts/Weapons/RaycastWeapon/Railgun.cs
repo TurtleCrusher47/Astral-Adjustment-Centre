@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Railgun : RaycastRangedWeapon
 {
     private float chargeMultiplier = 1.25f;
     private float elapsedTime = 0;
+    [SerializeField] private VisualEffect chargeUpEffect;
+
+    private void Awake()
+    {
+        chargeUpEffect.Stop();
+    }
 
     protected override void UseSecondary()
     {
         // elapsed time to check per second
         if (rangedWeaponData.currentAmmo - 10 >= 0)
         {
+            chargeUpEffect.Play();
             elapsedTime += Time.deltaTime;
             AudioManager.Instance.PlaySFXLoop("SFXChargeUp");
             if (elapsedTime >= 1f)
@@ -31,6 +39,7 @@ public class Railgun : RaycastRangedWeapon
 
     protected override void UseSecondaryUp()
     {
+        chargeUpEffect.Stop();
         // To store the variable that was furthest
         RaycastHit furthestHit;
 
