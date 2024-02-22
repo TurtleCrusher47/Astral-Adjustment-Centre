@@ -9,7 +9,7 @@ public class ElevatorTrigger : MonoBehaviour
     [SerializeField] private Generator3D mapGenerator;
     public void LoadNextLevel()
     {
-        if (GameManager.Instance.floorNum == 1)
+        if (GameManager.Instance.floorNum == 4)
         {
             // game end
             GameManager.Instance.timerActive = false;
