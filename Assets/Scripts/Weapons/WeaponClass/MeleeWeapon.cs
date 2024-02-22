@@ -47,13 +47,6 @@ public abstract class MeleeWeapon : Weapon
 		verticalInput = Input.GetAxisRaw("Vertical");
     }
 
-    public void UpdateTransform()
-    {
-        // Read input buffer for chained slash attacks
-		// If there are commands in queue but no slashes are playing,
-		// start playing chained slash attacks
-    }
-
     public void ClearSlashQueue()
     {
         attackQueue.Clear();
@@ -64,7 +57,14 @@ public abstract class MeleeWeapon : Weapon
 
     private IEnumerator PlaySlash()
 	{
-        animator.speed = 1 * atkSpdBuffMultiplier;
+        Debug.Log("Play slash");
+        
+        if (atkSpdBuffMultiplier > 1)
+        {
+            animator.speed = 1 * atkSpdBuffMultiplier;
+        }
+
+        else animator.speed = 1;
 
 		// Remove last command in queue
 		attackQueue.Dequeue();

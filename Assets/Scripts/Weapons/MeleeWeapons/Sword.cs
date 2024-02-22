@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Sword : MeleeWeapon
 {
+
     protected override void Start()
     {
-    }
 
+    }
+    
     protected override void OnTriggerEnter(Collider other)
     {
-        if ( other.gameObject.CompareTag("WeaponCollider"))
+        if ( other.gameObject.CompareTag("WeaponCollider")|| GetComponent<Collider>().gameObject.CompareTag("Player") || GetComponent<Collider>().gameObject.CompareTag("AggroRadius") || GetComponent<Collider>().gameObject.CompareTag("StrikingDistance"))
         return;
 
         if (other.CompareTag("PlayerCollider") && !inInventory)
@@ -30,33 +32,30 @@ public class Sword : MeleeWeapon
     {
         int i = 0;
         attackQueue.Enqueue(i);
-
-        Debug.Log("use sword primary");
-        Debug.Log("Queue " + attackQueue.Count);
     }
 
     protected override void UseAbility()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     protected override void UseSecondary()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     protected override void OnPrimary()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     protected override void OnAbility()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     protected override void OnSecondary()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 }
