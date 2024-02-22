@@ -15,7 +15,7 @@ public abstract class RaycastRangedWeapon : RangedWeapon
             if (CanShoot())
             {
                 // Debug.Log("Shoot");
-                if (Physics.Raycast(camRotation.position, camRotation.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, targetLayers))
+                if (Physics.Raycast(cam.position, camRotation.forward, out RaycastHit hitInfo, raycastProjectileData.maxDistance, targetLayers))
                 {
                     StartCoroutine(RenderTraceLine(hitInfo.point));
                     Debug.Log(hitInfo.transform.name);
