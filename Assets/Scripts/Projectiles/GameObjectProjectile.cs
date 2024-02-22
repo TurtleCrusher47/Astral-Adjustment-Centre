@@ -31,6 +31,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.constraints &= ~RigidbodyConstraints.FreezePosition;
+        rb.constraints &= ~RigidbodyConstraints.FreezeRotation;
         // Debug.Log("Enabled");
 
         SetAngularVelocity();

@@ -7,6 +7,10 @@ public class ShurikenProjectile : GameObjectProjectile
     protected override void SetAngularVelocity()
     {
         angularVelocity = camRotation.up;
+
+        // Freeze rotation for X and Z axis at the start
+        rb.constraints = RigidbodyConstraints.FreezeRotationX;
+        rb.constraints = RigidbodyConstraints.FreezeRotationZ;
     }
 
     public override void OnTriggerEnter(Collider collider)
@@ -25,6 +29,7 @@ public class ShurikenProjectile : GameObjectProjectile
         else
         {
             rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.constraints = RigidbodyConstraints.FreezeRotationY;
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
         }
 
