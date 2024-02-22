@@ -7,6 +7,9 @@ public class AxeProjectile : GameObjectProjectile
     protected override void SetAngularVelocity()
     {
         angularVelocity = camRotation.right;
+
+        // Freeze rotation for Y axis at the start
+        rb.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 
     public override void OnTriggerEnter(Collider collider)
@@ -25,6 +28,8 @@ public class AxeProjectile : GameObjectProjectile
         else
         {
             rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.constraints = RigidbodyConstraints.FreezeRotationX;
+            rb.constraints = RigidbodyConstraints.FreezeRotationZ;
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
         }
         //Debug.Log(collider.gameObject.name);
