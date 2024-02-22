@@ -9,6 +9,7 @@ public class DualRevolvers : RaycastRangedWeapon
 
     protected override void OnPrimary()
     {
+        animator.SetTrigger("Primary");
         AudioManager.Instance.PlaySFX("SFXRevolverShoot");
     }
 
@@ -28,6 +29,7 @@ public class DualRevolvers : RaycastRangedWeapon
 
     protected override void UseSecondary()
     {
+        animator.ResetTrigger("Secondary");
         if (rangedWeaponData.currentAmmo > 0 || rangedWeaponData.infiniteAmmo)
         {
             if (CanUseSecondary())
