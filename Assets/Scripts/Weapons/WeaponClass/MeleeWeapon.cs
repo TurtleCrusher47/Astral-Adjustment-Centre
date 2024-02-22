@@ -13,6 +13,23 @@ public abstract class MeleeWeapon : Weapon
     private float horizontalInput;
     private float verticalInput;
 
+    protected ScriptableBuff atkSpdBuff;
+    protected float atkSpdBuffMultiplier;
+
+    protected float GetAtkSpdMultiplier()
+    {
+        atkSpdBuff = BuffManager.Instance.buffs[0];
+        if (atkSpdBuff.currBuffTier > 0)
+        {
+            atkSpdBuffMultiplier = atkSpdBuff.buffBonus[atkSpdBuff.currBuffTier - 1];
+        }
+        else
+        {
+            atkSpdBuffMultiplier = 1;
+        }
+        return atkSpdBuffMultiplier;
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -47,6 +64,8 @@ public abstract class MeleeWeapon : Weapon
 
     private IEnumerator PlaySlash()
 	{
+        animator.speed = 1 * atkSpdBuffMultiplier;
+
 		// Remove last command in queue
 		attackQueue.Dequeue();
 

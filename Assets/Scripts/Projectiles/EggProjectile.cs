@@ -36,7 +36,7 @@ public class EggProjectile : GameObjectProjectile
             {
                 if (collider.TryGetComponent<IDamageable>(out var damageable))
                 {
-                    damageable.Damage(gameObjectProjectileData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
+                    damageable.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
                 }
             }
 

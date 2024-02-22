@@ -11,6 +11,9 @@ public abstract class GameObjectProjectile : MonoBehaviour
     private Transform firePoint;
     [HideInInspector] public Vector3 projectileDirection;
 
+    protected ScriptableBuff atkBuff;
+    protected float atkBuffMultiplier;
+
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -19,6 +22,20 @@ public abstract class GameObjectProjectile : MonoBehaviour
     }
 
     protected abstract void OnEnable();
+
+    protected float GetAtkMultiplier()
+    {
+        atkBuff = BuffManager.Instance.buffs[0];
+        if (atkBuff.currBuffTier > 0)
+        {
+            atkBuffMultiplier = atkBuff.buffBonus[atkBuff.currBuffTier - 1];
+        }
+        else
+        {
+            atkBuffMultiplier = 1;
+        }
+        return atkBuffMultiplier;
+    }
 
     public void MoveProjectile()
     {
