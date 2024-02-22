@@ -104,7 +104,7 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public IEnumerator PlaySFXLoop(string name)
+    public void PlaySFXLoop(string name)
     {
         AudioClip clipToPlay = null;
 
@@ -118,6 +118,11 @@ public class AudioManager : Singleton<AudioManager>
 
         for (int i = 0; i < sfxSources.Count; i++)
         {
+            if (sfxSources[i].isPlaying && sfxSources[i].clip == clipToPlay)
+            {
+                return;
+            }
+
             if (!sfxSources[i].isPlaying)
             {
                 sfxSources[i].clip = clipToPlay;
@@ -126,11 +131,9 @@ public class AudioManager : Singleton<AudioManager>
                 break;
             }
         }
-
-        yield return null;
     }
 
-    public IEnumerator StopSFXLoop(string name)
+    public void StopSFXLoop(string name)
     {
         AudioClip clipToPlay = null;
 
@@ -151,8 +154,6 @@ public class AudioManager : Singleton<AudioManager>
                 break;
             }
         }
-
-        yield return null;
     }
 
     public void PlayVL(string name)
@@ -212,11 +213,11 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            StartCoroutine(PlaySFXLoop("SFXHit"));
+            PlaySFXLoop("SFXHit");
         }
         else if (Input.GetKeyUp(KeyCode.M))
         {
-            StartCoroutine(StopSFXLoop("SFXHit"));
+           StopSFXLoop("SFXHit");
         }
     }
 }

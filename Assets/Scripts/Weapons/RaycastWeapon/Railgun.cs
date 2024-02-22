@@ -14,6 +14,7 @@ public class Railgun : RaycastRangedWeapon
         if (rangedWeaponData.currentAmmo - 10 >= 0)
         {
             elapsedTime += Time.deltaTime;
+            AudioManager.Instance.PlaySFXLoop("SFXChargeUp");
             if (elapsedTime >= 1f)
             {
                 elapsedTime %= 1f;
@@ -33,12 +34,15 @@ public class Railgun : RaycastRangedWeapon
         // To store the variable that was furthest
         RaycastHit furthestHit;
 
+        AudioManager.Instance.StopSFXLoop("SFXChargeUp");
+
         // Do not do damage if the player did not properly charge
         if (chargeMultiplier <= 1.25f)
         {
             ResetValues();
             return;
         }
+
         RaycastHit[] hits = Physics.RaycastAll(cam.position, camRotation.forward, raycastProjectileData.maxDistance, targetLayers);
         // Assign furthestHit to the first point in hits
         furthestHit = hits[0];
@@ -53,6 +57,8 @@ public class Railgun : RaycastRangedWeapon
             if (hits[i].collider.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.Damage(raycastProjectileData.damage * chargeMultiplier * GetAtkMultiplier());
+                
+                AudioManager.Instance.PlaySFX("SFXLaserImpact");
             }
             Debug.Log(hits[i].transform.name);
 
@@ -79,9 +85,15 @@ public class Railgun : RaycastRangedWeapon
     {
     }
 
+    protected override void OnPrimary()
+    {
+        AudioManager.Instance.PlaySFX("SFXLaserShoot");
+    }
+
     protected override void OnSecondary()
     {
         animator.SetTrigger("Primary");
+        AudioManager.Instance.PlaySFX("SFXLaserShoot");
     }
 
     protected override void OnAbility()

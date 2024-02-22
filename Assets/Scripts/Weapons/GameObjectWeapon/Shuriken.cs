@@ -45,12 +45,28 @@ public class Shuriken : GameObjectRangedWeapon
         }
     }
 
+    protected override void OnPrimary()
+    {
+        AudioManager.Instance.PlaySFX("SFXShurikenThrow");
+    }
+
     protected override void OnSecondary()
     {
         animator.SetTrigger("Primary");
+        StartCoroutine(SecondarySFX());
     }
 
     protected override void OnAbility()
     {
+    }
+
+    private IEnumerator SecondarySFX()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            AudioManager.Instance.PlaySFX("SFXShurikenThrow");
+
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

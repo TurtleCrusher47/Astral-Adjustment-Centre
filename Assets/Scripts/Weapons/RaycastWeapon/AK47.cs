@@ -8,6 +8,11 @@ public class AK47 : RaycastRangedWeapon
     {
     }
 
+    protected override void OnPrimary()
+    {
+        AudioManager.Instance.PlaySFX("SFXAK47Shoot");
+    }
+
     protected override void OnSecondary()
     {
     }
