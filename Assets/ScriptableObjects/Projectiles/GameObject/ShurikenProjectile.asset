@@ -16,4 +16,4 @@ MonoBehaviour:
   force: 5
   range: 60
   timeBeforeDestroy: 10
-  angularVelocity: {x: 0, y: 20, z: 0}
+  angularVelocity: {x: 0, y: 0, z: 20}

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class ShurikenProjectile : GameObjectProjectile
 {
-    protected override void OnEnable()
+    protected override void SetAngularVelocity()
     {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
-        rb.constraints = ~RigidbodyConstraints.FreezePosition;
+        angularVelocity = camRotation.up;
     }
 
     public override void OnTriggerEnter(Collider collider)

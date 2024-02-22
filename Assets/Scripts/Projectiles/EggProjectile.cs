@@ -7,15 +7,6 @@ public class EggProjectile : GameObjectProjectile
     [SerializeField] float explosiveTimer = 3;
     private bool isTriggered = false;
 
-    protected override void OnEnable()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = gameObjectProjectileData.angularVelocity;
-        isTriggered = false;
-
-        StartCoroutine(StartExplosiveTimer());
-    }
-
     public override void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))
@@ -24,6 +15,10 @@ public class EggProjectile : GameObjectProjectile
         if (collider.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             Explode();
+        }
+        else
+        {
+            StartCoroutine(StartExplosiveTimer());
         }
     }
 

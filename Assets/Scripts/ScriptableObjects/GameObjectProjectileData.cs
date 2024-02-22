@@ -10,5 +10,4 @@ public class GameObjectProjectileData : ScriptableObject
     public float force;
     public float range;
     public float timeBeforeDestroy;
-    public Vector3 angularVelocity;
 }
