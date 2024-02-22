@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player", menuName = "Player/Data")]
@@ -41,7 +43,8 @@ public class PlayerData : ScriptableObject
 
     [Header("Health")]
     public float currentHealth = 100;
-    public int maxHealth = 100;
+    public float initialMaxHealth = 100;
+	public float currentMaxHealth = 100;
 
 	[Header("Player Settings")]
 	public float mainVolume;
@@ -54,14 +57,32 @@ public class PlayerData : ScriptableObject
 	public int atkSpeedLevel;
 	public int fireRateLevel;
 
-	private float resetLevel = 0;
-
     public void ResetValues()
     {
-        currentHealth = maxHealth;
+        currentHealth = initialMaxHealth;
+		currentMaxHealth = initialMaxHealth;
 
-		ResetBuffs();
+		UpdateHealth();
+        ResetBuffs();
     }
+
+	public void UpdateHealth()
+	{
+        ScriptableBuff hpBuff = BuffManager.Instance.buffs[3];
+        float hpBuffMultiplier;
+        if (hpBuff.currBuffTier > 0)
+        {
+            hpBuffMultiplier = hpBuff.buffBonus[hpBuff.currBuffTier - 1];
+        }
+		else
+        {
+            hpBuffMultiplier = 1;
+        }
+
+        float temp = currentMaxHealth;
+        currentMaxHealth = initialMaxHealth * hpBuffMultiplier;
+		currentHealth += currentMaxHealth - temp;
+	}
 
 	public void ResetBuffs()
 	{

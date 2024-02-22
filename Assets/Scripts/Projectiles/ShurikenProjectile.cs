@@ -21,7 +21,7 @@ public class ShurikenProjectile : GameObjectProjectile
         // damageable?.Damage(gameObjectProjectileData.damage);
         if (collider.transform.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.Damage(gameObjectProjectileData.damage * BuffManager.Instance.buffs[1].buffBonus[BuffManager.Instance.buffs[1].currBuffTier]);
+            damageable.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
             // StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject));
         }
         else

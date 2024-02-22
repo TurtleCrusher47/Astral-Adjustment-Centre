@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa00893e83a9d6419341c4db2c038f5, type: 3}
   m_Name: MovementSpdBuff
   m_EditorClassIdentifier: 
-  buffName: MovementSpd
+  buffName: Movement Speed
   currBuffTier: 0
   buffTiers:
   - I
