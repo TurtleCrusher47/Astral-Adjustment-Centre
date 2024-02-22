@@ -5,7 +5,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
-public class JSONManager : Singleton<JSONManager>
+public class JSONManager : MonoBehaviour
 {
     public void SendJSON(int runsCompleted)
     {

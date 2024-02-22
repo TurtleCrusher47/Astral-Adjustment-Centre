@@ -9,18 +9,18 @@ public class ElevatorTrigger : MonoBehaviour
     [SerializeField] private Generator3D mapGenerator;
     public void LoadNextLevel()
     {
-        if (GameManager.Instance.floorNum == 4)
+        if (GameManager.Instance.floorNum == 1)
         {
             // game end
             GameManager.Instance.timerActive = false;
             PlayFabManager.runsCompleted += 1;
 
-            JSONManager.Instance.SendJSON(PlayFabManager.runsCompleted);
+            GameManager.Instance.GetComponent<JSONManager>().SendJSON(PlayFabManager.runsCompleted);
 
-            JSONManager.Instance.SendLeaderboard("HighScore");
-            JSONManager.Instance.SendLeaderboard("HighScoreDaily");
-            JSONManager.Instance.SendLeaderboard("HighScoreWeekly");
-            JSONManager.Instance.SendLeaderboard("HighScoreMonthly");
+            GameManager.Instance.GetComponent<JSONManager>().SendLeaderboard("HighScore");
+            GameManager.Instance.GetComponent<JSONManager>().SendLeaderboard("HighScoreDaily");
+            GameManager.Instance.GetComponent<JSONManager>().SendLeaderboard("HighScoreWeekly");
+            GameManager.Instance.GetComponent<JSONManager>().SendLeaderboard("HighScoreMonthly");
 
             GameManager.Instance.ChangeScene("MenuScene");
         }
