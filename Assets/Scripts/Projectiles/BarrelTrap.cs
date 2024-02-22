@@ -13,8 +13,8 @@ public class BarrelTrap : Trap
 
     public override IEnumerator TriggerTrap()
     {
-       Debug.Log("Triggered Trap");
-       yield return new WaitForSeconds(trapData.triggerDelay);
+        Debug.Log("Triggered Trap");
+        yield return new WaitForSeconds(trapData.triggerDelay);
 
         foreach (var collider in Physics.OverlapSphere(transform.position, trapData.damageRange))
         {
@@ -25,10 +25,10 @@ public class BarrelTrap : Trap
             else if (collider.TryGetComponent<BarrelTrap>(out var barrelTrap))
             {
                 // If the barrel already exploded, return null
-                if (collider.gameObject.GetComponent<BarrelTrap>().isTriggered)
-                yield return null;
-
-                collider.gameObject.GetComponent<BarrelTrap>().StartCoroutine(barrelTrap.TriggerTrap());
+                if (!collider.gameObject.GetComponent<BarrelTrap>().isTriggered)
+                {
+                    collider.gameObject.GetComponent<BarrelTrap>().StartCoroutine(barrelTrap.TriggerTrap());
+                }
             }
         }
 

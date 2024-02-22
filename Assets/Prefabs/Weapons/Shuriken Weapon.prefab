@@ -61,7 +61,6 @@ MonoBehaviour:
     type: 2}
   projectile: {fileID: 1225672631827000199, guid: bfba75cc7669c084693521bd7906c7fc,
     type: 3}
-  animator: {fileID: 937391826750947698}
   abilityProjectile: {fileID: 1686820092174708099, guid: a9ffd673cc4a69e4da0b24650de27d41,
     type: 3}
 --- !u!54 &2234285575767978175
