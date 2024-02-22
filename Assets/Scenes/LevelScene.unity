@@ -1618,6 +1618,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51bc0c469b689ea48be7092c14512c11, type: 2}
   - {fileID: 11400000, guid: 3cf582f464c737e4ba4d33ce004d36bb, type: 2}
   - {fileID: 11400000, guid: 423ca0948f1fe1e4ca4edd2944960ff9, type: 2}
+  randomWeaponlist:
+  - {fileID: 3138362185222739293, guid: c73fe733721d28a498d04658a6563b9b, type: 3}
+  - {fileID: 4402013094830998426, guid: fa24c9089fac72a40863abb2e3f863df, type: 3}
+  - {fileID: 182669890448295919, guid: 689932e0295c3744c80277b8bdbd6fbf, type: 3}
+  - {fileID: 8153578986637794486, guid: 1da106161871a4a429d2fe95d245e0f0, type: 3}
+  - {fileID: 6407801722664980708, guid: a5bf5914650d66644a154130f9299e3a, type: 3}
+  - {fileID: 2253815619291179934, guid: 423a5f822503f98429aaa49bdab48483, type: 3}
+  - {fileID: 2234285575767978173, guid: 38cf2c38710a66447b3689cb1a38866b, type: 3}
+  - {fileID: 349771463281939438, guid: 15c3dc6426989364ea04e6a1af15ffec, type: 3}
+  - {fileID: 6810437230062205763, guid: 5c88eb6a5822a62469b41e523e6601b9, type: 3}
   seed: 0
   size: {x: 40, y: 7, z: 40}
   roomCount: 30

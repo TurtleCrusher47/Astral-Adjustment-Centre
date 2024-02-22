@@ -15,6 +15,11 @@ public class Railgun : RaycastRangedWeapon
         chargeUpEffect.Stop();
     }
 
+    private void OnEnable()
+    {
+        chargeUpEffect.Stop();
+    }
+
     protected override void UseSecondary()
     {
         // elapsed time to check per second

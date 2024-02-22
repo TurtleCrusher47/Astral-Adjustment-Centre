@@ -33,6 +33,7 @@ public class Generator3D : MonoBehaviour
     }
 
     [SerializeField] private List<MapRoomObjManagerData> mRoomObjManagerList;
+    [SerializeField] private List<GameObject> randomWeaponlist;
     [SerializeField] private int seed;
     [SerializeField] private Vector3Int size;
     [SerializeField] private int roomCount;
@@ -596,10 +597,20 @@ public class Generator3D : MonoBehaviour
                     // removes that space from list of vacant spaces
                     if (vacantSpaces.Count > 0)
                     {
+                        GameObject obj;
                         int randIndex = RandomR.Range(0, vacantSpaces.Count);
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        // check if obj is a weapon
+                        if (roomData.ObjectsList[i].name.Contains("Weapon"))
+                        {
+                            int randWeapon = RandomR.Range(0, randomWeaponlist.Count);
+                            obj = ObjectPoolManager.Instance.SpawnObject(randomWeaponlist[randWeapon], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        }
+                        else
+                        {
+                            obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        }
                         mapContent.Add(obj);
                         obj.transform.eulerAngles = new Vector3(0, RandomR.Range(0.0f, 360.0f), 0);
                     }
