@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayFab;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 public class ElevatorTrigger : MonoBehaviour
@@ -10,7 +12,13 @@ public class ElevatorTrigger : MonoBehaviour
         if (GameManager.Instance.floorNum == 4)
         {
             // game end
+            GameManager.Instance.timerActive = false;
+            SendLeaderboard("HighScore");
+            SendLeaderboard("HighScoreDaily");
+            SendLeaderboard("HighScoreWeekly");
+            SendLeaderboard("HighScoreMonthly");
 
+            GameManager.Instance.ChangeScene("MenuScene");
         }
         else
         {
@@ -18,5 +26,32 @@ public class ElevatorTrigger : MonoBehaviour
             Debug.Log("Next Level");
             StartCoroutine(mapGenerator.LoadNextLevel());
         }
+    }
+
+    public void SendLeaderboard(string statName)
+    {
+        var req = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate>
+            {
+                new StatisticUpdate
+                {
+                    StatisticName = statName,
+                    Value = GameManager.Instance.seconds
+                }
+            }
+        };
+
+        PlayFabClientAPI.UpdatePlayerStatistics(req, OnLeaderboardUpdate, OnError);
+    }
+
+    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult r)
+    {
+        Debug.Log("Successful Leaderboard Sent : " + r.ToString());
+    }
+
+    void OnError(PlayFabError e)
+    {
+        Debug.Log("Error : " + e.GenerateErrorReport());
     }
 }

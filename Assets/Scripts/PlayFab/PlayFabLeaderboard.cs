@@ -354,7 +354,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         newRow.transform.SetSiblingIndex(rank);
         rankText.text = AddOrdinal(rank);
         nameText.text = rankIcon + item.DisplayName;
-        scoreText.text = item.StatValue.ToString();
+        scoreText.text = ConvertSecondsToHHMMSS(item.StatValue);
 
         delay += 0.25f;
         StartCoroutine(FadeInRow(background, rankText, nameText, scoreText, delay));

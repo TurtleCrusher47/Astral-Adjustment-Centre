@@ -8,6 +8,9 @@ public class GameManager : Singleton<GameManager>
 {
     public string nextSceneName;
     public int floorNum = 1;
+    public float timer = 0;
+    public int seconds = 0;
+    public bool timerActive = false;
 
     public void ChangeScene(string sceneName)
     {
@@ -33,5 +36,14 @@ public class GameManager : Singleton<GameManager>
         }
  
         return child;
+    }
+
+    void Update()
+    {
+        if (timerActive)
+        {
+            timer += Time.deltaTime;
+            seconds = (int)(timer % 60);
+        }
     }
 }
