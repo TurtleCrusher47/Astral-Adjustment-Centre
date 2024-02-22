@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293f6e554861bbb42b65a9b9b2a3208e, type: 3}
   m_Name: Boss Line Attack
   m_EditorClassIdentifier: 
+  type: 1
+  visualEffect: {fileID: 1314945738539566, guid: 32c9fd11a72259d45aa26ae41c34c5aa,
+    type: 3}
   _attackRange: {x: 0.6, y: 1, z: 3}
   _posOffset: 1.25
   _damage: 20
