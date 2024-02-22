@@ -7,16 +7,8 @@ using PlayFab.ClientModels;
 
 public class JSONManager : MonoBehaviour
 {
-
-    void Awake()
+    public void SendJSON(int runsCompleted)
     {
-        
-    }
-
-    public static void SendJSON(int runsCompleted)
-    {
-        string stringListAsJson = JsonUtility.ToJson(runsCompleted);
-
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
@@ -73,7 +65,25 @@ public class JSONManager : MonoBehaviour
         return stringBuilder.ToString();
     }
 
-    static void OnError(PlayFabError e)
+    public void SendLeaderboard(string statName)
+    {
+        var req = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate>
+            {
+                new StatisticUpdate
+                {
+                    StatisticName = statName,
+                    Value = GameManager.Instance.seconds
+                }
+            }
+        };
+
+        PlayFabClientAPI.UpdatePlayerStatistics(req, 
+        result => Debug.Log("Successful"), OnError);
+    }
+
+    void OnError(PlayFabError e)
     {
         Debug.Log("Error : " + e.GenerateErrorReport());
     }
