@@ -15,6 +15,8 @@ MonoBehaviour:
   ObjectsList:
   - {fileID: 1165792392210164609, guid: 86927605401ce0d4797db526abf3832c, type: 3}
   - {fileID: 2866348493960091575, guid: 1d5a70baca7f0934eb013000a00753bf, type: 3}
+  - {fileID: 1190860668489238221, guid: 25a63928bda60bd4da5afdadc77c02f8, type: 3}
   maxMinChanceList:
   - {x: 8, y: 4, z: 75}
   - {x: 4, y: 2, z: 50}
+  - {x: 1, y: 1, z: 100}

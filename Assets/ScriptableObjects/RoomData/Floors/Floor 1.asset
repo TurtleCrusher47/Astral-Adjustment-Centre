@@ -15,8 +15,9 @@ MonoBehaviour:
   startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
   endRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
   contentRoomData:
+  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
   - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
-  - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
+  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
