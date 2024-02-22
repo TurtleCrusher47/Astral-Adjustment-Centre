@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public Rigidbody rb { get; set; }
     public Animator animator;
     private Generator3D generator;
+    private bool isDead = false;
 
     //public bool isFacingRight { get; set; } = false;
 
@@ -75,6 +76,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         stateMachine.Init(idleState);   
         
         generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
+
+        isDead = false;
     }
 
     private void Update()
@@ -91,7 +94,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     private void UpdateAnimator()
     {
-
+        if (isDead)
+        return;
 
         if (Mathf.Abs(rb.velocity.x) > 0.01f || Mathf.Abs(rb.velocity.z) > 0.01f)
         {
@@ -108,17 +112,21 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 #region health functions
     public void Damage(float damage)
     {
-       CurrentHealth -= damage;
+        if (isDead)
+        return;
 
-       CurrentHealth = Mathf.Max(CurrentHealth, 0f);
+        CurrentHealth -= damage;
 
-       animator.SetTrigger("isHit");
+        CurrentHealth = Mathf.Max(CurrentHealth, 0f);
 
-       if (CurrentHealth <= 0)
-       {
+        animator.SetTrigger("isHit");
+
+        if (CurrentHealth <= 0)
+        {
             animator.SetTrigger("isDead");
+            isDead = true;
             rb.isKinematic = true;
-       }
+        }
     }
 
     public void Despawn()
@@ -146,10 +154,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     }
 
     public enum AnimationTriggerType
-        {
-            EnemyDamaged,
-            PlayFootstepSound
-        }
+    {
+        EnemyDamaged,
+        PlayFootstepSound
+    }
 #endregion
 
 #region trigger checks
