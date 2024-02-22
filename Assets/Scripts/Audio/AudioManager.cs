@@ -118,15 +118,41 @@ public class AudioManager : Singleton<AudioManager>
 
         for (int i = 0; i < sfxSources.Count; i++)
         {
-            if (sfxSources[i].clip == clipToPlay)
+            if (!sfxSources[i].isPlaying)
             {
-                yield return new WaitUntil(() => !sfxSources[i].isPlaying);
-
                 sfxSources[i].clip = clipToPlay;
                 sfxSources[i].Play();
+                sfxSources[i].loop = true;
                 break;
             }
         }
+
+        yield return null;
+    }
+
+    public IEnumerator StopSFXLoop(string name)
+    {
+        AudioClip clipToPlay = null;
+
+        for (int i = 0; i < sfxClips.Count; i++)
+        {
+            if (sfxClips[i].name == name)
+            {
+                clipToPlay = sfxClips[i];
+            }
+        }
+
+        for (int i = 0; i < sfxSources.Count; i++)
+        {
+            if (sfxSources[i].isPlaying && sfxSources[i].clip == clipToPlay)
+            {
+                sfxSources[i].loop = false;
+                sfxSources[i].Stop();
+                break;
+            }
+        }
+
+        yield return null;
     }
 
     public void PlayVL(string name)
@@ -179,6 +205,18 @@ public class AudioManager : Singleton<AudioManager>
 
                 yield return null;
             }
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            StartCoroutine(PlaySFXLoop("SFXHit"));
+        }
+        else if (Input.GetKeyUp(KeyCode.M))
+        {
+            StartCoroutine(StopSFXLoop("SFXHit"));
         }
     }
 }
