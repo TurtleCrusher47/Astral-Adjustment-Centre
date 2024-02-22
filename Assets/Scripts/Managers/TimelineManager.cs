@@ -13,7 +13,6 @@ public class TimelineManager : Singleton<TimelineManager>
     [SerializeField] private List<TimelineAsset> timelines = new List<TimelineAsset>();
     public string nextSceneName;
     public int cutsceneIndex = 0;
-    public bool skipCutscene;
 
     void Awake()
     {
@@ -65,7 +64,6 @@ public class TimelineManager : Singleton<TimelineManager>
     {
         StopAllCoroutines();
 
-        skipCutscene = true;
         skipButton.gameObject.SetActive(false);
 
         if (director.state == PlayState.Playing)
