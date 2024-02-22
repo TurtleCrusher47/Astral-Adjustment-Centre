@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
         stateMachine.Init(idleState);   
         
-        generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
+        //generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
     }
 
     private void Update()
