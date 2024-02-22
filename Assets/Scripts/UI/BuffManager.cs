@@ -162,7 +162,7 @@ public class BuffManager : Singleton<BuffManager>
             // Update PlayerData based on the selected buff
             switch (selectedBuff.buffName)
             {
-                case "Speed":
+                case "MovementSpd":
                     playerData.speedLevel += 1;
                     playerData.walkSpeed *= 1 + selectedBuff.buffBonus[0];
                     break;
@@ -177,12 +177,12 @@ public class BuffManager : Singleton<BuffManager>
                     // Buff Player
                     break;
 
-                case "Atk Spd":
+                case "AttackSpd":
                     playerData.atkSpeedLevel += 1;
                     // Buff Atk Spd
                     break;
 
-                case "Fire Rate":
+                case "FireRate":
                     playerData.fireRateLevel += 1;
                     // Buff Fire Rate
                     break;
