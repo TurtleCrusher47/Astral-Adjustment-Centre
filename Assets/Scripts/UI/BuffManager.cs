@@ -4,8 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuffManager : Singleton<BuffManager>
+public class BuffManager : MonoBehaviour
 {
+    public static BuffManager Instance;
+
     [SerializeField]
     private GameObject roguePanel;
 
@@ -22,10 +24,20 @@ public class BuffManager : Singleton<BuffManager>
     // Just to see if its instantiating
     private List<GameObject> instantiatedPanels = new List<GameObject>(); // Keep track of instantiated panels
 
-    private void Start()
+    private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        InitBuffPanel();
+        if (Instance == null)
+        {
+            Instance = this;
+            InitBuffPanel();
+            player = GameObject.FindGameObjectWithTag("Player");
+            DontDestroyOnLoad(this);
+        }
+        else if (Instance != null)
+        {
+            Instance.player = GameObject.FindGameObjectWithTag("Player");
+            Destroy(this);
+        }
     }
 
     private void InitBuffPanel()
@@ -78,9 +90,9 @@ public class BuffManager : Singleton<BuffManager>
             TMP_Text descText = buffPanel.transform.Find("DescText").GetComponent<TMP_Text>();
 
             // Set text dynamically using generic buff properties
-            titleText.text = availableBuffs[i].buffName + " " + availableBuffs[i].buffTiers[0]; // Show Level 1 initially
+            titleText.text = availableBuffs[i].buffName + " " + availableBuffs[i].buffTiers[availableBuffs[i].currBuffTier]; // Show Level 1 initially
 
-            descText.text = "Increases " + availableBuffs[i].buffName + " by " + ((availableBuffs[i].buffBonus[0] - 1) * 100) + " %";
+            descText.text = "Increases " + availableBuffs[i].buffName + " by " + ((availableBuffs[i].buffBonus[availableBuffs[i].currBuffTier] - 1) * 100) + " %";
 
             // Add click listener to the button
             Button button = buffPanel.GetComponent<Button>();
