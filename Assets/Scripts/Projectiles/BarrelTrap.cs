@@ -40,6 +40,7 @@ public class BarrelTrap : Trap
     protected override void OnTrapTriggered()
     {
         GameObject explosion = ObjectPoolManager.Instance.SpawnObject(effectObject, transform.position, Quaternion.identity);
+        explosion.GetComponent<Transform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
         AudioManager.Instance.PlaySFX("SFXExplosion");
         ObjectPoolManager.Instance.StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(explosion, 1.9f));
     }

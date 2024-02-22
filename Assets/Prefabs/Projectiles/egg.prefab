@@ -162,5 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectProjectileData: {fileID: 11400000, guid: c8e4c1a560520ef46afd2625e0f62575,
     type: 2}
+  angularVelocityMultiplier: 0
   projectileDirection: {x: 0, y: 0, z: 0}
   explosiveTimer: 3
+  effectObject: {fileID: 3806640428471623052, guid: d419cafd82867594896482c33941ee17,
+    type: 3}

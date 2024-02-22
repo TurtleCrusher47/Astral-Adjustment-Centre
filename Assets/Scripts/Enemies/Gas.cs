@@ -48,4 +48,9 @@ public class Gas : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void PlayGasSound()
+    {
+        AudioManager.Instance.PlaySFX("SFXGasRelease");
+    }
 }

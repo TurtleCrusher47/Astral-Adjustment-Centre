@@ -78,7 +78,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectProjectileData: {fileID: 11400000, guid: fcdbd2fa96d1c214cae20c3a31f34639,
     type: 2}
+  angularVelocityMultiplier: 0
   projectileDirection: {x: 0, y: 0, z: 0}
+  effectObject: {fileID: 3806640428471623052, guid: d419cafd82867594896482c33941ee17,
+    type: 3}
 --- !u!1001 &1686820091538736902
 PrefabInstance:
   m_ObjectHideFlags: 0

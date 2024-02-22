@@ -33,6 +33,7 @@ public class EnemyAttackGas : EnemyAttackSOBase
     {
         base.DoExitLogic();
 
+        gasAnimator.ResetTrigger("isExpand");
         gasAnimator.SetTrigger("isShrink");
     }
 
