@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectProjectileData: {fileID: 11400000, guid: c67cb6062c630dc4fa17e9bcc62d06c3,
     type: 2}
-  angularVelocity: {x: 0, y: 20, z: 0}
+  angularVelocityMultiplier: 30
   projectileDirection: {x: 0, y: 0, z: 0}
 --- !u!65 &2144592010315192020
 BoxCollider:
