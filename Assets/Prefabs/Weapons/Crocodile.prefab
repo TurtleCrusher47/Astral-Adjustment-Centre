@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 4402013094717017199}
   m_Layer: 9
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: FirePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -750,14 +750,15 @@ MonoBehaviour:
   type: 0
   inInventory: 0
   inventoryPosition: 0
-  rangedWeaponData: {fileID: 0}
-  firePoint: {fileID: 0}
+  rangedWeaponData: {fileID: 11400000, guid: 44befbf59e544844bb53cecb6626e55a, type: 2}
+  firePoint: {fileID: 4402013094717017199}
   targetLayers:
     serializedVersion: 2
-    m_Bits: 0
-  gameObjectProjectileData: {fileID: 0}
-  projectile: {fileID: 0}
-  grenadePrefab: {fileID: 0}
+    m_Bits: 2113
+  gameObjectProjectileData: {fileID: 11400000, guid: c8e4c1a560520ef46afd2625e0f62575,
+    type: 2}
+  projectile: {fileID: 8529992186659624741, guid: ea900b8d217fb2646815c687b5fef147,
+    type: 3}
 --- !u!1 &4679618512127174024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1226,7 @@ GameObject:
   - component: {fileID: 7414694213664581104}
   m_Layer: 9
   m_Name: Crocigator
-  m_TagString: Untagged
+  m_TagString: WeaponCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

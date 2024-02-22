@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EggProjectile
   m_EditorClassIdentifier: 
   damage: 60
-  force: 1
+  force: 5
   range: 60
-  timeBeforeDestroy: 10
-  angularVelocity: {x: 0, y: 20, z: 0}
+  timeBeforeDestroy: 3
+  angularVelocity: {x: 0, y: 0, z: 0}

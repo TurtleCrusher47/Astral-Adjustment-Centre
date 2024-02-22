@@ -12,6 +12,8 @@ public class EggProjectile : GameObjectProjectile
         rb.velocity = Vector3.zero;
         rb.angularVelocity = gameObjectProjectileData.angularVelocity;
         isTriggered = false;
+
+        StartCoroutine(StartExplosiveTimer());
     }
 
     public override void OnTriggerEnter(Collider collider)
