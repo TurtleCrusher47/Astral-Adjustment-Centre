@@ -23,7 +23,7 @@ public class MainSceneManager : MonoBehaviour
 
     void Awake()
     {
-        //StartCoroutine(AudioManager.Instance.PlayBGM("BGMDemonSky"));
+        Cursor.lockState = CursorLockMode.None;
 
         if (PlayFabManager.currPlayFabID == null || PlayFabManager.currPlayFabID == "")
         {
@@ -31,13 +31,8 @@ public class MainSceneManager : MonoBehaviour
             forgetpassPage.SetActive(false);
             loginPage.SetActive(true);
         }
-        else
-        {
-            // LoadScene to Menu
-        }
 
         statusText.text = "";
-        // SetDisplayName(PlayFabManager.currPlayFabDN);
 
         playfabScripts.Add(playfabSocial);
         playfabScripts.Add(playfabLeaderboard);

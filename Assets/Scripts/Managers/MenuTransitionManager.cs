@@ -23,14 +23,6 @@ public class MenuTransitionManager : MonoBehaviour
     void Awake()
     {
         subtitlePanel.SetActive(false);
-
-        for (int i = 0; i < virtualCameras.Count; i++)
-        {
-            virtualCameras[i].SetActive(false);
-        }
-
-        virtualCameras[0].SetActive(true);
-
         loginPanel.SetActive(false);
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
@@ -41,9 +33,26 @@ public class MenuTransitionManager : MonoBehaviour
         settingsMat = settingsTarget.GetComponent<Renderer>().material;
         creditsMat = creditsTarget.GetComponent<Renderer>().material;
 
-        currCamera.Priority++;
+        cutsceneDirector = TimelineManager.Instance.GetComponent<PlayableDirector>();
+        subtitlePanel = GameManager.Instance.FindChildWithTag(GameManager.Instance.gameObject, "Orientation");
 
-        StartCoroutine(DelayedShowLogin());
+        for (int i = 0; i < virtualCameras.Count; i++)
+        {
+            virtualCameras[i].SetActive(false);
+        }
+
+        if (PlayFabManager.currPlayFabID == null || PlayFabManager.currPlayFabID == "")
+        {
+            virtualCameras[0].SetActive(true);
+            currCamera.Priority++;
+            StartCoroutine(DelayedShowLogin());
+        }
+        else
+        {
+            virtualCameras[1].SetActive(true);
+            currCamera.Priority++;
+            StartCoroutine(DelayedShowMenu());
+        }
     }
 
     public void UpdateCamera(CinemachineVirtualCamera target)
@@ -108,6 +117,18 @@ public class MenuTransitionManager : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
 
         loginPanel.SetActive(true);
+    }
+
+    private IEnumerator DelayedShowMenu()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        menuTarget.SetActive(true);
+        StartCoroutine(HologramDissolve(menuMat, menuTarget, true));
+
+        yield return new WaitForSeconds(0.75f);
+
+        menuPanel.SetActive(true);
     }
 
     private IEnumerator DelayedShowPanel(GameObject panel, Material mat, bool show)

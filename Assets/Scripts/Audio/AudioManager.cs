@@ -73,6 +73,10 @@ public class AudioManager : Singleton<AudioManager>
             }
 
             currSource.volume = 0;
+            currSource.clip = null;
+            currSource.loop = false;
+            currSource.Stop();
+            
             newSource.volume = 1;
         }
     }
