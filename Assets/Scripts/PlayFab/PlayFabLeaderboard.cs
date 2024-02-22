@@ -12,7 +12,7 @@ using System.Linq;
 public class PlayFabLeaderboard : MonoBehaviour
 {
     [System.Serializable]
-    public class GetRunsCompleted
+    public class GetRunsCompletedResult
     {
         public List<string> RunsCompleted = new();
     }
@@ -139,7 +139,7 @@ public class PlayFabLeaderboard : MonoBehaviour
         }, csResult=>
         {
             var jsonString = csResult.FunctionResult.ToString();
-            var runsCompleted = JsonUtility.FromJson<GetRunsCompleted>(jsonString);
+            var runsCompleted = JsonUtility.FromJson<GetRunsCompletedResult>(jsonString);
 
             playersRunsCompleted = runsCompleted.RunsCompleted.ToList();
 
