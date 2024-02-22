@@ -700,8 +700,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7222638, g: 0, b: 0.98039216, a: 1}
-      key1: {r: 0.8854941, g: 0.3066038, b: 1, a: 1}
+      key0: {r: 0.9811321, g: 0.12957971, b: 0, a: 1}
+      key1: {r: 0.9811321, g: 0.12957971, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -724,7 +724,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -759,6 +759,8 @@ MonoBehaviour:
     type: 2}
   projectile: {fileID: 8529992186659624741, guid: ea900b8d217fb2646815c687b5fef147,
     type: 3}
+  lineRenderer: {fileID: 4402013094830998429}
+  lazerRange: 5
 --- !u!1 &4679618512127174024
 GameObject:
   m_ObjectHideFlags: 0
