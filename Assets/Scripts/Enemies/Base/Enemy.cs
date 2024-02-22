@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public Animator animator;
     private Generator3D generator;
     private bool isDead = false;
+    private float immunityTimer = 0;
 
     //public bool isFacingRight { get; set; } = false;
 
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         
         generator = GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>();
 
+        immunityTimer = 0;
         isDead = false;
     }
 
@@ -85,6 +87,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         stateMachine.currEnemyState.FrameUpdate();
         UpdateAnimator();
         HealthBarSlider();
+
+        if (immunityTimer > 0 && !isDead)
+        {
+            immunityTimer -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -115,17 +122,21 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         if (isDead)
         return;
 
-        CurrentHealth -= damage;
-
-        CurrentHealth = Mathf.Max(CurrentHealth, 0f);
-
-        animator.SetTrigger("isHit");
-
-        if (CurrentHealth <= 0)
+        if (immunityTimer <= 0)
         {
-            animator.SetTrigger("isDead");
-            isDead = true;
-            rb.isKinematic = true;
+            CurrentHealth -= damage;
+
+            CurrentHealth = Mathf.Max(CurrentHealth, 0f);
+
+            animator.SetTrigger("isHit");
+
+            if (CurrentHealth <= 0)
+            {
+                animator.SetTrigger("isDead");
+                isDead = true;
+                rb.isKinematic = true;
+            }
+            immunityTimer = 0.5f;
         }
     }
 
