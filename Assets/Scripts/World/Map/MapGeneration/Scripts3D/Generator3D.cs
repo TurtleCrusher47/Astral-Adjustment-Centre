@@ -562,9 +562,9 @@ public class Generator3D : MonoBehaviour
         RoomData roomData = data;
         // create list of available spaces
         List<Vector3> vacantSpaces = new List<Vector3>();
-        for (float x = 0.5f; x < size.x - 0.5f; x += 0.5f)
+        for (float x = 1.0f; x < size.x - 1.0f; x += 0.5f)
         {
-            for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
+            for (float z = 1.0f; z < size.z - 1.0f; z += 0.5f)
             {
                 vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
             }
@@ -634,9 +634,9 @@ public class Generator3D : MonoBehaviour
         // create list of available spaces
         List<Vector3> vacantSpaces = new List<Vector3>();
         List<Vector3> allSpaces = new List<Vector3>();
-        for (float x = 0.5f; x < size.x - 0.5f; x+= 0.5f)
+        for (float x = 1.0f; x < size.x - 1.0f; x+= 0.5f)
         {
-            for (float z = 0.5f; z < size.z - 0.5f; z += 0.5f)
+            for (float z = 1.0f; z < size.z - 1.0f; z += 0.5f)
             {
                 vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
             }
