@@ -71,6 +71,7 @@ public class TimelineManager : Singleton<TimelineManager>
         if (director.state == PlayState.Playing)
         {
             director.Stop();
+            cutsceneIndex++;
         }
 
         GameManager.Instance.ChangeScene(nextSceneName);
