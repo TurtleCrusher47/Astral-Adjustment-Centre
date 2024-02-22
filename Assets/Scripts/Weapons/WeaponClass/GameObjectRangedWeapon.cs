@@ -44,7 +44,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
         RaycastHit hit;
         if (Physics.Raycast(cam.position, camRotation.forward, out hit, gameObjectProjectileData.range, targetLayers))
         {
-            Debug.Log("Ray " + hit.collider.gameObject.name);
+            // Debug.Log("Ray " + hit.collider.gameObject.name);
             projectile.GetComponent<GameObjectProjectile>().projectileDirection = (hit.point - firePoint.position).normalized;
         }
     }
