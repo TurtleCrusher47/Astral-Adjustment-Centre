@@ -6,11 +6,11 @@ public abstract class GameObjectProjectile : MonoBehaviour
 {
    [SerializeField] public GameObjectProjectileData gameObjectProjectileData;
    [SerializeField] private float angularVelocityMultiplier;
-   private Vector3 angularVelocity;
+   protected Vector3 angularVelocity;
 
     protected Rigidbody rb;
     private Transform cam;
-    private Transform camRotation;
+    protected Transform camRotation;
     private Transform firePoint;
     [HideInInspector] public Vector3 projectileDirection;
 
@@ -28,10 +28,15 @@ public abstract class GameObjectProjectile : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.constraints &= ~RigidbodyConstraints.FreezePosition;
-        angularVelocity = camRotation.right;
         // Debug.Log("Enabled");
+
+        SetAngularVelocity();
     }
 
+    protected virtual void SetAngularVelocity()
+    {
+        angularVelocity = Vector3.zero;
+    }
 
     public void MoveProjectile()
     {

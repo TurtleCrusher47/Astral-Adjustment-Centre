@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ShurikenProjectile : GameObjectProjectile
 {
+    protected override void SetAngularVelocity()
+    {
+        angularVelocity = camRotation.up;
+    }
+
     public override void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class AxeProjectile : GameObjectProjectile
 {
+    protected override void SetAngularVelocity()
+    {
+        angularVelocity = camRotation.right;
+    }
+
     public override void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCollider") || collider.gameObject.CompareTag("WeaponCollider"))

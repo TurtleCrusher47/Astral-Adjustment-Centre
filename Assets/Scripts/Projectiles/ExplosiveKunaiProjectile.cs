@@ -17,6 +17,11 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
         StartCoroutine(Explode());
     }
 
+    protected override void SetAngularVelocity()
+    {
+        throw new System.NotImplementedException();
+    }
+
     // Wait for a few seconds then explode
     private IEnumerator Explode()
     {
