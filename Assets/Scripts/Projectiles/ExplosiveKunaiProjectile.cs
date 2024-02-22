@@ -32,6 +32,8 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
             if (collider.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
+
+                AudioManager.Instance.PlaySFX("SFXExplosion");
             }
         }
         
