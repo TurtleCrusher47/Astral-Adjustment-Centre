@@ -32,7 +32,7 @@ public class PlayerWeaponPickup : MonoBehaviour
                 child.gameObject.layer = LayerMask.NameToLayer("Weapons");
 
                 foreach (Transform secondaryChild in child.transform)
-                    child.gameObject.layer = LayerMask.NameToLayer("Weapons");
+                    secondaryChild.gameObject.layer = LayerMask.NameToLayer("Weapons");
             }
         }
     }
