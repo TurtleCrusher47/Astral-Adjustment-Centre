@@ -13,6 +13,10 @@ public class ElevatorTrigger : MonoBehaviour
         {
             // game end
             GameManager.Instance.timerActive = false;
+            PlayFabManager.runsCompleted += 1;
+
+            JSONManager.SendJSON(PlayFabManager.runsCompleted);
+
             SendLeaderboard("HighScore");
             SendLeaderboard("HighScoreDaily");
             SendLeaderboard("HighScoreWeekly");
