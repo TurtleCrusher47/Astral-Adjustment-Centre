@@ -11,7 +11,7 @@ public class BuffManager : Singleton<BuffManager>
 
     [Header("Buff Data")]
     public List<ScriptableBuff> buffs;
-    public List<ScriptableBuff> availableBuffs;
+    public List<ScriptableBuff> availableBuffs = new List<ScriptableBuff>();
 
     public PlayerData playerData;
 
@@ -133,7 +133,7 @@ public class BuffManager : Singleton<BuffManager>
             buff.ResetBuffTier();
         }
         playerData.ResetBuffs();
-        availableBuffs = buffs;
+        availableBuffs.AddRange(buffs);
     }
 
     private void OnPanelClick(int index)
