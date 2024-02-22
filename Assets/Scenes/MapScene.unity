@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.031880878, g: 0.033699412, b: 0.04478655, a: 1}
+  m_IndirectSpecularColor: {r: 0.026402317, g: 0.02844765, b: 0.03786385, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _persistent: 1
   nextSceneName: 
+  floorNum: 1
 --- !u!4 &73930766
 Transform:
   m_ObjectHideFlags: 0
@@ -1054,7 +1055,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1783158047}
   - component: {fileID: 1783158046}
-  - component: {fileID: 1783158045}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -1062,22 +1062,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1783158045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783158044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 095e30edf3aea064482b9724f78e4d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
-  endRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
-  contentRoomData:
-  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
 --- !u!114 &1783158046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,7 +1074,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2adc24e688e8841887873ee6b3e08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPrefabManager: {fileID: 1783158045}
+  mRoomObjManagerList:
+  - {fileID: 11400000, guid: 188e126c70c190848923ff91a0780177, type: 2}
+  - {fileID: 11400000, guid: 51bc0c469b689ea48be7092c14512c11, type: 2}
+  - {fileID: 11400000, guid: 3cf582f464c737e4ba4d33ce004d36bb, type: 2}
+  - {fileID: 11400000, guid: 423ca0948f1fe1e4ca4edd2944960ff9, type: 2}
   seed: 0
   size: {x: 40, y: 7, z: 40}
   roomCount: 30
