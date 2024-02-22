@@ -30,6 +30,6 @@ public class ShurikenProjectile : GameObjectProjectile
 
         AudioManager.Instance.PlaySFX("SFXShurikenImpact");
 
-        Debug.Log(collider.gameObject.name);
+        //Debug.Log(collider.gameObject.name);
     }
 }

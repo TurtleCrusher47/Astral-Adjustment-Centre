@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7dc8d9f477d3d418063d778aa85758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 50
+  <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
   healthSlider: {fileID: 7472087035528093490}
   easeHealthSlider: {fileID: 7262376049580636793}

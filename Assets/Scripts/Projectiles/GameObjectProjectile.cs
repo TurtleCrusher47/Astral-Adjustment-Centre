@@ -60,7 +60,7 @@ public abstract class GameObjectProjectile : MonoBehaviour
         // Call a coroutine to return bullet to pool after a set amount of time
         Vector3 shootDirection = projectileDirection;
         rb.angularVelocity = angularVelocity * angularVelocityMultiplier;
-        Debug.Log(rb.angularVelocity);
+        //Debug.Log(rb.angularVelocity);
 
         // RaycastHit hit;
         // if (Physics.Raycast(cam.position, cam.forward, out hit, gameObjectProjectileData.range))
