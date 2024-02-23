@@ -681,7 +681,7 @@ public class Generator3D : MonoBehaviour
         {
             for (float z = 1.0f; z < size.z - 0.5f; z += 0.5f)
             {
-                vacantSpaces.Add(location + new Vector3(x, -0.3f, z));
+                vacantSpaces.Add(location + new Vector3(x, -0.15f, z));
             }
         }
         allSpaces.AddRange(vacantSpaces);
