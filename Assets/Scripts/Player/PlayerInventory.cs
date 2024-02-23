@@ -246,6 +246,10 @@ public class PlayerInventory : MonoBehaviour
                         rangedWeapon.UpdateAmmo();
                     }
                 }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("UpdateAmmoText").GetComponent<UpdateAmmoText>().ClearText();
+                }
 
                 selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().inventoryPosition;
                 selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
