@@ -6,13 +6,11 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour, IDamageable
 {
     [SerializeField] public PlayerData playerData;
-    [SerializeField] private TMP_Text healthText;
     private bool isDead = false;
 
     void Start()
     {
         playerData.ResetValues();
-        healthText.text = playerData.currentHealth.ToString() + " HP";
     }
 
     public void Damage(float damage)
@@ -27,8 +25,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
             playerData.currentHealth = 0;
             Despawn();
         }
-        
-        healthText.text = playerData.currentHealth.ToString() + " HP";
     }
 
     public void Despawn()
