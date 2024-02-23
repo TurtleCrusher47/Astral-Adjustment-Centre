@@ -3797,6 +3797,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 1000
   <CurrentHealth>k__BackingField: 0
+  healthSlider: {fileID: 0}
+  easeHealthSlider: {fileID: 0}
+  lerpSpeed: 0.05
   animator: {fileID: 2741984547037465631}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
   enemyChaseBase: {fileID: 11400000, guid: d70a3e48687b3f74f99da9868e501a0f, type: 2}
@@ -3839,7 +3842,7 @@ CapsuleCollider:
   m_Radius: 0.27406323
   m_Height: 1.828897
   m_Direction: 1
-  m_Center: {x: 0.01745556, y: 0.8879192, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &2741984547037465631
 Animator:
   serializedVersion: 5
@@ -4485,6 +4488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 3898797661051801271}
   easeHealthSlider: {fileID: 4916086892767866749}
+  playerData: {fileID: 0}
   lerpSpeed: 0.005
 --- !u!114 &8036806979272342125
 MonoBehaviour:
@@ -4498,4 +4502,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1010e7a650b0f644bb5f8b7f14fb51f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
