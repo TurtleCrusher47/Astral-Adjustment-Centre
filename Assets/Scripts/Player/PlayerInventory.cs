@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : Singleton<PlayerInventory>
 {
     [SerializeField] private GameObject selectedBorder;
     [SerializeField] private GridLayoutGroup invGridLayoutGroup;
