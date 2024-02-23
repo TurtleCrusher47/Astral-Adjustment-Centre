@@ -28,6 +28,11 @@ public class PlayerWeaponDrop : MonoBehaviour
         weapon.GetComponent<Animator>().enabled = false;
         rb = weapon.GetComponent<Rigidbody>();
 
+        if (weapon.TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+        {
+            rangedWeapon.ClearText();
+        }
+
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
 
         rb.AddForce(cam.forward * dropForwardForce, ForceMode.Impulse);
