@@ -51,12 +51,12 @@ public class BuffManager : MonoBehaviour
     private void InitBuffPanel()
     {
         ResetBuffs();
-        //roguePanel.SetActive(false);
+        roguePanel.SetActive(false); // testing
     }
 
     public void ShowBuffPanel()
     {
-        //roguePanel.SetActive(true);
+        roguePanel.SetActive(true); // testing
         player.SetActive(false);
         InstantiateBuffPanels();
     }
