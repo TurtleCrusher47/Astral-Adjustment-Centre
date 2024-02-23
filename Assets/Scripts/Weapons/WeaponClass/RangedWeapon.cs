@@ -1,8 +1,6 @@
 using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
-using Unity.VisualScripting;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
 
