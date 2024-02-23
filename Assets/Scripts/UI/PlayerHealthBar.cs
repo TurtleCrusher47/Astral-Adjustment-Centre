@@ -32,8 +32,6 @@ public class PlayerHealthBar : MonoBehaviour, IDamageable
             healthSlider.value = playerData.currentHealth;
         }
 
-        healthText.text = healthSlider.value.ToString() + " / " + playerData.currentMaxHealth;
-
         if (healthSlider.value != easeHealthSlider.value)
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, playerData.currentHealth, lerpSpeed);
@@ -41,6 +39,11 @@ public class PlayerHealthBar : MonoBehaviour, IDamageable
 
         healthSlider.maxValue = playerData.currentMaxHealth;
         easeHealthSlider.maxValue = playerData.currentMaxHealth;
+    }
+
+    void FixedUpdate()
+    {
+        healthText.text = healthSlider.value.ToString() + " / " + playerData.currentMaxHealth;
     }
 
     public void Damage(float amount)
