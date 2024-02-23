@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Boss Line Attack
   m_EditorClassIdentifier: 
   type: 1
+  animName: isSlam
   visualEffect: {fileID: 1314945738539566, guid: 32c9fd11a72259d45aa26ae41c34c5aa,
     type: 3}
   _attackRange: {x: 0.6, y: 1, z: 3}

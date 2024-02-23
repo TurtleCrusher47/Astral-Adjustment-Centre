@@ -141,6 +141,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
                 animator.SetTrigger("isDead");
                 isDead = true;
                 rb.isKinematic = true;
+                GetComponent<CapsuleCollider>().enabled = false;
             }
             immunityTimer = 0.5f;
         }
@@ -150,6 +151,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     {
         //change later to use object pooling
         rb.isKinematic = false;
+        GetComponent<CapsuleCollider>().enabled = true;
         generator.RemoveEnemyFromRoom(gameObject.transform.parent.gameObject);
     }
 

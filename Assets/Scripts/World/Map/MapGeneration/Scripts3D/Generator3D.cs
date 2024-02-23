@@ -678,11 +678,11 @@ public class Generator3D : MonoBehaviour
         // create list of available spaces
         List<Vector3> vacantSpaces = new List<Vector3>();
         List<Vector3> allSpaces = new List<Vector3>();
-        for (float x = 1.0f; x < size.x - 0.5f; x+= 0.5f)
+        for (float x = 2.0f; x < size.x - 1.5f; x+= 0.25f)
         {
-            for (float z = 1.0f; z < size.z - 0.5f; z += 0.5f)
+            for (float z = 2.0f; z < size.z - 1.5f; z += 0.25f)
             {
-                vacantSpaces.Add(location + new Vector3(x, -0.15f, z));
+                vacantSpaces.Add(location + new Vector3(x, 0, z));
             }
         }
         allSpaces.AddRange(vacantSpaces);
@@ -703,7 +703,7 @@ public class Generator3D : MonoBehaviour
                         int randIndex = RandomR.Range(0, vacantSpaces.Count);
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], center + new Vector3(0, -1, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                         mapContent.Add(obj);
                         currEnemiesInRoom.Add(obj);

@@ -15,6 +15,7 @@ public class BossEnemyAttack : EnemyAttackSOBase
     }
 
     [SerializeField] private AttackType type;
+    [SerializeField] private string animName;
     [SerializeField] private GameObject visualEffect;
 
     private Animator animator;
@@ -34,7 +35,7 @@ public class BossEnemyAttack : EnemyAttackSOBase
         animator = enemy.gameObject.GetComponent<Animator>();
         self = transform.GetComponent<BossEnemy>();
         // play back swing anim
-        animator.SetTrigger("isPunch");
+        animator.SetBool(animName, true);
         _timer = _chargeUpTimer;
         // set attack indicator
         self.indicator.gameObject.SetActive(true);
@@ -84,7 +85,7 @@ public class BossEnemyAttack : EnemyAttackSOBase
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 // play follow through anim
-                animator.SetBool("isPunchEnd", true);
+                animator.SetBool(animName, false);
             }
             // wait for follow through anim to finish
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -97,7 +98,6 @@ public class BossEnemyAttack : EnemyAttackSOBase
                 }
                 self.indicator.ActivateHit(_damage);
                 enemy.stateMachine.ChangeState(enemy.chaseState);
-                animator.SetBool("isPunchEnd", false);
                 self.indicator.gameObject.SetActive(false);
             }
         }
