@@ -11,6 +11,7 @@ public class PlayerHealthBar : MonoBehaviour, IDamageable
     [SerializeField] 
     private TMP_Text healthText;
 
+    [SerializeField]
     public PlayerData playerData;
 
     [Header("Ease Speed")]

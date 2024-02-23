@@ -375,7 +375,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2741984547037465628}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1438782617998032003
 SkinnedMeshRenderer:
@@ -953,7 +953,7 @@ Transform:
   - {fileID: 1438782618944369508}
   - {fileID: 1438782618720447256}
   m_Father: {fileID: 2741984547037465628}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -3.7300115, y: 46.38318, z: -3.8615046}
 --- !u!1 &1438782618299202585
 GameObject:
@@ -1116,7 +1116,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2741984547037465628}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1438782618336809547
 SkinnedMeshRenderer:
@@ -1447,7 +1447,7 @@ Transform:
   - {fileID: 1434002111}
   - {fileID: 1593207643}
   m_Father: {fileID: 2741984547037465628}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1438782618427254989
 MonoBehaviour:
@@ -1664,7 +1664,7 @@ Transform:
   - {fileID: 1438782619192989729}
   - {fileID: 1438782618954944091}
   m_Father: {fileID: 2741984547037465628}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1438782618630746060
 GameObject:
@@ -2946,7 +2946,7 @@ Transform:
   - {fileID: 1438782618883404287}
   - {fileID: 1438782619433470584}
   m_Father: {fileID: 2741984547037465628}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1438782619418514249
 MonoBehaviour:
@@ -3640,7 +3640,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2741984546336638954}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2741984546031502787
 GameObject:
@@ -3671,7 +3671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2741984546336638954}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2741984546336638953
 GameObject:
@@ -3701,7 +3701,6 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 585228341255296036}
   - {fileID: 2741984546999257021}
   - {fileID: 2741984546031502788}
   - {fileID: 2741984545243080788}
@@ -3738,7 +3737,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2741984546336638954}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2741984547037465626
 GameObject:
@@ -3774,6 +3773,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 585228341255296036}
   - {fileID: 1438782617998032000}
   - {fileID: 1438782618336809544}
   - {fileID: 1438782618279696823}
@@ -3781,7 +3781,7 @@ Transform:
   - {fileID: 1438782619418514255}
   - {fileID: 1438782618427254978}
   m_Father: {fileID: 2741984546336638954}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2741984547037465637
 MonoBehaviour:
@@ -3797,8 +3797,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 1000
   <CurrentHealth>k__BackingField: 0
-  healthSlider: {fileID: 0}
-  easeHealthSlider: {fileID: 0}
+  healthSlider: {fileID: 3898797661051801271}
+  easeHealthSlider: {fileID: 4916086892767866749}
   lerpSpeed: 0.05
   animator: {fileID: 2741984547037465631}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
@@ -4235,7 +4235,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3060320407762235517}
-  m_Father: {fileID: 2741984546336638954}
+  m_Father: {fileID: 2741984547037465628}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4487,6 +4487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 3898797661051801271}
   easeHealthSlider: {fileID: 4916086892767866749}
+  healthText: {fileID: 0}
   playerData: {fileID: 0}
   lerpSpeed: 0.005
 --- !u!114 &8036806979272342125

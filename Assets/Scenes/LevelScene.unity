@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.033328008, g: 0.035004523, b: 0.046520345, a: 1}
+  m_IndirectSpecularColor: {r: 0.03229238, g: 0.034101445, b: 0.045324642, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11331,7 +11331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 851525080}
   easeHealthSlider: {fileID: 708125970}
-  healthText: {fileID: 0}
+  healthText: {fileID: 657572513}
   playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   lerpSpeed: 0.005
 --- !u!1 &852847829
