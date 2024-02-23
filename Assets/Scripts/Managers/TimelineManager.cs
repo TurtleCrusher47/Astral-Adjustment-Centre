@@ -68,10 +68,15 @@ public class TimelineManager : Singleton<TimelineManager>
 
         director.playableAsset = timelines[cutsceneIndex];
 
-        if (cutsceneName == "Lose")
+        if (cutsceneName == "Intro")
         {
-            IEnumerable<TrackAsset> outputTracks = timelines[cutsceneIndex].GetOutputTracks();
-            TrackAsset targetTrack = outputTracks.FirstOrDefault(track => track.name == "CameraAnim" && track.GetType() == typeof(AnimationTrack));
+            TrackAsset targetTrack = FindTrackByName(timelines[cutsceneIndex], "CameraAnim");
+            
+            director.SetGenericBinding(targetTrack, GameObject.FindWithTag("CameraHolder").GetComponent<Animator>());
+        }
+        else if (cutsceneName == "Lose")
+        {
+            TrackAsset targetTrack = FindTrackByName(timelines[cutsceneIndex], "CameraAnim");
             
             director.SetGenericBinding(targetTrack, Camera.main.transform.gameObject.GetComponent<Animator>());
         }
@@ -114,16 +119,10 @@ public class TimelineManager : Singleton<TimelineManager>
         subtitlePanel.SetActive(false);
     }
 
-    TrackAsset FindTrackByName(TrackAsset[] tracks, string trackName)
+    private TrackAsset FindTrackByName(TimelineAsset asset, string trackName)
     {
-        foreach (var track in tracks)
-        {
-            if (track.name == trackName)
-            {
-                return track;
-            }
-        }
-        return null;
+        IEnumerable<TrackAsset> outputTracks = asset.GetOutputTracks();
+        return outputTracks.FirstOrDefault(track => track.name == trackName && track.GetType() == typeof(AnimationTrack));
     }
 
     void Update()

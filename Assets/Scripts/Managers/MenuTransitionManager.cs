@@ -12,6 +12,7 @@ public class MenuTransitionManager : MonoBehaviour
     [SerializeField] private List<GameObject> virtualCameras;
     [SerializeField] private CinemachineVirtualCamera currCamera;
     [SerializeField] private CinemachineBrain mainCamBrain;
+    [SerializeField] private CinemachineVirtualCamera loginCamera;
     [SerializeField] private CinemachineVirtualCamera menuCamera;
     [SerializeField] private CinemachineVirtualCamera loadSceneCamera;
     [SerializeField] private GameObject loginPanel, menuPanel, settingsPanel, creditsPanel;
@@ -20,6 +21,8 @@ public class MenuTransitionManager : MonoBehaviour
 
     void Awake()
     {
+        TimelineManager.Instance.cutsceneIndex = 0;
+        
         loginPanel.SetActive(false);
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
@@ -38,12 +41,14 @@ public class MenuTransitionManager : MonoBehaviour
         if (PlayFabManager.currPlayFabID == null || PlayFabManager.currPlayFabID == "")
         {
             virtualCameras[0].SetActive(true);
+            currCamera = loginCamera;
             currCamera.Priority++;
             StartCoroutine(DelayedShowLogin());
         }
         else
         {
             virtualCameras[1].SetActive(true);
+            currCamera = menuCamera;
             currCamera.Priority++;
             StartCoroutine(DelayedShowMenu());
         }
