@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("Panels")]
     public GameObject phonePanel;
-    public GameObject optionPanel;
+    //public GameObject optionPanel;
 
     //public Canvas gameCanvas;
 
@@ -91,13 +91,13 @@ public class UIManager : MonoBehaviour
 
     private void OpenOptionAnimation()
     {
-        LeanTween.scale(optionPanel, new Vector3(1f, 1f, 1f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
+        //LeanTween.scale(optionPanel, new Vector3(1f, 1f, 1f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
         LeanTween.scale(phonePanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
     }
 
     private void CloseOptionAnimation()
     {
-        LeanTween.scale(optionPanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
+        //LeanTween.scale(optionPanel, new Vector3(0f, 0f, 0f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
         LeanTween.scale(phonePanel, new Vector3(1f, 1f, 1f), .5f).setDelay(0.1f).setEase(LeanTweenType.easeInOutSine);
     }
 
@@ -108,8 +108,8 @@ public class UIManager : MonoBehaviour
         phonePanel.transform.localScale = new Vector3(0f, 0f, 0f);
 
         // Reset Option Panel
-        optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
-        optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
+        //optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
+        //optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
 
         // Ensure the gameplay canvas is active
         //gameCanvas.gameObject.SetActive(true);

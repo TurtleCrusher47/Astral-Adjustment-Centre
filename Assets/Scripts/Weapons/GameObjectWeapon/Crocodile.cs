@@ -20,15 +20,15 @@ public class Crocodile : GameObjectRangedWeapon
             if (Physics.Raycast(cam.position, camRotation.forward, out RaycastHit hitInfo, lazerRange, targetLayers))
             {
                 elapsedTime += Time.deltaTime;
-                if (elapsedTime >= 1f)
+                if (elapsedTime >= 0.2f)
                 {
-                    elapsedTime %= 1f;
+                    elapsedTime %= 0.2f;
                     rangedWeaponData.currentAmmo -= 1;
                     UpdateAmmo();
 
                     Debug.Log(hitInfo.transform.name);
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
-                    damageable?.Damage(gameObjectProjectileData.damage * GetAtkMultiplier());
+                    damageable?.Damage(10 * GetAtkMultiplier());
                     
                     // GameObject effect = ObjectPoolManager.SpawnObject(hitEffect, hitInfo.point, hitInfo.transform.rotation);
                     // Destroy(effect, 0.5f);

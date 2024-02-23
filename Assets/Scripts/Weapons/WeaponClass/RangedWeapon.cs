@@ -1,7 +1,10 @@
 using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
 using UnityEngine;
+using Image = UnityEngine.UI.Image;
 
 public abstract class RangedWeapon : Weapon
 {
@@ -14,6 +17,7 @@ public abstract class RangedWeapon : Weapon
     protected Transform camRotation;
     protected Animator animator;
     protected UpdateAmmoText updateAmmoText;
+    private Image reloadIcon;
     // [SerializeField] protected Recoil recoil;
 
     // [SerializeField] protected UpdateAmmoText updateAmmoText;
@@ -44,6 +48,8 @@ public abstract class RangedWeapon : Weapon
         camRotation = GameObject.FindGameObjectWithTag("CameraRotation").transform;
         recoil = camRotation.GetComponent<Recoil>();
         animator = gameObject.GetComponent<Animator>();
+        reloadIcon = GameObject.FindGameObjectWithTag("ReloadIcon").GetComponent<Image>();
+        reloadIcon.fillAmount = 0;
 
         // if (GameObject.FindGameObjectWithTag("UpdateAmmoText") != null)
         updateAmmoText = GameObject.FindGameObjectWithTag("UpdateAmmoText").GetComponent<UpdateAmmoText>();
@@ -113,6 +119,8 @@ public abstract class RangedWeapon : Weapon
 
         rangedWeaponData.reloading = true;
 
+        StartCoroutine(Reloading());
+
         yield return new WaitForSeconds(rangedWeaponData.reloadTime);
 
         rangedWeaponData.currentAmmo = rangedWeaponData.magazineSize;
@@ -123,6 +131,20 @@ public abstract class RangedWeapon : Weapon
         {
             updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
         }
+    }
+
+    private IEnumerator Reloading()
+    {
+        while (reloadIcon.fillAmount < 1.0f)
+        {
+            reloadIcon.fillAmount += Time.deltaTime / rangedWeaponData.reloadTime;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        reloadIcon.fillAmount = 0;
     }
 
     public void UpdateAmmo()
