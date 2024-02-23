@@ -107,7 +107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 698152120417281407}
   - component: {fileID: 3657660463883702151}
-  - component: {fileID: 1860335284881793229}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -189,23 +188,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1860335284881793229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361688317180386045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dbd60e4cc6ee24fa5e441f81b3905f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 3657660463883702151}
-  easeHealthSlider: {fileID: 3481308251181543743}
-  healthText: {fileID: 0}
-  playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
-  lerpSpeed: 0.005
 --- !u!1 &457408860499573168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,6 +1474,7 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   healthSlider: {fileID: 3657660463883702151}
   easeHealthSlider: {fileID: 3481308251181543743}
+  enemyText: {fileID: 2849734298573332091}
   lerpSpeed: 0.05
   animator: {fileID: 1630214206294898797}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
@@ -1798,8 +1781,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.38980016}
-  m_SizeDelta: {x: 525.833, y: 54.40892}
+  m_AnchoredPosition: {x: 0.0000000037253, y: 0.398}
+  m_SizeDelta: {x: 654.5181, y: 68.4049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2403375150078222844
 GameObject:
@@ -2112,8 +2095,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 / 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e95f2bfbea6d884458b64b9eae553992, type: 2}
+  m_sharedMaterial: {fileID: -6396573718608157244, guid: e95f2bfbea6d884458b64b9eae553992,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2137,8 +2121,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

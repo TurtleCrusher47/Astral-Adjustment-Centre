@@ -11,4 +11,9 @@ public class UpdateAmmoText : MonoBehaviour
     {
        ammoText.text = currentAmmo.ToString() + "/" + maxAmmo.ToString();
     }
+
+    public void ClearText()
+    {
+        ammoText.text = "";
+    }
 }
