@@ -7,9 +7,6 @@ public class UIManager : MonoBehaviour
 {
     [Header("Panels")]
     public GameObject phonePanel;
-    //public GameObject optionPanel;
-
-    //public Canvas gameCanvas;
 
     private bool isPhonePanelOpen = false;
 
@@ -110,9 +107,6 @@ public class UIManager : MonoBehaviour
         // Reset Option Panel
         //optionPanel.transform.localPosition = new Vector3(0f, 0f, 0f);
         //optionPanel.transform.localScale = new Vector3(0f, 0f, 0f);
-
-        // Ensure the gameplay canvas is active
-        //gameCanvas.gameObject.SetActive(true);
     }
 
     public void CloseGame()
