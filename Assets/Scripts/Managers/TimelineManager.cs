@@ -28,6 +28,16 @@ public class TimelineManager : Singleton<TimelineManager>
     {
         nextSceneName = nextScene;
 
+        switch (cutsceneName)
+        {
+            case "PostIntro":
+                skipButton.gameObject.SetActive(false);
+                break;
+            default:
+                skipButton.gameObject.SetActive(true);
+                break;
+        }
+
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.SetBGMSourcesVol(0.2f));
 
         for (int i = 0; i < timelines.Count; i++)
