@@ -21,7 +21,7 @@ public class ExplosiveKunaiProjectile : GameObjectProjectile
 
     protected override void SetAngularVelocity()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     // Wait for a few seconds then explode
