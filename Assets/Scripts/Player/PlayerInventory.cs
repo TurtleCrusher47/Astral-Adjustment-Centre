@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class PlayerInventory : Singleton<PlayerInventory>
+public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private GameObject selectedBorder;
-    [SerializeField] private GridLayoutGroup invGridLayoutGroup;
+    public static PlayerInventory Instance;
+    private GameObject selectedBorder;
+    private GridLayoutGroup invGridLayoutGroup;
     [SerializeField] private GameObject invGridElementPrefab;
     [SerializeField] private LayerMask targetableLayer;
     [SerializeField] private int invSlots;
-    [SerializeField] private Transform cam;
+    private Transform cam;
 
     [SerializeField] private List<Sprite> weaponIcons = new List<Sprite>();
     public static GameObject selectBorder;
@@ -25,50 +27,67 @@ public class PlayerInventory : Singleton<PlayerInventory>
 
     private static bool swapWeapon = false;
 
-    void Awake()
+    private void Awake()
     {
-        selectBorder = null;
-        invWeaponIcons = new List<Sprite>();
-        invWeapons = new List<GameObject>();
-        invUISlots = new List<GameObject>();
-
-        maxInvSlots = 0;
-        selectedWeaponIndex = 0;
-        currWeaponIndex = 0;
-        prevWeaponIndex = 0;
-
-        if (invSlots >= maxInvSlots)
+        if (Instance == null)
         {
-            maxInvSlots = invSlots;
+            Instance = this;
+            DontDestroyOnLoad(this);
         }
-
-        RectTransform invGridLayoutGroupTransform = invGridLayoutGroup.gameObject.GetComponent<RectTransform>();
-        int newWidth = 150 * maxInvSlots;
-
-        invGridLayoutGroupTransform.sizeDelta = new Vector2(newWidth, 150);
-
-        Debug.Log(maxInvSlots);
-
-        for (int i = 0; i < maxInvSlots; i++)
+        else if (Instance != null)
         {
-            GameObject newSlot = Instantiate(invGridElementPrefab);
-            newSlot.transform.SetParent(invGridLayoutGroup.transform);
-            newSlot.transform.localScale = new Vector3(1, 1, 1);
-
-            invUISlots.Add(newSlot);
+            Destroy(this);
         }
+    }
 
-        invWeaponIcons = weaponIcons;
-        selectBorder = selectedBorder;
+    public void SetInventory()
+    {
+        if (SceneManager.GetActiveScene().name == "LevelScene")
+        {
+            selectBorder = null;
+            invWeaponIcons = new List<Sprite>();
+            invWeapons = new List<GameObject>();
+            invUISlots = new List<GameObject>();
+
+            maxInvSlots = 0;
+            selectedWeaponIndex = 0;
+            currWeaponIndex = 0;
+            prevWeaponIndex = 0;
+
+            if (invSlots >= maxInvSlots)
+            {
+                maxInvSlots = invSlots;
+            }
+
+            int newWidth = 150 * maxInvSlots;
+            selectedBorder = GameObject.FindGameObjectWithTag("SelectedBorder");
+            invGridLayoutGroup = GameObject.FindGameObjectWithTag("InventoryPanel").GetComponent<GridLayoutGroup>();
+            cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
+            RectTransform invGridLayoutGroupTransform = invGridLayoutGroup.gameObject.GetComponent<RectTransform>();
+            invGridLayoutGroupTransform.sizeDelta = new Vector2(newWidth, 150);
+
+            for (int i = 0; i < maxInvSlots; i++)
+            {
+                GameObject newSlot = Instantiate(invGridElementPrefab);
+                newSlot.transform.SetParent(invGridLayoutGroup.transform);
+                newSlot.transform.localScale = new Vector3(1, 1, 1);
+
+                invUISlots.Add(newSlot);
+            }
+            Debug.Log(maxInvSlots);
+            invWeaponIcons = weaponIcons;
+            selectBorder = selectedBorder;
+            selectedBorder.transform.localPosition = invUISlots[0].transform.localPosition;
+        }
     }
     
-    void Start()
-    {
-        selectedBorder.transform.localPosition = invUISlots[0].transform.localPosition;
-    }
-
     void Update()
     {
+        if (SceneManager.GetActiveScene().name != "LevelScene")
+        {
+            return;
+        }
+
         InputChangeWeapon();
         InputDropWeapon();
         InputSwapWeapon();

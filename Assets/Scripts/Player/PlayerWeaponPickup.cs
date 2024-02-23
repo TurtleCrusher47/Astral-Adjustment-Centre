@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class PlayerWeaponPickup : MonoBehaviour
 {
-    [SerializeField] private GameObject weaponContainer;
+    private GameObject weaponContainer;
     private bool canPickUp;
+
+    public void Start()
+    {
+        weaponContainer = GameObject.FindGameObjectWithTag("WeaponHolder");
+    }
 
     public void PickUpWeapon(GameObject weapon)
     {

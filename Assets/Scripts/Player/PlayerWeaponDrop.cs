@@ -5,16 +5,21 @@ using UnityEngine;
 public class PlayerWeaponDrop : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private Transform cam;
+    private Transform cam;
 
     [SerializeField] private float dropForwardForce, dropUpwardForce;
 
     private Rigidbody rb;
 
-    void Awake()
+    private void Awake()
     {
         player = gameObject;
         //cam = Camera.main;
+    }
+
+    private void Start()
+    {
+		cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     public void DropWeapon(GameObject weapon)

@@ -49,7 +49,7 @@ public class Generator3D : MonoBehaviour
     [SerializeField] private GameObject roomLightPrefab;
     [SerializeField] private GameObject hallwayLightPrefab;
     [SerializeField] private GameObject playerObj;
-    [SerializeField] private GameObject camObj;
+    private GameObject camObj;
     [SerializeField] private GameObject endObj;
 
     // algorithm & others
@@ -95,6 +95,7 @@ public class Generator3D : MonoBehaviour
 
     void Start()
     {
+        camObj = GameObject.FindGameObjectWithTag("CameraHolder");
         ChangeSeed();
         InitializeMap();
     }

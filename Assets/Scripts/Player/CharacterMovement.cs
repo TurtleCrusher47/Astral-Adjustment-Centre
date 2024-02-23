@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
 	[SerializeField] Transform orientation;
 		
 	[Header("Crouch and Prone")]
-	[SerializeField] Camera cam;
+	private Camera cam;
 	[SerializeField] GameObject capsule;
 	[SerializeField] CapsuleCollider capsuleCollider;
 	private float playerHeight;
@@ -38,6 +38,8 @@ public class CharacterMovement : MonoBehaviour
 		rb.freezeRotation = true;
 
 		playerHeight = transform.localScale.y;
+
+		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
 	private void Update()

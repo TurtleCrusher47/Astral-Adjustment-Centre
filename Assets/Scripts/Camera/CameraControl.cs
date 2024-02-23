@@ -7,7 +7,7 @@ public class CameraControl : MonoBehaviour
 	[Header("References")]
 	// [SerializeField] WallRun wallRun;
 
-	[SerializeField] private Transform cam;
+	private Transform cam;
 	[SerializeField] private Transform orientation;
 	//[SerializeField] GameObject playerModel;
 	// [SerializeField] private Recoil recoil;
@@ -18,10 +18,18 @@ public class CameraControl : MonoBehaviour
 	public float xRotation = 0f;
 	public float yRotation = 0f;
 
+	private void Awake()
+	{
+		GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<MoveCamera>().SetCameraPosition();
+		GameObject.FindGameObjectWithTag("PlayerInventory").GetComponent<PlayerInventory>().SetInventory();
+	}
+
 	private void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
+			
+		cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
 	}
 
 	private void Update()
