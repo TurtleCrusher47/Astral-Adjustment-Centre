@@ -4040,6 +4040,7 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   healthSlider: {fileID: 730876317978317839}
   easeHealthSlider: {fileID: 9169603079360740531}
+  enemyText: {fileID: 6112288896278855281}
   lerpSpeed: 0.05
   animator: {fileID: 2741984547037465631}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}

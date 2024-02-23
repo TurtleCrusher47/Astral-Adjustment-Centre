@@ -20016,6 +20016,7 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   healthSlider: {fileID: 8451468316079066604}
   easeHealthSlider: {fileID: 7762863571010919565}
+  enemyText: {fileID: 5809680706391440602}
   lerpSpeed: 0.05
   animator: {fileID: 7086879924197070007}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
