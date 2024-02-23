@@ -43,13 +43,6 @@ public class BuffManager : MonoBehaviour
         rerollText.text = rerollCount.ToString();
     }
 
-    private void Start()
-    {
-        InstantiateBuffPanels();
-        
-        rerollText.text = rerollCount.ToString();
-    }
-
     private void InitBuffPanel()
     {
         ResetBuffs();
