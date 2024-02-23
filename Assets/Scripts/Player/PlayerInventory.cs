@@ -95,6 +95,18 @@ public class PlayerInventory : MonoBehaviour
                 invWeapons[prevWeaponIndex].SetActive(false);
                 invWeapons[currWeaponIndex].SetActive(true);
 
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+                {
+                    if (rangedWeapon.rangedWeaponData.infiniteAmmo)
+                    {
+                        rangedWeapon.ClearText();
+                    }
+                    else
+                    {
+                        rangedWeapon.UpdateAmmo();
+                    }
+                }
+
                 selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().inventoryPosition;
                 selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
 
@@ -115,6 +127,18 @@ public class PlayerInventory : MonoBehaviour
                 
                 invWeapons[prevWeaponIndex].SetActive(false);
                 invWeapons[currWeaponIndex].SetActive(true);
+
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+                {
+                    if (rangedWeapon.rangedWeaponData.infiniteAmmo)
+                    {
+                        rangedWeapon.ClearText();
+                    }
+                    else
+                    {
+                        rangedWeapon.UpdateAmmo();
+                    }
+                }
 
                 selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().inventoryPosition;
                 selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
@@ -142,6 +166,18 @@ public class PlayerInventory : MonoBehaviour
             {
                 invWeapons[currWeaponIndex].SetActive(true);
 
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+                {
+                    if (rangedWeapon.rangedWeaponData.infiniteAmmo)
+                    {
+                        rangedWeapon.ClearText();
+                    }
+                    else
+                    {
+                        rangedWeapon.UpdateAmmo();
+                    }
+                }
+
                 selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().inventoryPosition;
                 selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
             }
@@ -164,6 +200,18 @@ public class PlayerInventory : MonoBehaviour
                 GetComponent<PlayerWeaponPickup>().PickUpWeapon(hitObj);
                 
                 invWeapons[currWeaponIndex].SetActive(true);
+
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+                {
+                    if (rangedWeapon.rangedWeaponData.infiniteAmmo)
+                    {
+                        rangedWeapon.ClearText();
+                    }
+                    else
+                    {
+                        rangedWeapon.UpdateAmmo();
+                    }
+                }
 
                 selectedWeaponIndex = invWeapons[currWeaponIndex].GetComponent<Weapon>().inventoryPosition;
                 selectedBorder.transform.localPosition = invUISlots[selectedWeaponIndex].transform.localPosition;
