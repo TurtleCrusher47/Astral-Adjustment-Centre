@@ -115,6 +115,11 @@ public class UIManager : MonoBehaviour
         //gameCanvas.gameObject.SetActive(true);
     }
 
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
+
     private void LoadMainMenuScene()
     {
         SceneManager.LoadScene("MenuScene");
