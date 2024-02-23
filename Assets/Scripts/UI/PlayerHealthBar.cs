@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +8,10 @@ public class PlayerHealthBar : MonoBehaviour, IDamageable
 {
     [SerializeField] private Slider healthSlider, easeHealthSlider;
 
-    public PlayerData playerData;
+    [SerializeField] 
+    private TMP_Text healthText;
 
-    //private float maxHealth = 100f;
-    //private float health;
+    public PlayerData playerData;
 
     [Header("Ease Speed")]
     [SerializeField]
@@ -20,6 +21,7 @@ public class PlayerHealthBar : MonoBehaviour, IDamageable
     void Start()
     {
         playerData.currentHealth = playerData.currentMaxHealth;
+        
     }
 
     // Update is called once per frame
@@ -30,16 +32,15 @@ public class PlayerHealthBar : MonoBehaviour, IDamageable
             healthSlider.value = playerData.currentHealth;
         }
 
-        /*
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Damage(10);
-        }*/
+        healthText.text = healthSlider.value.ToString() + " / " + playerData.currentMaxHealth;
 
         if (healthSlider.value != easeHealthSlider.value)
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, playerData.currentHealth, lerpSpeed);
         }
+
+        healthSlider.maxValue = playerData.currentMaxHealth;
+        easeHealthSlider.maxValue = playerData.currentMaxHealth;
     }
 
     public void Damage(float amount)

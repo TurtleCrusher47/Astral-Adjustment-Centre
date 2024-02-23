@@ -67,6 +67,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
         CurrentHealth = MaxHealth;
 
+        healthSlider.maxValue = CurrentHealth;
+        easeHealthSlider.maxValue = CurrentHealth;
+
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 

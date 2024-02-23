@@ -83,7 +83,6 @@ public class BuffManager : MonoBehaviour
             // Instantiate the base buff panel
             GameObject buffPanel = Instantiate(basePanel, roguePanel.transform);
             instantiatedPanels.Add(buffPanel);
-            //buffIndices.Add(i); // Store the buff index for this panel
 
             // Get the Title and Desc Text components
             TMP_Text titleText = buffPanel.transform.Find("TitleText").GetComponent<TMP_Text>();
