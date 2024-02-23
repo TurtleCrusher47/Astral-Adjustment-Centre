@@ -47,6 +47,7 @@ TagManager:
   - Leave
   - AggroRadius
   - StrikingDistance
+  - UpdateAmmoText
   layers:
   - Default
   - TransparentFX

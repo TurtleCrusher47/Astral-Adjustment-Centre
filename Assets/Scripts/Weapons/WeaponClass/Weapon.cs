@@ -38,7 +38,7 @@ public abstract class Weapon : MonoBehaviour
 
     // To init the weapon type
     protected abstract void Start();
-
+    
     // For weapon pickup
     protected abstract void OnTriggerEnter(Collider other);
 

@@ -33,6 +33,7 @@ public class Railgun : RaycastRangedWeapon
                 elapsedTime %= 1f;
                 chargeMultiplier += 1;
                 rangedWeaponData.currentAmmo -= 10;
+                UpdateAmmo();
             }
         }
         // If player starts reloading while charging

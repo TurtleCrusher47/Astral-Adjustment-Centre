@@ -31,7 +31,10 @@ public abstract class RaycastRangedWeapon : RangedWeapon
                 }
 
                 if (!rangedWeaponData.infiniteAmmo)
-                rangedWeaponData.currentAmmo--;
+                {
+                    rangedWeaponData.currentAmmo--;
+                    UpdateAmmo();
+                }
 
                 timeSinceLastShot = 0;
                 //recoil.GunRecoil(rangedWeaponData.recoil);

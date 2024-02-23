@@ -50,7 +50,8 @@ public class DualRevolvers : RaycastRangedWeapon
                     StartCoroutine(RenderSecondTraceLine(cam.forward * raycastProjectileData.maxDistance));
                 }
 
-                rangedWeaponData.currentAmmo--;
+                UpdateAmmo();
+                updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
 
                 secondaryCooldownTimer = rangedWeaponData.secondarycooldown;
 

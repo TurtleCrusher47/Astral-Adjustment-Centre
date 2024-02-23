@@ -13,6 +13,7 @@ public abstract class RangedWeapon : Weapon
     protected Recoil recoil;
     protected Transform camRotation;
     protected Animator animator;
+    protected UpdateAmmoText updateAmmoText;
     // [SerializeField] protected Recoil recoil;
 
     // [SerializeField] protected UpdateAmmoText updateAmmoText;
@@ -43,6 +44,7 @@ public abstract class RangedWeapon : Weapon
         camRotation = GameObject.FindGameObjectWithTag("CameraRotation").transform;
         recoil = camRotation.GetComponent<Recoil>();
         animator = gameObject.GetComponent<Animator>();
+        updateAmmoText = GameObject.FindGameObjectWithTag("UpdateAmmoText").GetComponent<UpdateAmmoText>();
     }
 
     public void Update()
@@ -117,6 +119,12 @@ public abstract class RangedWeapon : Weapon
 
         // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
     }
+
+    public void UpdateAmmo()
+    {
+        updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
+    }
+
 
     public int GetAmmo()
     {
