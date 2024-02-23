@@ -86,11 +86,6 @@ public class LoadingScene : MonoBehaviour
                     GameManager.Instance.timerActive = true;
                 }
                 else if(GameManager.Instance.currSceneName == "LevelScene" &&
-                        GameManager.Instance.nextSceneName == "MenuScene")
-                {
-                    TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("Lose", null));
-                }
-                else if(GameManager.Instance.currSceneName == "LevelScene" &&
                         GameManager.Instance.nextSceneName == "WinScene")
                 {
                     TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("Win", null));
