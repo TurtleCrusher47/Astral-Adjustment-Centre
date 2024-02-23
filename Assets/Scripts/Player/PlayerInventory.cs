@@ -372,6 +372,7 @@ public class PlayerInventory : MonoBehaviour
         if (invWeapons.Count >= 1)
         {
             selectBorder.transform.localPosition = invUISlots[currWeaponIndex].transform.localPosition;
+            invWeapons[currWeaponIndex].SetActive(true);
         }
     }
 
