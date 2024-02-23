@@ -53,6 +53,7 @@ TagManager:
   - CameraPosition
   - WeaponHolder
   - PlayerInventory
+  - ReloadIcon
   layers:
   - Default
   - TransparentFX
