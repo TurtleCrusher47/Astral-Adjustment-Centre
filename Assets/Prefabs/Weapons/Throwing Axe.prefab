@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6432586585455372200}
   m_Layer: 9
   m_Name: Left Axe
-  m_TagString: Untagged
+  m_TagString: WeaponCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 286417448546586971}
   m_Layer: 9
   m_Name: Right Axe
-  m_TagString: Untagged
+  m_TagString: WeaponCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
