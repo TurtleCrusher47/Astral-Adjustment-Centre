@@ -22,6 +22,7 @@ public class CameraControl : MonoBehaviour
 	{
 		GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<MoveCamera>().SetCameraPosition();
 		GameObject.FindGameObjectWithTag("PlayerInventory").GetComponent<PlayerInventory>().SetInventory();
+		// PlayerInventory.CheckWeapon();
 	}
 
 	private void Start()
