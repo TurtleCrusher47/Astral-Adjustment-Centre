@@ -13,12 +13,6 @@ MonoBehaviour:
   m_Name: StartRoomData
   m_EditorClassIdentifier: 
   ObjectsList:
-  - {fileID: 2234285575767978173, guid: 38cf2c38710a66447b3689cb1a38866b, type: 3}
-  - {fileID: 6407801722664980708, guid: a5bf5914650d66644a154130f9299e3a, type: 3}
-  - {fileID: 182669890448295919, guid: 689932e0295c3744c80277b8bdbd6fbf, type: 3}
-  - {fileID: 6810437230062205763, guid: 5c88eb6a5822a62469b41e523e6601b9, type: 3}
+  - {fileID: 1190860668489238221, guid: 25a63928bda60bd4da5afdadc77c02f8, type: 3}
   maxMinChanceList:
-  - {x: 1, y: 1, z: 100}
-  - {x: 1, y: 1, z: 100}
-  - {x: 1, y: 1, z: 100}
-  - {x: 10, y: 10, z: 100}
+  - {x: 3, y: 3, z: 100}

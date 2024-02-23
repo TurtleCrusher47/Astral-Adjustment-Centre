@@ -24,13 +24,14 @@ public class ElevatorTrigger : MonoBehaviour
 
             TimelineManager.Instance.cutsceneIndex = 0;
 
+            StartCoroutine(mapGenerator.ClearMap(false));
             GameManager.Instance.ChangeScene("WinScene");
         }
         else
         {
             // load next level
             Debug.Log("Next Level");
-            StartCoroutine(mapGenerator.LoadNextLevel());
+            StartCoroutine(mapGenerator.ClearMap(true));
         }
     }
 }
