@@ -18,15 +18,16 @@ public class EnemyProjectileBasic : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        if (collider.gameObject.CompareTag("WeaponCollider") || collider.gameObject.CompareTag("AggroRadius") || collider.gameObject.CompareTag("StrikingDistance") || collider.gameObject.CompareTag("Enemy"))
+        return;
+        
         if (collider.CompareTag("PlayerCollider"))
         {
             player.Damage(damage);
         }
 
-        if (!collider.CompareTag("Enemy"))
-        {
-            StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(gameObject, 0));
-        }
+        StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(gameObject, 0));
+        
     }
 
     public void MoveProjectile(Vector3 moveVector)
