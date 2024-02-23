@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095e30edf3aea064482b9724f78e4d36, type: 3}
   m_Name: Floor 3
   m_EditorClassIdentifier: 
-  startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
+  startRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
   endRoomData: {fileID: 11400000, guid: 8d804e9678e87d44abbd58dd93b2bba4, type: 2}
   contentRoomData:
   - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
