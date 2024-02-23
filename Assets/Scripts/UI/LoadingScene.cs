@@ -54,7 +54,7 @@ public class LoadingScene : MonoBehaviour
                 loadingBarText.color = altColor;
             }
 
-            loadingBarText.text = (progress * 100f).ToString("F0") + "%";
+            loadingBarText.text = (progress * 100f).ToString("F0") + " %";
             loadingBar.value = progress;
 
             loadingText.text = "Loading ";
