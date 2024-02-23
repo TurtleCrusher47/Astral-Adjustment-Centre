@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(transform.gameObject);
+            DontDestroyOnLoad(this);
         }
         else if (Instance != null)
         {
