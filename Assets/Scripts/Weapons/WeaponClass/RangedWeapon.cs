@@ -39,7 +39,7 @@ public abstract class RangedWeapon : Weapon
         return fireRateBuffMultiplier;
     }
 
-    protected override void StartFunctionality()
+    public override void StartFunctionality()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
         orientation = GameObject.FindGameObjectWithTag("Orientation").transform;

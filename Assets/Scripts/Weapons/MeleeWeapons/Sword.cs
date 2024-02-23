@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sword : MeleeWeapon
 {
 
-    protected override void StartFunctionality()
+    public override void StartFunctionality()
     {
 
     }

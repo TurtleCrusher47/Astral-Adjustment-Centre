@@ -366,6 +366,7 @@ public class PlayerInventory : MonoBehaviour
         {
             int pos = invWeapons[i].GetComponent<Weapon>().inventoryPosition;
             invUISlots[pos].GetComponent<Image>().sprite = invWeaponIcons[(int)invWeapons[i].GetComponent<Weapon>().type];
+            invWeapons[i].GetComponent<Weapon>().StartFunctionality();
         }
 
         if (invWeapons.Count >= 1)
