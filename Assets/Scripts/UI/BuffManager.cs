@@ -40,25 +40,25 @@ public class BuffManager : MonoBehaviour
             Instance.player = GameObject.FindGameObjectWithTag("Player");
             Destroy(this);
         }
-        rerollText.text = rerollCount.ToString();
+        //rerollText.text = rerollCount.ToString();
     }
 
     private void Start()
     {
         InstantiateBuffPanels();
         
-        rerollText.text = rerollCount.ToString();
+        //rerollText.text = rerollCount.ToString();
     }
 
     private void InitBuffPanel()
     {
         ResetBuffs();
-        //roguePanel.SetActive(false); // testing
+        roguePanel.SetActive(false); // testing
     }
 
     public void ShowBuffPanel()
     {
-        //roguePanel.SetActive(true); // testing
+        roguePanel.SetActive(true); // testing
         player.SetActive(false);
         InstantiateBuffPanels();
     }
@@ -144,7 +144,7 @@ public class BuffManager : MonoBehaviour
 
     private void PlayAndDestroyPanels()
     {
-        // LeanTweening
+        // LeanTweening 
     }
 
     public void RerollButton()
