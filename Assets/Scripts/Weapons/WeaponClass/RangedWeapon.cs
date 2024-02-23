@@ -44,6 +44,8 @@ public abstract class RangedWeapon : Weapon
         camRotation = GameObject.FindGameObjectWithTag("CameraRotation").transform;
         recoil = camRotation.GetComponent<Recoil>();
         animator = gameObject.GetComponent<Animator>();
+
+        if (GameObject.FindGameObjectWithTag("UpdateAmmoText") != null)
         updateAmmoText = GameObject.FindGameObjectWithTag("UpdateAmmoText").GetComponent<UpdateAmmoText>();
     }
 
