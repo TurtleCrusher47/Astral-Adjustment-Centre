@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04101217, g: 0.04204025, b: 0.05581323, a: 1}
+  m_IndirectSpecularColor: {r: 0.04348212, g: 0.04463889, b: 0.05930857, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1653,7 +1653,6 @@ MonoBehaviour:
   hallwayLightPrefab: {fileID: 4587904980839318902, guid: 0861ca3d33089e144a30fe77feaf1923,
     type: 3}
   playerObj: {fileID: 1174318290}
-  camObj: {fileID: 0}
   endObj: {fileID: 6653203107403685663}
 --- !u!4 &108134768
 Transform:
@@ -15927,7 +15926,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: CameraPosition
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3053727766965237687, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ed5dc1bd0e8791a4b8228583125542f5, type: 3}
 --- !u!1 &1174318290 stripped
 GameObject:
