@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.022108024, g: 0.02367896, b: 0.031614583, a: 1}
+  m_IndirectSpecularColor: {r: 0.035208218, g: 0.036593854, b: 0.04860419, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15031,7 +15031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phonePanel: {fileID: 1188574601}
-  optionPanel: {fileID: 0}
+  optionPanel: {fileID: 979969311}
 --- !u!1 &1152418046
 GameObject:
   m_ObjectHideFlags: 0
