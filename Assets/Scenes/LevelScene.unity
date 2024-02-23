@@ -11331,7 +11331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 851525080}
   easeHealthSlider: {fileID: 708125970}
-  healthText: {fileID: 0}
+  healthText: {fileID: 657572513}
   playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   lerpSpeed: 0.005
 --- !u!1 &852847829
