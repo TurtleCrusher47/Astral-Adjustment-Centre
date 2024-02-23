@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public static PlayerInventory Instance;
     private GameObject selectedBorder;
     private GridLayoutGroup invGridLayoutGroup;
+    [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject invGridElementPrefab;
     [SerializeField] private LayerMask targetableLayer;
     [SerializeField] private int invSlots;
@@ -42,8 +43,10 @@ public class PlayerInventory : MonoBehaviour
 
     public void SetInventory()
     {
-        if (SceneManager.GetActiveScene().name == "LevelScene")
+        if (GameManager.Instance.currSceneName == "MenuScene")
         {
+            inventoryPanel.SetActive(false);
+
             selectBorder = null;
             invWeaponIcons = new List<Sprite>();
             invWeapons = new List<GameObject>();
@@ -53,7 +56,12 @@ public class PlayerInventory : MonoBehaviour
             selectedWeaponIndex = 0;
             currWeaponIndex = 0;
             prevWeaponIndex = 0;
+        }
 
+        if (SceneManager.GetActiveScene().name == "LevelScene")
+        {
+            inventoryPanel.SetActive(true);
+            
             if (invSlots >= maxInvSlots)
             {
                 maxInvSlots = invSlots;
@@ -66,18 +74,25 @@ public class PlayerInventory : MonoBehaviour
             RectTransform invGridLayoutGroupTransform = invGridLayoutGroup.gameObject.GetComponent<RectTransform>();
             invGridLayoutGroupTransform.sizeDelta = new Vector2(newWidth, 150);
 
-            for (int i = 0; i < maxInvSlots; i++)
+            if (invUISlots.Count < maxInvSlots)
             {
-                GameObject newSlot = Instantiate(invGridElementPrefab);
-                newSlot.transform.SetParent(invGridLayoutGroup.transform);
-                newSlot.transform.localScale = new Vector3(1, 1, 1);
+                for (int i = 0; i < maxInvSlots; i++)
+                {
+                    GameObject newSlot = Instantiate(invGridElementPrefab);
+                    newSlot.transform.SetParent(invGridLayoutGroup.transform);
+                    newSlot.transform.localScale = new Vector3(1, 1, 1);
 
-                invUISlots.Add(newSlot);
+                    invUISlots.Add(newSlot);
+                }
             }
+
             Debug.Log(maxInvSlots);
+
             invWeaponIcons = weaponIcons;
             selectBorder = selectedBorder;
             selectedBorder.transform.localPosition = invUISlots[0].transform.localPosition;
+
+            SetUI();
         }
     }
     
@@ -319,6 +334,20 @@ public class PlayerInventory : MonoBehaviour
         }
         
         return false;
+    }
+
+    private void SetUI()
+    {
+        for (int i = 0; i < invWeapons.Count; i++)
+        {
+            int pos = invWeapons[i].GetComponent<Weapon>().inventoryPosition;
+            invUISlots[pos].GetComponent<Image>().sprite = invWeaponIcons[(int)invWeapons[i].GetComponent<Weapon>().type];
+        }
+
+        if (invWeapons.Count >= 1)
+        {
+            selectBorder.transform.localPosition = invUISlots[currWeaponIndex].transform.localPosition;
+        }
     }
 
     public static void DropWeapon(GameObject selected)
