@@ -315,7 +315,6 @@ public class PlayerInventory : MonoBehaviour
                         break;
                     }
                 }
-
                 Debug.Log("Added Weapon : " + weapon.name);
             }
 
@@ -324,6 +323,20 @@ public class PlayerInventory : MonoBehaviour
                 currWeaponIndex = 0;
                 weapon.SetActive(true);
                 selectBorder.transform.localPosition = invUISlots[currWeaponIndex].transform.localPosition;
+
+
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+                {
+                    if (rangedWeapon.rangedWeaponData.infiniteAmmo)
+                    {
+                        rangedWeapon.ClearText();
+                    }
+                    else
+                    {
+                        GameObject.FindGameObjectWithTag("UpdateAmmoText").GetComponent<UpdateAmmoText>().UpdateAmmo(rangedWeapon.rangedWeaponData.currentAmmo, rangedWeapon.rangedWeaponData.magazineSize);
+                        Debug.Log("ok");
+                    }
+                }
             }
             else
             {

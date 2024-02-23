@@ -37,7 +37,7 @@ public abstract class RangedWeapon : Weapon
         return fireRateBuffMultiplier;
     }
 
-    protected override void Start()
+    protected override void StartFunctionality()
     {
         cam = GameObject.FindGameObjectWithTag("CameraHolder").transform;
         orientation = GameObject.FindGameObjectWithTag("Orientation").transform;
@@ -45,7 +45,7 @@ public abstract class RangedWeapon : Weapon
         recoil = camRotation.GetComponent<Recoil>();
         animator = gameObject.GetComponent<Animator>();
 
-        if (GameObject.FindGameObjectWithTag("UpdateAmmoText") != null)
+        // if (GameObject.FindGameObjectWithTag("UpdateAmmoText") != null)
         updateAmmoText = GameObject.FindGameObjectWithTag("UpdateAmmoText").GetComponent<UpdateAmmoText>();
     }
 
