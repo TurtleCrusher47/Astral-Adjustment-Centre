@@ -678,9 +678,9 @@ public class Generator3D : MonoBehaviour
         // create list of available spaces
         List<Vector3> vacantSpaces = new List<Vector3>();
         List<Vector3> allSpaces = new List<Vector3>();
-        for (float x = 1.0f; x < size.x - 0.5f; x+= 0.5f)
+        for (float x = 2.0f; x < size.x - 1.5f; x+= 0.25f)
         {
-            for (float z = 1.0f; z < size.z - 0.5f; z += 0.5f)
+            for (float z = 2.0f; z < size.z - 1.5f; z += 0.25f)
             {
                 vacantSpaces.Add(location + new Vector3(x, 0, z));
             }
