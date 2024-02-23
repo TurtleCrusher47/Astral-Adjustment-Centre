@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider easeHealthSlider;
+
+    [SerializeField] private TMP_Text enemyText;
 
     [SerializeField] private float lerpSpeed = 0.05f; 
 
@@ -211,6 +214,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         {
             healthSlider.value = CurrentHealth;
         }
+
+        enemyText.text = healthSlider.value.ToString() + " / " + MaxHealth;
 
         if(healthSlider.value != easeHealthSlider.value)
         {

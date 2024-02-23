@@ -4040,6 +4040,7 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   healthSlider: {fileID: 730876317978317839}
   easeHealthSlider: {fileID: 9169603079360740531}
+  enemyText: {fileID: 6112288896278855281}
   lerpSpeed: 0.05
   animator: {fileID: 2741984547037465631}
   enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
@@ -4271,8 +4272,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 / 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e95f2bfbea6d884458b64b9eae553992, type: 2}
+  m_sharedMaterial: {fileID: -6396573718608157244, guid: e95f2bfbea6d884458b64b9eae553992,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4296,8 +4298,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4593,6 +4595,7 @@ GameObject:
   - component: {fileID: 1249548982179427066}
   - component: {fileID: 4404514799611165484}
   - component: {fileID: 7884404350120525326}
+  - component: {fileID: 5419876740288986629}
   m_Layer: 5
   m_Name: HealthBar Canvas
   m_TagString: Untagged
@@ -4682,6 +4685,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5419876740288986629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220823621087236364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1010e7a650b0f644bb5f8b7f14fb51f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7908171812581602029
 GameObject:
   m_ObjectHideFlags: 0
