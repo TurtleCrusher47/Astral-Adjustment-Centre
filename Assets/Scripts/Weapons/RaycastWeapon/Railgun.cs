@@ -12,11 +12,13 @@ public class Railgun : RaycastRangedWeapon
 
     private void Awake()
     {
+        if (chargeUpEffect != null)
         chargeUpEffect.Stop();
     }
 
     private void OnEnable()
     {
+        if (chargeUpEffect != null)
         chargeUpEffect.Stop();
     }
 
