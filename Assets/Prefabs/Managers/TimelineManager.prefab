@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1335677544140363519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1335677544140363518}
+  - component: {fileID: 1335677544140363517}
+  - component: {fileID: 1335677544140363516}
+  m_Layer: 0
+  m_Name: TimelineManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1335677544140363518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335677544140363519}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &1335677544140363517
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335677544140363519}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6180293725157951473, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8625436324659599505, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 125087378330134204, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3492691612108917438, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7564776653768700751, guid: e64e226364b654247b8ae194b39464a0, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -188210922067182793, guid: e64e226364b654247b8ae194b39464a0, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4849535997664194003, guid: e64e226364b654247b8ae194b39464a0, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &1335677544140363516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335677544140363519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e55653f62e43b044a1abfc3d0a5881c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  skipButton: {fileID: 0}
+  subtitlePanel: {fileID: 0}
+  director: {fileID: 0}
+  timelines:
+  - {fileID: 11400000, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
+  - {fileID: 11400000, guid: e64e226364b654247b8ae194b39464a0, type: 2}
+  nextSceneName: 
+  cutsceneIndex: 0
