@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class RangedWeapon : Weapon
 {
-    [SerializeField] protected RangedWeaponData rangedWeaponData;
+    [SerializeField] public RangedWeaponData rangedWeaponData;
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected LayerMask targetLayers;
     protected Transform cam;
@@ -117,7 +117,7 @@ public abstract class RangedWeapon : Weapon
 
         rangedWeaponData.reloading = false;
 
-        // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
+        updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
     }
 
     public void UpdateAmmo()
@@ -125,6 +125,10 @@ public abstract class RangedWeapon : Weapon
         updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
     }
 
+    public void ClearText()
+    {
+        updateAmmoText.ClearText();
+    }
 
     public int GetAmmo()
     {
