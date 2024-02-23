@@ -35,13 +35,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     {
         isDead = true;
 
-        // PUT IN THE PLACE YES THX
-
-        //if (cutsceneName == "Lose")
-        //{
-        //    StartCoroutine(GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>().ClearMap(false));
-        //}
-
         GameObject.FindWithTag("CameraHolder").GetComponent<MoveCamera>().enabled = false;
         TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("Lose", "MenuScene"));
         
