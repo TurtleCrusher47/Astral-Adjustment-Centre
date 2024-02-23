@@ -76,7 +76,7 @@ public class PlayerInventory : MonoBehaviour
 
             if (invUISlots.Count < maxInvSlots)
             {
-                for (int i = 0; i < maxInvSlots; i++)
+                for (int i = invUISlots.Count; i < maxInvSlots; i++)
                 {
                     GameObject newSlot = Instantiate(invGridElementPrefab);
                     newSlot.transform.SetParent(invGridLayoutGroup.transform);
