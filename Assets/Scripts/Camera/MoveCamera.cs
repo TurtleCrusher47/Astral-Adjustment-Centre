@@ -9,7 +9,7 @@ public class MoveCamera : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void SetCameraPosition()
