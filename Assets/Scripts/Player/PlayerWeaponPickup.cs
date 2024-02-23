@@ -24,18 +24,6 @@ public class PlayerWeaponPickup : MonoBehaviour
             weapon.GetComponent<Animator>().enabled = true;
             weapon.GetComponent<Rigidbody>().isKinematic = true;
 
-            if (weapon.TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
-            {
-                if (rangedWeapon.rangedWeaponData.infiniteAmmo)
-                {
-                    rangedWeapon.ClearText();
-                }
-                else
-                {
-                    rangedWeapon.UpdateAmmo();
-                }
-            }
-
             canPickUp = false;
 
             weapon.layer = LayerMask.NameToLayer("Weapons");

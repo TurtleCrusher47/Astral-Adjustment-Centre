@@ -251,6 +251,18 @@ public class PlayerInventory : MonoBehaviour
                 invUISlots[currWeaponIndex].GetComponent<Image>().sprite = invWeaponIcons[(int)weapon.GetComponent<Weapon>().type];
                 selectBorder.transform.localPosition = invUISlots[currWeaponIndex].transform.localPosition;
 
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon))
+                {
+                    if (rangedWeapon.rangedWeaponData.infiniteAmmo)
+                    {
+                        rangedWeapon.ClearText();
+                    }
+                    else
+                    {
+                        rangedWeapon.UpdateAmmo();
+                    }
+                }
+
                 Debug.Log("Swap Weapon : " + weapon.name);
                 swapWeapon = false;
             }
