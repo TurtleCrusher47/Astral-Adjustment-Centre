@@ -34,7 +34,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     public void Despawn()
     {
         isDead = true;
+
         GameObject.FindWithTag("CameraHolder").GetComponent<MoveCamera>().enabled = false;
         TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("Lose", "MenuScene"));
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
