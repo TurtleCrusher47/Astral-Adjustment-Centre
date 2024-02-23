@@ -3845,6 +3845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263096913}
+  - component: {fileID: 263096914}
   m_Layer: 0
   m_Name: Settings Manager
   m_TagString: Untagged
@@ -3860,13 +3861,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263096912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 908.2972, y: 539.6649, z: 32035.32}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &263096914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263096912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f731c1d03ea8d4cbf346a28d64c61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vsyncButton: {fileID: 1090099221}
+  fullscreenButton: {fileID: 611312713}
+  fpsButton: {fileID: 697288449}
+  fpsBox: {fileID: 661779080}
+  resolutionDropdown: {fileID: 1623457811}
+  globalMixer: {fileID: 24100000, guid: a4f13dd0cc60af144b7aabfa7b9884f7, type: 2}
+  bgmSlider: {fileID: 273123117}
+  sfxSlider: {fileID: 1029170961}
+  vlSlider: {fileID: 1090564804}
+  appliedSettings: 0
+  localFullscreenBool: 0
+  localFPSBool: 0
 --- !u!1 &265915281
 GameObject:
   m_ObjectHideFlags: 0
@@ -15549,6 +15574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1140427356}
+  - component: {fileID: 1140427357}
   m_Layer: 0
   m_Name: UI Manager
   m_TagString: Untagged
@@ -15564,13 +15590,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140427355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 908.2972, y: 539.6649, z: 32035.32}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1140427357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140427355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7484f8fdcf059b34280e9025ac82931c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phonePanel: {fileID: 1188574601}
+  optionPanel: {fileID: 509030224}
 --- !u!1 &1152418046
 GameObject:
   m_ObjectHideFlags: 0
@@ -20665,7 +20705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1525211067
 RectTransform:
   m_ObjectHideFlags: 0
