@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player", menuName = "Player/Data")]
