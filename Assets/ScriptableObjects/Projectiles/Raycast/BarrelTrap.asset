@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea8f7c598e52c445bc4e1f771fce96c, type: 3}
   m_Name: BarrelTrap
   m_EditorClassIdentifier: 
-  damage: 200
+  damage: 50
   maxDistance: 3

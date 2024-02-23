@@ -114,6 +114,13 @@ public class PlayerInventory : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
             {
+                if (invWeapons[currWeaponIndex].TryGetComponent<RangedWeapon>(out RangedWeapon rangedWeapon2))
+                {
+                    if (rangedWeapon2.rangedWeaponData.reloading)
+                    {
+                        return;
+                    }
+                }
 
                 if (currWeaponIndex >= invWeapons.Count - 1)
                 {
