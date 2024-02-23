@@ -24,6 +24,7 @@ public class Crocodile : GameObjectRangedWeapon
                 {
                     elapsedTime %= 1f;
                     rangedWeaponData.currentAmmo -= 1;
+                    UpdateAmmo();
 
                     Debug.Log(hitInfo.transform.name);
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();

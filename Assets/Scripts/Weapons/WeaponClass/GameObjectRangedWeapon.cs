@@ -23,7 +23,10 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
 
                 // Only deduct ammo if the ammo is not infinite
                 if (!rangedWeaponData.infiniteAmmo)
-                rangedWeaponData.currentAmmo--;
+                {
+                    rangedWeaponData.currentAmmo--;
+                    UpdateAmmo();
+                }
 
                 timeSinceLastShot = 0;
                 // recoil.GunRecoil(gunData.recoil);
