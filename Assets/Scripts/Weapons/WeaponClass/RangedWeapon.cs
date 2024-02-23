@@ -117,17 +117,26 @@ public abstract class RangedWeapon : Weapon
 
         rangedWeaponData.reloading = false;
 
-        updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
+        if (updateAmmoText != null)
+        {
+            updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
+        }
     }
 
     public void UpdateAmmo()
     {
-        updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
+        if (updateAmmoText != null)
+        {
+            updateAmmoText.UpdateAmmo(rangedWeaponData.currentAmmo, rangedWeaponData.magazineSize);
+        }
     }
 
     public void ClearText()
     {
-        updateAmmoText.ClearText();
+        if (updateAmmoText != null)
+        {
+            updateAmmoText.ClearText();
+        }
     }
 
     public int GetAmmo()
