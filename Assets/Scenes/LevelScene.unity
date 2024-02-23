@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016848568, g: 0.018133568, b: 0.024220763, a: 1}
+  m_IndirectSpecularColor: {r: 0.022108024, g: 0.02367896, b: 0.031614583, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3903,15 +3903,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f731c1d03ea8d4cbf346a28d64c61b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vsyncButton: {fileID: 0}
-  fullscreenButton: {fileID: 0}
-  fpsButton: {fileID: 0}
+  vsyncButton: {fileID: 2137818507}
+  fullscreenButton: {fileID: 1622059751}
+  fpsButton: {fileID: 485508067}
   fpsBox: {fileID: 661779080}
-  resolutionDropdown: {fileID: 0}
+  resolutionDropdown: {fileID: 1503866894}
   globalMixer: {fileID: 24100000, guid: a4f13dd0cc60af144b7aabfa7b9884f7, type: 2}
-  bgmSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  vlSlider: {fileID: 0}
+  bgmSlider: {fileID: 824930998}
+  sfxSlider: {fileID: 158839268}
+  vlSlider: {fileID: 885372429}
   appliedSettings: 0
   localFullscreenBool: 0
   localFPSBool: 0
