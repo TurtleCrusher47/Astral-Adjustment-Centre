@@ -48,6 +48,11 @@ TagManager:
   - AggroRadius
   - StrikingDistance
   - UpdateAmmoText
+  - SelectedBorder
+  - InventoryPanel
+  - CameraPosition
+  - WeaponHolder
+  - PlayerInventory
   layers:
   - Default
   - TransparentFX

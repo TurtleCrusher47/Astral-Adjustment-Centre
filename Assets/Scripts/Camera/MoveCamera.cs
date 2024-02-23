@@ -1,14 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoveCamera : MonoBehaviour
 {
-    [SerializeField] Transform cameraPosition;
+    private Transform cameraPosition;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
+    public void SetCameraPosition()
+    {
+        if (SceneManager.GetActiveScene().name == "LevelScene")
+        {
+            cameraPosition = GameObject.FindGameObjectWithTag("CameraPosition").transform;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = cameraPosition.position;
+        if (cameraPosition != null)
+        {
+            transform.position = cameraPosition.position;
+        }
     }
 }
