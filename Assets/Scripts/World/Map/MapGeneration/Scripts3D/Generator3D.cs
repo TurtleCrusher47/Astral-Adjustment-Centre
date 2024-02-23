@@ -32,11 +32,12 @@ public class Generator3D : MonoBehaviour
         }
     }
 
-    [SerializeField] private List<MapRoomObjManagerData> mRoomObjManagerList;
+    [SerializeField] public List<MapRoomObjManagerData> mRoomObjManagerList;
     [SerializeField] private List<GameObject> randomWeaponlist;
     [SerializeField] private int seed;
     [SerializeField] private Vector3Int size;
     [SerializeField] private int roomCount;
+    [SerializeField] private float hallwayDensity;
     [SerializeField] private Vector3Int roomMaxSize;
     [SerializeField] private Vector3Int roomMinSize;
     [SerializeField] private List<GameObject> floorPrefab;
@@ -254,7 +255,7 @@ public class Generator3D : MonoBehaviour
 
         foreach (var edge in remainingEdges) 
         {
-            if (random.NextDouble() < 0.65) 
+            if (random.NextDouble() < hallwayDensity) 
             {
                 selectedEdges.Add(edge);
             }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016549597, g: 0.017805772, b: 0.023778196, a: 1}
+  m_IndirectSpecularColor: {r: 0.033328008, g: 0.035004523, b: 0.046520345, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1631,6 +1631,7 @@ MonoBehaviour:
   seed: 0
   size: {x: 40, y: 7, z: 40}
   roomCount: 30
+  hallwayDensity: 0.75
   roomMaxSize: {x: 5, y: 2, z: 5}
   roomMinSize: {x: 2, y: 2, z: 2}
   floorPrefab:

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectsList:
   - {fileID: 2741984546336638953, guid: aa1ed538939212b4fb7b51ab5ef54483, type: 3}
-  - {fileID: 1630214205921981339, guid: fbe5c8939adedf84292cbcc95e28021c, type: 3}
+  - {fileID: 7086879923504930625, guid: 51bfb35a92b5b624a9e14e1a34fe0f2c, type: 3}
   - {fileID: 1949679902744178465, guid: 75eed5cce29cb4b47864397ac428a453, type: 3}
   maxMinChanceList:
   - {x: 1, y: 1, z: 100}
-  - {x: 3, y: 2, z: 100}
-  - {x: 3, y: 2, z: 100}
+  - {x: 2, y: 0, z: 100}
+  - {x: 4, y: 3, z: 100}

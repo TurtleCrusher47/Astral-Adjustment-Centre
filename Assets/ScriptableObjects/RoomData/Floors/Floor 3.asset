@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Floor 3
   m_EditorClassIdentifier: 
   startRoomData: {fileID: 11400000, guid: e3cbfc185adf961438478bbd733c072f, type: 2}
-  endRoomData: {fileID: 11400000, guid: eea73d42d28055544a5a0e83ae22eeec, type: 2}
+  endRoomData: {fileID: 11400000, guid: 8d804e9678e87d44abbd58dd93b2bba4, type: 2}
   contentRoomData:
+  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
+  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
   - {fileID: 11400000, guid: 4899c6eceb485ea4ba8224303251ff8c, type: 2}
   - {fileID: 11400000, guid: fe69f1924e1c3b942925baea159b5fa0, type: 2}
+  - {fileID: 11400000, guid: 223245638e4fbdb448bfa3585f4bdefc, type: 2}
   - {fileID: 11400000, guid: aea5faa86af193141a04ad4a7efa8c9e, type: 2}
   - {fileID: 11400000, guid: aea5faa86af193141a04ad4a7efa8c9e, type: 2}
-  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
-  - {fileID: 11400000, guid: 6788550998f0d3f4c814ae286dad477c, type: 2}
+  - {fileID: 11400000, guid: aea5faa86af193141a04ad4a7efa8c9e, type: 2}
