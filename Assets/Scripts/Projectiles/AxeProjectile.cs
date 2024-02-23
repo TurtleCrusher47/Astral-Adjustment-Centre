@@ -32,6 +32,9 @@ public class AxeProjectile : GameObjectProjectile
             rb.constraints = RigidbodyConstraints.FreezeRotationZ;
             StartCoroutine(ObjectPoolManager.Instance.ReturnObjectToPool(this.gameObject, 3));
         }
+
+        AudioManager.Instance.PlaySFX("SFXShurikenImpact");
+
         //Debug.Log(collider.gameObject.name);
     }
 }

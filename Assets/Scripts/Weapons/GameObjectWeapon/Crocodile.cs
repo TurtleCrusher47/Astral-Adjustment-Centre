@@ -56,7 +56,7 @@ public class Crocodile : GameObjectRangedWeapon
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, hitPosition);
 
-        Debug.Log("Rendering Line");
+        //Debug.Log("Rendering Line");
     }
 
     protected override void OnAbility()
@@ -66,5 +66,16 @@ public class Crocodile : GameObjectRangedWeapon
 
     protected override void UseAbility()
     {
+    }
+
+    protected override void OnPrimary()
+    {
+        animator.SetTrigger("Primary");
+        AudioManager.Instance.PlaySFX("SFXCrocAttack");
+    }
+
+    public void PlayCrocIdleSFX()
+    {
+        AudioManager.Instance.PlaySFX("SFXCrocIdle");
     }
 }

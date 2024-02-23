@@ -12,6 +12,14 @@ public class ThrowingAxe : GameObjectRangedWeapon
 
     protected override void OnSecondary()
     {
+        animator.SetTrigger("Secondary");
+        AudioManager.Instance.PlaySFX("SFXShurikenThrow");
+    }
+
+    protected override void OnPrimary()
+    {
+        animator.SetTrigger("Primary");
+        AudioManager.Instance.PlaySFX("SFXShurikenThrow");
     }
 
     protected override void UseAbility()

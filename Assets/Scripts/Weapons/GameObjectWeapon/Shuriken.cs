@@ -47,6 +47,7 @@ public class Shuriken : GameObjectRangedWeapon
 
     protected override void OnPrimary()
     {
+        animator.SetTrigger("Primary");
         AudioManager.Instance.PlaySFX("SFXShurikenThrow");
     }
 
