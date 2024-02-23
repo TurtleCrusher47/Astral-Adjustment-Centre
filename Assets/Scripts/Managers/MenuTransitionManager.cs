@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuTransitionManager : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector cutsceneDirector;
-    [SerializeField] private GameObject subtitlePanel;
     [SerializeField] private List<GameObject> virtualCameras;
     [SerializeField] private CinemachineVirtualCamera currCamera;
     [SerializeField] private CinemachineBrain mainCamBrain;
@@ -22,7 +20,6 @@ public class MenuTransitionManager : MonoBehaviour
 
     void Awake()
     {
-        subtitlePanel.SetActive(false);
         loginPanel.SetActive(false);
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
@@ -32,9 +29,6 @@ public class MenuTransitionManager : MonoBehaviour
         menuMat = menuTarget.GetComponent<Renderer>().material;
         settingsMat = settingsTarget.GetComponent<Renderer>().material;
         creditsMat = creditsTarget.GetComponent<Renderer>().material;
-
-        cutsceneDirector = TimelineManager.Instance.GetComponent<PlayableDirector>();
-        subtitlePanel = GameManager.Instance.FindChildWithTag(GameManager.Instance.gameObject, "Orientation");
 
         for (int i = 0; i < virtualCameras.Count; i++)
         {
