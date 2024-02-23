@@ -9,6 +9,7 @@ public class TimelineManager : Singleton<TimelineManager>
 {
     public Button skipButton;
     [SerializeField] private GameObject subtitlePanel;
+    [SerializeField] private GameObject topPanel, btmPanel;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private List<TimelineAsset> timelines = new List<TimelineAsset>();
     public string nextSceneName;
@@ -32,11 +33,17 @@ public class TimelineManager : Singleton<TimelineManager>
         {
             case "PostIntro":
                 skipButton.gameObject.SetActive(false);
+                topPanel.SetActive(false);
+                btmPanel.SetActive(false);
                 break;
             default:
                 skipButton.gameObject.SetActive(true);
+                topPanel.SetActive(true);
+                btmPanel.SetActive(true);
                 break;
         }
+
+        gameObject.GetComponent<SubtitleManager>().ResetText();
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.SetBGMSourcesVol(0.2f));
 

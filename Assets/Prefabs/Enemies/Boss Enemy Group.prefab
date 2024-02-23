@@ -2335,7 +2335,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438782618954944088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2585,7 +2585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438782619192989734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3809,7 +3809,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa498bc4cd735054386de6aaae7fb3e0, type: 2}
   - {fileID: 11400000, guid: fa498bc4cd735054386de6aaae7fb3e0, type: 2}
   - {fileID: 11400000, guid: fa498bc4cd735054386de6aaae7fb3e0, type: 2}
-  - {fileID: 11400000, guid: fa498bc4cd735054386de6aaae7fb3e0, type: 2}
   enemyUltimateAttackBase: {fileID: 11400000, guid: 9ea3fab7e87eaae43b2babc1f8fdcfc6,
     type: 2}
   indicator: {fileID: 1438782618427254989}
@@ -3842,7 +3841,7 @@ CapsuleCollider:
   m_Radius: 0.27406323
   m_Height: 1.828897
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!95 &2741984547037465631
 Animator:
   serializedVersion: 5

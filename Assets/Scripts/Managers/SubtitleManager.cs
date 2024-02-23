@@ -22,6 +22,12 @@ public class SubtitleManager : MonoBehaviour
         playerCurrLine = 0;
     }
 
+    public void ResetText()
+    {
+        playerSubtitleText.text = string.Empty;
+        enemySubtitleText.text = string.Empty;
+    }
+
     public void PlayerNextLine()
     {
         if (playerSubtitles.Count >= playerCurrLine)

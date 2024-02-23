@@ -101,7 +101,7 @@ public class EnemyAttackIndicator : MonoBehaviour
                 {
                     if (collider.CompareTag("PlayerCollider"))
                     {
-                        //player.Damage(dmg);
+                        player.Damage(dmg);
                         Debug.Log("Player Hit");
                     }
                 }
@@ -114,7 +114,7 @@ public class EnemyAttackIndicator : MonoBehaviour
                 {
                     if (collider.CompareTag("PlayerCollider"))
                     {
-                        //player.Damage(dmg);
+                        player.Damage(dmg);
                         Debug.Log("Player Hit");
                     }
                 }

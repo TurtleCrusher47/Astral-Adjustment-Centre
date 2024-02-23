@@ -29,6 +29,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        transform.GetComponent<RangedEnemy>().HideIndicator();
     }
 
     public override void DoFrameUpdateLogic()
@@ -45,6 +46,10 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
         _timer += Time.deltaTime;
 
+        if (_timer > _shotCooldown - 0.5f)
+        {
+            transform.GetComponent<RangedEnemy>().ShowIndicator();
+        }
         if (_timer > _shotCooldown)
         {
             _timer = 0f;
@@ -56,6 +61,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
             bullet.GetComponent<EnemyProjectileBasic>().ScaleProjectile(playerTransform.localScale);
             bullet.GetComponent<EnemyProjectileBasic>().MoveProjectile(dir * _bulletSpeed);
 
+            transform.GetComponent<RangedEnemy>().HideIndicator();
         }
 
         if (Vector3.Distance(playerTransform.position, enemy.transform.position) > (_distanceToCountExit * playerTransform.localScale.x))
