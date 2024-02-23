@@ -17,5 +17,5 @@ MonoBehaviour:
   visualEffect: {fileID: 0}
   _attackRange: {x: 0.4, y: 1, z: 0.5}
   _posOffset: 0.25
-  _damage: 10
-  _chargeUpTimer: 1
+  _damage: 25
+  _chargeUpTimer: 0.5
