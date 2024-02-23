@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Boss Melee Attack
   m_EditorClassIdentifier: 
   type: 1
+  animName: isPunch
+  visualEffect: {fileID: 0}
   _attackRange: {x: 0.4, y: 1, z: 0.5}
   _posOffset: 0.25
   _damage: 10
