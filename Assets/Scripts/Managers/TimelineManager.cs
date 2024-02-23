@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -10,6 +12,7 @@ public class TimelineManager : Singleton<TimelineManager>
     public Button skipButton;
     [SerializeField] private GameObject subtitlePanel;
     [SerializeField] private GameObject topPanel, btmPanel;
+    [SerializeField] private GameObject centerText;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private List<TimelineAsset> timelines = new List<TimelineAsset>();
     public string nextSceneName;
@@ -35,11 +38,19 @@ public class TimelineManager : Singleton<TimelineManager>
                 skipButton.gameObject.SetActive(false);
                 topPanel.SetActive(false);
                 btmPanel.SetActive(false);
+                centerText.SetActive(false);
+                break;
+            case "Lose":
+                skipButton.gameObject.SetActive(true);
+                topPanel.SetActive(true);
+                btmPanel.SetActive(true);
+                centerText.SetActive(true);
                 break;
             default:
                 skipButton.gameObject.SetActive(true);
                 topPanel.SetActive(true);
                 btmPanel.SetActive(true);
+                centerText.SetActive(false);
                 break;
         }
 
@@ -56,6 +67,15 @@ public class TimelineManager : Singleton<TimelineManager>
         }
 
         director.playableAsset = timelines[cutsceneIndex];
+
+        if (cutsceneName == "Lose")
+        {
+            IEnumerable<TrackAsset> outputTracks = timelines[cutsceneIndex].GetOutputTracks();
+            TrackAsset targetTrack = outputTracks.FirstOrDefault(track => track.name == "CameraAnim" && track.GetType() == typeof(AnimationTrack));
+            
+            director.SetGenericBinding(targetTrack, Camera.main.transform.gameObject.GetComponent<Animator>());
+        }
+
         director.Play();
 
         yield return new WaitUntil(() => director.state == PlayState.Paused);
@@ -92,6 +112,18 @@ public class TimelineManager : Singleton<TimelineManager>
         GameManager.Instance.ChangeScene(nextSceneName);
 
         subtitlePanel.SetActive(false);
+    }
+
+    TrackAsset FindTrackByName(TrackAsset[] tracks, string trackName)
+    {
+        foreach (var track in tracks)
+        {
+            if (track.name == trackName)
+            {
+                return track;
+            }
+        }
+        return null;
     }
 
     void Update()

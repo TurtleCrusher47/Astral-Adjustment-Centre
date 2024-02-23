@@ -3142,6 +3142,7 @@ MonoBehaviour:
   subtitlePanel: {fileID: 4354202643762529990}
   topPanel: {fileID: 4354202644515465044}
   btmPanel: {fileID: 4354202643401406841}
+  centerText: {fileID: 1813156304}
   director: {fileID: 0}
   timelines:
   - {fileID: 11400000, guid: 78e070e1c1dc4554787c53ccb35a6900, type: 2}
