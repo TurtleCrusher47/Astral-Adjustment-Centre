@@ -73,7 +73,8 @@ public class LoadingScene : MonoBehaviour
                 // Wait until you press the space key to activate the Scene
                 asyncOperation.allowSceneActivation = true;
 
-                if (GameManager.Instance.nextSceneName == "LevelScene")
+                if (GameManager.Instance.currSceneName == "MenuScene" &&
+                    GameManager.Instance.nextSceneName == "LevelScene")
                 {
                     if (GameManager.Instance.floorNum <= 1)
                     {
@@ -81,6 +82,22 @@ public class LoadingScene : MonoBehaviour
                         GameManager.Instance.timer = 0;
                         GameManager.Instance.seconds = 0;
                     }
+                    
+                    GameManager.Instance.timerActive = true;
+                }
+                else if(GameManager.Instance.currSceneName == "LevelScene" &&
+                        GameManager.Instance.nextSceneName == "WinScene")
+                {
+                    TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("Win", null));
+                }
+                else if(GameManager.Instance.currSceneName == "WinScene" &&
+                        GameManager.Instance.nextSceneName == "LevelScene")
+                {
+                    GameManager.Instance.floorNum = 1;
+                    
+                    TimelineManager.Instance.StartCoroutine(TimelineManager.Instance.PlayCutscene("PostIntro", null));
+                    GameManager.Instance.timer = 0;
+                    GameManager.Instance.seconds = 0;
                     
                     GameManager.Instance.timerActive = true;
                 }

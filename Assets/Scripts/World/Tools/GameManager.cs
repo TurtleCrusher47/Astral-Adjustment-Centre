@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    public string currSceneName;
     public string nextSceneName;
     public int floorNum = 1;
     public float timer = 0;
@@ -14,8 +15,9 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeScene(string sceneName)
     {
+        currSceneName = SceneManager.GetActiveScene().name;
+
         SceneManager.LoadScene("LoadingScene");
-        // SceneManager.LoadScene(sceneName);
 
         nextSceneName = sceneName;
 
