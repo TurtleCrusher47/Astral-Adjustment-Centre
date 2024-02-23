@@ -662,7 +662,7 @@ public class Generator3D : MonoBehaviour
                         }
                     }
                     // place enemies
-                    PlaceEnemies(enemyRooms[i].bounds.position, enemyRooms[i].bounds.size, enemyRoomData[i]);
+                    PlaceEnemies(enemyRooms[i].bounds.position, enemyRooms[i].bounds.center, enemyRooms[i].bounds.size, enemyRoomData[i]);
                     currEnemyRoom = enemyRooms[i];
                     enemyRooms.RemoveAt(i);
                     enemyRoomData.RemoveAt(i);
@@ -671,7 +671,7 @@ public class Generator3D : MonoBehaviour
         }
     }
 
-    private void PlaceEnemies(Vector3Int location, Vector3Int size, RoomData data)
+    private void PlaceEnemies(Vector3Int location, Vector3 center, Vector3Int size, RoomData data)
     {
         // set room type
         RoomData roomData = data;
@@ -703,7 +703,7 @@ public class Generator3D : MonoBehaviour
                         int randIndex = RandomR.Range(0, vacantSpaces.Count);
                         Vector3 randPos = vacantSpaces[randIndex];
                         vacantSpaces.RemoveAt(randIndex);
-                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], randPos, Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                        GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomData.ObjectsList[i], center + new Vector3(0, -1, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                         mapContent.Add(obj);
                         currEnemiesInRoom.Add(obj);
