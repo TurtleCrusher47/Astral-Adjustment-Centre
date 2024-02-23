@@ -18,6 +18,6 @@ public class EnemyStateMachine
         currEnemyState = nextState;
         currEnemyState.EnterState();
 
-        Debug.Log(currEnemyState);
+        //Debug.Log(currEnemyState);
     }
 }
