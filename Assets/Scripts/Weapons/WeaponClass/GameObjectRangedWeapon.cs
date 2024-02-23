@@ -29,7 +29,7 @@ public abstract class GameObjectRangedWeapon : RangedWeapon
                 }
 
                 timeSinceLastShot = 0;
-                // recoil.GunRecoil(gunData.recoil);
+                recoil.GunRecoil(rangedWeaponData.recoil);
 
                 // updateAmmoText.UpdateAmmo(gunData.currentAmmo, gunData.magazineSize);
                 OnPrimary();
