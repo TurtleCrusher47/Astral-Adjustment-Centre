@@ -18,5 +18,5 @@ MonoBehaviour:
     type: 3}
   _attackRange: {x: 2, y: 1, z: 2}
   _posOffset: 0
-  _damage: 35
+  _damage: 40
   _chargeUpTimer: 2
