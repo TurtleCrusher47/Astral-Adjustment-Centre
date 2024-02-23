@@ -501,7 +501,7 @@ public class Generator3D : MonoBehaviour
         // place light in the middle of the room
         GameObject obj = ObjectPoolManager.Instance.SpawnObject(roomLightPrefab, rooms[0].bounds.center + new Vector3(0, -0.15f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
         mapContent.Add(obj);
-        PlaceRoomObjects(rooms[0].bounds.position, rooms[0].bounds.size, mRoomObjManager.startRoomData);
+        PlaceRoomObjects(rooms[0].bounds.position, rooms[0].bounds.size, mRoomObjManager.startRoomData, 0);
         Vector3 playerStartPos = rooms[0].bounds.center + Vector3.down;
         playerObj.transform.position = playerStartPos;
         camObj.transform.position = playerStartPos;
@@ -531,7 +531,7 @@ public class Generator3D : MonoBehaviour
                     }
                     else
                     {
-                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.endRoomData);
+                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.endRoomData, -0.4f);
                     }
                     endObj.transform.position = playerEndPos + new Vector3(0, -1.8f, 0);
                 }
@@ -548,7 +548,7 @@ public class Generator3D : MonoBehaviour
                     else
                     {
                         // place rest of the objects
-                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.contentRoomData[contentRoomIndex]);
+                        PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.contentRoomData[contentRoomIndex], -0.4f);
                     }
                 }
             }
@@ -565,13 +565,13 @@ public class Generator3D : MonoBehaviour
                 else
                 {
                     // place rest of the objects
-                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.contentRoomData[contentRoomIndex]);
+                    PlaceRoomObjects(rooms[i].bounds.position, rooms[i].bounds.size, mRoomObjManager.contentRoomData[contentRoomIndex], -0.4f);
                 }
             }
         }
     }
 
-    private void PlaceRoomObjects(Vector3Int location, Vector3Int size, RoomData data)
+    private void PlaceRoomObjects(Vector3Int location, Vector3Int size, RoomData data, float vertOffset)
     {
         // set room type
         RoomData roomData = data;
@@ -581,7 +581,7 @@ public class Generator3D : MonoBehaviour
         {
             for (float z = 1.0f; z < size.z - 0.5f; z += 0.5f)
             {
-                vacantSpaces.Add(location + new Vector3(x, -0.4f, z));
+                vacantSpaces.Add(location + new Vector3(x, vertOffset, z));
             }
         }
         // loops all items
@@ -606,7 +606,7 @@ public class Generator3D : MonoBehaviour
                         if (roomData.ObjectsList[i].name.Contains("Weapon"))
                         {
                             int randWeapon = RandomR.Range(0, randomWeaponlist.Count);
-                            obj = ObjectPoolManager.Instance.SpawnObject(randomWeaponlist[randWeapon], randPos + new Vector3(0, 0.4f, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
+                            obj = ObjectPoolManager.Instance.SpawnObject(randomWeaponlist[randWeapon], randPos + new Vector3(0, -vertOffset, 0), Quaternion.identity, ObjectPoolManager.PoolType.Map);
                         }
                         else
                         {
