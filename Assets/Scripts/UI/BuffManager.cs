@@ -14,6 +14,8 @@ public class BuffManager : MonoBehaviour
     [Header("Buff Data")]
     public List<ScriptableBuff> buffs;
     public List<ScriptableBuff> availableBuffs = new List<ScriptableBuff>();
+    public TMP_Text rerollText;
+    private int rerollCount = 1;
 
     public PlayerData playerData;
     private GameObject player;
@@ -38,17 +40,23 @@ public class BuffManager : MonoBehaviour
             Instance.player = GameObject.FindGameObjectWithTag("Player");
             Destroy(this);
         }
+        rerollText.text = rerollCount.ToString();
+    }
+
+    private void Start()
+    {
+        rerollText.text = rerollCount.ToString();
     }
 
     private void InitBuffPanel()
     {
         ResetBuffs();
-        roguePanel.SetActive(false);
+        //roguePanel.SetActive(false);
     }
 
     public void ShowBuffPanel()
     {
-        roguePanel.SetActive(true);
+        //roguePanel.SetActive(true);
         player.SetActive(false);
         InstantiateBuffPanels();
     }
@@ -134,8 +142,19 @@ public class BuffManager : MonoBehaviour
 
     public void RerollButton()
     {
-        DestroyOldPanels();
-        InstantiateBuffPanels();
+        if(rerollCount > 0)
+        {
+            rerollCount--;
+
+            rerollText.text = rerollCount.ToString();
+
+            DestroyOldPanels();
+            InstantiateBuffPanels();
+        }
+        else
+        {
+            Debug.Log("No more rerolls allowed");
+        }
     }
 
     public void ClearButton()
