@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MeleeEnemyRoomData
   m_EditorClassIdentifier: 
   ObjectsList:
-  - {fileID: 1630214205921981339, guid: fbe5c8939adedf84292cbcc95e28021c, type: 3}
+  - {fileID: 1949679902744178465, guid: 75eed5cce29cb4b47864397ac428a453, type: 3}
   maxMinChanceList:
   - {x: 5, y: 3, z: 100}
