@@ -1274,12 +1274,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1630214206294898798}
+  - component: {fileID: 1630214204690556014}
   - component: {fileID: 1630214206294898796}
   - component: {fileID: 1630214206294898799}
   - component: {fileID: 1630214206294898797}
   - component: {fileID: 1630214204690556000}
   - component: {fileID: 1630214204690556001}
-  - component: {fileID: 1630214204690556014}
   m_Layer: 0
   m_Name: Melee Enemy
   m_TagString: Enemy
@@ -1308,6 +1308,29 @@ Transform:
   m_Father: {fileID: 1630214205921981336}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630214204690556014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630214206294898792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7dc8d9f477d3d418063d778aa85758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxHealth>k__BackingField: 100
+  <CurrentHealth>k__BackingField: 0
+  healthSlider: {fileID: 3657660463883702151}
+  easeHealthSlider: {fileID: 3481308251181543743}
+  enemyText: {fileID: 2849734298573332091}
+  lerpSpeed: 0.05
+  animator: {fileID: 1630214206294898797}
+  enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
+  enemyChaseBase: {fileID: 11400000, guid: 046e02beeb055d54f9c1f1894fdd585c, type: 2}
+  enemyAttackBase: {fileID: 11400000, guid: 1dcc8e8772612ae4bbcf91b4c328f25a, type: 2}
+  indicator: {fileID: 8479954788592592411}
 --- !u!54 &1630214206294898796
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1458,29 +1481,6 @@ MonoBehaviour:
   - m_Rig: {fileID: 977572094851369074}
     m_Active: 1
   m_Effectors: []
---- !u!114 &1630214204690556014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630214206294898792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7dc8d9f477d3d418063d778aa85758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 100
-  <CurrentHealth>k__BackingField: 0
-  healthSlider: {fileID: 3657660463883702151}
-  easeHealthSlider: {fileID: 3481308251181543743}
-  enemyText: {fileID: 2849734298573332091}
-  lerpSpeed: 0.05
-  animator: {fileID: 1630214206294898797}
-  enemyIdleBase: {fileID: 11400000, guid: c9919950bdcc3664f9ecb1fd82a7ddcc, type: 2}
-  enemyChaseBase: {fileID: 11400000, guid: 046e02beeb055d54f9c1f1894fdd585c, type: 2}
-  enemyAttackBase: {fileID: 11400000, guid: 1dcc8e8772612ae4bbcf91b4c328f25a, type: 2}
-  indicator: {fileID: 8479954788592592411}
 --- !u!1 &1630214206464065283
 GameObject:
   m_ObjectHideFlags: 0
