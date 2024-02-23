@@ -15,6 +15,7 @@ public class TimelineManager : Singleton<TimelineManager>
     [SerializeField] private GameObject centerText;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private List<TimelineAsset> timelines = new List<TimelineAsset>();
+    public string currCutsceneName;
     public string nextSceneName;
     public int cutsceneIndex = 0;
 
@@ -30,6 +31,7 @@ public class TimelineManager : Singleton<TimelineManager>
 
     public IEnumerator PlayCutscene(string cutsceneName, string nextScene)
     {
+        currCutsceneName = cutsceneName;
         nextSceneName = nextScene;
 
         switch (cutsceneName)
@@ -89,6 +91,11 @@ public class TimelineManager : Singleton<TimelineManager>
 
         if (nextScene != null)
         {
+            if (cutsceneName == "Lose")
+            {
+                StartCoroutine(GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>().ClearMap(false));
+            }
+
             GameManager.Instance.ChangeScene(nextScene);
         }
         else
@@ -112,6 +119,11 @@ public class TimelineManager : Singleton<TimelineManager>
         {
             director.Stop();
             cutsceneIndex++;
+        }
+
+        if (currCutsceneName == "Lose")
+        {
+            StartCoroutine(GameObject.FindGameObjectWithTag("TradeButton").GetComponent<Generator3D>().ClearMap(false));
         }
 
         GameManager.Instance.ChangeScene(nextSceneName);
