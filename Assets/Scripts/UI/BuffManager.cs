@@ -45,18 +45,20 @@ public class BuffManager : MonoBehaviour
 
     private void Start()
     {
+        InstantiateBuffPanels();
+        
         rerollText.text = rerollCount.ToString();
     }
 
     private void InitBuffPanel()
     {
         ResetBuffs();
-        roguePanel.SetActive(false); // testing
+        //roguePanel.SetActive(false); // testing
     }
 
     public void ShowBuffPanel()
     {
-        roguePanel.SetActive(true); // testing
+        //roguePanel.SetActive(true); // testing
         player.SetActive(false);
         InstantiateBuffPanels();
     }
@@ -112,7 +114,7 @@ public class BuffManager : MonoBehaviour
             if (i == 0)
             {
                 // Reset Buff Panel
-                buffPanel.transform.localPosition = new Vector3(-344.25f, 61f, 0f);
+                buffPanel.transform.localPosition = new Vector3(-344.25f, 838f, 0f);
                 buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
                 buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
                 // Buff Animation
@@ -121,11 +123,11 @@ public class BuffManager : MonoBehaviour
             }
             else if (i == 1)
             {
-                buffPanel.transform.localPosition = new Vector3(388f, 126f, 0f);
+                buffPanel.transform.localPosition = new Vector3(388f, 838f, 0f);
                 buffPanel.transform.localScale = new Vector3(1f, 1f, 0f);
                 buffPanel.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
                 // Buff Animation
-                LeanTween.moveLocal(buffPanel, new Vector3(384f, 0f, 0f), .6f).setDelay(0.3f).setEase(LeanTweenType.easeInOutQuart);
+                LeanTween.moveLocal(buffPanel, new Vector3(384f, 0f, 0f), .6f).setDelay(0.5f).setEase(LeanTweenType.easeInOutQuart);
                 LeanTween.rotate(buffPanel, new Vector3(0f, 0f, 0f), .9f).setDelay(1.2f).setEase(LeanTweenType.easeInOutExpo);
             }
         }
@@ -135,9 +137,14 @@ public class BuffManager : MonoBehaviour
     {
         foreach (GameObject panel in instantiatedPanels)
         {
-            Destroy(panel);
+            Destroy(panel); // Destroy Panels
         }
         instantiatedPanels.Clear();
+    }
+
+    private void PlayAndDestroyPanels()
+    {
+        // LeanTweening
     }
 
     public void RerollButton()

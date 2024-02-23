@@ -14817,7 +14817,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phonePanel: {fileID: 442950473}
   optionPanel: {fileID: 1324970589}
-  roguePanel: {fileID: 847264408}
 --- !u!4 &1228206964
 Transform:
   m_ObjectHideFlags: 0
@@ -14847,6 +14846,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 77466319}
   easeHealthSlider: {fileID: 749209835}
+  healthText: {fileID: 0}
+  playerData: {fileID: 0}
   lerpSpeed: 0.005
 --- !u!1 &1230280447
 GameObject:
@@ -21277,13 +21278,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roguePanel: {fileID: 847264408}
   buffs:
-  - {fileID: 11400000, guid: 8a2fc865221b50b47a573e8f0c7e98fd, type: 2}
+  - {fileID: 11400000, guid: 8b88c804e5c34674f99f9e0e108ad643, type: 2}
   - {fileID: 11400000, guid: 4f81666b29c39914483ca982029adf92, type: 2}
-  - {fileID: 11400000, guid: 318118b03da6e46449edaea514a367ec, type: 2}
-  - {fileID: 11400000, guid: a27b8827e3f7fb348a19ad62c2e4ae37, type: 2}
-  - {fileID: 11400000, guid: bac2e410ecf0ec242a399b6c67a29b6e, type: 2}
-  playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
+  - {fileID: 11400000, guid: 2d73a49b15bc678468691f1fa3aabb2a, type: 2}
+  - {fileID: 11400000, guid: 2f18bdf464ab7f24c997703a862b3274, type: 2}
+  - {fileID: 11400000, guid: 06ab420992011274b803930d6e775ed4, type: 2}
+  availableBuffs: []
   rerollText: {fileID: 57601892}
+  playerData: {fileID: 11400000, guid: f77fce2c1f2a5cb4f9a76310d2651386, type: 2}
   basePanel: {fileID: 5907959068461915938, guid: 1686b6c7468a7e94baa94a8c85ed4f47,
     type: 3}
 --- !u!4 &1666390444
